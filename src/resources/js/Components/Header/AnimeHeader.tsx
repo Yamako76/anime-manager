@@ -18,7 +18,6 @@ export default function Header() {
                     </Typography>
                     <Button color="inherit">アニメ一覧</Button>
                     <Button color="inherit">フォルダ一覧</Button>
-                    <Button color="inherit">タグ一覧</Button>
                     <Button color="inherit">ログアウト</Button>
                 </Toolbar>
             </AppBar>

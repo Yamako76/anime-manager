@@ -1,5 +1,5 @@
-import { Head } from "@inertiajs/react";
-import React, { useState } from "react";
+import {Head} from "@inertiajs/react";
+import React, {useState} from "react";
 import {
     Box,
     Grid,
@@ -16,7 +16,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import AnimeHeader from "../../Components/Header/AnimeHeader";
 import Button from "@mui/material/Button";
 
-export default function Index() {
+const Index = () => {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -25,8 +25,8 @@ export default function Index() {
 
     return (
         <>
-            <Head title="Anime" />
-            <AnimeHeader />
+            <Head title="Anime"/>
+            <AnimeHeader/>
             <Grid container alignItems={"center"} justifyContent={"center"}>
                 <Box
                     sx={{
@@ -39,7 +39,7 @@ export default function Index() {
                             size={"small"}
                             type="search"
                             id="search"
-                            sx={{ width: 200, marginTop: 1 }}
+                            sx={{width: 200, marginTop: 1}}
                             InputProps={{
                                 endAdornment: (
                                     <InputAdornment position="end">
@@ -48,7 +48,7 @@ export default function Index() {
                                                 setIsSearch(!isSearch)
                                             }
                                         >
-                                            <SearchIcon />
+                                            <SearchIcon/>
                                         </IconButton>
                                     </InputAdornment>
                                 ),
@@ -57,15 +57,15 @@ export default function Index() {
                     ) : (
                         <Tooltip title={"検索"}>
                             <IconButton onClick={() => setIsSearch(!isSearch)}>
-                                <SearchIcon />
+                                <SearchIcon/>
                             </IconButton>
                         </Tooltip>
                     )}
                 </Box>
-                <Box sx={{ color: "grey", marginLeft: "10%" }}>
+                <Box sx={{color: "grey", marginLeft: "10%"}}>
                     <Tooltip title={"追加"}>
                         <IconButton onClick={handleOpen}>
-                            <AddIcon />
+                            <AddIcon/>
                         </IconButton>
                     </Tooltip>
                     <Modal open={open} onClose={handleClose}>
@@ -91,7 +91,7 @@ export default function Index() {
                                     marginTop: 7,
                                 }}
                             >
-                                <Typography sx={{ marginLeft: 22 }}>
+                                <Typography sx={{marginLeft: 22}}>
                                     アニメ名
                                 </Typography>
                                 <TextField
@@ -106,57 +106,23 @@ export default function Index() {
                                         width: 350,
                                     }}
                                 />
-                                <Typography
-                                    sx={{ marginTop: 1, marginLeft: 22 }}
-                                >
-                                    年
-                                </Typography>
-                                <TextField
-                                    label="year"
-                                    variant="outlined"
-                                    size="small"
-                                    sx={{
-                                        alignSelf: "center",
-                                        justifyContent: "center",
-                                        marginTop: 1,
-                                        marginLeft: 22,
-                                        width: 150,
-                                    }}
-                                />
-                                <Typography
-                                    sx={{ marginTop: 1, marginLeft: 22 }}
-                                >
-                                    シーズン
-                                </Typography>
-                                <TextField
-                                    label="season"
-                                    variant="outlined"
-                                    size="small"
-                                    sx={{
-                                        alignSelf: "center",
-                                        justifyContent: "center",
-                                        marginTop: 1,
-                                        marginLeft: 22,
-                                        width: 150,
-                                    }}
-                                />
                             </Box>
                             <Button
-                                sx={{ position: "absolute", top: 25, left: 20 }}
+                                sx={{position: "absolute", top: 25, left: 20}}
                                 onClick={handleClose}
                             >
                                 戻る
                             </Button>
-                            <Button sx={{ marginLeft: 27, marginTop: 27 }}>
+                            <Button sx={{marginLeft: 27, marginTop: 27}}>
                                 追加
                             </Button>
                         </Box>
                     </Modal>
                 </Box>
-                <Box sx={{ color: "grey" }}>
+                <Box sx={{color: "grey"}}>
                     <Tooltip title={"並び替え"}>
                         <IconButton>
-                            <SortIcon />
+                            <SortIcon/>
                         </IconButton>
                     </Tooltip>
                 </Box>
@@ -195,12 +161,6 @@ export default function Index() {
                     <Typography textAlign={"center"} paddingTop={2}>
                         銀魂
                     </Typography>
-                    <Typography textAlign={"center"} marginTop={1}>
-                        2006年
-                    </Typography>
-                    <Typography textAlign={"center"} marginTop={1}>
-                        春
-                    </Typography>
                 </Box>
                 <Box
                     sx={{
@@ -214,14 +174,10 @@ export default function Index() {
                     <Typography textAlign={"center"} paddingTop={2}>
                         ドラゴンボールGT
                     </Typography>
-                    <Typography textAlign={"center"} marginTop={1}>
-                        1980年
-                    </Typography>
-                    <Typography textAlign={"center"} marginTop={1}>
-                        夏
-                    </Typography>
                 </Box>
             </Grid>
         </>
     );
 }
+
+export default Index;

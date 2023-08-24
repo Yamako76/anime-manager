@@ -1,5 +1,5 @@
-import { Head } from "@inertiajs/react";
-import React, { useState } from "react";
+import {Head} from "@inertiajs/react";
+import React, {useState} from "react";
 import {
     Box,
     Grid,
@@ -21,7 +21,7 @@ interface FolderProps {
     name: string;
 }
 
-export default function Folder({ name }: FolderProps) {
+const Folder = ({name}: FolderProps) => {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -32,9 +32,9 @@ export default function Folder({ name }: FolderProps) {
 
     return (
         <>
-            <Head title="Folder" />
+            <Head title="Folder"/>
 
-            <AnimeHeader />
+            <AnimeHeader/>
             <Grid container alignItems={"center"} justifyContent={"center"}>
                 <Box
                     sx={{
@@ -47,7 +47,7 @@ export default function Folder({ name }: FolderProps) {
                             size={"small"}
                             type="search"
                             id="search"
-                            sx={{ width: 200, marginTop: 1 }}
+                            sx={{width: 200, marginTop: 1}}
                             InputProps={{
                                 endAdornment: (
                                     <InputAdornment position="end">
@@ -56,7 +56,7 @@ export default function Folder({ name }: FolderProps) {
                                                 setIsSearch(!isSearch)
                                             }
                                         >
-                                            <SearchIcon />
+                                            <SearchIcon/>
                                         </IconButton>
                                     </InputAdornment>
                                 ),
@@ -65,15 +65,15 @@ export default function Folder({ name }: FolderProps) {
                     ) : (
                         <Tooltip title={"検索"}>
                             <IconButton onClick={() => setIsSearch(!isSearch)}>
-                                <SearchIcon />
+                                <SearchIcon/>
                             </IconButton>
                         </Tooltip>
                     )}
                 </Box>
-                <Box sx={{ color: "grey", marginLeft: "10%" }}>
+                <Box sx={{color: "grey", marginLeft: "10%"}}>
                     <Tooltip title={"追加"}>
                         <IconButton onClick={handleOpen}>
-                            <AddIcon />
+                            <AddIcon/>
                         </IconButton>
                     </Tooltip>
                     <Modal open={open} onClose={handleClose}>
@@ -99,7 +99,7 @@ export default function Folder({ name }: FolderProps) {
                                     marginTop: 7,
                                 }}
                             >
-                                <Typography sx={{ marginLeft: 22 }}>
+                                <Typography sx={{marginLeft: 22}}>
                                     アニメ名
                                 </Typography>
                                 <TextField
@@ -115,7 +115,7 @@ export default function Folder({ name }: FolderProps) {
                                     }}
                                 />
                                 <Typography
-                                    sx={{ marginTop: 1, marginLeft: 22 }}
+                                    sx={{marginTop: 1, marginLeft: 22}}
                                 >
                                     年
                                 </Typography>
@@ -132,7 +132,7 @@ export default function Folder({ name }: FolderProps) {
                                     }}
                                 />
                                 <Typography
-                                    sx={{ marginTop: 1, marginLeft: 22 }}
+                                    sx={{marginTop: 1, marginLeft: 22}}
                                 >
                                     シーズン
                                 </Typography>
@@ -150,21 +150,21 @@ export default function Folder({ name }: FolderProps) {
                                 />
                             </Box>
                             <Button
-                                sx={{ position: "absolute", top: 25, left: 20 }}
+                                sx={{position: "absolute", top: 25, left: 20}}
                                 onClick={handleClose}
                             >
                                 戻る
                             </Button>
-                            <Button sx={{ marginLeft: 27, marginTop: 27 }}>
+                            <Button sx={{marginLeft: 27, marginTop: 27}}>
                                 追加
                             </Button>
                         </Box>
                     </Modal>
                 </Box>
-                <Box sx={{ color: "grey" }}>
+                <Box sx={{color: "grey"}}>
                     <Tooltip title={"並び替え"}>
                         <IconButton>
-                            <SortIcon />
+                            <SortIcon/>
                         </IconButton>
                     </Tooltip>
                 </Box>
@@ -188,7 +188,7 @@ export default function Folder({ name }: FolderProps) {
                                 marginTop: 7,
                             }}
                         >
-                            <Typography sx={{ marginLeft: 10 }}>
+                            <Typography sx={{marginLeft: 10}}>
                                 フォルダ名
                             </Typography>
                             <TextField
@@ -205,10 +205,10 @@ export default function Folder({ name }: FolderProps) {
                                 }}
                             />
                         </Box>
-                        <Button sx={{ marginLeft: 18, marginTop: 10 }}>
+                        <Button sx={{marginLeft: 18, marginTop: 10}}>
                             決定
                         </Button>
-                        <Button sx={{ marginLeft: 8, marginTop: 10 }}>
+                        <Button sx={{marginLeft: 8, marginTop: 10}}>
                             削除
                         </Button>
                         <Button
@@ -225,9 +225,11 @@ export default function Folder({ name }: FolderProps) {
                 </div>
             ) : (
                 <div>
-                    <AnimeList setIsEdit={setIsEdit} />
+                    <AnimeList setIsEdit={setIsEdit}/>
                 </div>
             )}
         </>
     );
 }
+
+export default Folder;
