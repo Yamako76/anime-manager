@@ -1,54 +1,100 @@
-import { Head } from "@inertiajs/react";
+import {Head} from "@inertiajs/react";
 import React from "react";
 import Header from "@/Components/Header/Header";
 import Typography from "@mui/material/Typography";
-import { Button, Grid } from "@mui/material";
+import {Button, Grid, Box} from "@mui/material";
 
 export default function Index() {
     return (
-        <>
-            <Head title="Top" />
-            <Header />
-            <Grid container alignItems={"center"} justifyContent={"center"}>
-                <Grid item xs={"auto"}>
-                    <Typography variant="h2" paddingTop={40}>
-                        Anime Manager
-                    </Typography>
-                </Grid>
-            </Grid>
-            <Grid
-                container
-                justify={"space-between"}
-                alignItems={"center"}
-                justifyContent={"center"}
-                justifyItems={"space-between"}
-                direction={"column"}
-            >
-                <Button
+        <Box
+            sx={{
+                backgroundColor: "#212121",
+                flex: 1,
+                justifyContent: "center",
+                alignItems: "center",
+                height: "100vh",
+                margin: "0px",
+            }}
+        >
+            <Header/>
+            <Box sx={{flexGrow: 1}}>
+                <Typography
+                    component="div"
                     sx={{
-                        borderRadius: 50,
-                        backgroundColor: "gray",
-                        fontSize: 25,
-                        color: "black",
-                        marginTop: 12,
+                        color: "#ffc107",
+                        fontSize: "80px",
+                        textAlign: "center",
+                        fontWeight: "medium",
+                        marginTop: "300px",
                     }}
-                    size={"medium"}
                 >
-                    新規登録
-                </Button>
-                <Button
+                    Anime Manager
+                </Typography>
+                <Box
                     sx={{
-                        borderRadius: 50,
-                        backgroundColor: "gray",
-                        fontSize: 25,
-                        color: "black",
-                        marginTop: 5,
+                        flexGrow: 1,
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        alignItems: "center",
                     }}
-                    size={"medium"}
                 >
-                    ログイン
-                </Button>
-            </Grid>
-        </>
+                    <Button
+                        sx={{
+                            width: "150px",
+                            borderRadius: "25px",
+                            backgroundColor: "#e53935",
+                            color: "#FFFFFF",
+                            fontSize: "16px",
+                            boxShadow: "none",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            marginTop: "200px",
+                            "&:hover": {
+                                backgroundColor: "#b71c1c",
+                            },
+                        }}
+                    >
+                        新規登録
+                    </Button>
+                    <Button
+                        sx={{
+                            width: "150px",
+                            borderRadius: "25px",
+                            backgroundColor: "#37474f",
+                            color: "#FFFFFF",
+                            fontSize: "16px",
+                            boxShadow: "none",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            marginTop: "20px",
+                            "&:hover": {
+                                backgroundColor: "#263238",
+                            },
+                        }}
+                    >
+                        ログイン
+                    </Button>
+                    <Button
+                        sx={{
+                            width: "150px",
+                            borderRadius: "25px",
+                            backgroundColor: "#ffc107",
+                            color: "black",
+                            fontSize: "16px",
+                            boxShadow: "none",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            marginTop: "20px",
+                            "&:hover": {
+                                backgroundColor: "#ffeb3b",
+                            },
+                        }}
+                    >
+                        ゲストログイン
+                    </Button>
+                </Box>
+            </Box>
+        </Box>
     );
 }
