@@ -1,10 +1,9 @@
-import {Head} from "@inertiajs/react";
 import React from "react";
 import Header from "@/Components/Header/Header";
 import Typography from "@mui/material/Typography";
-import {Button, Grid, Box} from "@mui/material";
+import {Box, Button} from "@mui/material";
 
-export default function Index() {
+const Index = () => {
     return (
         <Box
             sx={{
@@ -98,3 +97,5 @@ export default function Index() {
         </Box>
     );
 }
+
+export default Index;

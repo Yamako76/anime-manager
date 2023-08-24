@@ -4,7 +4,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 
-export default function Header() {
+const Header = () => {
     return (
         <Box sx={{flexGrow: 1}}>
             <AppBar
@@ -58,3 +58,5 @@ export default function Header() {
         </Box>
     );
 }
+
+export default Header;
