@@ -1,5 +1,5 @@
 import React from "react";
-import {Box, Grid} from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 
@@ -7,7 +7,7 @@ interface Props {
     setIsEdit: (b: boolean) => void;
 }
 
-const AnimeList = ({setIsEdit}: Props) => {
+const AnimeList = ({ setIsEdit }: Props) => {
     return (
         <>
             <Grid container alignItems={"center"} justifyContent={"center"}>
@@ -25,9 +25,9 @@ const AnimeList = ({setIsEdit}: Props) => {
                     >
                         コメディー
                     </Typography>
-                    <Box sx={{display: "inline"}}>
+                    <Box sx={{ display: "inline" }}>
                         <Button
-                            sx={{marginTop: -1}}
+                            sx={{ marginTop: -1 }}
                             onClick={() => {
                                 setIsEdit(true);
                             }}
@@ -85,6 +85,6 @@ const AnimeList = ({setIsEdit}: Props) => {
             </Grid>
         </>
     );
-}
+};
 
 export default AnimeList;

@@ -1,5 +1,5 @@
-import {Head} from "@inertiajs/react";
-import React, {useState} from "react";
+import { Head } from "@inertiajs/react";
+import React, { useState } from "react";
 import {
     Box,
     Grid,
@@ -25,8 +25,8 @@ const Index = () => {
 
     return (
         <>
-            <Head title="Anime"/>
-            <AnimeHeader/>
+            <Head title="Anime" />
+            <AnimeHeader />
             <Grid container alignItems={"center"} justifyContent={"center"}>
                 <Box
                     sx={{
@@ -39,7 +39,7 @@ const Index = () => {
                             size={"small"}
                             type="search"
                             id="search"
-                            sx={{width: 200, marginTop: 1}}
+                            sx={{ width: 200, marginTop: 1 }}
                             InputProps={{
                                 endAdornment: (
                                     <InputAdornment position="end">
@@ -48,7 +48,7 @@ const Index = () => {
                                                 setIsSearch(!isSearch)
                                             }
                                         >
-                                            <SearchIcon/>
+                                            <SearchIcon />
                                         </IconButton>
                                     </InputAdornment>
                                 ),
@@ -57,15 +57,15 @@ const Index = () => {
                     ) : (
                         <Tooltip title={"検索"}>
                             <IconButton onClick={() => setIsSearch(!isSearch)}>
-                                <SearchIcon/>
+                                <SearchIcon />
                             </IconButton>
                         </Tooltip>
                     )}
                 </Box>
-                <Box sx={{color: "grey", marginLeft: "10%"}}>
+                <Box sx={{ color: "grey", marginLeft: "10%" }}>
                     <Tooltip title={"追加"}>
                         <IconButton onClick={handleOpen}>
-                            <AddIcon/>
+                            <AddIcon />
                         </IconButton>
                     </Tooltip>
                     <Modal open={open} onClose={handleClose}>
@@ -91,7 +91,7 @@ const Index = () => {
                                     marginTop: 7,
                                 }}
                             >
-                                <Typography sx={{marginLeft: 22}}>
+                                <Typography sx={{ marginLeft: 22 }}>
                                     アニメ名
                                 </Typography>
                                 <TextField
@@ -108,21 +108,21 @@ const Index = () => {
                                 />
                             </Box>
                             <Button
-                                sx={{position: "absolute", top: 25, left: 20}}
+                                sx={{ position: "absolute", top: 25, left: 20 }}
                                 onClick={handleClose}
                             >
                                 戻る
                             </Button>
-                            <Button sx={{marginLeft: 27, marginTop: 27}}>
+                            <Button sx={{ marginLeft: 27, marginTop: 27 }}>
                                 追加
                             </Button>
                         </Box>
                     </Modal>
                 </Box>
-                <Box sx={{color: "grey"}}>
+                <Box sx={{ color: "grey" }}>
                     <Tooltip title={"並び替え"}>
                         <IconButton>
-                            <SortIcon/>
+                            <SortIcon />
                         </IconButton>
                     </Tooltip>
                 </Box>
@@ -178,6 +178,6 @@ const Index = () => {
             </Grid>
         </>
     );
-}
+};
 
 export default Index;

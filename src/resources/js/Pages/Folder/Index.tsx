@@ -1,6 +1,14 @@
-import {Head} from "@inertiajs/react";
-import React, {useState} from "react";
-import {Box, Grid, IconButton, InputAdornment, Modal, TextField, Tooltip,} from "@mui/material";
+import { Head } from "@inertiajs/react";
+import React, { useState } from "react";
+import {
+    Box,
+    Grid,
+    IconButton,
+    InputAdornment,
+    Modal,
+    TextField,
+    Tooltip,
+} from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import SortIcon from "@mui/icons-material/Sort";
 import Typography from "@mui/material/Typography";
@@ -18,9 +26,9 @@ const Index = () => {
 
     return (
         <>
-            <Head title="Folder"/>
+            <Head title="Folder" />
 
-            <AnimeHeader/>
+            <AnimeHeader />
             <Grid container alignItems={"center"} justifyContent={"center"}>
                 <Box
                     sx={{
@@ -33,7 +41,7 @@ const Index = () => {
                             size={"small"}
                             type="search"
                             id="search"
-                            sx={{width: 200, marginTop: 1}}
+                            sx={{ width: 200, marginTop: 1 }}
                             InputProps={{
                                 endAdornment: (
                                     <InputAdornment position="end">
@@ -42,7 +50,7 @@ const Index = () => {
                                                 setIsSearch(!isSearch)
                                             }
                                         >
-                                            <SearchIcon/>
+                                            <SearchIcon />
                                         </IconButton>
                                     </InputAdornment>
                                 ),
@@ -51,15 +59,15 @@ const Index = () => {
                     ) : (
                         <Tooltip title={"検索"}>
                             <IconButton onClick={() => setIsSearch(!isSearch)}>
-                                <SearchIcon/>
+                                <SearchIcon />
                             </IconButton>
                         </Tooltip>
                     )}
                 </Box>
-                <Box sx={{color: "grey", marginLeft: "10%"}}>
+                <Box sx={{ color: "grey", marginLeft: "10%" }}>
                     <Tooltip title={"追加"}>
                         <IconButton onClick={handleOpen}>
-                            <AddIcon/>
+                            <AddIcon />
                         </IconButton>
                     </Tooltip>
                     <Modal open={open} onClose={handleClose}>
@@ -85,7 +93,7 @@ const Index = () => {
                                     marginTop: 15,
                                 }}
                             >
-                                <Typography sx={{marginLeft: 10}}>
+                                <Typography sx={{ marginLeft: 10 }}>
                                     フォルダ名
                                 </Typography>
                                 <TextField
@@ -102,21 +110,21 @@ const Index = () => {
                                 />
                             </Box>
                             <Button
-                                sx={{marginLeft: 18, marginTop: 10}}
+                                sx={{ marginLeft: 18, marginTop: 10 }}
                                 onClick={handleClose}
                             >
                                 戻る
                             </Button>
-                            <Button sx={{marginLeft: 8, marginTop: 10}}>
+                            <Button sx={{ marginLeft: 8, marginTop: 10 }}>
                                 追加
                             </Button>
                         </Box>
                     </Modal>
                 </Box>
-                <Box sx={{color: "grey"}}>
+                <Box sx={{ color: "grey" }}>
                     <Tooltip title={"並び替え"}>
                         <IconButton>
-                            <SortIcon/>
+                            <SortIcon />
                         </IconButton>
                     </Tooltip>
                 </Box>
@@ -143,7 +151,7 @@ const Index = () => {
                 marginTop={3}
                 direction={"row"}
             >
-                <Box sx={{color: "gray"}}>
+                <Box sx={{ color: "gray" }}>
                     <FolderIcon
                         sx={{
                             width: 120,
@@ -160,7 +168,7 @@ const Index = () => {
                         コメディー
                     </Typography>
                 </Box>
-                <Box sx={{color: "gray"}}>
+                <Box sx={{ color: "gray" }}>
                     <FolderIcon
                         sx={{
                             width: 120,
@@ -180,6 +188,6 @@ const Index = () => {
             </Grid>
         </>
     );
-}
+};
 
 export default Index;
