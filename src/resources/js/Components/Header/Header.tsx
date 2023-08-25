@@ -32,6 +32,7 @@ const Header = () => {
                         width: "100%",
                         margin: "0px",
                         minWidth: "300px",
+                        height: 64,
                     }}
                 >
                     <Toolbar
@@ -43,7 +44,7 @@ const Header = () => {
                         <Typography
                             variant="h6"
                             component="div"
-                            sx={{color: "black"}}
+                            sx={{color: "black", lineHeight: "64px"}} // Adjust the lineHeight value
                         >
                             Anime Manager
                         </Typography>
@@ -71,24 +72,36 @@ const Header = () => {
                                         },
                                     }}
                                 >
-                                    <MenuItem sx={{
-                                        color: "#616161",
-                                        "&:hover": {
-                                            color: "#212121",
-                                        },
-                                    }}> 新規登録 < /MenuItem>
-                                    <MenuItem sx={{
-                                        color: "#616161",
-                                        "&:hover": {
-                                            color: "#212121",
-                                        },
-                                    }}>ログイン</MenuItem>
-                                    <MenuItem sx={{
-                                        color: "#616161",
-                                        "&:hover": {
-                                            color: "#212121",
-                                        },
-                                    }}>ゲストログイン</MenuItem>
+                                    <MenuItem
+                                        sx={{
+                                            color: "#616161",
+                                            "&:hover": {
+                                                color: "#212121",
+                                            },
+                                        }}
+                                    >
+                                        新規登録
+                                    </MenuItem>
+                                    <MenuItem
+                                        sx={{
+                                            color: "#616161",
+                                            "&:hover": {
+                                                color: "#212121",
+                                            },
+                                        }}
+                                    >
+                                        ログイン
+                                    </MenuItem>
+                                    <MenuItem
+                                        sx={{
+                                            color: "#616161",
+                                            "&:hover": {
+                                                color: "#212121",
+                                            },
+                                        }}
+                                    >
+                                        ゲストログイン
+                                    </MenuItem>
                                 </Menu>
                             </div>
                         ) : (
