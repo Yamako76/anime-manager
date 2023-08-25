@@ -9,8 +9,8 @@ import {createTheme, ThemeProvider, useMediaQuery} from "@mui/material";
 import {useState} from "react";
 
 const Header = () => {
-    const theme = createTheme(); // テーマの作成
-    const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
+    const theme = createTheme();
+    const isSmallScreen = useMediaQuery(theme.breakpoints.down(550));
 
     const [menuAnchor, setMenuAnchor] = useState(null);
 
