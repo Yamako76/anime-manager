@@ -32,7 +32,7 @@ const Header = () => {
                         width: "100%",
                         margin: "0px",
                         minWidth: "300px",
-                        height: 64,
+                        height: "64px",
                     }}
                 >
                     <Toolbar
@@ -44,7 +44,7 @@ const Header = () => {
                         <Typography
                             variant="h6"
                             component="div"
-                            sx={{color: "black", lineHeight: "64px"}} // Adjust the lineHeight value
+                            sx={{color: "black", lineHeight: "64px"}}
                         >
                             Anime Manager
                         </Typography>
