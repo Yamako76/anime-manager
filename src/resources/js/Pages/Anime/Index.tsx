@@ -9,17 +9,18 @@ import {
     Tooltip,
 } from "@mui/material";
 import SortIcon from "@mui/icons-material/Sort";
-import Typography from "@mui/material/Typography";
 import SearchIcon from "@mui/icons-material/Search";
 import AnimeHeader from "../../Components/Header/AnimeHeader";
 import AddButton from "@/Components/Button/AddButton";
+import AllAnime from "@/Components/AllAnime/AllAnime";
+import Typography from "@mui/material/Typography";
 
 const Index = () => {
     const [open, setOpen] = useState<boolean>(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-    const [isSearch, setIsSearch] = useState(false);
+    const [isSearch, setIsSearch] = useState<boolean>(false);
 
     return (
         <>
@@ -88,40 +89,7 @@ const Index = () => {
                     </Typography>
                 </Box>
             </Grid>
-            <Grid
-                container
-                alignItems={"center"}
-                justifyContent={"center"}
-                marginTop={3}
-                direction={"row"}
-            >
-                <Box
-                    sx={{
-                        backgroundColor: "gray",
-                        width: 140,
-                        height: 160,
-                        borderRadius: 5,
-                        margin: 3,
-                    }}
-                >
-                    <Typography textAlign={"center"} paddingTop={2}>
-                        銀魂
-                    </Typography>
-                </Box>
-                <Box
-                    sx={{
-                        backgroundColor: "gray",
-                        width: 140,
-                        height: 160,
-                        borderRadius: 5,
-                        margin: 3,
-                    }}
-                >
-                    <Typography textAlign={"center"} paddingTop={2}>
-                        ドラゴンボールGT
-                    </Typography>
-                </Box>
-            </Grid>
+            <AllAnime />
         </>
     );
 };

@@ -1,6 +1,6 @@
-import { Head } from "@inertiajs/react";
-import React, { useState } from "react";
-import { Box, Grid, TextField } from "@mui/material";
+import {Head} from "@inertiajs/react";
+import React, {useState} from "react";
+import {Box, Grid, TextField} from "@mui/material";
 import AnimeHeader from "../../Components/Header/AnimeHeader";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
@@ -9,13 +9,13 @@ interface AnimeProps {
     name: string;
 }
 
-const Anime = ({ name }: AnimeProps) => {
+const Anime = ({name}: AnimeProps) => {
     const [isEdit, setIsEdit] = useState(false);
 
     return (
         <>
-            <Head title="Anime" />
-            <AnimeHeader />
+            <Head title="Anime"/>
+            <AnimeHeader/>
             <Grid container alignItems={"center"} justifyContent={"center"}>
                 <Box
                     sx={{
@@ -36,14 +36,14 @@ const Anime = ({ name }: AnimeProps) => {
                                     marginTop: 7,
                                 }}
                             >
-                                <Typography sx={{ marginLeft: 22 }}>
+                                <Typography sx={{marginLeft: 22}}>
                                     アニメ名
                                 </Typography>
                                 <TextField
                                     label="name"
                                     variant="outlined"
                                     size="small"
-                                    defaultValue="銀魂"
+                                    defaultValue={name}
                                     sx={{
                                         alignSelf: "center",
                                         justifyContent: "center",
@@ -53,7 +53,7 @@ const Anime = ({ name }: AnimeProps) => {
                                     }}
                                 />
                             </Box>
-                            <Button sx={{ marginLeft: 27, marginTop: 27 }}>
+                            <Button sx={{marginLeft: 27, marginTop: 27}}>
                                 決定
                             </Button>
                             <Button
@@ -77,7 +77,7 @@ const Anime = ({ name }: AnimeProps) => {
                                     marginTop: 2,
                                 }}
                             >
-                                <Typography sx={{ alignSelf: "center" }}>
+                                <Typography sx={{alignSelf: "center"}}>
                                     アニメ名
                                 </Typography>
                                 <Typography
@@ -87,7 +87,7 @@ const Anime = ({ name }: AnimeProps) => {
                                         fontSize: 30,
                                     }}
                                 >
-                                    銀魂
+                                    {name}
                                 </Typography>
                             </Box>
                             <Button
