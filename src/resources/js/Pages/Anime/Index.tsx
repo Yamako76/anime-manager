@@ -5,6 +5,7 @@ import AnimeHeader from "../../Components/Header/AnimeHeader";
 import AllAnime from "@/Components/AllAnime/AllAnime";
 import { getBoxWidth } from "@/Components/AllAnime/tool";
 import AnimeListTitle from "@/Components/AllAnime/AnimeListTitle";
+import SearchBar from "@/Components/AllAnime/SearchBar";
 
 const Index = () => {
     const BoxWidth = getBoxWidth();
@@ -12,6 +13,17 @@ const Index = () => {
     const [open, setOpen] = useState<boolean>(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+
+    const [value, setValue] = useState<string>("");
+
+    const handleChange = (e) => {
+        setValue(e.target.value);
+    }
+
+    const handleRefresh = () => {
+        setValue("");
+    }
+
 
     const Main = () => {
         return (
@@ -43,14 +55,11 @@ const Index = () => {
                     }}
                 >
                     <Main />
-                    {/* フォルダ内検索 */}
-                    {/*<ItemSearchBar*/}
-                    {/*    handleChange={handleChange}*/}
-                    {/*    handleRefresh={handleRefresh}*/}
-                    {/*    handleReload={handleReload}*/}
-                    {/*    handleSubmit={handleSubmit}*/}
-                    {/*    value={value}*/}
-                    {/*/>*/}
+                    <SearchBar
+                        handleChange={handleChange}
+                        handleRefresh={handleRefresh}
+                        value={value}
+                    />
                 </Box>
             </Box>
         </>
