@@ -71,6 +71,7 @@ const AllAnime = ({}: Props) => {
                         aria-label={"delete anime"}
                         disableFocusRipple={true}
                         size={"small"}
+                        sx={{"&:hover": {color: grey[900]}}}
                     >
                         <DeleteIcon />
                     </IconButton>
