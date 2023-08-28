@@ -6,6 +6,8 @@ import Paper from "@mui/material/Paper";
 import { grey } from "@mui/material/colors";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { getBoxWidth } from "@/Components/AllAnime/tool/tool";
+import DeleteButton from "@/Components/Button/DeleteButton";
+import DeleteAnime from "@/Components/AllAnime/tool/DeleteAnime";
 
 interface Props {}
 
@@ -66,15 +68,7 @@ const AllAnime = ({}: Props) => {
             },
             {
                 body: (
-                    <IconButton
-                        // onClick={handleOpen}
-                        aria-label={"delete anime"}
-                        disableFocusRipple={true}
-                        size={"small"}
-                        sx={{ "&:hover": { color: grey[900] } }}
-                    >
-                        <DeleteIcon />
-                    </IconButton>
+                    <DeleteAnime/>
                 ),
                 sx: {
                     width: "40px",
