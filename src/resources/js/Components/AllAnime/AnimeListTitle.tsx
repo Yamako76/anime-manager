@@ -4,7 +4,8 @@ import Tooltip from "@mui/material/Tooltip";
 import Grid from "@mui/material/Grid";
 import AddButton from "@/Components/Button/AddButton";
 // import SortItem from '../tool/SortItem';
-import { getBoxWidth } from "@/Components/AllAnime/tool";
+import { getBoxWidth } from "@/Components/AllAnime/tool/tool";
+import AddAnime from "@/Components/AllAnime/tool/AddAnime";
 
 interface Props {
     open: boolean;
@@ -42,13 +43,7 @@ const Main = ({ open, handleOpen, handleClose, titleWidth }) => {
             },
         },
         {
-            body: (
-                <AddButton
-                    open={open}
-                    handleOpen={handleOpen}
-                    handleClose={handleClose}
-                />
-            ),
+            body: <AddAnime />,
             sx: {
                 width: "50px",
                 display: "flex",

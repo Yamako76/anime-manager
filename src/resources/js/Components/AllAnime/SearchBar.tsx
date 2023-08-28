@@ -7,7 +7,7 @@ import Tooltip from "@mui/material/Tooltip";
 import SearchIcon from "@mui/icons-material/Search";
 import RefreshIcon from "@mui/icons-material/Refresh";
 // import ClearButton from '../../common/ClearButton';
-import { getBoxWidth, getSearchBarWidth } from "./tool";
+import { getBoxWidth, getSearchBarWidth } from "./tool/tool";
 
 interface Props {
     handleChange: (e) => void;

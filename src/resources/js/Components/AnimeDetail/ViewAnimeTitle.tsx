@@ -1,5 +1,5 @@
-import {Box} from "@mui/material";
-import {grey} from "@mui/material/colors";
+import { Box } from "@mui/material";
+import { grey } from "@mui/material/colors";
 import Typography from "@mui/material/Typography";
 import React from "react";
 import ViewMemo from "@/Components/AnimeDetail/ViewMemo";
@@ -8,7 +8,7 @@ interface AnimeProps {
     name: string;
 }
 
-const ViewAnimeTitle = ({name}: AnimeProps) => {
+const ViewAnimeTitle = ({ name }: AnimeProps) => {
     return (
         <>
             <Box
@@ -33,7 +33,7 @@ const ViewAnimeTitle = ({name}: AnimeProps) => {
                     {name}
                 </Typography>
             </Box>
-            <ViewMemo/>
+            <ViewMemo />
         </>
     );
 };

@@ -1,10 +1,10 @@
-import React, {useEffect, useRef, useState} from "react";
-import {Box} from "@mui/material";
+import React, { useEffect, useRef, useState } from "react";
+import { Box } from "@mui/material";
 import Button from "@mui/material/Button";
 import axios from "axios";
 import Divider from "@mui/material/Divider";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import {grey} from "@mui/material/colors";
+import { grey } from "@mui/material/colors";
 import EditIcon from "@mui/icons-material/Edit";
 import Typography from "@mui/material/Typography";
 import ViewYouTubeVideo from "@/Components/YouTubeApi/ViewYouTubeVideo";
@@ -14,7 +14,7 @@ interface AnimeProps {
     name: string;
 }
 
-const AnimeDetail = ({name}: AnimeProps) => {
+const AnimeDetail = ({ name }: AnimeProps) => {
     const [videoId, setVideoId] = useState();
     const isMounted = useRef(false);
 
@@ -22,25 +22,26 @@ const AnimeDetail = ({name}: AnimeProps) => {
         isMounted.current = true;
         return () => {
             isMounted.current = false;
-        }
-    }, [])
+        };
+    }, []);
 
     useEffect(() => {
         const getAnime = async () => {
             const youTubeVideoId = await fetchYouTubeVideoId(name);
             setVideoId(youTubeVideoId);
-        }
+        };
         if (isMounted.current) {
             getAnime();
         }
-    }, [])
+    }, []);
     const fetchYouTubeVideoId = async (keyWord) => {
         const abortCtrl = new AbortController();
         const timeout = setTimeout(() => abortCtrl.abort(), 10000);
         let res;
 
         try {
-            res = await axios.get(`https://www.googleapis.com/youtube/v3/search`,
+            res = await axios.get(
+                `https://www.googleapis.com/youtube/v3/search`,
                 {
                     signal: abortCtrl.signal,
                     headers: {
@@ -51,9 +52,10 @@ const AnimeDetail = ({name}: AnimeProps) => {
                         q: keyWord + " pv",
                         maxResults: 1,
                         type: "video",
-                        key: "AIzaSyCp814viDX87DANnIYs8o2SsWwtwPxOMvY"
-                    }
-                });
+                        key: "AIzaSyCp814viDX87DANnIYs8o2SsWwtwPxOMvY",
+                    },
+                }
+            );
         } catch {
             // failedToLoad();
         } finally {
@@ -63,7 +65,7 @@ const AnimeDetail = ({name}: AnimeProps) => {
             return null;
         }
         return res.data.items[0].id.videoId;
-    }
+    };
 
     const ViewItem = () => {
         return (
@@ -77,21 +79,27 @@ const AnimeDetail = ({name}: AnimeProps) => {
                     marginTop: "50px",
                     paddingRight: "50px",
                     paddingLeft: "50px",
-                }}>
-                <Box sx={{
-                    justifyContent: "flex-start",
-                    alignItems: "flex-end",
-                    display: "flex",
-                    width: "100%",
-                    height: "50px",
-                }}>
+                }}
+            >
+                <Box
+                    sx={{
+                        justifyContent: "flex-start",
+                        alignItems: "flex-end",
+                        display: "flex",
+                        width: "100%",
+                        height: "50px",
+                    }}
+                >
                     <Button
                         size={"small"}
                         // component={Link}
                         // to={"/app/home/folders/" + folderId + "/items/"}
                         variant="text"
-                        startIcon={<ArrowBackIcon/>}
-                        sx={{marginRight: "10px", "&:hover": {color: grey[900]}}}
+                        startIcon={<ArrowBackIcon />}
+                        sx={{
+                            marginRight: "10px",
+                            "&:hover": { color: grey[900] },
+                        }}
                         color="inherit"
                     >
                         戻る
@@ -102,15 +110,21 @@ const AnimeDetail = ({name}: AnimeProps) => {
                         // aria-label={ariaLabel}
                         disableFocusRipple={true}
                         size={"small"}
-                        sx={{"&:hover": {color: grey[900]}}}
-                        startIcon={<EditIcon/>}
+                        sx={{ "&:hover": { color: grey[900] } }}
+                        startIcon={<EditIcon />}
                         color="inherit"
                     >
                         編集
                     </Button>
                 </Box>
-                <Divider sx={{width: "100%", marginTop: "5px", marginBottom: "5px"}}/>
-                <ViewAnimeTitle name={name}/>
+                <Divider
+                    sx={{
+                        width: "100%",
+                        marginTop: "5px",
+                        marginBottom: "5px",
+                    }}
+                />
+                <ViewAnimeTitle name={name} />
                 <Box
                     sx={{
                         width: "100%",
@@ -120,29 +134,36 @@ const AnimeDetail = ({name}: AnimeProps) => {
                         display: "flex",
                         paddingLeft: "10px",
                         marginBottom: "1px",
-                    }}>
-                    <Box sx={{
-                        height: "18px",
-                        width: "5px",
-                        bgcolor: grey[300],
-                        marginRight: "5px"
-                    }}/>
-                    <Typography sx={{fontSize: 18, fontWeight: "bold"}}>関連のビデオ</Typography>
+                    }}
+                >
+                    <Box
+                        sx={{
+                            height: "18px",
+                            width: "5px",
+                            bgcolor: grey[300],
+                            marginRight: "5px",
+                        }}
+                    />
+                    <Typography sx={{ fontSize: 18, fontWeight: "bold" }}>
+                        関連のビデオ
+                    </Typography>
                 </Box>
-                <Box sx={{
-                    width: "100%",
-                    height: "400px",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    display: "flex",
-                    minWidth: "320px",
-                    maxWidth: "1200px",
-                }}>
-                    <ViewYouTubeVideo videoId={videoId}/>
+                <Box
+                    sx={{
+                        width: "100%",
+                        height: "400px",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        display: "flex",
+                        minWidth: "320px",
+                        maxWidth: "1200px",
+                    }}
+                >
+                    <ViewYouTubeVideo videoId={videoId} />
                 </Box>
             </Box>
         );
-    }
+    };
     return (
         <Box
             sx={{
@@ -154,7 +175,7 @@ const AnimeDetail = ({name}: AnimeProps) => {
                 display: "flex",
             }}
         >
-            <ViewItem/>
+            <ViewItem />
         </Box>
     );
 };

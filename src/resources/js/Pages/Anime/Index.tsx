@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Box, Divider, Grid } from "@mui/material";
 import AnimeHeader from "../../Components/Header/AnimeHeader";
 import AllAnime from "@/Components/AllAnime/AllAnime";
-import { getBoxWidth } from "@/Components/AllAnime/tool";
+import { getBoxWidth } from "@/Components/AllAnime/tool/tool";
 import AnimeListTitle from "@/Components/AllAnime/AnimeListTitle";
 import SearchBar from "@/Components/AllAnime/SearchBar";
 
@@ -18,12 +18,11 @@ const Index = () => {
 
     const handleChange = (e) => {
         setValue(e.target.value);
-    }
+    };
 
     const handleRefresh = () => {
         setValue("");
-    }
-
+    };
 
     const Main = () => {
         return (

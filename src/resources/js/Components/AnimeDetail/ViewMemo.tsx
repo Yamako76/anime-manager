@@ -1,5 +1,5 @@
-import {Box, Grid} from "@mui/material";
-import {grey} from "@mui/material/colors";
+import { Box, Grid } from "@mui/material";
+import { grey } from "@mui/material/colors";
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import React from "react";
@@ -44,7 +44,7 @@ const ViewMemo = () => {
                             marginRight: "5px",
                         }}
                     />
-                    <Typography sx={{fontSize: 18, fontWeight: "bold"}}>
+                    <Typography sx={{ fontSize: 18, fontWeight: "bold" }}>
                         メモ
                     </Typography>
                 </Grid>
