@@ -7,6 +7,7 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
 import { useState } from "react";
+import {InertiaLink} from "@inertiajs/inertia-react";
 
 const Header = () => {
     const theme = createTheme();
@@ -79,6 +80,8 @@ const Header = () => {
                                                 color: "#212121",
                                             },
                                         }}
+                                        as={InertiaLink}
+                                        href="/register"
                                     >
                                         新規登録
                                     </MenuItem>
@@ -89,6 +92,8 @@ const Header = () => {
                                                 color: "#212121",
                                             },
                                         }}
+                                        as={InertiaLink}
+                                        href="/login"
                                     >
                                         ログイン
                                     </MenuItem>
@@ -114,6 +119,8 @@ const Header = () => {
                                         },
                                         marginRight: 1,
                                     }}
+                                    as={InertiaLink}
+                                    href="/register"
                                 >
                                     新規登録
                                 </Button>
@@ -125,6 +132,8 @@ const Header = () => {
                                         },
                                         marginRight: 1,
                                     }}
+                                    as={InertiaLink}
+                                    href="/login"
                                 >
                                     ログイン
                                 </Button>

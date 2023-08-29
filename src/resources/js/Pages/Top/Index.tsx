@@ -1,7 +1,8 @@
 import React from "react";
 import Header from "@/Components/Header/Header";
 import Typography from "@mui/material/Typography";
-import { Box, Button } from "@mui/material";
+import {Box, Button} from "@mui/material";
+import {InertiaLink} from "@inertiajs/inertia-react";
 
 const Index = () => {
     return (
@@ -17,7 +18,7 @@ const Index = () => {
                 paddingBottom: "65px",
             }}
         >
-            <Header />
+            <Header/>
             <Box
                 sx={{
                     flexGrow: 1,
@@ -47,6 +48,10 @@ const Index = () => {
                         marginTop: "50px",
                     }}
                 >
+                    <Box
+                        as={InertiaLink}
+                        href="/register"
+                    >
                     <Button
                         sx={{
                             width: "150px",
@@ -63,22 +68,28 @@ const Index = () => {
                     >
                         新規登録
                     </Button>
-                    <Button
-                        sx={{
-                            width: "150px",
-                            borderRadius: "25px",
-                            backgroundColor: "#37474f",
-                            color: "#FFFFFF",
-                            fontSize: "16px",
-                            boxShadow: "none",
-                            marginBottom: "20px",
-                            "&:hover": {
-                                backgroundColor: "#263238",
-                            },
-                        }}
+                    </Box>
+                    <Box
+                        as={InertiaLink}
+                        href="/login"
                     >
-                        ログイン
-                    </Button>
+                        <Button
+                            sx={{
+                                width: "150px",
+                                borderRadius: "25px",
+                                backgroundColor: "#37474f",
+                                color: "#FFFFFF",
+                                fontSize: "16px",
+                                boxShadow: "none",
+                                marginBottom: "20px",
+                                "&:hover": {
+                                    backgroundColor: "#263238",
+                                },
+                            }}
+                        >
+                            ログイン
+                        </Button>
+                    </Box>
                     <Button
                         sx={{
                             width: "150px",
