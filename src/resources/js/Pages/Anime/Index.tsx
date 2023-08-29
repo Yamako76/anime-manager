@@ -28,11 +28,7 @@ const Index = () => {
         return (
             <Grid container direction="column" sx={{ marginTop: "100px" }}>
                 <Grid container item>
-                    <AnimeListTitle
-                        open={open}
-                        handleOpen={handleOpen}
-                        handleClose={handleClose}
-                    />
+                    <AnimeListTitle />
                 </Grid>
                 <Divider />
                 <AllAnime />

@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import Box from '@mui/material/Box';
+import React, { useState } from "react";
+import Box from "@mui/material/Box";
 import DeleteButton from "@/Components/Button/DeleteButton";
 
 const DeleteAnime = () => {
@@ -15,7 +15,7 @@ const DeleteAnime = () => {
 
     const handleSubmit = () => {
         handleClose();
-    }
+    };
 
     return (
         <Box>
@@ -31,6 +31,6 @@ const DeleteAnime = () => {
             />
         </Box>
     );
-}
+};
 
 export default DeleteAnime;

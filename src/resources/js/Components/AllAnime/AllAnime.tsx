@@ -67,9 +67,7 @@ const AllAnime = ({}: Props) => {
                 },
             },
             {
-                body: (
-                    <DeleteAnime/>
-                ),
+                body: <DeleteAnime />,
                 sx: {
                     width: "40px",
                     display: "flex",

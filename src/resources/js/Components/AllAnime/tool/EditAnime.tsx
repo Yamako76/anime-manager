@@ -1,12 +1,11 @@
-import React, {useState} from 'react';
-import Box from '@mui/material/Box';
+import React, { useState } from "react";
+import Box from "@mui/material/Box";
 import EditAnimeButton from "@/Components/Button/EditAnimeButton";
-import {value_validation} from '../../common/tool';
+import { value_validation } from "../../common/tool";
 import EditIcon from "@mui/icons-material/Edit";
-import {grey} from "@mui/material/colors";
+import { grey } from "@mui/material/colors";
 
-
-const EditAnime = ({name, memo}) => {
+const EditAnime = ({ name, memo }) => {
     const [open, setOpen] = useState(false);
     const [error, setError] = useState(false);
     const [nameValue, setNameValue] = useState(name);
@@ -17,17 +16,17 @@ const EditAnime = ({name, memo}) => {
     const handleErrorRefresh = () => {
         setErrorText("");
         setError(false);
-    }
+    };
 
     const handleError = (errorMessage) => {
         setErrorText(errorMessage);
         setError(true);
-    }
+    };
 
     const handleRefresh = () => {
-        setNameValue('');
+        setNameValue("");
         handleErrorRefresh();
-    }
+    };
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -59,8 +58,7 @@ const EditAnime = ({name, memo}) => {
         } else {
             handleError(errorMessage);
         }
-    }
-
+    };
 
     return (
         <Box>
@@ -84,11 +82,11 @@ const EditAnime = ({name, memo}) => {
                 memoLabel="メモ"
                 memoValue={memoValue}
                 memoHandleChange={memoHandleChange}
-                startIcon={<EditIcon/>}
-                sx={{"&:hover": {color: grey[900]}}}
+                startIcon={<EditIcon />}
+                sx={{ "&:hover": { color: grey[900] } }}
             />
         </Box>
     );
-}
+};
 
 export default EditAnime;

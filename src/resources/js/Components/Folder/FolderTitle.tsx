@@ -6,14 +6,15 @@ import Grid from "@mui/material/Grid";
 import { getBoxWidth } from "@/Components/AllAnime/tool/tool";
 import AddAnime from "@/Components/AllAnime/tool/AddAnime";
 
-interface Props {}
+interface Props {
+    name: string;
+}
 
-// コンテンツMain部分
-const Main = ({ titleWidth }) => {
+const Main = ({ titleWidth, name }) => {
     const contentList = [
         {
             body: (
-                <Tooltip title={`アニメ一覧`} placement="bottom-end">
+                <Tooltip title={`${name}の一覧`} placement="bottom-end">
                     <Box
                         component="div"
                         textOverflow="ellipsis"
@@ -26,7 +27,7 @@ const Main = ({ titleWidth }) => {
                             marginBottom: "10px",
                         }}
                     >
-                        {`アニメ一覧`}
+                        {`${name}の一覧`}
                     </Box>
                 </Tooltip>
             ),
@@ -68,14 +69,14 @@ const Main = ({ titleWidth }) => {
     );
 };
 
-const AnimeListTitle = () => {
+const FolderTitle = ({ name }: Props) => {
     const titleWidth = getBoxWidth() - 100;
 
     return (
         <Box>
-            <Main titleWidth={titleWidth} />
+            <Main titleWidth={titleWidth} name={name} />
         </Box>
     );
 };
 
-export default AnimeListTitle;
+export default FolderTitle;

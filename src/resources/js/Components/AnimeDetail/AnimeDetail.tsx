@@ -1,10 +1,10 @@
-import React, {useEffect, useRef, useState} from "react";
-import {Box} from "@mui/material";
+import React, { useEffect, useRef, useState } from "react";
+import { Box } from "@mui/material";
 import Button from "@mui/material/Button";
 import axios from "axios";
 import Divider from "@mui/material/Divider";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import {grey} from "@mui/material/colors";
+import { grey } from "@mui/material/colors";
 import Typography from "@mui/material/Typography";
 import ViewYouTubeVideo from "@/Components/YouTubeApi/ViewYouTubeVideo";
 import ViewAnimeTitle from "@/Components/AnimeDetail/ViewAnimeTitle";
@@ -14,7 +14,7 @@ interface AnimeProps {
     name: string;
 }
 
-const AnimeDetail = ({name}: AnimeProps) => {
+const AnimeDetail = ({ name }: AnimeProps) => {
     const [videoId, setVideoId] = useState();
     const isMounted = useRef(false);
 
@@ -95,16 +95,16 @@ const AnimeDetail = ({name}: AnimeProps) => {
                         // component={Link}
                         // to={"/app/home/folders/" + folderId + "/items/"}
                         variant="text"
-                        startIcon={<ArrowBackIcon/>}
+                        startIcon={<ArrowBackIcon />}
                         sx={{
                             marginRight: "10px",
-                            "&:hover": {color: grey[900]},
+                            "&:hover": { color: grey[900] },
                         }}
                         color="inherit"
                     >
                         戻る
                     </Button>
-                    <EditAnime name={name} memo={"memo"}/>
+                    <EditAnime name={name} memo={"memo"} />
                 </Box>
                 <Divider
                     sx={{
@@ -113,7 +113,7 @@ const AnimeDetail = ({name}: AnimeProps) => {
                         marginBottom: "5px",
                     }}
                 />
-                <ViewAnimeTitle name={name}/>
+                <ViewAnimeTitle name={name} />
                 <Box
                     sx={{
                         width: "100%",
@@ -133,7 +133,7 @@ const AnimeDetail = ({name}: AnimeProps) => {
                             marginRight: "5px",
                         }}
                     />
-                    <Typography sx={{fontSize: 18, fontWeight: "bold"}}>
+                    <Typography sx={{ fontSize: 18, fontWeight: "bold" }}>
                         関連のビデオ
                     </Typography>
                 </Box>
@@ -148,7 +148,7 @@ const AnimeDetail = ({name}: AnimeProps) => {
                         maxWidth: "1200px",
                     }}
                 >
-                    <ViewYouTubeVideo videoId={videoId}/>
+                    <ViewYouTubeVideo videoId={videoId} />
                 </Box>
             </Box>
         );
@@ -164,7 +164,7 @@ const AnimeDetail = ({name}: AnimeProps) => {
                 display: "flex",
             }}
         >
-            <ViewItem/>
+            <ViewItem />
         </Box>
     );
 };

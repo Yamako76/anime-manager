@@ -7,7 +7,13 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
-const DeleteDialog = ({ task_name, content_text, open, handleClose, handleSubmit }) => {
+const DeleteDialog = ({
+    task_name,
+    content_text,
+    open,
+    handleClose,
+    handleSubmit,
+}) => {
     return (
         <Box>
             <Dialog open={open} onClose={handleClose}>
