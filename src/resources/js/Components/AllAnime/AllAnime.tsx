@@ -8,6 +8,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { getBoxWidth } from "@/Components/AllAnime/tool/tool";
 import DeleteButton from "@/Components/Button/DeleteButton";
 import DeleteAnime from "@/Components/AllAnime/tool/DeleteAnime";
+import {InertiaLink} from "@inertiajs/inertia-react";
 
 interface Props {}
 
@@ -46,7 +47,8 @@ const AllAnime = ({}: Props) => {
                             textOverflow="ellipsis"
                             overflow="hidden"
                             fontSize={20}
-                            // component={Link}
+                            as={InertiaLink}
+                            href="/anime-list/d"
                             sx={{
                                 margin: "0px 5px",
                                 width: String(titleWidth - 10) + "px",

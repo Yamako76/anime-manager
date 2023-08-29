@@ -7,6 +7,7 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
 import { useState } from "react";
+import {InertiaLink} from "@inertiajs/inertia-react";
 
 const AnimeHeader = () => {
     const theme = createTheme();
@@ -79,6 +80,8 @@ const AnimeHeader = () => {
                                                 color: "#212121",
                                             },
                                         }}
+                                        as={InertiaLink}
+                                        href="/anime-list"
                                     >
                                         アニメ一覧
                                     </MenuItem>
@@ -89,6 +92,8 @@ const AnimeHeader = () => {
                                                 color: "#212121",
                                             },
                                         }}
+                                        as={InertiaLink}
+                                        href="/folders"
                                     >
                                         フォルダ一覧
                                     </MenuItem>
@@ -114,6 +119,8 @@ const AnimeHeader = () => {
                                         },
                                         marginRight: 1,
                                     }}
+                                    as={InertiaLink}
+                                    href="/anime-list"
                                 >
                                     アニメ一覧
                                 </Button>
@@ -125,6 +132,8 @@ const AnimeHeader = () => {
                                         },
                                         marginRight: 1,
                                     }}
+                                    as={InertiaLink}
+                                    href="/folders"
                                 >
                                     フォルダ一覧
                                 </Button>
