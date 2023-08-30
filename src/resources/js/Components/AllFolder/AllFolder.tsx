@@ -1,42 +1,44 @@
 import React from "react";
 import {Box, Grid} from "@mui/material";
-import Tooltip from "@mui/material/Tooltip";
-import Paper from "@mui/material/Paper";
-import {grey} from "@mui/material/colors";
 import {getBoxWidth} from "@/Components/AllAnime/tool/tool";
-import DeleteAnime from "@/Components/AllAnime/tool/DeleteAnime";
+import Tooltip from "@mui/material/Tooltip";
 import {InertiaLink} from "@inertiajs/inertia-react";
+import {grey} from "@mui/material/colors";
+import DeleteFolder from "@/Components/AllFolder/tool/DeleteFolder";
+import Paper from "@mui/material/Paper";
+import EditFolder from "@/Components/AllFolder/tool/EditFolder";
 
 interface Props {
 }
 
-const AllAnime = ({}: Props) => {
-    const BoxWidth = getBoxWidth();
-    const titleWidth = BoxWidth - 50;
+const AllFolder = ({}: Props) => {
 
-    const animeList: string[] = [
-        "銀魂",
-        "ドラえもん",
-        "ドラゴンボール",
-        "ワンピース",
-        "アンパンマン",
-        "スラムダンク",
-        "あの日見た花の名前は忘れない",
-        "てんぷる",
-        "ぐらんぶる",
-        "ニセコイ",
-        "俺ガイル",
-        "咲",
-        "リセス",
-        "転したらスライムだった件",
-        "精霊幻想紀",
-        "ぼっちざろっく",
-        "けいおん",
-        "ラブライブ",
-        "ホリミヤ",
+    const BoxWidth = getBoxWidth();
+    const titleWidth = BoxWidth - 90;
+
+    const FolderList: string[] = [
+        "コメディー",
+        "アクション",
+        "ホラー",
+        "恋愛",
+        "泣ける",
+        "サスペンス",
+        "ミステリー",
+        "ミステリー",
+        "ミステリー",
+        "ミステリー",
+        "ミステリー",
+        "ミステリー",
+        "ミステリー",
+        "ミステリー",
+        "ミステリー",
+        "ミステリー",
+        "ミステリー",
+        "ミステリー",
+        "ミステリー",
     ];
 
-    const PaperContent = ({item}) => {
+    const PaperContent = ({ item }) => {
         const contentList = [
             {
                 body: (
@@ -46,13 +48,13 @@ const AllAnime = ({}: Props) => {
                             overflow="hidden"
                             fontSize={20}
                             as={InertiaLink}
-                            href="/anime-list/d"
+                            href="/folders/a"
                             sx={{
                                 margin: "0px 5px",
                                 width: String(titleWidth - 10) + "px",
                                 color: grey[900],
                                 textDecoration: "none",
-                                "&:hover": {color: grey[900]},
+                                "&:hover": { color: grey[900] },
                             }}
                         >
                             {item}
@@ -67,7 +69,16 @@ const AllAnime = ({}: Props) => {
                 },
             },
             {
-                body: <DeleteAnime/>,
+                body: <EditFolder folder={item} />,
+                sx: {
+                    width: "40px",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "flex-end",
+                },
+            },
+            {
+                body: <DeleteFolder />,
                 sx: {
                     width: "40px",
                     display: "flex",
@@ -119,9 +130,9 @@ const AllAnime = ({}: Props) => {
                 }}
             >
                 <Grid container direction="column" spacing={1}>
-                    {animeList.map((item, index) => (
+                    {FolderList.map((item, index) => (
                         <Grid key={index} container item>
-                            <PaperContent item={item}/>
+                            <PaperContent item={item} />
                         </Grid>
                     ))}
                 </Grid>
@@ -131,9 +142,9 @@ const AllAnime = ({}: Props) => {
 
     return (
         <Box>
-            <ItemList/>
+            <ItemList />
         </Box>
     );
 };
 
-export default AllAnime;
+export default AllFolder;

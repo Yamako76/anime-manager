@@ -1,19 +1,19 @@
-import {useEffect} from "react";
+import { useEffect } from "react";
 import GuestLayout from "@/Layouts/GuestLayout";
 import InputError from "@/Components/InputError";
 import InputLabel from "@/Components/InputLabel";
 import PrimaryButton from "@/Components/PrimaryButton";
 import TextInput from "@/Components/TextInput";
-import {Head, Link, useForm} from "@inertiajs/react";
+import { Head, Link, useForm } from "@inertiajs/react";
 import React from "react";
 import Header from "@/Components/Header/Header";
-import {getBoxWidth} from "@/Components/AllAnime/tool/tool";
-import {Box, CardHeader} from "@mui/material";
+import { getBoxWidth } from "@/Components/AllAnime/tool/tool";
+import { Box, CardHeader } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 
 export default function Register() {
-    const {data, setData, post, processing, errors, reset} = useForm({
+    const { data, setData, post, processing, errors, reset } = useForm({
         name: "",
         email: "",
         password: "",
@@ -43,18 +43,20 @@ export default function Register() {
 
     return (
         <>
-            <Header/>
+            <Header />
             {/*<GuestLayout>*/}
-            <Head title="Register"/>
-            <Box sx={{
-                flex: 1,
-                marginLeft: "10px",
-                marginRight: "10px",
-                marginTop: "30px",
-                justifyContent: "center",
-                alignItems: "center",
-                display: "flex"
-            }}>
+            <Head title="Register" />
+            <Box
+                sx={{
+                    flex: 1,
+                    marginLeft: "10px",
+                    marginRight: "10px",
+                    marginTop: "30px",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    display: "flex",
+                }}
+            >
                 <Card
                     sx={{
                         justifyContent: "center",
@@ -62,10 +64,12 @@ export default function Register() {
                         width: String(BoxWidth - 50) + "px",
                         height: "50%",
                         minWidth: "350px",
-                        padding: "10px"
-                    }}>
-                    <CardHeader title="会員登録"
-                                titleTypographyProps={{variant: "h6"}}
+                        padding: "10px",
+                    }}
+                >
+                    <CardHeader
+                        title="会員登録"
+                        titleTypographyProps={{ variant: "h6" }}
                     />
                     <CardContent>
                         <form onSubmit={submit}>
@@ -87,7 +91,10 @@ export default function Register() {
                                     required
                                 />
 
-                                <InputError message={errors.name} className="mt-2"/>
+                                <InputError
+                                    message={errors.name}
+                                    className="mt-2"
+                                />
                             </div>
 
                             <div className="mt-4">
@@ -108,7 +115,10 @@ export default function Register() {
                                     required
                                 />
 
-                                <InputError message={errors.email} className="mt-2"/>
+                                <InputError
+                                    message={errors.email}
+                                    className="mt-2"
+                                />
                             </div>
 
                             <div className="mt-4">
@@ -129,7 +139,10 @@ export default function Register() {
                                     required
                                 />
 
-                                <InputError message={errors.password} className="mt-2"/>
+                                <InputError
+                                    message={errors.password}
+                                    className="mt-2"
+                                />
                             </div>
 
                             <div className="mt-4">
@@ -164,9 +177,13 @@ export default function Register() {
                                 {/*    Already registered?*/}
                                 {/*</Link>*/}
 
-                                <PrimaryButton className="ml-4"
-                                               disabled={processing}
-                                               style={{backgroundColor: "#0066FF", color: "white"}}
+                                <PrimaryButton
+                                    className="ml-4"
+                                    disabled={processing}
+                                    style={{
+                                        backgroundColor: "#0066FF",
+                                        color: "white",
+                                    }}
                                 >
                                     送信
                                 </PrimaryButton>

@@ -1,19 +1,19 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import Checkbox from "@/Components/Checkbox";
 import GuestLayout from "@/Layouts/GuestLayout";
 import InputError from "@/Components/InputError";
 import InputLabel from "@/Components/InputLabel";
 import PrimaryButton from "@/Components/PrimaryButton";
 import TextInput from "@/Components/TextInput";
-import {Head, Link, useForm} from "@inertiajs/react";
+import { Head, Link, useForm } from "@inertiajs/react";
 import Header from "@/Components/Header/Header";
-import {Box, CardHeader} from "@mui/material";
+import { Box, CardHeader } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import {getBoxWidth} from "@/Components/AllAnime/tool/tool";
+import { getBoxWidth } from "@/Components/AllAnime/tool/tool";
 
-export default function Login({status, canResetPassword}: any) {
-    const {data, setData, post, processing, errors, reset} = useForm({
+export default function Login({ status, canResetPassword }: any) {
+    const { data, setData, post, processing, errors, reset } = useForm({
         email: "",
         password: "",
         // remember: "",
@@ -44,24 +44,26 @@ export default function Login({status, canResetPassword}: any) {
 
     return (
         <>
-            <Header/>
+            <Header />
             {/*<GuestLayout>*/}
-            <Head title="Log in"/>
+            <Head title="Log in" />
 
             {status && (
                 <div className="mb-4 font-medium text-sm text-green-600">
                     {status}
                 </div>
             )}
-            <Box sx={{
-                flex: 1,
-                marginLeft: "20px",
-                marginRight: "20px",
-                marginTop: "30px",
-                justifyContent: "center",
-                alignItems: "center",
-                display: "flex"
-            }}>
+            <Box
+                sx={{
+                    flex: 1,
+                    marginLeft: "20px",
+                    marginRight: "20px",
+                    marginTop: "30px",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    display: "flex",
+                }}
+            >
                 <Card
                     sx={{
                         justifyContent: "center",
@@ -69,10 +71,12 @@ export default function Login({status, canResetPassword}: any) {
                         width: String(BoxWidth - 50) + "px",
                         height: "50%",
                         minWidth: "350px",
-                        padding: "10px"
-                    }}>
-                    <CardHeader title="ログイン"
-                                titleTypographyProps={{variant: "h6"}}
+                        padding: "10px",
+                    }}
+                >
+                    <CardHeader
+                        title="ログイン"
+                        titleTypographyProps={{ variant: "h6" }}
                     />
                     <CardContent>
                         <form onSubmit={submit}>
@@ -94,7 +98,10 @@ export default function Login({status, canResetPassword}: any) {
                                     onChange={handleOnChange}
                                 />
 
-                                <InputError message={errors.email} className="mt-2"/>
+                                <InputError
+                                    message={errors.email}
+                                    className="mt-2"
+                                />
                             </div>
 
                             <div className="mt-4">
@@ -114,7 +121,10 @@ export default function Login({status, canResetPassword}: any) {
                                     onChange={handleOnChange}
                                 />
 
-                                <InputError message={errors.password} className="mt-2"/>
+                                <InputError
+                                    message={errors.password}
+                                    className="mt-2"
+                                />
                             </div>
 
                             {/*<div className="block mt-4">*/}
@@ -140,9 +150,13 @@ export default function Login({status, canResetPassword}: any) {
                                 {/*    </Link>*/}
                                 {/*)}*/}
 
-                                <PrimaryButton className="ml-4"
-                                               disabled={processing}
-                                               style={{backgroundColor: "#0066FF", color: "white"}}
+                                <PrimaryButton
+                                    className="ml-4"
+                                    disabled={processing}
+                                    style={{
+                                        backgroundColor: "#0066FF",
+                                        color: "white",
+                                    }}
                                 >
                                     送信
                                 </PrimaryButton>

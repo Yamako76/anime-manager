@@ -2,10 +2,11 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import EditDialog from "./EditDialog";
+import IconButton from "@mui/material/IconButton";
+import AddIcon from "@mui/icons-material/Add";
+import Tooltip from "@mui/material/Tooltip";
 
 const AddButton = ({
-    startIcon,
-    button_name,
     task_name,
     id,
     label,
@@ -23,14 +24,15 @@ const AddButton = ({
 }) => {
     return (
         <Box>
-            <Button
-                startIcon={startIcon}
-                onClick={handleClickOpen}
-                disableFocusRipple={true}
-                sx={sx}
-            >
-                {button_name}
-            </Button>
+            <Tooltip title={task_name}>
+                <IconButton
+                    onClick={handleClickOpen}
+                    disableFocusRipple={true}
+                    sx={sx}
+                >
+                    <AddIcon />
+                </IconButton>
+            </Tooltip>
 
             <EditDialog
                 task_name={task_name}
