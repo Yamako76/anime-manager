@@ -7,7 +7,7 @@ import PrimaryButton from "@/Components/PrimaryButton";
 import TextInput from "@/Components/TextInput";
 import {Head, Link, useForm} from "@inertiajs/react";
 import Header from "@/Components/Header/Header";
-import {Box, CardHeader, Paper} from "@mui/material";
+import {Box, CardHeader} from "@mui/material";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import {getBoxWidth} from "@/Components/AllAnime/tool/tool";
@@ -16,7 +16,7 @@ export default function Login({status, canResetPassword}: any) {
     const {data, setData, post, processing, errors, reset} = useForm({
         email: "",
         password: "",
-        remember: "",
+        // remember: "",
     });
 
     const BoxWidth = getBoxWidth();
@@ -55,9 +55,9 @@ export default function Login({status, canResetPassword}: any) {
             )}
             <Box sx={{
                 flex: 1,
-                marginLeft: "50px",
-                marginRight: "50px",
-                marginTop: "50px",
+                marginLeft: "20px",
+                marginRight: "20px",
+                marginTop: "30px",
                 justifyContent: "center",
                 alignItems: "center",
                 display: "flex"
@@ -68,8 +68,8 @@ export default function Login({status, canResetPassword}: any) {
                         alignItems: "center",
                         width: String(BoxWidth - 50) + "px",
                         height: "50%",
-                        minWidth: "300px",
-                        padding: "20px"
+                        minWidth: "350px",
+                        padding: "10px"
                     }}>
                     <CardHeader title="ログイン"
                                 titleTypographyProps={{variant: "h6"}}
