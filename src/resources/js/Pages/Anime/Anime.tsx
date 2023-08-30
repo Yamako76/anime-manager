@@ -17,7 +17,6 @@ const Anime = ({ name }: AnimeProps) => {
                 sx={{
                     width: "100%",
                     minWidth: "300px",
-                    maxWidth: "2000px",
                     justifyContent: "center",
                     alignItems: "center",
                     display: "flex",
