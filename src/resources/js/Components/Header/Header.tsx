@@ -7,7 +7,7 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
 import { useState } from "react";
-import {InertiaLink} from "@inertiajs/inertia-react";
+import { InertiaLink } from "@inertiajs/inertia-react";
 
 const Header = () => {
     const theme = createTheme();
@@ -46,6 +46,8 @@ const Header = () => {
                             variant="h6"
                             component="div"
                             sx={{ color: "black", lineHeight: "64px" }}
+                            as={InertiaLink}
+                            href="/"
                         >
                             Anime Manager
                         </Typography>

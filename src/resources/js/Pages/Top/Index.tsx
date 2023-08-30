@@ -1,8 +1,8 @@
 import React from "react";
 import Header from "@/Components/Header/Header";
 import Typography from "@mui/material/Typography";
-import {Box, Button} from "@mui/material";
-import {InertiaLink} from "@inertiajs/inertia-react";
+import { Box, Button } from "@mui/material";
+import { InertiaLink } from "@inertiajs/inertia-react";
 
 const Index = () => {
     return (
@@ -18,7 +18,7 @@ const Index = () => {
                 paddingBottom: "65px",
             }}
         >
-            <Header/>
+            <Header />
             <Box
                 sx={{
                     flexGrow: 1,
@@ -48,31 +48,25 @@ const Index = () => {
                         marginTop: "50px",
                     }}
                 >
-                    <Box
-                        as={InertiaLink}
-                        href="/register"
-                    >
-                    <Button
-                        sx={{
-                            width: "150px",
-                            borderRadius: "25px",
-                            backgroundColor: "#e53935",
-                            color: "#FFFFFF",
-                            fontSize: "16px",
-                            boxShadow: "none",
-                            marginBottom: "20px",
-                            "&:hover": {
-                                backgroundColor: "#b71c1c",
-                            },
-                        }}
-                    >
-                        新規登録
-                    </Button>
+                    <Box as={InertiaLink} href="/register">
+                        <Button
+                            sx={{
+                                width: "150px",
+                                borderRadius: "25px",
+                                backgroundColor: "#e53935",
+                                color: "#FFFFFF",
+                                fontSize: "16px",
+                                boxShadow: "none",
+                                marginBottom: "20px",
+                                "&:hover": {
+                                    backgroundColor: "#b71c1c",
+                                },
+                            }}
+                        >
+                            新規登録
+                        </Button>
                     </Box>
-                    <Box
-                        as={InertiaLink}
-                        href="/login"
-                    >
+                    <Box as={InertiaLink} href="/login">
                         <Button
                             sx={{
                                 width: "150px",

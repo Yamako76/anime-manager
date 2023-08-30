@@ -7,7 +7,7 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
 import { useState } from "react";
-import {InertiaLink} from "@inertiajs/inertia-react";
+import { InertiaLink } from "@inertiajs/inertia-react";
 
 const AnimeHeader = () => {
     const theme = createTheme();
