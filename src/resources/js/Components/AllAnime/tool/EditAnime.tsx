@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Box from "@mui/material/Box";
 import EditAnimeButton from "@/Components/Button/EditAnimeButton";
 import { value_validation } from "../../common/tool";
 import EditIcon from "@mui/icons-material/Edit";
 import { grey } from "@mui/material/colors";
+import { NoticeContext } from "@/Components/common/Notification";
 
 const EditAnime = ({ name, memo }) => {
     const [open, setOpen] = useState(false);
@@ -11,6 +12,7 @@ const EditAnime = ({ name, memo }) => {
     const [nameValue, setNameValue] = useState(name);
     const [memoValue, setMemoValue] = useState(memo);
     const [errorText, setErrorText] = useState("");
+    const [state, dispatch] = useContext(NoticeContext);
     const errorMessage = "1字以上200字以下で記入してください。";
 
     const handleErrorRefresh = () => {

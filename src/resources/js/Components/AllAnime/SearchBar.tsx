@@ -6,15 +6,28 @@ import InputBase from "@mui/material/InputBase";
 import Tooltip from "@mui/material/Tooltip";
 import SearchIcon from "@mui/icons-material/Search";
 import RefreshIcon from "@mui/icons-material/Refresh";
-// import ClearButton from '../../common/ClearButton';
+import ClearButton from "@/Components/Button/ClearButton";
 import { getBoxWidth, getSearchBarWidth } from "./tool/tool";
+import { pressEnter } from "@/Components/common/tool";
 
 interface Props {
     handleChange: (e) => void;
     handleRefresh: () => void;
+
+    handleReload: () => void;
+
+    handleSubmit: () => void;
+
     value: string;
 }
-const SearchBar = ({ handleChange, handleRefresh, value }: Props) => {
+
+const SearchBar = ({
+    handleChange,
+    handleRefresh,
+    handleReload,
+    handleSubmit,
+    value,
+}: Props) => {
     const BoxWidth = getBoxWidth();
     const SearchBarWidth = getSearchBarWidth();
 
@@ -45,19 +58,18 @@ const SearchBar = ({ handleChange, handleRefresh, value }: Props) => {
                     placeholder="アニメ検索"
                     value={value}
                     onChange={handleChange}
-                    // onKeyDown={(e) => {
-                    //     pressEnter(e, handleSubmit);
-                    // }}
+                    onKeyDown={(e) => {
+                        pressEnter(e, handleSubmit);
+                    }}
                 />
                 {value === "" ? null : (
-                    // <ClearButton
-                    //     title="検索のクリア"
-                    //     handleRefresh={handleRefresh}
-                    // />
-                    <></>
+                    <ClearButton
+                        title="検索のクリア"
+                        handleRefresh={handleRefresh}
+                    />
                 )}
                 <Tooltip title="アニメの再読み込み" placement="bottom">
-                    <IconButton>
+                    <IconButton onClick={handleReload}>
                         <RefreshIcon />
                     </IconButton>
                 </Tooltip>

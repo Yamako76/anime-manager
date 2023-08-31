@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Box } from "@mui/material";
 import Button from "@mui/material/Button";
 import axios from "axios";
@@ -9,13 +9,21 @@ import Typography from "@mui/material/Typography";
 import ViewYouTubeVideo from "@/Components/YouTubeApi/ViewYouTubeVideo";
 import ViewAnimeTitle from "@/Components/AnimeDetail/ViewAnimeTitle";
 import EditAnime from "@/Components/AllAnime/tool/EditAnime";
+import { NoticeContext } from "@/Components/common/Notification";
+// import { useNavigate } from "react-router-dom";
 
 interface AnimeProps {
     name: string;
 }
 
 const AnimeDetail = ({ name }: AnimeProps) => {
+    // const [name, setName] = useState();
+    const [memo, setMemo] = useState();
+    const [Item, setItem] = useState();
     const [videoId, setVideoId] = useState();
+    const [isLoading, setIsLoading] = useState(true);
+    const [notice_state, notice_dispatch] = useContext(NoticeContext);
+    // const navigate = useNavigate();
     const isMounted = useRef(false);
 
     useEffect(() => {
@@ -34,6 +42,51 @@ const AnimeDetail = ({ name }: AnimeProps) => {
             getAnime();
         }
     }, []);
+
+    // const failedToLoad = () => {
+    //     notice_dispatch({
+    //         type: "update_message",
+    //         payload: "アニメ詳細の読み込みに失敗しました",
+    //     });
+    //     notice_dispatch({ type: "handleNoticeOpen" });
+    //     navigate("/app/home", { replace: true });
+    // };
+
+    // const loader = (
+    //     <Grid
+    //         container
+    //         direction="column"
+    //         sx={{
+    //             width: "100%",
+    //             height: "100vh",
+    //             justifyContent: "center",
+    //             alignItems: "center",
+    //             display: "flex",
+    //         }}
+    //     >
+    //         <Grid
+    //             sx={{
+    //                 width: "100%",
+    //                 justifyContent: "center",
+    //                 alignItems: "center",
+    //                 display: "flex",
+    //             }}
+    //         >
+    //             <CircularProgress color="inherit" />
+    //         </Grid>
+    //         <Grid
+    //             sx={{
+    //                 width: "100%",
+    //                 justifyContent: "center",
+    //                 alignItems: "center",
+    //                 display: "flex",
+    //             }}
+    //         >
+    //             <Typography color="inherit">ロード中</Typography>
+    //         </Grid>
+    //     </Grid>
+    // );
+
     const fetchYouTubeVideoId = async (keyWord) => {
         const abortCtrl = new AbortController();
         const timeout = setTimeout(() => abortCtrl.abort(), 10000);
@@ -148,6 +201,9 @@ const AnimeDetail = ({ name }: AnimeProps) => {
                         maxWidth: "1200px",
                     }}
                 >
+                    {/*{videoId == null || !isMounted.current ? null : (*/}
+                    {/*    <ViewYouTubeVideo videoId={videoId} />*/}
+                    {/*)}*/}
                     <ViewYouTubeVideo videoId={videoId} />
                 </Box>
             </Box>
@@ -164,6 +220,7 @@ const AnimeDetail = ({ name }: AnimeProps) => {
                 display: "flex",
             }}
         >
+            {/*{isLoading ? loader : <ViewItem />}*/}
             <ViewItem />
         </Box>
     );

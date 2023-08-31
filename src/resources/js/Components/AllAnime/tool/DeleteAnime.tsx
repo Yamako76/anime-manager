@@ -1,9 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Box from "@mui/material/Box";
 import DeleteButton from "@/Components/Button/DeleteButton";
+import { NoticeContext } from "@/Components/common/Notification";
 
-const DeleteAnime = () => {
+interface Props {
+    handleReload: () => void;
+}
+
+const DeleteAnime = ({ handleReload }: Props) => {
     const [open, setOpen] = useState(false);
+    const [state, dispatch] = useContext(NoticeContext);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -16,6 +22,12 @@ const DeleteAnime = () => {
     const handleSubmit = () => {
         handleClose();
     };
+
+    // const ApiAfterAction = (payload) => {
+    //     dispatch({ type: "update_message", payload: payload });
+    //     dispatch({ type: "handleNoticeOpen" });
+    //     handleReload();
+    // };
 
     return (
         <Box>

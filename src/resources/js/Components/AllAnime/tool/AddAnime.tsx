@@ -1,14 +1,19 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Box from "@mui/material/Box";
 import AddAnimeButton from "@/Components/Button/AddAnimeButton";
 import { value_validation } from "../../common/tool";
+import { NoticeContext } from "../../common/Notification";
 
-const AddAnime = () => {
+interface Props {
+    handleReload: () => void;
+}
+const AddAnime = ({ handleReload }: Props) => {
     const [open, setOpen] = useState(false);
     const [error, setError] = useState(false);
     const [nameValue, setNameValue] = useState("");
     const [memoValue, setMemoValue] = useState("");
     const [errorText, setErrorText] = useState("");
+    const [state, dispatch] = useContext(NoticeContext);
     const errorMessage = "1字以上200字以下で記入してください。";
 
     const handleErrorRefresh = () => {
@@ -61,6 +66,12 @@ const AddAnime = () => {
             handleError(errorMessage);
         }
     };
+
+    // const ApiAfterAction = (payload) => {
+    //     dispatch({ type: "update_message", payload: payload });
+    //     dispatch({ type: "handleNoticeOpen" });
+    //     handleReload();
+    // };
 
     return (
         <Box>

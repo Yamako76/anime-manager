@@ -1,15 +1,17 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Tooltip from "@mui/material/Tooltip";
 import Grid from "@mui/material/Grid";
 // import SortItem from '../tool/SortItem';
 import { getBoxWidth } from "@/Components/AllAnime/tool/tool";
 import AddAnime from "@/Components/AllAnime/tool/AddAnime";
+import { NoticeContext } from "@/Components/common/Notification";
+import { useNavigate } from "react-router-dom";
 
 interface Props {}
 
 // コンテンツMain部分
-const Main = ({ titleWidth }) => {
+const Main = ({ titleWidth, handleReload }) => {
     const contentList = [
         {
             body: (
@@ -38,7 +40,7 @@ const Main = ({ titleWidth }) => {
             },
         },
         {
-            body: <AddAnime />,
+            body: <AddAnime handleReload={handleReload} />,
             sx: {
                 width: "50px",
                 display: "flex",
@@ -68,12 +70,34 @@ const Main = ({ titleWidth }) => {
     );
 };
 
-const AnimeListTitle = () => {
+const AnimeListTitle = ({ handleReload, isLoading }) => {
     const titleWidth = getBoxWidth() - 100;
+    // const [state, dispatch] = useContext(FolderStatusManagementContext);
+    // const [notice_state, notice_dispatch] = useContext(NoticeContext);
+    // const [folder, setFolder] = useState(null);
+    // const navigate = useNavigate();
+
+    // const NotFound = () => {
+    //     notice_dispatch({type: "update_message", payload: "フォルダの読み込みに失敗したか存在しないページにアクセスした可能性があります"});
+    //     notice_dispatch({type: "handleNoticeOpen"});
+    //     navigate('/anime-list', {replace: true});
+    // }
+
+    // useEffect(() => {
+    //     if (!state.isLoading) {
+    //         if (state.all_folders != null) {
+    //             const current_folder = state.all_folders.find((item) => String(item.id) === folderId);
+    //             setFolder(current_folder);
+    //             if (current_folder == null) {
+    //                 NotFound();
+    //             }
+    //         }
+    //     }
+    // }, [state.isLoading])
 
     return (
         <Box>
-            <Main titleWidth={titleWidth} />
+            <Main titleWidth={titleWidth} handleReload={handleReload} />
         </Box>
     );
 };
