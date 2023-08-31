@@ -1,7 +1,8 @@
-import React, {useState} from 'react';
-import Box from '@mui/material/Box';
+import React, { useContext, useState } from "react";
+import Box from "@mui/material/Box";
 import EditButton from "@/Components/Button/EditButton";
-import {value_validation} from "@/Components/common/tool";
+import { value_validation } from "@/Components/common/tool";
+import { NoticeContext } from "@/Components/common/Notification";
 
 // フォルダ編集機能 //
 // フォルダの編集ボタンを押すとフォルダを編集する画面が表示され
@@ -11,27 +12,28 @@ interface Props {
     folder: string;
 }
 
-const EditFolder = ({folder}: Props) => {
+const EditFolder = ({ folder }: Props) => {
     const [open, setOpen] = useState(false);
     const [error, setError] = useState(false);
     const [value, setValue] = useState(folder);
     const [errorText, setErrorText] = useState("");
+    const [state, dispatch] = useContext(NoticeContext);
     const errorMessage = "1字以上200字以下で記入してください。";
 
     const handleErrorRefresh = () => {
         setErrorText("");
         setError(false);
-    }
+    };
 
     const handleError = (errorMessage) => {
         setErrorText(errorMessage);
         setError(true);
-    }
+    };
 
     const handleRefresh = () => {
         setValue("");
         handleErrorRefresh();
-    }
+    };
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -59,8 +61,7 @@ const EditFolder = ({folder}: Props) => {
         } else {
             handleError(errorMessage);
         }
-    }
-
+    };
 
     return (
         <Box>
@@ -83,6 +84,6 @@ const EditFolder = ({folder}: Props) => {
             />
         </Box>
     );
-}
+};
 
 export default EditFolder;

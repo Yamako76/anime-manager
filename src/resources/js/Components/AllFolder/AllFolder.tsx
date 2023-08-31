@@ -9,10 +9,10 @@ import Paper from "@mui/material/Paper";
 import EditFolder from "@/Components/AllFolder/tool/EditFolder";
 
 interface Props {
+    handleReload: () => void;
 }
 
-const AllFolder = ({}: Props) => {
-
+const AllFolder = ({handleReload}: Props) => {
     const BoxWidth = getBoxWidth();
     const titleWidth = BoxWidth - 90;
 
@@ -38,7 +38,7 @@ const AllFolder = ({}: Props) => {
         "ミステリー",
     ];
 
-    const PaperContent = ({ item }) => {
+    const PaperContent = ({item, handleReload}) => {
         const contentList = [
             {
                 body: (
@@ -54,7 +54,7 @@ const AllFolder = ({}: Props) => {
                                 width: String(titleWidth - 10) + "px",
                                 color: grey[900],
                                 textDecoration: "none",
-                                "&:hover": { color: grey[900] },
+                                "&:hover": {color: grey[900]},
                             }}
                         >
                             {item}
@@ -69,7 +69,7 @@ const AllFolder = ({}: Props) => {
                 },
             },
             {
-                body: <EditFolder folder={item} />,
+                body: <EditFolder folder={item}/>,
                 sx: {
                     width: "40px",
                     display: "flex",
@@ -78,7 +78,7 @@ const AllFolder = ({}: Props) => {
                 },
             },
             {
-                body: <DeleteFolder />,
+                body: <DeleteFolder handleReload={handleReload}/>,
                 sx: {
                     width: "40px",
                     display: "flex",
@@ -119,7 +119,7 @@ const AllFolder = ({}: Props) => {
     };
 
     // アイテム一覧
-    const ItemList = () => {
+    const ItemList = (handleReload) => {
         return (
             <Box
                 sx={{
@@ -132,7 +132,10 @@ const AllFolder = ({}: Props) => {
                 <Grid container direction="column" spacing={1}>
                     {FolderList.map((item, index) => (
                         <Grid key={index} container item>
-                            <PaperContent item={item} />
+                            <PaperContent
+                                item={item}
+                                handleReload={handleReload}
+                            />
                         </Grid>
                     ))}
                 </Grid>
@@ -142,7 +145,7 @@ const AllFolder = ({}: Props) => {
 
     return (
         <Box>
-            <ItemList />
+            <ItemList handleReload={handleReload}/>
         </Box>
     );
 };

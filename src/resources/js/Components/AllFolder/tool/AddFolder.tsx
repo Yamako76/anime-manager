@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Box from "@mui/material/Box";
 import AddButton from "@/Components/Button/AddButton";
 import { value_validation } from "@/Components/common/tool";
+import { NoticeContext } from "@/Components/common/Notification";
 
 // フォルダ追加機能
 // フォルダの追加ボタンを押すと新しいフォルダ作成する画面が表示され
@@ -12,6 +13,7 @@ const AddFolder = ({ handleReload }) => {
     const [error, setError] = useState(false);
     const [value, setValue] = useState("");
     const [errorText, setErrorText] = useState("");
+    const [state, dispatch] = useContext(NoticeContext);
     const errorMessage = "1字以上200字以下で記入してください。";
 
     const handleErrorRefresh = () => {
@@ -55,6 +57,12 @@ const AddFolder = ({ handleReload }) => {
             handleError(errorMessage);
         }
     };
+
+    // const ApiAfterAction = (payload) => {
+    //     dispatch({ type: "update_message", payload: payload });
+    //     dispatch({ type: "handleNoticeOpen" });
+    //     handleReload();
+    // };
 
     return (
         <Box>

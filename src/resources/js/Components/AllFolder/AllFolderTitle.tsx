@@ -8,7 +8,7 @@ import AddFolder from "@/Components/AllFolder/tool/AddFolder";
 
 interface Props {}
 
-const Main = ({ titleWidth }) => {
+const Main = ({ titleWidth, handleReload }) => {
     const contentList = [
         {
             body: (
@@ -37,7 +37,7 @@ const Main = ({ titleWidth }) => {
             },
         },
         {
-            body: <AddFolder />,
+            body: <AddFolder handleReload={handleReload} />,
             sx: {
                 width: "50px",
                 display: "flex",
@@ -67,12 +67,12 @@ const Main = ({ titleWidth }) => {
     );
 };
 
-const AllFolderTitle = () => {
+const AllFolderTitle = (handleReload) => {
     const titleWidth = getBoxWidth() - 100;
 
     return (
         <Box>
-            <Main titleWidth={titleWidth} name={name} />
+            <Main titleWidth={titleWidth} handleReload={handleReload} />
         </Box>
     );
 };

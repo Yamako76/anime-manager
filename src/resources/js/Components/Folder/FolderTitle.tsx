@@ -8,9 +8,10 @@ import AddAnime from "@/Components/AllAnime/tool/AddAnime";
 
 interface Props {
     name: string;
+    handleReload: () => void;
 }
 
-const Main = ({ titleWidth, name }) => {
+const Main = ({ titleWidth, name, handleReload }) => {
     const contentList = [
         {
             body: (
@@ -39,7 +40,7 @@ const Main = ({ titleWidth, name }) => {
             },
         },
         {
-            body: <AddAnime />,
+            body: <AddAnime handleReload={handleReload} />,
             sx: {
                 width: "50px",
                 display: "flex",
@@ -69,12 +70,16 @@ const Main = ({ titleWidth, name }) => {
     );
 };
 
-const FolderTitle = ({ name }: Props) => {
+const FolderTitle = ({ name, handleReload }: Props) => {
     const titleWidth = getBoxWidth() - 100;
 
     return (
         <Box>
-            <Main titleWidth={titleWidth} name={name} />
+            <Main
+                titleWidth={titleWidth}
+                name={name}
+                handleReload={handleReload}
+            />
         </Box>
     );
 };

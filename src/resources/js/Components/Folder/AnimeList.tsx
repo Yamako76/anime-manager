@@ -1,17 +1,17 @@
 import React from "react";
-import { Box, Grid, IconButton } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import Tooltip from "@mui/material/Tooltip";
 import Paper from "@mui/material/Paper";
-// import DeleteItem from '../tool/DeleteItem';
 import { grey } from "@mui/material/colors";
-import DeleteIcon from "@mui/icons-material/Delete";
 import { getBoxWidth } from "@/Components/AllAnime/tool/tool";
-import DeleteButton from "@/Components/Button/DeleteButton";
 import DeleteAnime from "@/Components/AllAnime/tool/DeleteAnime";
+import { InertiaLink } from "@inertiajs/inertia-react";
 
-interface Props {}
+interface Props {
+    handleReload: () => void;
+}
 
-const AnimeList = ({}: Props) => {
+const AnimeList = ({ handleReload }: Props) => {
     const BoxWidth = getBoxWidth();
     const titleWidth = BoxWidth - 50;
 
@@ -46,7 +46,8 @@ const AnimeList = ({}: Props) => {
                             textOverflow="ellipsis"
                             overflow="hidden"
                             fontSize={20}
-                            // component={Link}
+                            as={InertiaLink}
+                            href="/anime-list/d"
                             sx={{
                                 margin: "0px 5px",
                                 width: String(titleWidth - 10) + "px",
@@ -67,7 +68,7 @@ const AnimeList = ({}: Props) => {
                 },
             },
             {
-                body: <DeleteAnime />,
+                body: <DeleteAnime handleReload={handleReload} />,
                 sx: {
                     width: "40px",
                     display: "flex",
