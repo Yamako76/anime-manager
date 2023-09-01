@@ -25,9 +25,7 @@ use Inertia\Inertia;
      */
     \Route::prefix('anime-list')->group(function () {
         \Route::get('/', [App\Http\Controllers\Anime\IndexController::class, 'index']);
-        \Route::get('/create', [App\Http\Controllers\Anime\Create\IndexController::class, 'index']);
         \Route::get('/{id}', [App\Http\Controllers\Anime\AnimeController::class, 'index']);
-        \Route::get('/{id}/edit', [App\Http\Controllers\Anime\Edit\IndexController::class, 'index']);
     });
 
     /**
@@ -35,19 +33,7 @@ use Inertia\Inertia;
      */
     \Route::prefix('folders')->group(function () {
         \Route::get('/', [App\Http\Controllers\Folder\IndexController::class, 'index']);
-        \Route::get('/create', [App\Http\Controllers\Folder\Create\IndexController::class, 'index']);
         \Route::get('/{id}', [App\Http\Controllers\Folder\FolderController::class, 'index']);
-        \Route::get('/{id}/edit', [App\Http\Controllers\Folder\Edit\IndexController::class, 'index']);
-    });
-
-    /**
-     * タグ関連のURL設定
-     */
-    \Route::prefix('tags')->group(function () {
-        \Route::get('/', [App\Http\Controllers\Tag\IndexController::class, 'index']);
-        \Route::get('/create', [App\Http\Controllers\Tag\Create\IndexController::class, 'index']);
-        \Route::get('/{id}', [App\Http\Controllers\Tag\TagController::class, 'index']);
-        \Route::get('/tag/{id}/edit', [App\Http\Controllers\Tag\Edit\IndexController::class, 'index']);
     });
 });
 
