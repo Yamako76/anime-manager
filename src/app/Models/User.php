@@ -76,5 +76,5 @@ class User extends Authenticatable
     {
         return $this->hasMany(FolderAnimeRelation::class, 'user_id', 'use_id');
     }
-    
+
 }
