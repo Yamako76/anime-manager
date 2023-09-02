@@ -6,11 +6,13 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 /**
+ *
  * @property int id
  * @property string name
  * @property int user_id
- * @property string season
- * @property string year
+ * @property string status
+ * @property string memo
+ * @property string deleted_at
  * @property string created_at
  * @property string updated_at
  *
@@ -31,14 +33,6 @@ class Anime extends Model
     public function folders(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Folder::class, 'folder_anime_relations', 'anime_id', 'folder_id');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function tags(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
-    {
-        return $this->belongsToMany(Tag::class, 'tag_anime_relations', 'anime_id', 'tag_id');
     }
 
     /**
