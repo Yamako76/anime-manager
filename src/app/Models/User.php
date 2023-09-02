@@ -76,20 +76,5 @@ class User extends Authenticatable
     {
         return $this->hasMany(FolderAnimeRelation::class, 'user_id', 'use_id');
     }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function tagAnimeRelations(): \Illuminate\Database\Eloquent\Relations\HasMany
-    {
-        return $this->hasMany(TagAnimeRelation::class, 'user_id', 'use_id');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function tags(): \Illuminate\Database\Eloquent\Relations\HasMany
-    {
-        return $this->hasMany(Tag::class, 'user_id', 'use_id');
-    }
+    
 }
