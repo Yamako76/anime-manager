@@ -22,6 +22,8 @@ return new class extends Migration
             $table->timestamp('deleted_at')->nullable();
             $table->timestamp('latest_changed_at');
             $table->timestamps();
+
+            $table->unique(['user_id', 'name'], 'unique_animes_01');
         });
     }
 
