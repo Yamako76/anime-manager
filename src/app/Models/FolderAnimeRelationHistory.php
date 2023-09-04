@@ -13,7 +13,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property string status
  * @property string deleted_at
  * @property string created_at
- * @property string updated_at
  *
  * @property FolderAnimeRelation $folderAnimeRelation
  *

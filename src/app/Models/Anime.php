@@ -13,11 +13,12 @@ use Illuminate\Database\Eloquent\Model;
  * @property string status
  * @property string memo
  * @property string deleted_at
+ * @property string latest_changed_at
  * @property string created_at
  * @property string updated_at
  *
  * @property Folder[]|Collection $folders
- * @property Tag[]|Collection $tags
+ * @property AnimeHistory[]|Collection $animeHistories
  *
  * @property User $user
  *
@@ -33,6 +34,14 @@ class Anime extends Model
     public function folders(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Folder::class, 'folder_anime_relations', 'anime_id', 'folder_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function animeHistories(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(AnimeHistory::class);
     }
 
     /**

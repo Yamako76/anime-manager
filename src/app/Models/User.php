@@ -21,8 +21,6 @@ use Laravel\Sanctum\HasApiTokens;
  * @property Folder[]|Collection $folders
  * @property Anime[]|Collection $animeList
  * @property FolderAnimeRelation[]|Collection $folderAnimeRelations
- * @property TagAnimeRelation[]|Collection $tagAnimeRelations
- * @property Tag[]|Collection $tags
  *
  */
 class User extends Authenticatable
