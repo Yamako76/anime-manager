@@ -48,6 +48,8 @@ Route::middleware('auth')->prefix('api')->group(function () {
         \Route::get('/', [App\Http\Controllers\Api\Anime\IndexController::class, 'index']);
         \Route::get('/{id}', [App\Http\Controllers\Api\Anime\IndexController::class, 'show']);
         \Route::post('/', [App\Http\Controllers\Api\Anime\IndexController::class, 'create']);
+        \Route::put('/{id}', [App\Http\Controllers\Api\Anime\IndexController::class, 'update']);
+        \Route::delete('/{id}', [App\Http\Controllers\Api\Anime\IndexController::class, 'delete']);
     });
 });
 
