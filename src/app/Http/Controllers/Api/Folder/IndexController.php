@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Folder;
 
 use App\Http\Controllers\Controller;
+use App\Models\Folder;
 use Illuminate\Support\Facades\Auth;
 
 class IndexController extends Controller
@@ -23,5 +24,17 @@ class IndexController extends Controller
         }
 
         return \response()->json($folderList->toArray());
+    }
+
+    public function show($id): \Illuminate\Http\JsonResponse
+    {
+        // 指定されたIDに基づいてフォルダを取得
+        $folder = Folder::find($id);
+
+        if (!$folder) {
+            return response()->json([], 404);
+        }
+
+        return \response()->json($folder);
     }
 }

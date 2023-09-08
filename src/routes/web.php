@@ -57,6 +57,7 @@ Route::middleware('auth')->prefix('api')->group(function () {
      */
     \Route::prefix('folders')->group(function () {
         \Route::get('/', [App\Http\Controllers\Api\Folder\IndexController::class, 'index']);
+        \Route::get('/{id}', [App\Http\Controllers\Api\Folder\IndexController::class, 'show']);
     });
 });
 
