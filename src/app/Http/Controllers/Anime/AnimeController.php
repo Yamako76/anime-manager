@@ -3,17 +3,17 @@
 namespace App\Http\Controllers\Anime;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\Anime;
 use Inertia\Inertia;
 use Inertia\Response;
 
 class AnimeController extends Controller
 {
 
-    public function index(Request $request): Response
+    public function index(Anime $anime): Response
     {
         return Inertia::render('Anime/Anime', [
-            "name" => "ドラゴンボール"
+            "name" => $anime->name
         ]);
     }
 }

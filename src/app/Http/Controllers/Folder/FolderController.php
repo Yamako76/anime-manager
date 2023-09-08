@@ -3,17 +3,17 @@
 namespace App\Http\Controllers\Folder;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\Folder;
 use Inertia\Inertia;
 use Inertia\Response;
 
 class FolderController extends Controller
 {
 
-    public function index(Request $request): Response
+    public function index(Folder $folder): Response
     {
         return Inertia::render('Folder/Folder', [
-            "name" => "コメディー"
+            "name" => $folder->name
         ]);
     }
 }
