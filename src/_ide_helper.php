@@ -17729,6 +17729,16 @@
      *
      */ 
         class FolderService {
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function createFolderRecord($userId, $name)
+        {
+                        /** @var \App\Services\Api\Folder\FolderService $instance */
+                        return $instance->createFolderRecord($userId, $name);
+        }
          
     }
      

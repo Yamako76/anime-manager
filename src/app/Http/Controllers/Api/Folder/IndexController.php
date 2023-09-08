@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Folder;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\FolderRequest;
 use App\Models\Folder;
 use Illuminate\Support\Facades\Auth;
 
@@ -36,5 +37,13 @@ class IndexController extends Controller
         }
 
         return \response()->json($folder);
+    }
+
+    public function create(FolderRequest $request): \Illuminate\Http\JsonResponse
+    {
+        $userId = Auth::id();
+
+        \FolderService::createFolderRecord($userId, $request->name);
+        return \response()->json([], 201);
     }
 }
