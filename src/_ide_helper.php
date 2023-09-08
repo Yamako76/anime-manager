@@ -17723,6 +17723,17 @@
      
 }
 
+    namespace App\Facades\Folder { 
+            /**
+     * 
+     *
+     */ 
+        class FolderService {
+         
+    }
+     
+}
+
     namespace Spatie\LaravelIgnition\Facades { 
             /**
      * 
@@ -22084,6 +22095,7 @@ namespace  {
             class View extends \Illuminate\Support\Facades\View {}
             class Vite extends \Illuminate\Support\Facades\Vite {}
             class AnimeService extends \App\Facades\Anime\AnimeService {}
+            class FolderService extends \App\Facades\Folder\FolderService {}
             class Flare extends \Spatie\LaravelIgnition\Facades\Flare {}
      
 }

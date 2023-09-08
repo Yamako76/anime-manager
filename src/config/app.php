@@ -195,6 +195,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\Anime\AnimeServiceProvider::class,
+        App\Providers\Folder\FolderServiceProvider::class,
 
     ],
 
@@ -211,6 +212,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         'AnimeService' => App\Facades\Anime\AnimeService::class,
+        'FolderService' => App\Facades\Folder\FolderService::class,
     ])->toArray(),
 
 ];
