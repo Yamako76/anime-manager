@@ -51,6 +51,13 @@ Route::middleware('auth')->prefix('api')->group(function () {
         \Route::put('/{id}', [App\Http\Controllers\Api\Anime\IndexController::class, 'update']);
         \Route::delete('/{id}', [App\Http\Controllers\Api\Anime\IndexController::class, 'delete']);
     });
+
+    /**
+     * フォルダ関連のURL設定
+     */
+    \Route::prefix('folders')->group(function () {
+        \Route::get('/', [App\Http\Controllers\Api\Folder\IndexController::class, 'index']);
+    });
 });
 
 \Route::get('/dashboard', function () {
