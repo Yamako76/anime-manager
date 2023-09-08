@@ -7,15 +7,8 @@ use App\Models\Folder;
 
 class FolderController extends Controller
 {
-    public function index($id): \Illuminate\Http\JsonResponse
+    public function index(Folder $folder): \Illuminate\Http\JsonResponse
     {
-        // 指定されたIDに基づいてフォルダを取得
-        $folder = Folder::find($id);
-
-        if (!$folder) {
-            return response()->json([], 404);
-        }
-
-        return \response()->json($folder);
+        return \response()->json($folder, 200);
     }
 }
