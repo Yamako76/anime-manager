@@ -46,10 +46,10 @@ Route::middleware('auth')->prefix('api')->group(function () {
      */
     \Route::prefix('anime-list')->group(function () {
         \Route::get('/', [App\Http\Controllers\Api\Anime\IndexController::class, 'index']);
-        \Route::get('/{id}', [App\Http\Controllers\Api\Anime\IndexController::class, 'show']);
-        \Route::post('/', [App\Http\Controllers\Api\Anime\IndexController::class, 'create']);
-        \Route::put('/{id}', [App\Http\Controllers\Api\Anime\IndexController::class, 'update']);
-        \Route::delete('/{id}', [App\Http\Controllers\Api\Anime\IndexController::class, 'delete']);
+        \Route::get('/{id}', [App\Http\Controllers\Api\Anime\AnimeController::class, 'index']);
+        \Route::post('/', [App\Http\Controllers\Api\Anime\Create\IndexController::class, 'index']);
+//        \Route::put('/{id}', [App\Http\Controllers\Api\Anime\Update\IndexController::class, 'index']);
+//        \Route::delete('/{id}', [App\Http\Controllers\Api\Anime\Delete\IndexController::class, 'index']);
     });
 
     /**
@@ -57,8 +57,8 @@ Route::middleware('auth')->prefix('api')->group(function () {
      */
     \Route::prefix('folders')->group(function () {
         \Route::get('/', [App\Http\Controllers\Api\Folder\IndexController::class, 'index']);
-        \Route::get('/{id}', [App\Http\Controllers\Api\Folder\IndexController::class, 'show']);
-        \Route::post('/', [App\Http\Controllers\Api\Folder\IndexController::class, 'create']);
+        \Route::get('/{id}', [App\Http\Controllers\Api\Folder\FolderController::class, 'index']);
+        \Route::post('/', [App\Http\Controllers\Api\Folder\Create\IndexController::class, 'index']);
     });
 });
 
