@@ -3,10 +3,12 @@ import Box from "@mui/material/Box";
 import AddAnimeButton from "@/Components/Button/AddAnimeButton";
 import { value_validation } from "../../common/tool";
 import { NoticeContext } from "../../common/Notification";
+import axios from "axios";
 
 interface Props {
     handleReload: () => void;
 }
+
 const AddAnime = ({ handleReload }: Props) => {
     const [open, setOpen] = useState(false);
     const [error, setError] = useState(false);
@@ -61,6 +63,7 @@ const AddAnime = ({ handleReload }: Props) => {
 
     const handleSubmit = () => {
         if (value_validation(nameValue)) {
+            createAnime();
             handleClose();
         } else {
             handleError(errorMessage);
@@ -72,6 +75,31 @@ const AddAnime = ({ handleReload }: Props) => {
     //     dispatch({ type: "handleNoticeOpen" });
     //     handleReload();
     // };
+
+    const createAnime = () => {
+        const abortCtrl = new AbortController();
+        const timeout = setTimeout(() => {
+            abortCtrl.abort();
+        }, 10000);
+        axios
+            .post(
+                `/api/anime-list/`,
+                {
+                    name: nameValue.trim(),
+                    memo: memoValue,
+                },
+                { signal: abortCtrl.signal }
+            )
+            .then(() => {
+                // ApiAfterAction("アニメの作成が完了しました");
+            })
+            .catch(() => {
+                // ApiAfterAction("アニメの作成に失敗しました");
+            })
+            .finally(() => {
+                clearTimeout(timeout);
+            });
+    };
 
     return (
         <Box>
