@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Anime;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AnimeRequest;
 use App\Models\Anime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -42,7 +43,7 @@ class IndexController extends Controller
         return \response()->json($animeList->toArray());
     }
 
-    public function show($id)
+    public function show($id): \Illuminate\Http\JsonResponse
     {
         // 指定されたIDに基づいてアニメを取得
         $anime = Anime::find($id);
@@ -52,5 +53,13 @@ class IndexController extends Controller
         }
 
         return \response()->json($anime);
+    }
+
+    public function create(AnimeRequest $request): \Illuminate\Http\JsonResponse
+    {
+        $userId = Auth::id();
+
+        \AnimeService::createAnimeRecord($userId, $request->name, $request->memo);
+        return \response()->json([], 201);
     }
 }

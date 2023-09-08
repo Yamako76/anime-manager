@@ -17694,6 +17694,8 @@
          * 
          * 取得順は「sortType」によって変更する。
          * - created_atの場合: アニメの登録順
+         * - latestの場合: アニメの最新順
+         * - titleの場合: アニメのタイトル順
          *
          * @param int $userId
          * @param int $paginateUnit
@@ -17705,6 +17707,16 @@
         {
                         /** @var \App\Services\Api\Anime\AnimeService $instance */
                         return $instance->getAnimeListByUserId($userId, $currentPage, $paginateUnit, $sortType);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function createAnimeRecord($userId, $name, $memo)
+        {
+                        /** @var \App\Services\Api\Anime\AnimeService $instance */
+                        return $instance->createAnimeRecord($userId, $name, $memo);
         }
          
     }

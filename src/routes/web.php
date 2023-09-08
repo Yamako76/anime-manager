@@ -47,6 +47,7 @@ Route::middleware('auth')->prefix('api')->group(function () {
     \Route::prefix('anime-list')->group(function () {
         \Route::get('/', [App\Http\Controllers\Api\Anime\IndexController::class, 'index']);
         \Route::get('/{id}', [App\Http\Controllers\Api\Anime\IndexController::class, 'show']);
+        \Route::post('/', [App\Http\Controllers\Api\Anime\IndexController::class, 'create']);
     });
 });
 

@@ -3,6 +3,7 @@
 namespace App\Services\Api\Anime;
 
 use App\Models\Anime;
+use Carbon\Carbon;
 
 class AnimeService
 {
@@ -47,5 +48,17 @@ class AnimeService
         $animeList = $query->paginate($paginateUnit, ['*'], 'page', $currentPage);
 
         return $animeList;
+    }
+
+    public function createAnimeRecord(int $userId, string $name, ?string $memo): \App\Models\Anime
+    {
+        $anime = new Anime();
+        $anime->user_id = $userId;
+        $anime->name = trim($name);
+        $anime->memo = $memo;
+        $anime->status = "active";
+        $anime->latest_changed_at = Carbon::now();
+        $anime->save();
+        return $anime;
     }
 }
