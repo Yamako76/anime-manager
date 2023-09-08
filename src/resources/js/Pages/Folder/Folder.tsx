@@ -1,12 +1,12 @@
-import {Head} from "@inertiajs/react";
-import React, {useContext, useEffect, useRef, useState} from "react";
-import {Box, Divider, Grid} from "@mui/material";
+import { Head } from "@inertiajs/react";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import { Box, Divider, Grid } from "@mui/material";
 import AnimeHeader from "../../Components/Header/AnimeHeader";
 import AnimeList from "@/Components/Folder/AnimeList";
-import {getBoxWidth} from "@/Components/AllAnime/tool/tool";
+import { getBoxWidth } from "@/Components/AllAnime/tool/tool";
 import FolderTitle from "@/Components/Folder/FolderTitle";
 import SearchBar from "@/Components/AllAnime/SearchBar";
-import {NoticeContext} from "@/Components/common/Notification";
+import { NoticeContext } from "@/Components/common/Notification";
 
 // import { useNavigate } from "react-router-dom";
 
@@ -14,7 +14,7 @@ interface FolderProps {
     name: string;
 }
 
-const Folder = ({name}: FolderProps) => {
+const Folder = ({ name }: FolderProps) => {
     const BoxWidth = getBoxWidth();
     const [value, setValue] = useState<string>("");
     const [items, setItems] = useState([]);
@@ -86,21 +86,21 @@ const Folder = ({name}: FolderProps) => {
 
     const Main = () => {
         return (
-            <Grid container direction="column" sx={{marginTop: "100px"}}>
+            <Grid container direction="column" sx={{ marginTop: "100px" }}>
                 <Grid container item>
-                    <FolderTitle name={name} handleReload={handleReload}/>
+                    <FolderTitle name={name} handleReload={handleReload} />
                 </Grid>
-                <Divider/>
-                <AnimeList handleReload={handleReload}/>
+                <Divider />
+                <AnimeList handleReload={handleReload} />
             </Grid>
         );
     };
 
     return (
         <>
-            <Head title="Anime"/>
-            <AnimeHeader/>
-            <Box sx={{display: "flex", justifyContent: "center"}}>
+            <Head title="Anime" />
+            <AnimeHeader />
+            <Box sx={{ display: "flex", justifyContent: "center" }}>
                 <Box
                     sx={{
                         width: BoxWidth,
@@ -109,7 +109,7 @@ const Folder = ({name}: FolderProps) => {
                         minWidth: "300px",
                     }}
                 >
-                    <Main/>
+                    <Main />
                     <SearchBar
                         handleChange={handleChange}
                         handleRefresh={handleRefresh}

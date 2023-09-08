@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import EditButton from "@/Components/Button/EditButton";
 import { value_validation } from "@/Components/common/tool";
 import { NoticeContext } from "@/Components/common/Notification";
+import {grey} from "@mui/material/colors";
 
 // フォルダ編集機能 //
 // フォルダの編集ボタンを押すとフォルダを編集する画面が表示され
@@ -81,6 +82,7 @@ const EditFolder = ({ folder }: Props) => {
                 submit_button_name="完了"
                 aria_label="edit_folder"
                 size="small"
+                sx={{ "&:hover": { color: grey[900] } }}
             />
         </Box>
     );

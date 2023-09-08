@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import AddButton from "@/Components/Button/AddButton";
 import { value_validation } from "@/Components/common/tool";
 import { NoticeContext } from "@/Components/common/Notification";
+import axios from "axios";
 
 // フォルダ追加機能
 // フォルダの追加ボタンを押すと新しいフォルダ作成する画面が表示され
@@ -52,6 +53,7 @@ const AddFolder = ({ handleReload }) => {
 
     const handleSubmit = () => {
         if (value_validation(value)) {
+            createFolder();
             handleClose();
         } else {
             handleError(errorMessage);
@@ -63,6 +65,28 @@ const AddFolder = ({ handleReload }) => {
     //     dispatch({ type: "handleNoticeOpen" });
     //     handleReload();
     // };
+
+    const createFolder = () => {
+        const abortCtrl = new AbortController();
+        const timeout = setTimeout(() => {
+            abortCtrl.abort();
+        }, 10000);
+        axios
+            .post(
+                "/api/folders",
+                { name: value.trim() },
+                { signal: abortCtrl.signal }
+            )
+            .then(() => {
+                // ApiAfterAction("フォルダの作成が完了しました");
+            })
+            .catch(() => {
+                // ApiAfterAction("フォルダの作成に失敗しました");
+            })
+            .finally(() => {
+                clearTimeout(timeout);
+            });
+    };
 
     return (
         <Box>

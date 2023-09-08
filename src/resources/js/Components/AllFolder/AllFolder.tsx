@@ -1,9 +1,9 @@
 import React from "react";
-import {Box, Grid} from "@mui/material";
-import {getBoxWidth} from "@/Components/AllAnime/tool/tool";
+import { Box, Grid } from "@mui/material";
+import { getBoxWidth } from "@/Components/AllAnime/tool/tool";
 import Tooltip from "@mui/material/Tooltip";
-import {InertiaLink} from "@inertiajs/inertia-react";
-import {grey} from "@mui/material/colors";
+import { InertiaLink } from "@inertiajs/inertia-react";
+import { grey } from "@mui/material/colors";
 import DeleteFolder from "@/Components/AllFolder/tool/DeleteFolder";
 import Paper from "@mui/material/Paper";
 import EditFolder from "@/Components/AllFolder/tool/EditFolder";
@@ -12,7 +12,7 @@ interface Props {
     handleReload: () => void;
 }
 
-const AllFolder = ({handleReload}: Props) => {
+const AllFolder = ({ handleReload }: Props) => {
     const BoxWidth = getBoxWidth();
     const titleWidth = BoxWidth - 90;
 
@@ -38,7 +38,7 @@ const AllFolder = ({handleReload}: Props) => {
         "ミステリー",
     ];
 
-    const PaperContent = ({item, handleReload}) => {
+    const PaperContent = ({ item, handleReload }) => {
         const contentList = [
             {
                 body: (
@@ -54,7 +54,7 @@ const AllFolder = ({handleReload}: Props) => {
                                 width: String(titleWidth - 10) + "px",
                                 color: grey[900],
                                 textDecoration: "none",
-                                "&:hover": {color: grey[900]},
+                                "&:hover": { color: grey[900] },
                             }}
                         >
                             {item}
@@ -69,7 +69,7 @@ const AllFolder = ({handleReload}: Props) => {
                 },
             },
             {
-                body: <EditFolder folder={item}/>,
+                body: <EditFolder folder={item} />,
                 sx: {
                     width: "40px",
                     display: "flex",
@@ -78,7 +78,7 @@ const AllFolder = ({handleReload}: Props) => {
                 },
             },
             {
-                body: <DeleteFolder handleReload={handleReload}/>,
+                body: <DeleteFolder handleReload={handleReload} />,
                 sx: {
                     width: "40px",
                     display: "flex",
@@ -145,7 +145,7 @@ const AllFolder = ({handleReload}: Props) => {
 
     return (
         <Box>
-            <ItemList handleReload={handleReload}/>
+            <ItemList handleReload={handleReload} />
         </Box>
     );
 };
