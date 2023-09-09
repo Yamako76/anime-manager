@@ -21,7 +21,6 @@ class IndexController extends Controller
         }
 
         try {
-            // TODO: ソートオプションを追加する
             $sortType = !is_null($request->query('sort')) ? $request->query('sort') : 'created_at';
             $animeList = \AnimeService::getAnimeListByUserId($userId, $currentPage, 20, $sortType);
         } catch (\Exception $e) {
