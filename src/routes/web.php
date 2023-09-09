@@ -25,7 +25,7 @@ use Inertia\Inertia;
      */
     \Route::prefix('anime-list')->group(function () {
         \Route::get('/', [App\Http\Controllers\Anime\IndexController::class, 'index']);
-        \Route::get('/{anime}', [App\Http\Controllers\Anime\AnimeController::class, 'index']);
+        \Route::get('/{animeId}', [App\Http\Controllers\Anime\AnimeController::class, 'index']);
     });
 
     /**
@@ -33,7 +33,7 @@ use Inertia\Inertia;
      */
     \Route::prefix('folders')->group(function () {
         \Route::get('/', [App\Http\Controllers\Folder\IndexController::class, 'index']);
-        \Route::get('/{folder}', [App\Http\Controllers\Folder\FolderController::class, 'index']);
+        \Route::get('/{folderId}', [App\Http\Controllers\Folder\FolderController::class, 'index']);
     });
 });
 
@@ -46,10 +46,10 @@ Route::middleware('auth')->prefix('api')->group(function () {
      */
     \Route::prefix('anime-list')->group(function () {
         \Route::get('/', [App\Http\Controllers\Api\Anime\IndexController::class, 'index']);
-        \Route::get('/{anime}', [App\Http\Controllers\Api\Anime\AnimeController::class, 'index']);
+        \Route::get('/{animeId}', [App\Http\Controllers\Api\Anime\AnimeController::class, 'index']);
         \Route::post('/', [App\Http\Controllers\Api\Anime\Create\IndexController::class, 'index']);
-//        \Route::put('/{anime}', [App\Http\Controllers\Api\Anime\Update\IndexController::class, 'index']);
-//        \Route::delete('/{anime}', [App\Http\Controllers\Api\Anime\Delete\IndexController::class, 'index']);
+//        \Route::put('/{animeId}', [App\Http\Controllers\Api\Anime\Update\IndexController::class, 'index']);
+        \Route::delete('/{animeId}', [App\Http\Controllers\Api\Anime\Delete\IndexController::class, 'index']);
     });
 
     /**
@@ -57,7 +57,7 @@ Route::middleware('auth')->prefix('api')->group(function () {
      */
     \Route::prefix('folders')->group(function () {
         \Route::get('/', [App\Http\Controllers\Api\Folder\IndexController::class, 'index']);
-        \Route::get('/{folder}', [App\Http\Controllers\Api\Folder\FolderController::class, 'index']);
+        \Route::get('/{folderId}', [App\Http\Controllers\Api\Folder\FolderController::class, 'index']);
         \Route::post('/', [App\Http\Controllers\Api\Folder\Create\IndexController::class, 'index']);
     });
 });
