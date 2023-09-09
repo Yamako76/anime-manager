@@ -9,6 +9,8 @@ class AnimeController extends Controller
 {
     public function index($animeId): \Illuminate\Http\JsonResponse
     {
+        // TODO statusがdeletedだった時のエラーハンドリング
+
         $userId = \Auth::id();
 
         /** @var Anime $anime */
