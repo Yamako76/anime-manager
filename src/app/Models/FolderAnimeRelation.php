@@ -26,6 +26,9 @@ class FolderAnimeRelation extends Model
 {
     protected $table = 'folder_anime_relations';
 
+    const STATUS_ACTIVE = "active";
+    const STATUS_DELETED = "deleted";
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */

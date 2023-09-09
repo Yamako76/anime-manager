@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Services\Api\Anime\State\AnimeStateActive;
+use App\Services\Api\Anime\State\AnimeStateDeleted;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
@@ -27,6 +29,9 @@ class Anime extends Model
 {
     protected $table = 'animes';
 
+    const STATUS_ACTIVE = "active";
+    const STATUS_DELETED = "deleted";
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
@@ -50,5 +55,22 @@ class Anime extends Model
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id', 'user_id');
+    }
+
+    /**
+     * アニメのモデルからアニメのステータスクラスへ変換する。
+     *
+     * @return \App\Services\Api\Anime\State\AnimeState
+     * @throws \InvalidArgumentException
+     */
+    public function toState(): \App\Services\Api\Anime\State\AnimeState
+    {
+        if ($this->status == self::STATUS_ACTIVE) {
+            return new AnimeStateActive();
+        } else if ($this->status == self::STATUS_DELETED) {
+            return new AnimeStateDeleted();
+        } else {
+            throw new \InvalidArgumentException(`ステータスが存在しません。[{$this->status}]`);
+        }
     }
 }

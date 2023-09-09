@@ -17701,6 +17701,7 @@
          * @param int $paginateUnit
          * @param string $sortType
          * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator 
+         * @throws \InvalidArgumentException
          * @static 
          */ 
         public static function getAnimeListByUserId($userId, $currentPage, $paginateUnit = 20, $sortType = 'created_at')
@@ -17709,14 +17710,32 @@
                         return $instance->getAnimeListByUserId($userId, $currentPage, $paginateUnit, $sortType);
         }
                     /**
-         * 
+         * アニメのレコードを追加します。
          *
+         * @param int $userId
+         * @param string $name
+         * @param string|null $memo
+         * @return \App\Models\Anime 
          * @static 
          */ 
         public static function createAnimeRecord($userId, $name, $memo)
         {
                         /** @var \App\Services\Api\Anime\AnimeService $instance */
                         return $instance->createAnimeRecord($userId, $name, $memo);
+        }
+                    /**
+         * ユーザーIDとアニメIDからアニメを取得します。
+         *
+         * @param int $animeId
+         * @param int $userId
+         * @param bool $usePrimary
+         * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|object|null 
+         * @static 
+         */ 
+        public static function getAnimeByIdAndUserId($animeId, $userId, $usePrimary = false)
+        {
+                        /** @var \App\Services\Api\Anime\AnimeService $instance */
+                        return $instance->getAnimeByIdAndUserId($animeId, $userId, $usePrimary);
         }
          
     }

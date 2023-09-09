@@ -24,6 +24,9 @@ class Folder extends Model
 {
     protected $table = 'folders';
 
+    const STATUS_ACTIVE = "active";
+    const STATUS_DELETED = "deleted";
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
