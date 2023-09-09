@@ -88,4 +88,7 @@ class AnimeService
             ->first();
         return $anime;
     }
+
+    // TODO getAnimeByUserIdAndNameの作成
+    // TODO CreateAnimeの作成
 }
