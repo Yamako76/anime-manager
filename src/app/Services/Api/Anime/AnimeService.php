@@ -29,7 +29,7 @@ class AnimeService
     ): \Illuminate\Contracts\Pagination\LengthAwarePaginator
     {
         // ソート順を指定してクエリを構築
-        $query = Anime::query()->where('user_id', '=', $userId);
+        $query = Anime::query()->where('user_id', '=', $userId)->where('status', '=', Anime::STATUS_ACTIVE);
         switch ($sortType) {
             case 'created_at':
                 $query->orderBy('created_at');
