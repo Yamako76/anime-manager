@@ -10,8 +10,14 @@ use Inertia\Response;
 class AnimeController extends Controller
 {
 
-    public function index(Anime $anime): Response
+    public function index($animeId): Response
     {
+
+        $userId = \Auth::id();
+
+        /** @var Anime $anime */
+        $anime = \AnimeService::getAnimeByIdAndUserId($animeId, $userId);
+
         return Inertia::render('Anime/Anime', [
             "name" => $anime->name
         ]);
