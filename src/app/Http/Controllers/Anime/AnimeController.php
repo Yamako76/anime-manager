@@ -13,8 +13,9 @@ class AnimeController extends Controller
     public function index($animeId): Response
     {
 
-        $userId = \Auth::id();
+        // TODO statusがdeletedだった時のエラーハンドリング
 
+        $userId = \Auth::id();
         /** @var Anime $anime */
         $anime = \AnimeService::getAnimeByIdAndUserId($animeId, $userId);
 
