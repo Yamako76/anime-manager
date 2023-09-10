@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Services\Api\Folder\State\FolderStateActive;
+use App\Services\Api\Folder\State\FolderStateDeleted;
 use Illuminate\Database\Eloquent\Model;
 use Ramsey\Collection\Collection;
 
@@ -51,4 +53,22 @@ class Folder extends Model
     {
         return $this->belongsTo(User::class, 'user_id', 'user_id');
     }
+
+    /**
+     * フォルダのモデルからフォルダのステータスクラスへ変換する。
+     *
+     * @return \App\Services\Api\Folder\State\FolderState
+     * @throws \InvalidArgumentException
+     */
+    public function toState(): \App\Services\Api\Folder\State\FolderState
+    {
+        if ($this->status == self::STATUS_ACTIVE) {
+            return new FolderStateActive();
+        } else if ($this->status == self::STATUS_DELETED) {
+            return new FolderStateDeleted();
+        } else {
+            throw new \InvalidArgumentException(`ステータスが存在しません。[{$this->status}]`);
+        }
+    }
+
 }
