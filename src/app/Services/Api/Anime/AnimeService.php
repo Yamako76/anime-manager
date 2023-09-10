@@ -108,6 +108,8 @@ class AnimeService
     }
 
     /**
+     * アニメの追加を行います。
+     *
      * @param int $userId
      * @param string $name
      * @param string|null $memo
