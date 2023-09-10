@@ -81,7 +81,7 @@ class FolderService
         } else {
             if ($folder->status == Folder::STATUS_ACTIVE) {
                 // TODO エラーハンドリングできれば400を返したい
-                throw new \Exception("そのアニメはすでに存在しています。");
+                throw new \Exception("そのフォルダはすでに存在しています。");
             } elseif ($folder->status == Folder::STATUS_DELETED) {
                 $folder = $folder->toState()->activate($folder);
             }
