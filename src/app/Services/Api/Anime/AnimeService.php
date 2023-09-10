@@ -111,7 +111,7 @@ class AnimeService
      * @param int $userId
      * @param string $name
      * @param string|null $memo
-     * @return Anime
+     * @return \App\Models\Anime
      * @throws \Exception
      */
     public function CreateAnime(int $userId, string $name, ?string $memo): \App\Models\Anime
@@ -122,12 +122,26 @@ class AnimeService
             $anime = $this->createAnimeRecord($userId, $name, $memo);
         } else {
             if ($anime->status == Anime::STATUS_ACTIVE) {
-                // TODO エラーハンドリング
+                // TODO エラーハンドリングできれば400を返したい
                 throw new \Exception("そのアニメはすでに存在しています。");
             } elseif ($anime->status == Anime::STATUS_DELETED) {
                 $anime = $anime->toState()->activate($anime);
             }
         }
+        return $anime;
+    }
+
+    /**
+     * @param Anime $anime
+     * @param string $name
+     * @param string|null $memo
+     * @return \App\Models\Anime
+     */
+    public function UpdateAnimeRecord(Anime $anime, string $name, ?string $memo): \App\Models\Anime
+    {
+        $anime->name = $name;
+        $anime->memo = $memo;
+        $anime->save();
         return $anime;
     }
 

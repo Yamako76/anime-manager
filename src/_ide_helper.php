@@ -17738,7 +17738,7 @@
                         return $instance->getAnimeByIdAndUserId($animeId, $userId, $usePrimary);
         }
                     /**
-         * 
+         * ユーザーIDとアニメの名前からアニメを取得します。
          *
          * @param int $userId
          * @param string $animeName
@@ -17765,6 +17765,20 @@
         {
                         /** @var \App\Services\Api\Anime\AnimeService $instance */
                         return $instance->CreateAnime($userId, $name, $memo);
+        }
+                    /**
+         * 
+         *
+         * @param \App\Models\Anime $anime
+         * @param string $name
+         * @param string|null $memo
+         * @return \App\Models\Anime 
+         * @static 
+         */ 
+        public static function UpdateAnimeRecord($anime, $name, $memo)
+        {
+                        /** @var \App\Services\Api\Anime\AnimeService $instance */
+                        return $instance->UpdateAnimeRecord($anime, $name, $memo);
         }
          
     }
