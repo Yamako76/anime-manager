@@ -89,6 +89,46 @@ class AnimeService
         return $anime;
     }
 
-    // TODO getAnimeByUserIdAndNameの作成
-    // TODO CreateAnimeの作成
+    /**
+     * ユーザーIDとアニメの名前からアニメを取得します。
+     *
+     * @param int $userId
+     * @param string $animeName
+     * @param bool $usePrimary
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|object|null
+     */
+    public function getAnimeByUserIdAndName(int $userId, string $animeName, bool $usePrimary = false): mixed
+    {
+        $query = $usePrimary ? Anime::onWriteConnection() : Anime::query();
+        $anime = $query
+            ->where("user_id", "=", $userId)
+            ->where("name", "=", $animeName)
+            ->first();
+        return $anime;
+    }
+
+    /**
+     * @param int $userId
+     * @param string $name
+     * @param string|null $memo
+     * @return Anime
+     * @throws \Exception
+     */
+    public function CreateAnime(int $userId, string $name, ?string $memo): \App\Models\Anime
+    {
+        /** @var Anime $anime */
+        $anime = $this->getAnimeByUserIdAndName($userId, $name);
+        if (is_null($anime)) {
+            $anime = $this->createAnimeRecord($userId, $name, $memo);
+        } else {
+            if ($anime->status == Anime::STATUS_ACTIVE) {
+                // TODO エラーハンドリング
+                throw new \Exception("そのアニメはすでに存在しています。");
+            } elseif ($anime->status == Anime::STATUS_DELETED) {
+                $anime = $anime->toState()->activate($anime);
+            }
+        }
+        return $anime;
+    }
+
 }

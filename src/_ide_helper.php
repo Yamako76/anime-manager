@@ -17737,6 +17737,35 @@
                         /** @var \App\Services\Api\Anime\AnimeService $instance */
                         return $instance->getAnimeByIdAndUserId($animeId, $userId, $usePrimary);
         }
+                    /**
+         * 
+         *
+         * @param int $userId
+         * @param string $animeName
+         * @param bool $usePrimary
+         * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|object|null 
+         * @static 
+         */ 
+        public static function getAnimeByUserIdAndName($userId, $animeName, $usePrimary = false)
+        {
+                        /** @var \App\Services\Api\Anime\AnimeService $instance */
+                        return $instance->getAnimeByUserIdAndName($userId, $animeName, $usePrimary);
+        }
+                    /**
+         * 
+         *
+         * @param int $userId
+         * @param string $name
+         * @param string|null $memo
+         * @return \App\Models\Anime 
+         * @throws \Exception
+         * @static 
+         */ 
+        public static function CreateAnime($userId, $name, $memo)
+        {
+                        /** @var \App\Services\Api\Anime\AnimeService $instance */
+                        return $instance->CreateAnime($userId, $name, $memo);
+        }
          
     }
      
