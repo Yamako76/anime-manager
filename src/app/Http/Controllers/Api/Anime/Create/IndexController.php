@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api\Anime\Create;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AnimeRequest;
-use App\Services\Api\Anime\State\InvalidAnimeStateChangeException;
 use Illuminate\Support\Facades\Auth;
 
 class IndexController extends Controller
