@@ -9,6 +9,8 @@ use Carbon\Carbon;
 class FolderService
 {
     /**
+     * フォルダのレコードを追加します。
+     *
      * @param int $userId
      * @param string $name
      * @return \App\Models\Folder
@@ -61,4 +63,30 @@ class FolderService
             ->first();
         return $folder;
     }
+
+    /**
+     * フォルダの追加を行います。
+     *
+     * @param int $userId
+     * @param string $name
+     * @return \App\Models\Folder
+     * @throws \Exception
+     */
+    public function CreateFolder(int $userId, string $name): \App\Models\Folder
+    {
+        /** @var Folder $folder */
+        $folder = $this->getFolderByUserIdAndName($userId, $name);
+        if (is_null($folder)) {
+            $folder = $this->createFolderRecord($userId, $name);
+        } else {
+            if ($folder->status == Folder::STATUS_ACTIVE) {
+                // TODO エラーハンドリングできれば400を返したい
+                throw new \Exception("そのアニメはすでに存在しています。");
+            } elseif ($folder->status == Folder::STATUS_DELETED) {
+                $folder = $folder->toState()->activate($folder);
+            }
+        }
+        return $folder;
+    }
+
 }

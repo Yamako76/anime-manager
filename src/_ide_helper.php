@@ -17752,7 +17752,7 @@
                         return $instance->getAnimeByUserIdAndName($userId, $animeName, $usePrimary);
         }
                     /**
-         * 
+         * アニメの追加を行います。
          *
          * @param int $userId
          * @param string $name
@@ -17792,7 +17792,7 @@
      */ 
         class FolderService {
                     /**
-         * 
+         * フォルダのレコードを追加します。
          *
          * @param int $userId
          * @param string $name
@@ -17831,6 +17831,20 @@
         {
                         /** @var \App\Services\Api\Folder\FolderService $instance */
                         return $instance->getFolderByUserIdAndName($userId, $animeName, $usePrimary);
+        }
+                    /**
+         * フォルダの追加を行います。
+         *
+         * @param int $userId
+         * @param string $name
+         * @return \App\Models\Folder 
+         * @throws \Exception
+         * @static 
+         */ 
+        public static function CreateFolder($userId, $name)
+        {
+                        /** @var \App\Services\Api\Folder\FolderService $instance */
+                        return $instance->CreateFolder($userId, $name);
         }
          
     }
