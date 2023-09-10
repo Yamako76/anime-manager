@@ -89,4 +89,21 @@ class FolderService
         return $folder;
     }
 
+    /**
+     * フォルダの編集を行います。
+     *
+     * @param Folder $folder
+     * @param string $name
+     * @return \App\Models\Folder
+     */
+    public function UpdateFolderRecord(Folder $folder, string $name): \App\Models\Folder
+    {
+        $now = Carbon::now();
+        $folder->name = $name;
+        $folder->latest_changed_at = $now;
+        $folder->updated_at = $now;
+        $folder->save();
+        return $folder;
+    }
+
 }

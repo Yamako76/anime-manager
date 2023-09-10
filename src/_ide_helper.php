@@ -17767,7 +17767,7 @@
                         return $instance->CreateAnime($userId, $name, $memo);
         }
                     /**
-         * 
+         * アニメの編集を行います。
          *
          * @param \App\Models\Anime $anime
          * @param string $name
@@ -17845,6 +17845,19 @@
         {
                         /** @var \App\Services\Api\Folder\FolderService $instance */
                         return $instance->CreateFolder($userId, $name);
+        }
+                    /**
+         * 
+         *
+         * @param \App\Models\Folder $folder
+         * @param string $name
+         * @return \App\Models\Folder 
+         * @static 
+         */ 
+        public static function UpdateFolderRecord($folder, $name)
+        {
+                        /** @var \App\Services\Api\Folder\FolderService $instance */
+                        return $instance->UpdateFolderRecord($folder, $name);
         }
          
     }
