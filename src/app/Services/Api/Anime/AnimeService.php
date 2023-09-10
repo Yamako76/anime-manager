@@ -134,6 +134,8 @@ class AnimeService
     }
 
     /**
+     * アニメの編集を行います。
+     *
      * @param Anime $anime
      * @param string $name
      * @param string|null $memo

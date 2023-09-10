@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Api\Anime\Update;
 
 use App\Http\Controllers\Controller;
 use App\Models\Anime;
-use App\Services\Api\Anime\State\InvalidAnimeStateChangeException;
 
 class IndexController extends Controller
 {
-
+    /**
+     * @param $animeId
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function index($animeId): \Illuminate\Http\JsonResponse
     {
 
