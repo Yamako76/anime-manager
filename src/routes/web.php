@@ -48,7 +48,7 @@ Route::middleware('auth')->prefix('api')->group(function () {
         \Route::get('/', [App\Http\Controllers\Api\Anime\IndexController::class, 'index']);
         \Route::get('/{animeId}', [App\Http\Controllers\Api\Anime\AnimeController::class, 'index']);
         \Route::post('/', [App\Http\Controllers\Api\Anime\Create\IndexController::class, 'index']);
-//        \Route::put('/{animeId}', [App\Http\Controllers\Api\Anime\Update\IndexController::class, 'index']);
+        \Route::put('/{animeId}', [App\Http\Controllers\Api\Anime\Update\IndexController::class, 'index']);
         \Route::delete('/{animeId}', [App\Http\Controllers\Api\Anime\Delete\IndexController::class, 'index']);
     });
 
