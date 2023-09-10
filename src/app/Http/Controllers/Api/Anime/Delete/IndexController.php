@@ -8,7 +8,10 @@ use App\Services\Api\Anime\State\InvalidAnimeStateChangeException;
 
 class IndexController extends Controller
 {
-
+    /**
+     * @param $animeId
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function index($animeId): \Illuminate\Http\JsonResponse
     {
 
