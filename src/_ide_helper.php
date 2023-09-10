@@ -17794,12 +17794,43 @@
                     /**
          * 
          *
+         * @param int $userId
+         * @param string $name
+         * @return \App\Models\Folder 
          * @static 
          */ 
         public static function createFolderRecord($userId, $name)
         {
                         /** @var \App\Services\Api\Folder\FolderService $instance */
                         return $instance->createFolderRecord($userId, $name);
+        }
+                    /**
+         * ユーザーIDとフォルダIDからフォルダを取得します。
+         *
+         * @param int $animeId
+         * @param int $userId
+         * @param bool $usePrimary
+         * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|object|null 
+         * @static 
+         */ 
+        public static function getFolderByIdAndUserId($animeId, $userId, $usePrimary = false)
+        {
+                        /** @var \App\Services\Api\Folder\FolderService $instance */
+                        return $instance->getFolderByIdAndUserId($animeId, $userId, $usePrimary);
+        }
+                    /**
+         * ユーザーIDとフォルダの名前からフォルダを取得します。
+         *
+         * @param int $userId
+         * @param string $animeName
+         * @param bool $usePrimary
+         * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|object|null 
+         * @static 
+         */ 
+        public static function getFolderByUserIdAndName($userId, $animeName, $usePrimary = false)
+        {
+                        /** @var \App\Services\Api\Folder\FolderService $instance */
+                        return $instance->getFolderByUserIdAndName($userId, $animeName, $usePrimary);
         }
          
     }

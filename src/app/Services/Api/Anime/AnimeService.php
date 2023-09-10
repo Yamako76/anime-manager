@@ -139,8 +139,11 @@ class AnimeService
      */
     public function UpdateAnimeRecord(Anime $anime, string $name, ?string $memo): \App\Models\Anime
     {
+        $now = Carbon::now();
         $anime->name = $name;
         $anime->memo = $memo;
+        $anime->latest_changed_at = $now;
+        $anime->updated_at = $now;
         $anime->save();
         return $anime;
     }
