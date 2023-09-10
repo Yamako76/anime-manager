@@ -60,7 +60,7 @@ Route::middleware('auth')->prefix('api')->group(function () {
         \Route::get('/{folderId}', [App\Http\Controllers\Api\Folder\FolderController::class, 'index']);
         \Route::post('/', [App\Http\Controllers\Api\Folder\Create\IndexController::class, 'index']);
 //        \Route::put('/{folderId}', [App\Http\Controllers\Api\Folder\Update\IndexController::class, 'index']);
-//        \Route::delete('/{folderId}', [App\Http\Controllers\Api\Folder\Delete\IndexController::class, 'index']);
+        \Route::delete('/{folderId}', [App\Http\Controllers\Api\Folder\Delete\IndexController::class, 'index']);
     });
 });
 
