@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Folder;
 
 use App\Http\Controllers\Controller;
+use App\Models\Folder;
 use Illuminate\Support\Facades\Auth;
 
 class IndexController extends Controller
@@ -12,7 +13,7 @@ class IndexController extends Controller
     {
 
         try {
-            $folderList = Auth::user()->folders()->get();
+            $folderList = Auth::user()->folders()->where("status", "=", Folder::STATUS_ACTIVE )->get();
 
         } catch (\Exception $e) {
             \Log::error(
