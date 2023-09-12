@@ -21,7 +21,7 @@ class FolderService
         $folder = new Folder();
         $folder->user_id = $userId;
         $folder->name = $name;
-        $folder->status = "active";
+        $folder->status = Folder::STATUS_ACTIVE;
         $folder->latest_changed_at = $now;
         $folder->created_at = $now;
         $folder->updated_at = $now;
@@ -80,7 +80,6 @@ class FolderService
             $folder = $this->createFolderRecord($userId, $name);
         } else {
             if ($folder->status == Folder::STATUS_ACTIVE) {
-                // TODO エラーハンドリングできれば400を返したい
                 throw new \Exception("そのフォルダはすでに存在しています。");
             } elseif ($folder->status == Folder::STATUS_DELETED) {
                 $folder = $folder->toState()->activate($folder);
