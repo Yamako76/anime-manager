@@ -18,7 +18,7 @@ return new class extends Migration {
             $table->bigInteger('user_id');
             $table->bigInteger('anime_id');
             $table->string('name', 500);
-            $table->string('memo', 500);
+            $table->string('memo', 500)->nullable();
             $table->string('status', 15);
             $table->timestamp('deleted_at')->nullable();
             $table->timestamp('created_at');
