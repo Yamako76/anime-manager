@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Services\Api\Anime\State\AnimeStateActive;
 use App\Services\Api\Anime\State\AnimeStateDeleted;
+use App\Services\Api\Anime\State\AnimeStateNotFoundException;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
@@ -70,7 +71,7 @@ class Anime extends Model
         } else if ($this->status == self::STATUS_DELETED) {
             return new AnimeStateDeleted();
         } else {
-            throw new \InvalidArgumentException(`ステータスが存在しません。[{$this->status}]`);
+            throw new AnimeStateNotFoundException(`ステータスが存在しません。[{$this->status}]`);
         }
     }
 }
