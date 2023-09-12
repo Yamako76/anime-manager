@@ -22,6 +22,8 @@ class AnimeHistory extends Model
 {
     protected $table = 'anime_histories';
 
+    public $timestamps = false;
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
