@@ -24,7 +24,7 @@ class IndexController extends Controller
             return \response()->json([], 404);
         }
 
-        // フォルダの編集処理を実行します。
+        // フォルダを編集します。
         try {
             \FolderService::UpdateFolderRecord($folder, $folder->name);
         } catch (\Exception $e) {

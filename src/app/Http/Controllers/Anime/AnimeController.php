@@ -13,6 +13,7 @@ class AnimeController extends Controller
     public function index($animeId): Response
     {
 
+        // TODO: animeId のバリデーション
         $userId = \Auth::id();
         /** @var Anime $anime */
         $anime = \AnimeService::getAnimeByIdAndUserId($animeId, $userId);

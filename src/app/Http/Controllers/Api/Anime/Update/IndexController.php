@@ -23,7 +23,7 @@ class IndexController extends Controller
             return \response()->json([], 404);
         }
 
-        // アニメの編集処理を実行します。
+        // アニメを更新します。
         try {
             \AnimeService::UpdateAnimeRecord($anime, $anime->name, $anime->memo);
         } catch (\Exception $e) {

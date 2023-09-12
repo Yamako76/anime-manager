@@ -24,7 +24,7 @@ class IndexController extends Controller
             return \response()->json([], 404);
         }
 
-        // アニメの削除処理を実行します。
+        // アニメを削除します。
         try {
             $anime = $anime->toState()->delete($anime);
         } catch (InvalidAnimeStateChangeException $e) {

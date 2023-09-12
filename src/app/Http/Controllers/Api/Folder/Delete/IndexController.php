@@ -24,7 +24,7 @@ class IndexController extends Controller
             return \response()->json([], 404);
         }
 
-        // フォルダの削除処理を実行します。
+        // フォルダを削除します。
         try {
             $folder = $folder->toState()->delete($folder);
         } catch (InvalidFolderStateChangeException $e) {

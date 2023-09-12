@@ -13,6 +13,7 @@ class IndexController extends Controller
     {
 
         try {
+            // TODO: サービスクラスに切り出しで、ペジネーション
             $folderList = Auth::user()->folders()->where("status", "=", Folder::STATUS_ACTIVE )->get();
 
         } catch (\Exception $e) {
