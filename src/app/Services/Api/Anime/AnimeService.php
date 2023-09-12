@@ -3,6 +3,7 @@
 namespace App\Services\Api\Anime;
 
 use App\Models\Anime;
+use App\Services\Api\Anime\State\AnimeStateNotFoundException;
 use Carbon\Carbon;
 
 class AnimeService
@@ -114,7 +115,7 @@ class AnimeService
      * @param string $name
      * @param string|null $memo
      * @return \App\Models\Anime
-     * @throws \Exception
+     * @throws AnimeStateNotFoundException
      */
     public function CreateAnime(int $userId, string $name, ?string $memo): \App\Models\Anime
     {
@@ -122,19 +123,22 @@ class AnimeService
         $anime = $this->getAnimeByUserIdAndName($userId, $name);
         if (is_null($anime)) {
             $anime = $this->createAnimeRecord($userId, $name, $memo);
-        } else {
-            if ($anime->status == Anime::STATUS_ACTIVE) {
-                // TODO エラーハンドリングできれば400を返したい
-                throw new \Exception("そのアニメはすでに存在しています。");
-            } elseif ($anime->status == Anime::STATUS_DELETED) {
-                $anime = $anime->toState()->activate($anime);
-            }
+            return $anime;
         }
-        return $anime;
+        if ($anime->status == Anime::STATUS_ACTIVE) {
+            return $anime;
+        }
+        if ($anime->status == Anime::STATUS_DELETED) {
+            $anime = $anime->toState()->activate($anime);
+            return $anime;
+        }
+        throw new AnimeStateNotFoundException(
+            `該当のアニメステータスが存在しません。["status": {$anime->status}, "userId": {$anime->user_id}, "animeId": {$anime->id}]`
+        );
     }
 
     /**
-     * アニメの編集を行います。
+     * アニメデータのレコードを更新します。
      *
      * @param Anime $anime
      * @param string $name
