@@ -21,6 +21,8 @@ class FolderAnimeRelationHistory extends Model
 {
     protected $table = 'folder_anime_relation_histories';
 
+    public $timestamps = false;
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

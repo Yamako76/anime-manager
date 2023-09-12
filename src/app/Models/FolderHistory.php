@@ -20,6 +20,8 @@ class FolderHistory extends Model
 {
     protected $table = 'folder_histories';
 
+    public $timestamps = false;
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
