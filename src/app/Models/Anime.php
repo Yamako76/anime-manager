@@ -62,7 +62,7 @@ class Anime extends Model
      * アニメのモデルからアニメのステータスクラスへ変換する。
      *
      * @return \App\Services\Api\Anime\State\AnimeState
-     * @throws \InvalidArgumentException
+     * @throws AnimeStateNotFoundException
      */
     public function toState(): \App\Services\Api\Anime\State\AnimeState
     {
