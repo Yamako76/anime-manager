@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int id
  * @property int user_id
  * @property int folder_id
- * @property int anime_id
+ * @property string name
  * @property string status
  * @property string deleted_at
  * @property string created_at
