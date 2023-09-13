@@ -4,10 +4,32 @@ namespace App\Services\Api\Folder;
 
 
 use App\Models\Folder;
+use App\Services\Api\Folder\State\FolderStateNotFoundException;
 use Carbon\Carbon;
 
 class FolderService
 {
+    /**
+     * 特定のユーザーに関連するフォルダ一覧を取得する。
+     *
+     * @param int $userId
+     * @param int $currentPage
+     * @param int $paginateUnit
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public function getFolderListByUserId(
+        int    $userId,
+        int    $currentPage,
+        int    $paginateUnit = 20,
+    ): \Illuminate\Contracts\Pagination\LengthAwarePaginator
+    {
+        // ソート順を指定してクエリを構築
+        $query = Folder::query()->where('user_id', '=', $userId)->where('status', '=', Folder::STATUS_ACTIVE);
+        // ページネーションを適用してアニメ一覧を取得
+        $folderList = $query->paginate($paginateUnit, ['*'], 'page', $currentPage);
+        return $folderList;
+    }
+
     /**
      * フォルダのレコードを追加します。
      *
@@ -66,11 +88,16 @@ class FolderService
 
     /**
      * フォルダの追加を行います。
+     * ユーザーId と フォルダの名前から、既にそのフォルダが存在しているか検索します。
+     * 存在していない場合、レコードにフォルダを追加します。
+     * 存在している場合、
+     * フォルダの status カラムが active の場合、そのままフォルダを返します。
+     * フォルダの status カラムが deleted の場合、 status を active に変更します。
      *
      * @param int $userId
      * @param string $name
      * @return \App\Models\Folder
-     * @throws \Exception
+     * @throws FolderStateNotFoundException
      */
     public function CreateFolder(int $userId, string $name): \App\Models\Folder
     {
@@ -78,18 +105,22 @@ class FolderService
         $folder = $this->getFolderByUserIdAndName($userId, $name);
         if (is_null($folder)) {
             $folder = $this->createFolderRecord($userId, $name);
-        } else {
-            if ($folder->status == Folder::STATUS_ACTIVE) {
-                throw new \Exception("そのフォルダはすでに存在しています。");
-            } elseif ($folder->status == Folder::STATUS_DELETED) {
-                $folder = $folder->toState()->activate($folder);
-            }
+            return $folder;
         }
-        return $folder;
+        if ($folder->status == Folder::STATUS_ACTIVE) {
+            return $folder;
+        }
+        if ($folder->status == Folder::STATUS_DELETED) {
+            $folder = $folder->toState()->activate($folder);
+            return $folder;
+        }
+        throw new FolderStateNotFoundException(
+            `該当のフォルダステータスが存在しません。["status": {$folder->status}, "userId": {$folder->user_id}, "folderId": {$folder->id}]`
+        );
     }
 
     /**
-     * フォルダの編集を行います。
+     * フォルダデータのレコードを更新します。
      *
      * @param Folder $folder
      * @param string $name

@@ -17753,12 +17753,17 @@
         }
                     /**
          * アニメの追加を行います。
+         * ユーザーId と アニメの名前から、既にそのアニメが存在しているか検索します。
+         * 存在していない場合、レコードにアニメを追加します。
+         * 存在している場合、
+         * アニメの status カラムが active の場合、そのままアニメを返します。
+         * アニメの status カラムが deleted の場合、 status を active に変更します。
          *
          * @param int $userId
          * @param string $name
          * @param string|null $memo
          * @return \App\Models\Anime 
-         * @throws \Exception
+         * @throws AnimeStateNotFoundException
          * @static 
          */ 
         public static function CreateAnime($userId, $name, $memo)
@@ -17767,7 +17772,7 @@
                         return $instance->CreateAnime($userId, $name, $memo);
         }
                     /**
-         * アニメの編集を行います。
+         * アニメデータのレコードを更新します。
          *
          * @param \App\Models\Anime $anime
          * @param string $name
@@ -17791,6 +17796,20 @@
      *
      */ 
         class FolderService {
+                    /**
+         * 特定のユーザーに関連するフォルダ一覧を取得する。
+         *
+         * @param int $userId
+         * @param int $currentPage
+         * @param int $paginateUnit
+         * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator 
+         * @static 
+         */ 
+        public static function getFolderListByUserId($userId, $currentPage, $paginateUnit = 20)
+        {
+                        /** @var \App\Services\Api\Folder\FolderService $instance */
+                        return $instance->getFolderListByUserId($userId, $currentPage, $paginateUnit);
+        }
                     /**
          * フォルダのレコードを追加します。
          *
@@ -17834,11 +17853,16 @@
         }
                     /**
          * フォルダの追加を行います。
+         * ユーザーId と フォルダの名前から、既にそのフォルダが存在しているか検索します。
+         * 存在していない場合、レコードにフォルダを追加します。
+         * 存在している場合、
+         * フォルダの status カラムが active の場合、そのままフォルダを返します。
+         * フォルダの status カラムが deleted の場合、 status を active に変更します。
          *
          * @param int $userId
          * @param string $name
          * @return \App\Models\Folder 
-         * @throws \Exception
+         * @throws FolderStateNotFoundException
          * @static 
          */ 
         public static function CreateFolder($userId, $name)
@@ -17847,7 +17871,7 @@
                         return $instance->CreateFolder($userId, $name);
         }
                     /**
-         * 
+         * フォルダデータのレコードを更新します。
          *
          * @param \App\Models\Folder $folder
          * @param string $name
