@@ -21,7 +21,6 @@ class IndexController extends Controller
         }
 
         try {
-            // TODO: サービスクラスに切り出しで、ペジネーション
             $folderList = \FolderService::getFolderListByUserId($userId, $currentPage, 20);
         } catch (\Exception $e) {
             \Log::error(
