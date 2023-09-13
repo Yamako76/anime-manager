@@ -110,6 +110,11 @@ class AnimeService
 
     /**
      * アニメの追加を行います。
+     * ユーザーId と アニメの名前から、既にそのアニメが存在しているか検索します。
+     * 存在していない場合、レコードにアニメを追加します。
+     * 存在している場合、
+     * アニメの status カラムが active の場合、そのままアニメを返します。
+     * アニメの status カラムが deleted の場合、 status を active に変更します。
      *
      * @param int $userId
      * @param string $name
