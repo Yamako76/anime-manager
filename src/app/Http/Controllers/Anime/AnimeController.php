@@ -18,6 +18,7 @@ class AnimeController extends Controller
         /** @var Anime $anime */
         $anime = \AnimeService::getAnimeByIdAndUserId($animeId, $userId);
 
+        // TODO: abort 変更
         if (is_null($anime)) {
             abort(404);
         }
