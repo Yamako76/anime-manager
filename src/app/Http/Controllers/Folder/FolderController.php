@@ -10,8 +10,13 @@ use Inertia\Response;
 class FolderController extends Controller
 {
 
-    public function index(Folder $folder): Response
+    public function index($folderId): Response
     {
+        $userId = \Auth::id();
+
+        /** @var Folder $folder */
+        $folder = \FolderService::getFolderByIdAndUserId($folderId, $userId);
+
         return Inertia::render('Folder/Folder', [
             "name" => $folder->name
         ]);
