@@ -122,7 +122,7 @@ class AnimeService
      * @return \App\Models\Anime
      * @throws AnimeStateNotFoundException
      */
-    public function CreateAnime(int $userId, string $name, ?string $memo): \App\Models\Anime
+    public function createAnime(int $userId, string $name, ?string $memo): \App\Models\Anime
     {
         /** @var Anime $anime */
         $anime = $this->getAnimeByUserIdAndName($userId, $name);
@@ -150,7 +150,7 @@ class AnimeService
      * @param string|null $memo
      * @return \App\Models\Anime
      */
-    public function UpdateAnimeRecord(Anime $anime, string $name, ?string $memo): \App\Models\Anime
+    public function updateAnimeRecord(Anime $anime, string $name, ?string $memo): \App\Models\Anime
     {
         $now = Carbon::now();
         $anime->name = $name;

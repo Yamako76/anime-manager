@@ -19,7 +19,7 @@ class IndexController extends Controller
 
         // フォルダを作成します。
         try {
-            \FolderService::CreateFolder($userId, $request->name);
+            \FolderService::createFolder($userId, $request->name);
         } catch (FolderStateNotFoundException $e) {
             \Log::error($e);
             return \response()->json([], 500);

@@ -27,7 +27,7 @@ class IndexController extends Controller
 
         // フォルダを更新します。
         try {
-            \FolderService::UpdateFolderRecord($folder, $request->name);
+            \FolderService::updateFolderRecord($folder, $request->name);
         } catch (\Exception $e) {
             \Log::error("フォルダの編集処理中、予期せぬエラーが発生しました。調査が必要です。", $e);
             return \response()->json([], 500);

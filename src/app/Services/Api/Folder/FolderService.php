@@ -99,7 +99,7 @@ class FolderService
      * @return \App\Models\Folder
      * @throws FolderStateNotFoundException
      */
-    public function CreateFolder(int $userId, string $name): \App\Models\Folder
+    public function createFolder(int $userId, string $name): \App\Models\Folder
     {
         /** @var Folder $folder */
         $folder = $this->getFolderByUserIdAndName($userId, $name);
@@ -126,7 +126,7 @@ class FolderService
      * @param string $name
      * @return \App\Models\Folder
      */
-    public function UpdateFolderRecord(Folder $folder, string $name): \App\Models\Folder
+    public function updateFolderRecord(Folder $folder, string $name): \App\Models\Folder
     {
         $now = Carbon::now();
         $folder->name = $name;

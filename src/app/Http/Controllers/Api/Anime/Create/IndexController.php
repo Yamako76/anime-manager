@@ -21,7 +21,7 @@ class IndexController extends Controller
 
         // アニメを作成します。
         try {
-            \AnimeService::CreateAnime($userId, $request->name, $request->memo);
+            \AnimeService::createAnime($userId, $request->name, $request->memo);
         } catch (AnimeStateNotFoundException $e) {
             \Log::error($e);
             return \response()->json([], 500);

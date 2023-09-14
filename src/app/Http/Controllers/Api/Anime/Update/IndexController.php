@@ -26,7 +26,7 @@ class IndexController extends Controller
 
         // アニメを更新します。
         try {
-            \AnimeService::UpdateAnimeRecord($anime, $request->name, $request->memo);
+            \AnimeService::updateAnimeRecord($anime, $request->name, $request->memo);
         } catch (\Exception $e) {
             \Log::error("アニメの編集処理中、予期せぬエラーが発生しました。調査が必要です。", $e);
             return \response()->json([], 500);

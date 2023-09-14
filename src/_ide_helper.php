@@ -17766,10 +17766,10 @@
          * @throws AnimeStateNotFoundException
          * @static 
          */ 
-        public static function CreateAnime($userId, $name, $memo)
+        public static function createAnime($userId, $name, $memo)
         {
                         /** @var \App\Services\Api\Anime\AnimeService $instance */
-                        return $instance->CreateAnime($userId, $name, $memo);
+                        return $instance->createAnime($userId, $name, $memo);
         }
                     /**
          * アニメデータのレコードを更新します。
@@ -17780,10 +17780,10 @@
          * @return \App\Models\Anime 
          * @static 
          */ 
-        public static function UpdateAnimeRecord($anime, $name, $memo)
+        public static function updateAnimeRecord($anime, $name, $memo)
         {
                         /** @var \App\Services\Api\Anime\AnimeService $instance */
-                        return $instance->UpdateAnimeRecord($anime, $name, $memo);
+                        return $instance->updateAnimeRecord($anime, $name, $memo);
         }
          
     }
@@ -17865,10 +17865,10 @@
          * @throws FolderStateNotFoundException
          * @static 
          */ 
-        public static function CreateFolder($userId, $name)
+        public static function createFolder($userId, $name)
         {
                         /** @var \App\Services\Api\Folder\FolderService $instance */
-                        return $instance->CreateFolder($userId, $name);
+                        return $instance->createFolder($userId, $name);
         }
                     /**
          * フォルダデータのレコードを更新します。
@@ -17878,10 +17878,10 @@
          * @return \App\Models\Folder 
          * @static 
          */ 
-        public static function UpdateFolderRecord($folder, $name)
+        public static function updateFolderRecord($folder, $name)
         {
                         /** @var \App\Services\Api\Folder\FolderService $instance */
-                        return $instance->UpdateFolderRecord($folder, $name);
+                        return $instance->updateFolderRecord($folder, $name);
         }
          
     }
