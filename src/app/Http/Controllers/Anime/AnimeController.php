@@ -13,18 +13,16 @@ class AnimeController extends Controller
     public function index($animeId): Response
     {
 
-        // TODO: animeId のバリデーション
         $userId = \Auth::id();
         /** @var Anime $anime */
         $anime = \AnimeService::getAnimeByIdAndUserId($animeId, $userId);
-
-        // TODO: abort 変更
+        
         if (is_null($anime)) {
-            abort(404);
+            return Inertia::render('Error/NotFound');
         }
 
         if ($anime->status == Anime::STATUS_DELETED) {
-            abort(404);
+            return Inertia::render('Error/NotFound');
         }
         // TODO 戻り値にmemoの追加
         return Inertia::render('Anime/Anime', [
