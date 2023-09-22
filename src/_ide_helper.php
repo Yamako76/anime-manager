@@ -17888,6 +17888,17 @@
      
 }
 
+    namespace App\Facades\FolderAnimeRelation { 
+            /**
+     * 
+     *
+     */ 
+        class FolderAnimeRelationService {
+         
+    }
+     
+}
+
     namespace Spatie\LaravelIgnition\Facades { 
             /**
      * 
@@ -22250,6 +22261,7 @@ namespace  {
             class Vite extends \Illuminate\Support\Facades\Vite {}
             class AnimeService extends \App\Facades\Anime\AnimeService {}
             class FolderService extends \App\Facades\Folder\FolderService {}
+            class FolderAnimeRelationService extends \App\Facades\FolderAnimeRelation\FolderAnimeRelationService {}
             class Flare extends \Spatie\LaravelIgnition\Facades\Flare {}
      
 }
