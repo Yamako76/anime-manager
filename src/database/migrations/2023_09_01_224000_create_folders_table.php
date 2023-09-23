@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('folders', function (Blueprint $table) {
             $table->increments('id');
             $table->bigInteger('user_id');
-            $table->string('name', 500)->unique();
+            $table->string('name', 500);
             $table->string('status', 15);
             $table->timestamp('deleted_at')->nullable();
             $table->timestamp('latest_changed_at');
