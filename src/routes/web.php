@@ -62,6 +62,13 @@ Route::middleware('auth')->prefix('api')->group(function () {
         \Route::put('/{folderId}', [App\Http\Controllers\Api\Folder\Update\IndexController::class, 'index']);
         \Route::delete('/{folderId}', [App\Http\Controllers\Api\Folder\Delete\IndexController::class, 'index']);
     });
+
+    /**
+     * フォルダにアニメを紐付ける関連のURL設定
+     */
+    \Route::prefix('folders/{folderId}')->group(function () {
+        \Route::get('/anime-list', [App\Http\Controllers\Api\FolderAnimeRelation\IndexController::class, 'index']);
+    });
 });
 
 \Route::get('/dashboard', function () {
