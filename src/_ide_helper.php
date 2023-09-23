@@ -17894,6 +17894,16 @@
      *
      */ 
         class FolderAnimeRelationService {
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function getAnimeListByUserIdAndFolderId($userId, $folderId, $currentPage, $paginateUnit = 20, $sortType = 'created_at')
+        {
+                        /** @var \App\Services\Api\FolderAnimeRelation\FolderAnimeRelationService $instance */
+                        return $instance->getAnimeListByUserIdAndFolderId($userId, $folderId, $currentPage, $paginateUnit, $sortType);
+        }
          
     }
      
