@@ -23,7 +23,7 @@ return new class extends Migration
             $table->timestamp('latest_changed_at');
             $table->timestamps();
 
-            $table->unique(['user_id', 'id'], 'unique_animes_01');
+            $table->unique(['user_id', 'name'], 'unique_animes_01');
         });
     }
 
