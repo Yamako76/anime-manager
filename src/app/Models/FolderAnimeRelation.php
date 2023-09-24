@@ -2,12 +2,15 @@
 
 namespace App\Models;
 
+use App\Services\Api\FolderAnimeRelation\State\FolderAnimeRelationStateActive;
+use App\Services\Api\FolderAnimeRelation\State\FolderAnimeRelationStateDeleted;
+use App\Services\Api\FolderAnimeRelation\State\FolderAnimeRelationStateNotFoundException;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 
 /**
-// * @property int id
+  // * @property int id
  * @property int user_id
  * @property int folder_id
  * @property int anime_id
@@ -44,5 +47,22 @@ class FolderAnimeRelation extends Model
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id', 'user_id');
+    }
+
+    /**
+     * フォルダアニメのモデルからアニメのステータスクラスへ変換する。
+     *
+     * @return \App\Services\Api\FolderAnimeRelation\State\FolderAnimeRelationState
+     * @throws FolderAnimeRelationStateNotFoundException
+     */
+    public function toState(): \App\Services\Api\FolderAnimeRelation\State\FolderAnimeRelationState
+    {
+        if ($this->status == self::STATUS_ACTIVE) {
+            return new FolderAnimeRelationStateActive();
+        } else if ($this->status == self::STATUS_DELETED) {
+            return new FolderAnimeRelationStateDeleted();
+        } else {
+            throw new FolderAnimeRelationStateNotFoundException(`ステータスが存在しません。[{$this->status}]`);
+        }
     }
 }
