@@ -68,6 +68,7 @@ Route::middleware('auth')->prefix('api')->group(function () {
      */
     \Route::prefix('folders/{folderId}')->group(function () {
         \Route::get('/anime-list', [App\Http\Controllers\Api\FolderAnimeRelation\IndexController::class, 'index']);
+        \Route::post('/anime-list', [App\Http\Controllers\Api\FolderAnimeRelation\Create\IndexController::class, 'index']);
     });
 });
 
