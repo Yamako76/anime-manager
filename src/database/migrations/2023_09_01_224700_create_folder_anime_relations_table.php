@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('folder_anime_relations', function (Blueprint $table) {
-//            $table->increments('id');
+            $table->increments('id');
             $table->bigInteger('user_id');
             $table->bigInteger('folder_id');
             $table->bigInteger('anime_id');

@@ -17,6 +17,7 @@ class FolderAnimeRelationObserver
     public function saved(FolderAnimeRelation $folderAnimeRelation): void
     {
         $folderAnimeRelationHistory = new FolderAnimeRelationHistory();
+        $folderAnimeRelationHistory->folder_anime_relation_id = $folderAnimeRelation->id;
         $folderAnimeRelationHistory->user_id = $folderAnimeRelation->user_id;
         $folderAnimeRelationHistory->folder_id = $folderAnimeRelation->folder_id;
         $folderAnimeRelationHistory->anime_id = $folderAnimeRelation->anime_id;

@@ -35,7 +35,7 @@ class FolderAnimeRelationService
                 $query->orderBy('created_at');
                 break;
             case 'latest':
-                $query->latest('anime_id');
+                $query->latest('id');
                 break;
             // TODO title順のソート追加
             default:
