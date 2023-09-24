@@ -4,7 +4,7 @@ import Tooltip from "@mui/material/Tooltip";
 import Grid from "@mui/material/Grid";
 // import SortItem from '../tool/SortItem';
 import { getBoxWidth } from "@/Components/AllAnime/tool/tool";
-import AddAnime from "@/Components/AllAnime/tool/AddAnime";
+import AddFolderAnime from "@/Components/Folder/tool/AddFolderAnime";
 
 interface Props {
     name: string;
@@ -40,7 +40,9 @@ const Main = ({ titleWidth, name, handleReload }) => {
             },
         },
         {
-            body: <AddAnime handleReload={handleReload} />,
+            body: (
+                <AddFolderAnime handleReload={handleReload} folderName={name} />
+            ),
             sx: {
                 width: "50px",
                 display: "flex",

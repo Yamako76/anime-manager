@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import EditButton from "@/Components/Button/EditButton";
 import { value_validation } from "@/Components/common/tool";
 import { NoticeContext } from "@/Components/common/Notification";
-import {grey} from "@mui/material/colors";
+import { grey } from "@mui/material/colors";
 
 // フォルダ編集機能 //
 // フォルダの編集ボタンを押すとフォルダを編集する画面が表示され

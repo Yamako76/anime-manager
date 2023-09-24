@@ -1,8 +1,7 @@
-import {Head} from "@inertiajs/react";
+import { Head } from "@inertiajs/react";
 import React from "react";
 import AnimeHeader from "../../Components/Header/AnimeHeader";
-import {Box, Typography} from "@mui/material";
-
+import { Box, Typography } from "@mui/material";
 
 const NotFound = () => {
     return (
@@ -17,8 +16,8 @@ const NotFound = () => {
                 paddingBottom: "65px",
             }}
         >
-            <Head title="NotFound"/>
-            <AnimeHeader/>
+            <Head title="NotFound" />
+            <AnimeHeader />
             <Box
                 sx={{
                     flexGrow: 1,

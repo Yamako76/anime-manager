@@ -144,7 +144,7 @@ class FolderAnimeRelationService
     {
         /** @var FolderAnimeRelation $folderAnimeRelation */
         $folderAnimeRelation = $this->getFolderAnimeRelationByUserIdAndFolderIdAndAnimeId($userId, $folderID, $animeId);
-        if (!is_null($folderAnimeRelation)) {
+        if (is_null($folderAnimeRelation)) {
             $folderAnimeRelation = $this->createFolderAnimeRelationRecord($userId, $folderID, $animeId);
             return $folderAnimeRelation;
         }
