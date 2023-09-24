@@ -5,8 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property int id
- * @property int folder_anime_relation_id
+// * @property int id
+// * @property int folder_anime_relation_id
  * @property int user_id
  * @property int folder_id
  * @property int anime_id

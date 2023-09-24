@@ -4,7 +4,9 @@ namespace App\Providers;
 
 use App\Models\Anime;
 use App\Models\Folder;
+use App\Models\FolderAnimeRelation;
 use App\Observers\AnimeObserver;
+use App\Observers\FolderAnimeRelationObserver;
 use App\Observers\FolderObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -32,6 +34,7 @@ class EventServiceProvider extends ServiceProvider
     {
         Anime::observe(AnimeObserver::class);
         Folder::observe(FolderObserver::class);
+        FolderAnimeRelation::observe(FolderAnimeRelationObserver::class);
     }
 
     /**
