@@ -10,16 +10,18 @@ import ViewYouTubeVideo from "@/Components/YouTubeApi/ViewYouTubeVideo";
 import ViewAnimeTitle from "@/Components/AnimeDetail/ViewAnimeTitle";
 import EditAnime from "@/Components/AllAnime/tool/EditAnime";
 import { NoticeContext } from "@/Components/common/Notification";
+
 // import { useNavigate } from "react-router-dom";
 
 interface AnimeProps {
     name: string;
+    memo: string;
 }
 
-const AnimeDetail = ({ name }: AnimeProps) => {
+const AnimeDetail = ({ name, memo }: AnimeProps) => {
     // const [name, setName] = useState();
-    const [memo, setMemo] = useState();
-    const [Item, setItem] = useState();
+    // const [memo, setMemo] = useState();
+    // const [Item, setItem] = useState();
     const [videoId, setVideoId] = useState();
     const [isLoading, setIsLoading] = useState(true);
     const [notice_state, notice_dispatch] = useContext(NoticeContext);
@@ -157,7 +159,7 @@ const AnimeDetail = ({ name }: AnimeProps) => {
                     >
                         戻る
                     </Button>
-                    <EditAnime name={name} memo={"memo"} />
+                    <EditAnime name={name} memo={memo} />
                 </Box>
                 <Divider
                     sx={{

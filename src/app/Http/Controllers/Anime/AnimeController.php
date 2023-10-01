@@ -16,7 +16,7 @@ class AnimeController extends Controller
         $userId = \Auth::id();
         /** @var Anime $anime */
         $anime = \AnimeService::getAnimeByIdAndUserId($animeId, $userId);
-        
+
         if (is_null($anime)) {
             return Inertia::render('Error/NotFound');
         }
@@ -26,7 +26,8 @@ class AnimeController extends Controller
         }
         // TODO 戻り値にmemoの追加
         return Inertia::render('Anime/Anime', [
-            "name" => $anime->name
+            "name" => $anime->name,
+            "memo" => $anime->memo,
         ]);
     }
 }

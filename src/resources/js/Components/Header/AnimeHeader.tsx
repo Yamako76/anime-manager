@@ -5,10 +5,10 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import {createTheme, ThemeProvider, useMediaQuery} from "@mui/material";
-import {useState} from "react";
-import {InertiaLink} from "@inertiajs/inertia-react";
-import {Inertia} from "@inertiajs/inertia";
+import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
+import { useState } from "react";
+import { InertiaLink } from "@inertiajs/inertia-react";
+import { Inertia } from "@inertiajs/inertia";
 
 const AnimeHeader = () => {
     const theme = createTheme();
@@ -26,7 +26,7 @@ const AnimeHeader = () => {
 
     return (
         <ThemeProvider theme={theme}>
-            <Box sx={{flexGrow: 1}}>
+            <Box sx={{ flexGrow: 1 }}>
                 <AppBar
                     position="static"
                     sx={{
@@ -46,7 +46,7 @@ const AnimeHeader = () => {
                         <Typography
                             variant="h6"
                             component="div"
-                            sx={{color: "black", lineHeight: "64px"}}
+                            sx={{ color: "black", lineHeight: "64px" }}
                         >
                             Anime Manager
                         </Typography>
@@ -105,7 +105,7 @@ const AnimeHeader = () => {
                                                 color: "#212121",
                                             },
                                         }}
-                                        onClick={() => Inertia.post('/logout')}
+                                        onClick={() => Inertia.post("/logout")}
                                     >
                                         ログアウト
                                     </MenuItem>
@@ -146,7 +146,7 @@ const AnimeHeader = () => {
                                             color: "#212121",
                                         },
                                     }}
-                                    onClick={() => Inertia.post('/logout')}
+                                    onClick={() => Inertia.post("/logout")}
                                 >
                                     ログアウト
                                 </Button>

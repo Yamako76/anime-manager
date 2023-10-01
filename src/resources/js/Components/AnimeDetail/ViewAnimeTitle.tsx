@@ -6,9 +6,10 @@ import ViewMemo from "@/Components/AnimeDetail/ViewMemo";
 
 interface AnimeProps {
     name: string;
+    memo: string;
 }
 
-const ViewAnimeTitle = ({ name }: AnimeProps) => {
+const ViewAnimeTitle = ({ name, memo }: AnimeProps) => {
     return (
         <>
             <Box
@@ -33,7 +34,7 @@ const ViewAnimeTitle = ({ name }: AnimeProps) => {
                     {name}
                 </Typography>
             </Box>
-            <ViewMemo />
+            <ViewMemo memo={memo} />
         </>
     );
 };

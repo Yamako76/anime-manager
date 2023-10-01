@@ -6,9 +6,10 @@ import AnimeDetail from "@/Components/AnimeDetail/AnimeDetail";
 
 interface AnimeProps {
     name: string;
+    memo: string;
 }
 
-const Anime = ({ name }: AnimeProps) => {
+const Anime = ({ name, memo }: AnimeProps) => {
     return (
         <>
             <Head title="Anime" />
@@ -22,7 +23,7 @@ const Anime = ({ name }: AnimeProps) => {
                     display: "flex",
                 }}
             >
-                <AnimeDetail name={name} />
+                <AnimeDetail name={name} memo={memo} />
             </Box>
         </>
     );
