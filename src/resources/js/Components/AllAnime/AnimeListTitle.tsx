@@ -2,16 +2,16 @@ import React, { useContext, useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Tooltip from "@mui/material/Tooltip";
 import Grid from "@mui/material/Grid";
-// import SortItem from '../tool/SortItem';
 import { getBoxWidth } from "@/Components/AllAnime/tool/tool";
 import AddAnime from "@/Components/AllAnime/tool/AddAnime";
 import { NoticeContext } from "@/Components/common/Notification";
 import { useNavigate } from "react-router-dom";
+import SortAnime from "@/Components/AllAnime/tool/SortAnime"
 
 interface Props {}
 
 // コンテンツMain部分
-const Main = ({ titleWidth, handleReload }) => {
+const Main = ({ titleWidth, handleReload, isLoading }) => {
     const contentList = [
         {
             body: (
@@ -48,10 +48,10 @@ const Main = ({ titleWidth, handleReload }) => {
                 alignItems: "flex-end",
             },
         },
-        // {
-        //     "body": <SortItem/>,
-        //     "sx": {width: "50px", display: "flex", justifyContent: "center", alignItems: "flex-end"},
-        // }
+        {
+            "body": <SortAnime isLoading={isLoading}/>,
+            "sx": {width: "50px", display: "flex", justifyContent: "center", alignItems: "flex-end"},
+        }
     ];
 
     return (
@@ -97,7 +97,7 @@ const AnimeListTitle = ({ handleReload, isLoading }) => {
 
     return (
         <Box>
-            <Main titleWidth={titleWidth} handleReload={handleReload} />
+            <Main titleWidth={titleWidth} handleReload={handleReload} isLoading={isLoading}/>
         </Box>
     );
 };
