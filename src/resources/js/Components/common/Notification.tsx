@@ -19,6 +19,7 @@ const initialState = {
 export const NoticeContext = createContext(initialState);
 
 const Notification = ({ children }) => {
+    // @ts-ignore
     const [state, dispatch] = useReducer((state, action) => {
         switch (action.type) {
             case "handleNoticeOpen":
@@ -34,7 +35,7 @@ const Notification = ({ children }) => {
                 return state;
         }
     }, initialState);
-
+    // @ts-ignore
     const action = (
         <Fragment>
             <IconButton
@@ -47,7 +48,7 @@ const Notification = ({ children }) => {
             </IconButton>
         </Fragment>
     );
-
+    // @ts-ignore
     return (
         <NoticeContext.Provider value={[state, dispatch]}>
             {children}

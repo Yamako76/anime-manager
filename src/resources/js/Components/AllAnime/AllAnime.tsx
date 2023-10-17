@@ -89,7 +89,6 @@ const AllAnime = ({ handleReload, items }: Props) => {
 
     // アイテム一覧
     const ItemList = () => {
-        console.log(items);
         return (
             <Box
                 sx={{

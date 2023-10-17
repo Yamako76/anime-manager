@@ -5,8 +5,13 @@ import {getBoxWidth} from "@/Components/AllAnime/tool/tool";
 import AnimeListTitle from "@/Components/AllAnime/AnimeListTitle";
 import SearchBar from "@/Components/AllAnime/SearchBar";
 // import { useNavigate } from "react-router-dom";
-import {NoticeContext} from "@/Components/common/Notification";
+// import {NoticeContext} from "@/Components/common/Notification";
 import {SortContext} from "@/Components/common/SortManagement";
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import DialogActions from "@mui/material/DialogActions";
+import Button from "@mui/material/Button";
 
 const AnimeManagement = () => {
         const BoxWidth = getBoxWidth();
@@ -15,8 +20,9 @@ const AnimeManagement = () => {
         const [reRender, setReRender] = useState(true);
         const [isLoading, setIsLoading] = useState(true);
         const [hasMore, setHasMore] = useState(true);
+        const [isDialog, setIsDialog] = useState<boolean>(false);
         const [state, dispatch] = useContext(SortContext);
-        const [notice_state, notice_dispatch] = useContext(NoticeContext);
+        // const [notice_state, notice_dispatch] = useContext(NoticeContext);
         // const navigate = useNavigate();
         const isMounted = useRef(false);
         const page = useRef(1);
@@ -65,14 +71,41 @@ const AnimeManagement = () => {
             // searchItems();
         };
 
+        const handleDialogOpen = () => {
+            setIsDialog(true);
+        }
+        const handleDialogClose = () => {
+            setIsDialog(false);
+            location.reload();
+        };
+
         // const failedToLoad = () => {
         //     notice_dispatch({
         //         type: "update_message",
         //         payload: "アニメの読み込みに失敗しました",
         //     });
-        //     notice_dispatch({ type: "handleNoticeOpen" });
-        //     navigate("/app/home", { replace: true });
+        //     notice_dispatch({type: "handleNoticeOpen"});
+        //     // navigate("/app/home", { replace: true });
         // };
+
+        const ApiErrorDialog = () => {
+            return (
+                <div>
+                    <Dialog open={isDialog} onClose={handleDialogClose}>
+                        <DialogTitle>通信エラー</DialogTitle>
+                        <DialogContent>
+                            <p>アニメの読み込みに失敗しました</p>
+                        </DialogContent>
+                        <DialogActions>
+                            <Button onClick={handleDialogClose} color="primary">
+                                閉じる
+                            </Button>
+                        </DialogActions>
+                    </Dialog>
+                </div>
+            );
+        };
+
 
         // const isNotExist = (
         //     (items.length) ? <ViewInfiniteScroll/> : <NotExistAnime/>
@@ -102,7 +135,8 @@ const AnimeManagement = () => {
                     throw new Error(res.statusText);
                 }
             } catch (error) {
-                // failedToLoad();
+                handleDialogOpen();
+                console.log("error");
             } finally {
                 clearTimeout(timeout);
             }
@@ -170,6 +204,7 @@ const AnimeManagement = () => {
                         value={value}
                     />
                 </Box>
+                {isDialog && <ApiErrorDialog/>}
             </>
         );
     }
