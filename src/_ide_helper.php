@@ -17785,6 +17785,20 @@
                         /** @var \App\Services\Api\Anime\AnimeService $instance */
                         return $instance->updateAnimeRecord($anime, $name, $memo);
         }
+                    /**
+         * 
+         *
+         * @param int $userId
+         * @param string $keyWord
+         * @param bool $usePrimary
+         * @return mixed 
+         * @static 
+         */ 
+        public static function searchAnime($userId, $keyWord, $usePrimary = false)
+        {
+                        /** @var \App\Services\Api\Anime\AnimeService $instance */
+                        return $instance->searchAnime($userId, $keyWord, $usePrimary);
+        }
          
     }
      
@@ -17968,7 +17982,12 @@
                         return $instance->createFolderAnimeRelationRecord($userId, $folderId, $animeId);
         }
                     /**
-         * 
+         * フォルダにアニメの追加を行います。
+         * ユーザーId と フォルダId と アニメId から、既にそのアニメがフォルダに存在しているか検索します。
+         * 存在していない場合、レコードにアニメを追加します。
+         * 存在している場合、
+         * フォルダアニメの status カラムが active の場合、そのままフォルダアニメを返します。
+         * フォルダアニメの status カラムが deleted の場合、 status を active に変更します。
          *
          * @param int $userId
          * @param int $folderID

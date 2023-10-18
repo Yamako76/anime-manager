@@ -161,4 +161,20 @@ class AnimeService
         return $anime;
     }
 
+    /**
+     * アニメを検索します。
+     *
+     * @param int $userId
+     * @param string $keyWord
+     * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
+     */
+    public function searchAnime(int $userId, string $keyWord): mixed
+    {
+        $animeList = Anime::query()->where('user_id', '=', $userId)
+            ->where('status', '=', Anime::STATUS_ACTIVE)
+            ->where('name', 'like', "%$keyWord%")
+            ->get();
+
+        return $animeList;
+    }
 }
