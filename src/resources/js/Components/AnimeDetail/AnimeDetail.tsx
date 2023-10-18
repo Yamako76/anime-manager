@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useRef, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {Box} from "@mui/material";
 import Button from "@mui/material/Button";
 import axios from "axios";
@@ -9,9 +9,8 @@ import Typography from "@mui/material/Typography";
 import ViewYouTubeVideo from "@/Components/YouTubeApi/ViewYouTubeVideo";
 import ViewAnimeTitle from "@/Components/AnimeDetail/ViewAnimeTitle";
 import EditAnime from "@/Components/AllAnime/tool/EditAnime";
-import {NoticeContext} from "@/Components/common/Notification";
-
-// import { useNavigate } from "react-router-dom";
+// import {useNavigate} from "react-router-dom";
+import ApiCommunicationFailed from "@/Components/common/ApiCommunicationFailed";
 
 interface AnimeProps {
     name: string;
@@ -22,9 +21,18 @@ interface AnimeProps {
 const AnimeDetail = ({name, memo, id}: AnimeProps) => {
     const [videoId, setVideoId] = useState();
     const [isLoading, setIsLoading] = useState(true);
-    const [notice_state, notice_dispatch] = useContext(NoticeContext);
+    const [isFailedSnackbar, setIsFailedSnackbar] = useState(false);
     // const navigate = useNavigate();
     const isMounted = useRef(false);
+
+    const handleSnackbarClose = () => {
+        setIsFailedSnackbar(false);
+        location.reload();
+    };
+
+    const handleSnackbarFailed = () => {
+        setIsFailedSnackbar(true);
+    }
 
     useEffect(() => {
         isMounted.current = true;
@@ -42,15 +50,6 @@ const AnimeDetail = ({name, memo, id}: AnimeProps) => {
             getAnime();
         }
     }, []);
-
-    // const failedToLoad = () => {
-    //     notice_dispatch({
-    //         type: "update_message",
-    //         payload: "アニメ詳細の読み込みに失敗しました",
-    //     });
-    //     notice_dispatch({ type: "handleNoticeOpen" });
-    //     navigate("/app/home", { replace: true });
-    // };
 
     // const loader = (
     //     <Grid
@@ -110,7 +109,7 @@ const AnimeDetail = ({name, memo, id}: AnimeProps) => {
                 }
             );
         } catch {
-            // failedToLoad();
+            handleSnackbarFailed();
         } finally {
             clearTimeout(timeout);
         }
@@ -210,19 +209,24 @@ const AnimeDetail = ({name, memo, id}: AnimeProps) => {
         );
     };
     return (
-        <Box
-            sx={{
-                width: "100%",
-                minWidth: "300px",
-                maxWidth: "2000px",
-                justifyContent: "center",
-                alignItems: "center",
-                display: "flex",
-            }}
-        >
-            {/*{isLoading ? loader : <ViewItem />}*/}
-            <ViewItem/>
-        </Box>
+        <>
+            <Box
+                sx={{
+                    width: "100%",
+                    minWidth: "300px",
+                    maxWidth: "2000px",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    display: "flex",
+                }}
+            >
+                {/*{isLoading ? loader : <ViewItem />}*/}
+                <ViewItem/>
+            </Box>
+            {isFailedSnackbar && <ApiCommunicationFailed message={`動画の取得に失敗しました`}
+                                                         handleSnackbarClose={handleSnackbarClose}
+                                                         isSnackbar={isFailedSnackbar}/>}
+        </>
     );
 };
 
