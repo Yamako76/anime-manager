@@ -24,10 +24,10 @@ class AnimeController extends Controller
         if ($anime->status == Anime::STATUS_DELETED) {
             return Inertia::render('Error/NotFound');
         }
-        // TODO 戻り値にidの追加
         return Inertia::render('Anime/Anime', [
             "name" => $anime->name,
             "memo" => $anime->memo,
+            "id" => $anime->id,
         ]);
     }
 }

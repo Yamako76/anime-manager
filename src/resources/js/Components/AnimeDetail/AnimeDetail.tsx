@@ -1,27 +1,25 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
-import { Box } from "@mui/material";
+import React, {useContext, useEffect, useRef, useState} from "react";
+import {Box} from "@mui/material";
 import Button from "@mui/material/Button";
 import axios from "axios";
 import Divider from "@mui/material/Divider";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { grey } from "@mui/material/colors";
+import {grey} from "@mui/material/colors";
 import Typography from "@mui/material/Typography";
 import ViewYouTubeVideo from "@/Components/YouTubeApi/ViewYouTubeVideo";
 import ViewAnimeTitle from "@/Components/AnimeDetail/ViewAnimeTitle";
 import EditAnime from "@/Components/AllAnime/tool/EditAnime";
-import { NoticeContext } from "@/Components/common/Notification";
+import {NoticeContext} from "@/Components/common/Notification";
 
 // import { useNavigate } from "react-router-dom";
 
 interface AnimeProps {
     name: string;
     memo: string;
+    id: number;
 }
 
-const AnimeDetail = ({ name, memo }: AnimeProps) => {
-    // const [name, setName] = useState();
-    // const [memo, setMemo] = useState();
-    // const [Item, setItem] = useState();
+const AnimeDetail = ({name, memo, id}: AnimeProps) => {
     const [videoId, setVideoId] = useState();
     const [isLoading, setIsLoading] = useState(true);
     const [notice_state, notice_dispatch] = useContext(NoticeContext);
@@ -150,16 +148,16 @@ const AnimeDetail = ({ name, memo }: AnimeProps) => {
                         // component={Link}
                         // to={"/app/home/folders/" + folderId + "/items/"}
                         variant="text"
-                        startIcon={<ArrowBackIcon />}
+                        startIcon={<ArrowBackIcon/>}
                         sx={{
                             marginRight: "10px",
-                            "&:hover": { color: grey[900] },
+                            "&:hover": {color: grey[900]},
                         }}
                         color="inherit"
                     >
                         戻る
                     </Button>
-                    <EditAnime name={name} memo={memo} />
+                    <EditAnime name={name} memo={memo} id={id}/>
                 </Box>
                 <Divider
                     sx={{
@@ -168,7 +166,7 @@ const AnimeDetail = ({ name, memo }: AnimeProps) => {
                         marginBottom: "5px",
                     }}
                 />
-                <ViewAnimeTitle name={name} />
+                <ViewAnimeTitle name={name} memo={memo}/>
                 <Box
                     sx={{
                         width: "100%",
@@ -188,7 +186,7 @@ const AnimeDetail = ({ name, memo }: AnimeProps) => {
                             marginRight: "5px",
                         }}
                     />
-                    <Typography sx={{ fontSize: 18, fontWeight: "bold" }}>
+                    <Typography sx={{fontSize: 18, fontWeight: "bold"}}>
                         関連のビデオ
                     </Typography>
                 </Box>
@@ -206,7 +204,7 @@ const AnimeDetail = ({ name, memo }: AnimeProps) => {
                     {/*{videoId == null || !isMounted.current ? null : (*/}
                     {/*    <ViewYouTubeVideo videoId={videoId} />*/}
                     {/*)}*/}
-                    <ViewYouTubeVideo videoId={videoId} />
+                    <ViewYouTubeVideo videoId={videoId}/>
                 </Box>
             </Box>
         );
@@ -223,7 +221,7 @@ const AnimeDetail = ({ name, memo }: AnimeProps) => {
             }}
         >
             {/*{isLoading ? loader : <ViewItem />}*/}
-            <ViewItem />
+            <ViewItem/>
         </Box>
     );
 };
