@@ -72,8 +72,12 @@ const EditAnime = ({name, memo, id}: AnimeProps) => {
         }
     };
 
-    const handleSnackbarClose = () => {
+    const handleSuccessSnackbarClose = () => {
         setIsSuccessSnackbar(false);
+        location.reload();
+    };
+
+    const handleFailedSnackbarClose = () => {
         setIsFailedSnackbar(false);
         location.reload();
     };
@@ -135,11 +139,11 @@ const EditAnime = ({name, memo, id}: AnimeProps) => {
                 />
             </Box>
             {isSuccessSnackbar && <ApiCommunicationSuccess message={`アニメ(${name})の更新が完了しました`}
-                                                           handleSnackbarClose={handleSnackbarClose}
+                                                           handleSnackbarClose={handleSuccessSnackbarClose}
                                                            isSnackbar={isSuccessSnackbar}
             />}
             {isFailedSnackbar && <ApiCommunicationFailed message={`アニメ(${name})の更新が失敗しました`}
-                                                         handleSnackbarClose={handleSnackbarClose}
+                                                         handleSnackbarClose={handleFailedSnackbarClose}
                                                          isSnackbar={isFailedSnackbar}
             />}
         </>
