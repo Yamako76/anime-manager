@@ -47,7 +47,7 @@ const AllAnime = ({ handleReload, items }: Props) => {
                 },
             },
             {
-                body: <DeleteAnime handleReload={handleReload} />,
+                body: <DeleteAnime handleReload={handleReload} item={item}/>,
                 sx: {
                     width: "40px",
                     display: "flex",
