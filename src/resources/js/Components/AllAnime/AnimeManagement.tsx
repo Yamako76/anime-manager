@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useRef, useState} from "react";
-import {Box, Divider, Grid} from "@mui/material";
+import {Box, Divider, Grid, Skeleton} from "@mui/material";
 import AllAnime from "@/Components/AllAnime/AllAnime";
 import {getBoxWidth} from "@/Components/AllAnime/tool/tool";
 import AnimeListTitle from "@/Components/AllAnime/AnimeListTitle";
@@ -7,6 +7,8 @@ import SearchBar from "@/Components/AllAnime/SearchBar";
 // import { useNavigate } from "react-router-dom";
 import {SortContext} from "@/Components/common/SortManagement";
 import ApiErrorDialog from "@/Components/common/ApiErrorDialog";
+import InfiniteScroll from "react-infinite-scroller";
+import NotExistAnimes from "@/Components/common/NotExistAnimes";
 
 const AnimeManagement = () => {
         const BoxWidth = getBoxWidth();
@@ -73,10 +75,6 @@ const AnimeManagement = () => {
             location.reload();
         };
 
-        // const isNotExist = (
-        //     (items.length) ? <ViewInfiniteScroll/> : <NotExistAnime/>
-        // );
-
         const fetchAnimes = async (page) => {
             let res;
             const abortCtrl = new AbortController();
@@ -134,6 +132,44 @@ const AnimeManagement = () => {
             }
         }, [state.sortIndex])
 
+        // 無限スクロールで呼ばれるアイテムの読み込みを行う関数
+        const loadMore = async () => {
+            page.current++;
+            const res = await fetchAnimes(page.current);
+            if (isMounted.current) {
+                const data = await res.json();
+                if (data.last_page === page.current) {
+                    setHasMore(false);
+                }
+                setItems([...items, ...data.data]);
+            }
+        }
+
+        // 無限スクロールで読み込み中に表示するコンポーネント
+        const loader = (
+            <Skeleton key={0} variant="rectangular" sx={{width: BoxWidth, height: "50px", marginTop: "10px"}}/>
+        );
+
+        // 無限スクロール用のコンポーネント
+        const ViewInfiniteScroll = () => {
+            return (
+                <Box sx={{marginBottom: "100px"}}>
+                    <InfiniteScroll
+                        pageStart={1}
+                        initialLoad={false}
+                        loadMore={loadMore}
+                        hasMore={hasMore}
+                        loader={loader}
+                    >
+                        <AllAnime handleReload={handleReload} items={items}/>
+                    </InfiniteScroll>
+                </Box>
+            );
+        }
+
+        const isNotExist = (
+            (items.length) ? <ViewInfiniteScroll/> : <NotExistAnimes/>
+        );
 
         const Main = () => {
             return (
@@ -145,7 +181,10 @@ const AnimeManagement = () => {
                         />
                     </Grid>
                     <Divider/>
-                    <AllAnime handleReload={handleReload} items={items}/>
+                    {/* アイテム一覧 */}
+                    <Grid container item>
+                        {(isLoading) ? (loader) : (isNotExist)}
+                    </Grid>
                 </Grid>
             );
         };
