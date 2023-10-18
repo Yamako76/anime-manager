@@ -22,7 +22,7 @@ const ApiCommunicationFailed = ({message, handleSnackbarClose, isSnackbar}: Prop
                 size="small"
                 aria-label="close"
                 color="inherit"
-                onClick={() => handleSnackbarClose}
+                onClick={handleSnackbarClose}
             >
                 <CloseIcon fontSize="small"/>
             </IconButton>
@@ -34,7 +34,7 @@ const ApiCommunicationFailed = ({message, handleSnackbarClose, isSnackbar}: Prop
             <Snackbar
                 open={isSnackbar}
                 anchorOrigin={{vertical: "bottom", horizontal: "center"}}
-                onClose={() => handleSnackbarClose}
+                onClose={handleSnackbarClose}
                 TransitionComponent={SlideTransition}
                 message={message}
                 autoHideDuration={5000}
