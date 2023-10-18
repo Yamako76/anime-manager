@@ -64,7 +64,7 @@ const AnimeManagement = () => {
             setHasMore(false);
             setIsLoading(true);
             setItems([]);
-            // searchItems();
+            searchAnimes();
         };
 
         const handleDialogOpen = () => {
@@ -105,6 +105,29 @@ const AnimeManagement = () => {
             }
             return res;
         }
+
+    const searchAnimes = async () => {
+        const abortCtrl = new AbortController()
+        const timeout = setTimeout(() => {
+            abortCtrl.abort()
+        }, 10000);
+        try {
+            const res = await fetch(`/api/anime-list/search?q=${value.trim()}`, {signal: abortCtrl.signal});
+            if (!res.ok) {
+                throw new Error(res.statusText);
+            }
+            const data = await res.json();
+            if (!isMounted.current) {
+                return;
+            }
+            setItems(data);
+            setIsLoading(false);
+        } catch (error) {
+            handleDialogOpen();
+        } finally {
+            clearTimeout(timeout);
+        }
+    }
 
         useEffect(() => {
             const getAnimes = async () => {

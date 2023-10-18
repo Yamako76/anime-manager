@@ -49,7 +49,7 @@ const SearchBar = ({
         <Box sx={box_sx}>
             <Paper elevation={24} sx={paper_sx}>
                 <Tooltip title="検索">
-                    <IconButton>
+                    <IconButton onClick={handleSubmit}>
                         <SearchIcon />
                     </IconButton>
                 </Tooltip>
