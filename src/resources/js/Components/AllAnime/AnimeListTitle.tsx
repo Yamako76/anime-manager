@@ -1,21 +1,22 @@
-import React, { useContext, useEffect, useState } from "react";
+import React from "react";
 import Box from "@mui/material/Box";
 import Tooltip from "@mui/material/Tooltip";
 import Grid from "@mui/material/Grid";
-import { getBoxWidth } from "@/Components/AllAnime/tool/tool";
+import {getBoxWidth} from "@/Components/AllAnime/tool/tool";
 import AddAnime from "@/Components/AllAnime/tool/AddAnime";
-import { NoticeContext } from "@/Components/common/Notification";
-import { useNavigate } from "react-router-dom";
 import SortAnime from "@/Components/AllAnime/tool/SortAnime"
 
-interface Props {}
+interface Props {
+    handleReload: () => void;
+    isLoading: () => void;
+}
 
 // コンテンツMain部分
-const Main = ({ titleWidth, handleReload, isLoading }) => {
+const Main = ({titleWidth, handleReload, isLoading}) => {
     const contentList = [
         {
             body: (
-                <Tooltip title={`アニメ一覧`} placement="bottom-end">
+                <Tooltip title={"アニメ一覧"} placement="bottom-end">
                     <Box
                         component="div"
                         textOverflow="ellipsis"
@@ -28,7 +29,7 @@ const Main = ({ titleWidth, handleReload, isLoading }) => {
                             marginBottom: "10px",
                         }}
                     >
-                        {`アニメ一覧`}
+                        {"アニメ一覧"}
                     </Box>
                 </Tooltip>
             ),
@@ -40,7 +41,7 @@ const Main = ({ titleWidth, handleReload, isLoading }) => {
             },
         },
         {
-            body: <AddAnime handleReload={handleReload} />,
+            body: <AddAnime handleReload={handleReload}/>,
             sx: {
                 width: "50px",
                 display: "flex",
@@ -57,7 +58,7 @@ const Main = ({ titleWidth, handleReload, isLoading }) => {
     return (
         <Grid
             container
-            sx={{ height: "60px", marginBottom: "5px", marginTop: "20px" }}
+            sx={{height: "60px", marginBottom: "5px", marginTop: "20px"}}
         >
             {contentList.map((content, index) => {
                 return (
@@ -70,30 +71,8 @@ const Main = ({ titleWidth, handleReload, isLoading }) => {
     );
 };
 
-const AnimeListTitle = ({ handleReload, isLoading }) => {
+const AnimeListTitle = ({handleReload, isLoading}: Props) => {
     const titleWidth = getBoxWidth() - 100;
-    // const [state, dispatch] = useContext(FolderStatusManagementContext);
-    // const [notice_state, notice_dispatch] = useContext(NoticeContext);
-    // const [folder, setFolder] = useState(null);
-    // const navigate = useNavigate();
-
-    // const NotFound = () => {
-    //     notice_dispatch({type: "update_message", payload: "フォルダの読み込みに失敗したか存在しないページにアクセスした可能性があります"});
-    //     notice_dispatch({type: "handleNoticeOpen"});
-    //     navigate('/anime-list', {replace: true});
-    // }
-
-    // useEffect(() => {
-    //     if (!state.isLoading) {
-    //         if (state.all_folders != null) {
-    //             const current_folder = state.all_folders.find((item) => String(item.id) === folderId);
-    //             setFolder(current_folder);
-    //             if (current_folder == null) {
-    //                 NotFound();
-    //             }
-    //         }
-    //     }
-    // }, [state.isLoading])
 
     return (
         <Box>
