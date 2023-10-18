@@ -8,7 +8,7 @@ import SortAnime from "@/Components/AllAnime/tool/SortAnime"
 
 interface Props {
     handleReload: () => void;
-    isLoading: () => void;
+    isLoading: boolean;
 }
 
 // コンテンツMain部分
