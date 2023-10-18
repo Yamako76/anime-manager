@@ -65,7 +65,7 @@ const EditAnime = ({name, memo, id}: AnimeProps) => {
 
     const handleSubmit = () => {
         if (value_validation(nameValue)) {
-            updateItem();
+            updateAnime();
             handleClose();
         } else {
             handleError(errorMessage);
@@ -90,7 +90,7 @@ const EditAnime = ({name, memo, id}: AnimeProps) => {
         setIsFailedSnackbar(true);
     }
 
-    const updateItem = () => {
+    const updateAnime = () => {
         const abortCtrl = new AbortController()
         const timeout = setTimeout(() => {
             abortCtrl.abort()
