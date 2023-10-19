@@ -17,7 +17,7 @@ const AllFolder = ({handleReload, folders}: Props) => {
     const BoxWidth = getBoxWidth();
     const titleWidth = BoxWidth - 90;
 
-    const PaperContent = ({folder, handleReload}) => {
+    const PaperContent = ({folder}) => {
         const contentList = [
             {
                 body: (
@@ -57,7 +57,7 @@ const AllFolder = ({handleReload, folders}: Props) => {
                 },
             },
             {
-                body: <DeleteFolder handleReload={handleReload}/>,
+                body: <DeleteFolder handleReload={handleReload} folder={folder}/>,
                 sx: {
                     width: "40px",
                     display: "flex",
@@ -97,8 +97,8 @@ const AllFolder = ({handleReload, folders}: Props) => {
         );
     };
 
-    // アイテム一覧
-    const ItemList = (handleReload) => {
+    // フォルダ一覧
+    const FolderList = () => {
         return (
             <Box
                 sx={{
@@ -113,7 +113,6 @@ const AllFolder = ({handleReload, folders}: Props) => {
                         <Grid key={index} container item>
                             <PaperContent
                                 folder={folder}
-                                handleReload={handleReload}
                             />
                         </Grid>
                     ))}
@@ -124,7 +123,7 @@ const AllFolder = ({handleReload, folders}: Props) => {
 
     return (
         <Box>
-            <ItemList handleReload={handleReload}/>
+            <FolderList handleReload={handleReload}/>
         </Box>
     );
 };
