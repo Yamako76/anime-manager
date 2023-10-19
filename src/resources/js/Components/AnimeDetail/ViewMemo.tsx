@@ -4,7 +4,11 @@ import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import React from "react";
 
-const ViewMemo = () => {
+interface Props {
+    memo: string;
+}
+
+const ViewMemo = ({ memo }: Props) => {
     return (
         <Box
             sx={{
@@ -45,7 +49,7 @@ const ViewMemo = () => {
                         }}
                     />
                     <Typography sx={{ fontSize: 18, fontWeight: "bold" }}>
-                        メモ
+                        {memo}
                     </Typography>
                 </Grid>
                 <Grid

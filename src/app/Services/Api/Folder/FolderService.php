@@ -21,11 +21,25 @@ class FolderService
         int    $userId,
         int    $currentPage,
         int    $paginateUnit = 20,
+        string $sortType = 'created_at'
     ): \Illuminate\Contracts\Pagination\LengthAwarePaginator
     {
         // ソート順を指定してクエリを構築
         $query = Folder::query()->where('user_id', '=', $userId)->where('status', '=', Folder::STATUS_ACTIVE);
-        // ページネーションを適用してアニメ一覧を取得
+        switch ($sortType) {
+            case 'created_at':
+                $query->orderBy('created_at');
+                break;
+            case 'latest':
+                $query->latest('id');
+                break;
+            case 'title':
+                $query->orderBy('name');
+                break;
+            default:
+                throw new \InvalidArgumentException(`不正なソートタイプが入力されました。[{$sortType}]`);
+        }
+        // ページネーションを適用してフォルダ一覧を取得
         $folderList = $query->paginate($paginateUnit, ['*'], 'page', $currentPage);
         return $folderList;
     }
@@ -134,6 +148,21 @@ class FolderService
         $folder->updated_at = $now;
         $folder->save();
         return $folder;
+    }
+
+    /**
+     * @param int $userId
+     * @param string $keyWord
+     * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
+     */
+    public function searchFolder(int $userId, string $keyWord): mixed
+    {
+        $folderList = Folder::query()->where('user_id', '=', $userId)
+            ->where('status', '=', Folder::STATUS_ACTIVE)
+            ->where('name', 'like', "%$keyWord%")
+            ->get();
+
+        return $folderList;
     }
 
 }

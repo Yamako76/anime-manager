@@ -17785,6 +17785,19 @@
                         /** @var \App\Services\Api\Anime\AnimeService $instance */
                         return $instance->updateAnimeRecord($anime, $name, $memo);
         }
+                    /**
+         * アニメを検索します。
+         *
+         * @param int $userId
+         * @param string $keyWord
+         * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection 
+         * @static 
+         */ 
+        public static function searchAnime($userId, $keyWord)
+        {
+                        /** @var \App\Services\Api\Anime\AnimeService $instance */
+                        return $instance->searchAnime($userId, $keyWord);
+        }
          
     }
      
@@ -17805,10 +17818,10 @@
          * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator 
          * @static 
          */ 
-        public static function getFolderListByUserId($userId, $currentPage, $paginateUnit = 20)
+        public static function getFolderListByUserId($userId, $currentPage, $paginateUnit = 20, $sortType = 'created_at')
         {
                         /** @var \App\Services\Api\Folder\FolderService $instance */
-                        return $instance->getFolderListByUserId($userId, $currentPage, $paginateUnit);
+                        return $instance->getFolderListByUserId($userId, $currentPage, $paginateUnit, $sortType);
         }
                     /**
          * フォルダのレコードを追加します。
@@ -17882,6 +17895,19 @@
         {
                         /** @var \App\Services\Api\Folder\FolderService $instance */
                         return $instance->updateFolderRecord($folder, $name);
+        }
+                    /**
+         * 
+         *
+         * @param int $userId
+         * @param string $keyWord
+         * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection 
+         * @static 
+         */ 
+        public static function searchFolder($userId, $keyWord)
+        {
+                        /** @var \App\Services\Api\Folder\FolderService $instance */
+                        return $instance->searchFolder($userId, $keyWord);
         }
          
     }
@@ -17968,7 +17994,12 @@
                         return $instance->createFolderAnimeRelationRecord($userId, $folderId, $animeId);
         }
                     /**
-         * 
+         * フォルダにアニメの追加を行います。
+         * ユーザーId と フォルダId と アニメId から、既にそのアニメがフォルダに存在しているか検索します。
+         * 存在していない場合、レコードにアニメを追加します。
+         * 存在している場合、
+         * フォルダアニメの status カラムが active の場合、そのままフォルダアニメを返します。
+         * フォルダアニメの status カラムが deleted の場合、 status を active に変更します。
          *
          * @param int $userId
          * @param int $folderID
@@ -17981,6 +18012,16 @@
         {
                         /** @var \App\Services\Api\FolderAnimeRelation\FolderAnimeRelationService $instance */
                         return $instance->createFolderAnimeRelation($userId, $folderID, $animeId);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function searchFolderAnime($userId, $keyWord)
+        {
+                        /** @var \App\Services\Api\FolderAnimeRelation\FolderAnimeRelationService $instance */
+                        return $instance->searchFolderAnime($userId, $keyWord);
         }
          
     }

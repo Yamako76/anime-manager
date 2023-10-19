@@ -4,7 +4,7 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { getBodyHeight, getBoxWidth } from "@/Components/AllAnime/tool/tool";
 
-// 検索後に該当するアイテムが存在しない場合に表示する画面
+// 検索後に該当するフォルダが存在しない場合に表示する画面
 const NotExistFolders = () => {
     const bodyHeight = getBodyHeight();
     const BoxWidth = getBoxWidth();

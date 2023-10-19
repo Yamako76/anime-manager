@@ -9,45 +9,24 @@ import { InertiaLink } from "@inertiajs/inertia-react";
 
 interface Props {
     handleReload: () => void;
+    items: any[];
 }
 
-const AllAnime = ({ handleReload }: Props) => {
+const AllAnime = ({ handleReload, items }: Props) => {
     const BoxWidth = getBoxWidth();
     const titleWidth = BoxWidth - 50;
-
-    const animeList: string[] = [
-        "銀魂",
-        "ドラえもん",
-        "ドラゴンボール",
-        "ワンピース",
-        "アンパンマン",
-        "スラムダンク",
-        "あの日見た花の名前は忘れない",
-        "てんぷる",
-        "ぐらんぶる",
-        "ニセコイ",
-        "俺ガイル",
-        "咲",
-        "リセス",
-        "転したらスライムだった件",
-        "精霊幻想紀",
-        "ぼっちざろっく",
-        "けいおん",
-        "ラブライブ",
-        "ホリミヤ",
-    ];
 
     const PaperContent = ({ item }) => {
         const contentList = [
             {
                 body: (
-                    <Tooltip title={item + "の詳細"} placement="bottom-end">
+                    <Tooltip title={item.name + "の詳細"} placement="bottom-end">
                         <Box
                             textOverflow="ellipsis"
                             overflow="hidden"
                             fontSize={20}
                             as={InertiaLink}
-                            href="/anime-list/d"
+                            href={`/anime-list/${item.id}`}
                             sx={{
                                 margin: "0px 5px",
                                 width: String(titleWidth - 10) + "px",
@@ -56,7 +35,7 @@ const AllAnime = ({ handleReload }: Props) => {
                                 "&:hover": { color: grey[900] },
                             }}
                         >
-                            {item}
+                            {item.name}
                         </Box>
                     </Tooltip>
                 ),
@@ -68,7 +47,7 @@ const AllAnime = ({ handleReload }: Props) => {
                 },
             },
             {
-                body: <DeleteAnime handleReload={handleReload} />,
+                body: <DeleteAnime handleReload={handleReload} item={item}/>,
                 sx: {
                     width: "40px",
                     display: "flex",
@@ -120,7 +99,7 @@ const AllAnime = ({ handleReload }: Props) => {
                 }}
             >
                 <Grid container direction="column" spacing={1}>
-                    {animeList.map((item, index) => (
+                    {items.map((item, index) => (
                         <Grid key={index} container item>
                             <PaperContent item={item} />
                         </Grid>

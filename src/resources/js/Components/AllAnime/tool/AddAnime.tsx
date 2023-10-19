@@ -1,21 +1,23 @@
-import React, { useContext, useState } from "react";
+import React, {useState} from "react";
 import Box from "@mui/material/Box";
 import AddAnimeButton from "@/Components/Button/AddAnimeButton";
-import { value_validation } from "../../common/tool";
-import { NoticeContext } from "../../common/Notification";
+import {value_validation} from "../../common/tool";
 import axios from "axios";
+import ApiCommunicationSuccess from "@/Components/common/ApiCommunicationSuccess";
+import ApiCommunicationFailed from "@/Components/common/ApiCommunicationFailed";
 
 interface Props {
     handleReload: () => void;
 }
 
-const AddAnime = ({ handleReload }: Props) => {
+const AddAnime = ({handleReload}: Props) => {
     const [open, setOpen] = useState(false);
     const [error, setError] = useState(false);
     const [nameValue, setNameValue] = useState("");
     const [memoValue, setMemoValue] = useState("");
     const [errorText, setErrorText] = useState("");
-    const [state, dispatch] = useContext(NoticeContext);
+    const [isSuccessSnackbar, setIsSuccessSnackbar] = useState(false);
+    const [isFailedSnackbar, setIsFailedSnackbar] = useState(false);
     const errorMessage = "1字以上200字以下で記入してください。";
 
     const handleErrorRefresh = () => {
@@ -70,11 +72,23 @@ const AddAnime = ({ handleReload }: Props) => {
         }
     };
 
-    // const ApiAfterAction = (payload) => {
-    //     dispatch({ type: "update_message", payload: payload });
-    //     dispatch({ type: "handleNoticeOpen" });
-    //     handleReload();
-    // };
+    const handleSuccessSnackbarClose = () => {
+        setIsSuccessSnackbar(false);
+        handleReload();
+    };
+
+    const handleFailedSnackbarClose = () => {
+        setIsFailedSnackbar(false);
+        handleReload();
+    };
+
+    const handleSnackbarSuccess = () => {
+        setIsSuccessSnackbar(true);
+    }
+
+    const handleSnackbarFailed = () => {
+        setIsFailedSnackbar(true);
+    }
 
     const createAnime = () => {
         const abortCtrl = new AbortController();
@@ -88,13 +102,13 @@ const AddAnime = ({ handleReload }: Props) => {
                     name: nameValue.trim(),
                     memo: memoValue,
                 },
-                { signal: abortCtrl.signal }
+                {signal: abortCtrl.signal}
             )
             .then(() => {
-                // ApiAfterAction("アニメの作成が完了しました");
+                handleSnackbarSuccess();
             })
             .catch(() => {
-                // ApiAfterAction("アニメの作成に失敗しました");
+                handleSnackbarFailed();
             })
             .finally(() => {
                 clearTimeout(timeout);
@@ -102,28 +116,38 @@ const AddAnime = ({ handleReload }: Props) => {
     };
 
     return (
-        <Box>
-            <AddAnimeButton
-                taskName="新しいアニメの作成"
-                id="newItemName"
-                label="新しいアニメ名"
-                open={open}
-                error={error}
-                errorText={errorText}
-                handleClickOpen={handleClickOpen}
-                handleChange={handleChange}
-                handleClose={handleClose}
-                handleSubmit={handleSubmit}
-                handleRefresh={handleRefresh}
-                nameValue={nameValue}
-                submitButtonName="追加"
-                memoId="newMemoName"
-                memoLabel="メモ"
-                memoValue={memoValue}
-                memoHandleChange={memoHandleChange}
-                memoHandleRefresh={memoHandleRefresh}
-            />
-        </Box>
+        <>
+            <Box>
+                <AddAnimeButton
+                    taskName="新しいアニメの作成"
+                    id="newItemName"
+                    label="新しいアニメ名"
+                    open={open}
+                    error={error}
+                    errorText={errorText}
+                    handleClickOpen={handleClickOpen}
+                    handleChange={handleChange}
+                    handleClose={handleClose}
+                    handleSubmit={handleSubmit}
+                    handleRefresh={handleRefresh}
+                    nameValue={nameValue}
+                    submitButtonName="追加"
+                    memoId="newMemoName"
+                    memoLabel="メモ"
+                    memoValue={memoValue}
+                    memoHandleChange={memoHandleChange}
+                    memoHandleRefresh={memoHandleRefresh}
+                />
+            </Box>
+            {isSuccessSnackbar && <ApiCommunicationSuccess message={"アニメの追加が完了しました"}
+                                                           handleSnackbarClose={handleSuccessSnackbarClose}
+                                                           isSnackbar={isSuccessSnackbar}
+            />}
+            {isFailedSnackbar && <ApiCommunicationFailed message={"アニメの追加に失敗しました"}
+                                                         handleSnackbarClose={handleFailedSnackbarClose}
+                                                         isSnackbar={isFailedSnackbar}
+            />}
+        </>
     );
 };
 

@@ -24,9 +24,9 @@ class FolderController extends Controller
         if ($folder->status == Folder::STATUS_DELETED) {
             return Inertia::render('Error/NotFound');
         }
-        // TODO folderのIdも
         return Inertia::render('Folder/Folder', [
-            "name" => $folder->name
+            "name" => $folder->name,
+            "id" => $folder->id,
         ]);
     }
 }

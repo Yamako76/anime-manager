@@ -10,7 +10,7 @@ interface Props {
     item: any;
 }
 
-const DeleteAnime = ({handleReload, item}: Props) => {
+const DeleteFolderAnime = ({handleReload, item}: Props) => {
     const [open, setOpen] = useState(false);
     const [isSuccessSnackbar, setIsSuccessSnackbar] = useState(false);
     const [isFailedSnackbar, setIsFailedSnackbar] = useState(false);
@@ -52,7 +52,7 @@ const DeleteAnime = ({handleReload, item}: Props) => {
             abortCtrl.abort()
         }, 10000);
         axios
-            .delete(`/api/anime-list/${item.id}`, {signal: abortCtrl.signal})
+            .delete(`/api/folders/${item.folder_id}/anime-list/${item.anime_id}`, {signal: abortCtrl.signal})
             .then(() => {
                 handleSnackbarSuccess();
             })
@@ -90,4 +90,4 @@ const DeleteAnime = ({handleReload, item}: Props) => {
     );
 };
 
-export default DeleteAnime;
+export default DeleteFolderAnime;

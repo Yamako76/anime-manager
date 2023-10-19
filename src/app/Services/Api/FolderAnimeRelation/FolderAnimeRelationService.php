@@ -8,6 +8,7 @@ use App\Models\Folder;
 use App\Models\FolderAnimeRelation;
 use App\Services\Api\FolderAnimeRelation\State\FolderAnimeRelationStateNotFoundException;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class FolderAnimeRelationService
 {
@@ -26,18 +27,25 @@ class FolderAnimeRelationService
         int    $paginateUnit = 20,
         string $sortType = 'created_at'): \Illuminate\Contracts\Pagination\LengthAwarePaginator
     {
-        $query = FolderAnimeRelation::query()->where('user_id', '=', $userId)
-            ->where('folder_id', '=', $folderId)
-            ->where('status', '=', FolderAnimeRelation::STATUS_ACTIVE);
+        $query = DB::table('folder_anime_relations')
+            ->join('animes', 'folder_anime_relations.anime_id', '=', 'animes.id')
+            ->where('folder_anime_relations.user_id', '=', $userId)
+            ->where('folder_anime_relations.folder_id', '=', $folderId)
+            ->where('folder_anime_relations.status', '=', FolderAnimeRelation::STATUS_ACTIVE)
+            ->where('animes.status', '=', Anime::STATUS_ACTIVE)
+            ->select('animes.name', 'folder_anime_relations.anime_id', 'folder_anime_relations.folder_id', 'folder_anime_relations.latest_changed_at as folder_anime_latest_changed_at');
 
         switch ($sortType) {
             case 'created_at':
-                $query->orderBy('created_at');
+                $query->orderBy('folder_anime_relations.created_at');
                 break;
             case 'latest':
-                $query->latest('id');
+                $query->latest('folder_anime_relations.id');
                 break;
             // TODO title順のソート追加
+            case 'title':
+                $query->orderBy('name');
+                break;
             default:
                 throw new \InvalidArgumentException(`不正なソートタイプが入力されました。[{$sortType}]`);
         }
@@ -158,6 +166,27 @@ class FolderAnimeRelationService
         throw new FolderAnimeRelationStateNotFoundException(
             `該当のアニメステータスが存在しません。["status": {$folderAnimeRelation->status}, "userId": {$folderAnimeRelation->user_id},"folderId": {$folderAnimeRelation->folder_id}, "animeId": {$folderAnimeRelation->anime_id}]`
         );
+    }
+
+    /**
+     * フォルダ内のアニメを検索します。
+     *
+     * @param int $userId
+     * @param string $keyWord
+     * @return \Illuminate\Support\Collection
+     */
+    public function searchFolderAnime(int $userId, string $keyWord): \Illuminate\Support\Collection
+    {
+        $animeList = DB::table('folder_anime_relations')
+            ->join('animes', 'folder_anime_relations.anime_id', '=', 'animes.id')
+            ->where('folder_anime_relations.user_id', '=', $userId)
+            ->where('folder_anime_relations.status', '=', FolderAnimeRelation::STATUS_ACTIVE)
+            ->where('animes.status', '=', Anime::STATUS_ACTIVE)
+            ->where('animes.name', 'like', "%$keyWord%")
+            ->select('animes.name', 'folder_anime_relations.anime_id', 'folder_anime_relations.folder_id', 'folder_anime_relations.latest_changed_at as folder_anime_latest_changed_at')
+            ->get();
+
+        return $animeList;
     }
 
 }

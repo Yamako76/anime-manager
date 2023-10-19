@@ -1,18 +1,20 @@
-import { Head } from "@inertiajs/react";
+import {Head} from "@inertiajs/react";
 import React from "react";
-import { Box } from "@mui/material";
+import {Box} from "@mui/material";
 import AnimeHeader from "../../Components/Header/AnimeHeader";
 import AnimeDetail from "@/Components/AnimeDetail/AnimeDetail";
 
 interface AnimeProps {
     name: string;
+    memo: string;
+    id: number;
 }
 
-const Anime = ({ name }: AnimeProps) => {
+const Anime = ({name, memo, id}: AnimeProps) => {
     return (
         <>
-            <Head title="Anime" />
-            <AnimeHeader />
+            <Head title="Anime"/>
+            <AnimeHeader/>
             <Box
                 sx={{
                     width: "100%",
@@ -22,7 +24,7 @@ const Anime = ({ name }: AnimeProps) => {
                     display: "flex",
                 }}
             >
-                <AnimeDetail name={name} />
+                <AnimeDetail name={name} memo={memo} id={id}/>
             </Box>
         </>
     );
