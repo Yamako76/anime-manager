@@ -48,7 +48,7 @@ const AllFolder = ({handleReload, folders}: Props) => {
                 },
             },
             {
-                body: <EditFolder folder={folder.name}/>,
+                body: <EditFolder folder={folder} handleReload={handleReload}/>,
                 sx: {
                     width: "40px",
                     display: "flex",
