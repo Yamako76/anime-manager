@@ -18013,6 +18013,16 @@
                         /** @var \App\Services\Api\FolderAnimeRelation\FolderAnimeRelationService $instance */
                         return $instance->createFolderAnimeRelation($userId, $folderID, $animeId);
         }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function searchFolderAnime($userId, $keyWord)
+        {
+                        /** @var \App\Services\Api\FolderAnimeRelation\FolderAnimeRelationService $instance */
+                        return $instance->searchFolderAnime($userId, $keyWord);
+        }
          
     }
      

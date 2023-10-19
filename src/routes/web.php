@@ -70,6 +70,7 @@ Route::middleware('auth')->prefix('api')->group(function () {
      */
     \Route::prefix('folders/{folderId}')->group(function () {
         \Route::get('/anime-list', [App\Http\Controllers\Api\FolderAnimeRelation\IndexController::class, 'index']);
+        \Route::get('/anime-list/search', [App\Http\Controllers\Api\FolderAnimeRelation\Search\IndexController::class, 'index']);
         \Route::post('/anime-list', [App\Http\Controllers\Api\FolderAnimeRelation\Create\IndexController::class, 'index']);
         \Route::delete('/anime-list/{animeId}', [App\Http\Controllers\Api\FolderAnimeRelation\Delete\IndexController::class, 'index']);
     });
