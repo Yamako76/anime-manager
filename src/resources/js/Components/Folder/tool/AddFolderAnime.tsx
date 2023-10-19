@@ -1,21 +1,24 @@
-import React, { useContext, useState } from "react";
+import React, {useState} from "react";
 import Box from "@mui/material/Box";
-import { value_validation } from "../../common/tool";
-import { NoticeContext } from "../../common/Notification";
+import {value_validation} from "../../common/tool";
 import axios from "axios";
 import AddButton from "@/Components/Button/AddButton";
+import ApiCommunicationSuccess from "@/Components/common/ApiCommunicationSuccess";
+import ApiCommunicationFailed from "@/Components/common/ApiCommunicationFailed";
 
 interface Props {
     folderName: string;
+    id: number;
     handleReload: () => void;
 }
 
-const AddFolderAnime = ({ handleReload, folderName }: Props) => {
+const AddFolderAnime = ({handleReload, folderName, id}: Props) => {
     const [open, setOpen] = useState(false);
     const [error, setError] = useState(false);
-    const [animeNameValue, setAnimeNameValue] = useState("");
+    const [value, setValue] = useState("");
     const [errorText, setErrorText] = useState("");
-    const [state, dispatch] = useContext(NoticeContext);
+    const [isSuccessSnackbar, setIsSuccessSnackbar] = useState(false);
+    const [isFailedSnackbar, setIsFailedSnackbar] = useState(false);
     const errorMessage = "1字以上200字以下で記入してください。";
 
     const handleErrorRefresh = () => {
@@ -29,7 +32,7 @@ const AddFolderAnime = ({ handleReload, folderName }: Props) => {
     };
 
     const handleRefresh = () => {
-        setAnimeNameValue("");
+        setValue("");
         handleErrorRefresh();
     };
 
@@ -44,7 +47,7 @@ const AddFolderAnime = ({ handleReload, folderName }: Props) => {
     };
 
     const handleChange = (e) => {
-        setAnimeNameValue(e.target.value);
+        setValue(e.target.value);
         if (value_validation(e.target.value)) {
             handleErrorRefresh();
         } else {
@@ -53,7 +56,7 @@ const AddFolderAnime = ({ handleReload, folderName }: Props) => {
     };
 
     const handleSubmit = () => {
-        if (value_validation(animeNameValue)) {
+        if (value_validation(value)) {
             createAnime();
             handleClose();
         } else {
@@ -61,11 +64,23 @@ const AddFolderAnime = ({ handleReload, folderName }: Props) => {
         }
     };
 
-    // const ApiAfterAction = (payload) => {
-    //     dispatch({ type: "update_message", payload: payload });
-    //     dispatch({ type: "handleNoticeOpen" });
-    //     handleReload();
-    // };
+    const handleSuccessSnackbarClose = () => {
+        setIsSuccessSnackbar(false);
+        handleReload();
+    };
+
+    const handleFailedSnackbarClose = () => {
+        setIsFailedSnackbar(false);
+        handleReload();
+    };
+
+    const handleSnackbarSuccess = () => {
+        setIsSuccessSnackbar(true);
+    }
+
+    const handleSnackbarFailed = () => {
+        setIsFailedSnackbar(true);
+    }
 
     const createAnime = () => {
         const abortCtrl = new AbortController();
@@ -74,19 +89,18 @@ const AddFolderAnime = ({ handleReload, folderName }: Props) => {
         }, 10000);
         axios
             .post(
-                // TODO ${folderId}に変更
-                `/api/folders/1/anime-list`,
+                `/api/folders/${id}/anime-list`,
                 {
                     folderName: folderName,
-                    animeName: animeNameValue,
+                    animeName: value,
                 },
-                { signal: abortCtrl.signal }
+                {signal: abortCtrl.signal}
             )
             .then(() => {
-                // ApiAfterAction("アニメの追加が完了しました");
+                handleSnackbarSuccess();
             })
             .catch(() => {
-                // ApiAfterAction("アニメの追加に失敗しました");
+                handleSnackbarFailed();
             })
             .finally(() => {
                 clearTimeout(timeout);
@@ -94,24 +108,34 @@ const AddFolderAnime = ({ handleReload, folderName }: Props) => {
     };
 
     return (
-        <Box>
-            <AddButton
-                button_name="アニメの追加"
-                task_name="フォルダにアニメの追加"
-                id="new_folder_name"
-                label="新しいアニメ名"
-                open={open}
-                error={error}
-                errorText={errorText}
-                handleClickOpen={handleClickOpen}
-                handleChange={handleChange}
-                handleClose={handleClose}
-                handleSubmit={handleSubmit}
-                handleRefresh={handleRefresh}
-                value={animeNameValue}
-                submit_button_name="追加"
-            />
-        </Box>
+        <>
+            <Box>
+                <AddButton
+                    button_name="アニメの追加"
+                    task_name="フォルダにアニメの追加"
+                    id="new_folder_name"
+                    label="新しいアニメ名"
+                    open={open}
+                    error={error}
+                    errorText={errorText}
+                    handleClickOpen={handleClickOpen}
+                    handleChange={handleChange}
+                    handleClose={handleClose}
+                    handleSubmit={handleSubmit}
+                    handleRefresh={handleRefresh}
+                    value={value}
+                    submit_button_name="追加"
+                />
+            </Box>
+            {isSuccessSnackbar && <ApiCommunicationSuccess message={"アニメの追加が完了しました"}
+                                                           handleSnackbarClose={handleSuccessSnackbarClose}
+                                                           isSnackbar={isSuccessSnackbar}
+            />}
+            {isFailedSnackbar && <ApiCommunicationFailed message={"アニメの追加に失敗しました"}
+                                                         handleSnackbarClose={handleFailedSnackbarClose}
+                                                         isSnackbar={isFailedSnackbar}
+            />}
+        </>
     );
 };
 
