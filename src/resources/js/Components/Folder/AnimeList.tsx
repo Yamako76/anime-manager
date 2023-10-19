@@ -1,62 +1,42 @@
 import React from "react";
-import { Box, Grid } from "@mui/material";
+import {Box, Grid} from "@mui/material";
 import Tooltip from "@mui/material/Tooltip";
 import Paper from "@mui/material/Paper";
-import { grey } from "@mui/material/colors";
-import { getBoxWidth } from "@/Components/AllAnime/tool/tool";
-import DeleteAnime from "@/Components/AllAnime/tool/DeleteAnime";
-import { InertiaLink } from "@inertiajs/inertia-react";
+import {grey} from "@mui/material/colors";
+import {getBoxWidth} from "@/Components/AllAnime/tool/tool";
+import {InertiaLink} from "@inertiajs/inertia-react";
+import DeleteFolderAnime from "@/Components/Folder/tool/DeleteFolderAnime";
 
 interface Props {
     handleReload: () => void;
+    items: any[];
+    id: number;
 }
 
-const AnimeList = ({ handleReload }: Props) => {
+const AnimeList = ({handleReload, items, id}: Props) => {
     const BoxWidth = getBoxWidth();
     const titleWidth = BoxWidth - 50;
 
-    const animeList: string[] = [
-        "銀魂",
-        "ドラえもん",
-        "ドラゴンボール",
-        "ワンピース",
-        "アンパンマン",
-        "スラムダンク",
-        "あの日見た花の名前は忘れない",
-        "てんぷる",
-        "ぐらんぶる",
-        "ニセコイ",
-        "俺ガイル",
-        "咲",
-        "リセス",
-        "転したらスライムだった件",
-        "精霊幻想紀",
-        "ぼっちざろっく",
-        "けいおん",
-        "ラブライブ",
-        "ホリミヤ",
-    ];
-
-    const PaperContent = ({ item }) => {
+    const PaperContent = ({item}) => {
         const contentList = [
             {
                 body: (
-                    <Tooltip title={item + "の詳細"} placement="bottom-end">
+                    <Tooltip title={item.name + "の詳細"} placement="bottom-end">
                         <Box
                             textOverflow="ellipsis"
                             overflow="hidden"
                             fontSize={20}
                             as={InertiaLink}
-                            href="/anime-list/d"
+                            href={`/anime-list/${item.anime_id}`}
                             sx={{
                                 margin: "0px 5px",
                                 width: String(titleWidth - 10) + "px",
                                 color: grey[900],
                                 textDecoration: "none",
-                                "&:hover": { color: grey[900] },
+                                "&:hover": {color: grey[900]},
                             }}
                         >
-                            {item}
+                            {item.name}
                         </Box>
                     </Tooltip>
                 ),
@@ -68,7 +48,7 @@ const AnimeList = ({ handleReload }: Props) => {
                 },
             },
             {
-                body: <DeleteAnime handleReload={handleReload} />,
+                body: <DeleteFolderAnime handleReload={handleReload} item={item}/>,
                 sx: {
                     width: "40px",
                     display: "flex",
@@ -119,9 +99,9 @@ const AnimeList = ({ handleReload }: Props) => {
                 }}
             >
                 <Grid container direction="column" spacing={1}>
-                    {animeList.map((item, index) => (
+                    {items.map((item, index) => (
                         <Grid key={index} container item>
-                            <PaperContent item={item} />
+                            <PaperContent item={item}/>
                         </Grid>
                     ))}
                 </Grid>
@@ -131,7 +111,7 @@ const AnimeList = ({ handleReload }: Props) => {
 
     return (
         <Box>
-            <ItemList />
+            <ItemList/>
         </Box>
     );
 };

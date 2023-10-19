@@ -5,13 +5,17 @@ import Grid from "@mui/material/Grid";
 // import SortItem from '../tool/SortItem';
 import { getBoxWidth } from "@/Components/AllAnime/tool/tool";
 import AddFolderAnime from "@/Components/Folder/tool/AddFolderAnime";
+import SortAnime from "@/Components/Folder/tool/SortAnime";
 
 interface Props {
     name: string;
+    id: number;
     handleReload: () => void;
+
+    isLoading: boolean;
 }
 
-const Main = ({ titleWidth, name, handleReload }) => {
+const Main = ({ titleWidth, name, handleReload, isLoading, id }) => {
     const contentList = [
         {
             body: (
@@ -41,7 +45,7 @@ const Main = ({ titleWidth, name, handleReload }) => {
         },
         {
             body: (
-                <AddFolderAnime handleReload={handleReload} folderName={name} />
+                <AddFolderAnime handleReload={handleReload} folderName={name} id={id}/>
             ),
             sx: {
                 width: "50px",
@@ -50,10 +54,10 @@ const Main = ({ titleWidth, name, handleReload }) => {
                 alignItems: "flex-end",
             },
         },
-        // {
-        //     "body": <SortItem/>,
-        //     "sx": {width: "50px", display: "flex", justifyContent: "center", alignItems: "flex-end"},
-        // }
+        {
+            "body": <SortAnime isLoading={isLoading}/>,
+            "sx": {width: "50px", display: "flex", justifyContent: "center", alignItems: "flex-end"},
+        }
     ];
 
     return (
@@ -72,7 +76,7 @@ const Main = ({ titleWidth, name, handleReload }) => {
     );
 };
 
-const FolderTitle = ({ name, handleReload }: Props) => {
+const FolderTitle = ({ name, handleReload, isLoading, id }: Props) => {
     const titleWidth = getBoxWidth() - 100;
 
     return (
@@ -80,7 +84,9 @@ const FolderTitle = ({ name, handleReload }: Props) => {
             <Main
                 titleWidth={titleWidth}
                 name={name}
+                id={id}
                 handleReload={handleReload}
+                isLoading={isLoading}
             />
         </Box>
     );
