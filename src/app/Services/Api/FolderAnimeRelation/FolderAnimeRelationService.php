@@ -8,6 +8,7 @@ use App\Models\Folder;
 use App\Models\FolderAnimeRelation;
 use App\Services\Api\FolderAnimeRelation\State\FolderAnimeRelationStateNotFoundException;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class FolderAnimeRelationService
 {
@@ -26,18 +27,25 @@ class FolderAnimeRelationService
         int    $paginateUnit = 20,
         string $sortType = 'created_at'): \Illuminate\Contracts\Pagination\LengthAwarePaginator
     {
-        $query = FolderAnimeRelation::query()->where('user_id', '=', $userId)
-            ->where('folder_id', '=', $folderId)
-            ->where('status', '=', FolderAnimeRelation::STATUS_ACTIVE);
+        $query = DB::table('folder_anime_relations')
+            ->join('animes', 'folder_anime_relations.anime_id', '=', 'animes.id')
+            ->where('folder_anime_relations.user_id', '=', $userId)
+            ->where('folder_anime_relations.folder_id', '=', $folderId)
+            ->where('folder_anime_relations.status', '=', 'active')
+            ->where('animes.status', '=', 'active')
+            ->select('animes.name', 'folder_anime_relations.anime_id', 'folder_anime_relations.folder_id', 'folder_anime_relations.latest_changed_at as folder_anime_latest_changed_at');
 
         switch ($sortType) {
             case 'created_at':
-                $query->orderBy('created_at');
+                $query->orderBy('folder_anime_relations.created_at');
                 break;
             case 'latest':
-                $query->latest('id');
+                $query->latest('folder_anime_relations.id');
                 break;
             // TODO title順のソート追加
+            case 'title':
+                $query->orderBy('name');
+                break;
             default:
                 throw new \InvalidArgumentException(`不正なソートタイプが入力されました。[{$sortType}]`);
         }
