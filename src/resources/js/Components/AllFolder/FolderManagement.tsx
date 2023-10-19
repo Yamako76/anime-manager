@@ -64,7 +64,7 @@ const FolderManagement = () => {
             setHasMore(false);
             setIsLoading(true);
             setFolders([]);
-            // searchFolders();
+            searchFolders();
         };
 
         const handleDialogOpen = () => {
@@ -106,28 +106,28 @@ const FolderManagement = () => {
             return res;
         }
 
-        // const searchFolders = async () => {
-        //     const abortCtrl = new AbortController()
-        //     const timeout = setTimeout(() => {
-        //         abortCtrl.abort()
-        //     }, 10000);
-        //     try {
-        //         const res = await fetch(`/api/folders/search?q=${value.trim()}`, {signal: abortCtrl.signal});
-        //         if (!res.ok) {
-        //             throw new Error(res.statusText);
-        //         }
-        //         const data = await res.json();
-        //         if (!isMounted.current) {
-        //             return;
-        //         }
-        //         setFolders(data);
-        //         setIsLoading(false);
-        //     } catch (error) {
-        //         handleDialogOpen();
-        //     } finally {
-        //         clearTimeout(timeout);
-        //     }
-        // }
+        const searchFolders = async () => {
+            const abortCtrl = new AbortController()
+            const timeout = setTimeout(() => {
+                abortCtrl.abort()
+            }, 10000);
+            try {
+                const res = await fetch(`/api/folders/search?q=${value.trim()}`, {signal: abortCtrl.signal});
+                if (!res.ok) {
+                    throw new Error(res.statusText);
+                }
+                const data = await res.json();
+                if (!isMounted.current) {
+                    return;
+                }
+                setFolders(data);
+                setIsLoading(false);
+            } catch (error) {
+                handleDialogOpen();
+            } finally {
+                clearTimeout(timeout);
+            }
+        }
 
         useEffect(() => {
             const getFolders = async () => {
