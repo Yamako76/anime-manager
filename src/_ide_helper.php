@@ -17786,18 +17786,17 @@
                         return $instance->updateAnimeRecord($anime, $name, $memo);
         }
                     /**
-         * 
+         * アニメを検索します。
          *
          * @param int $userId
          * @param string $keyWord
-         * @param bool $usePrimary
-         * @return mixed 
+         * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection 
          * @static 
          */ 
-        public static function searchAnime($userId, $keyWord, $usePrimary = false)
+        public static function searchAnime($userId, $keyWord)
         {
                         /** @var \App\Services\Api\Anime\AnimeService $instance */
-                        return $instance->searchAnime($userId, $keyWord, $usePrimary);
+                        return $instance->searchAnime($userId, $keyWord);
         }
          
     }
@@ -17819,10 +17818,10 @@
          * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator 
          * @static 
          */ 
-        public static function getFolderListByUserId($userId, $currentPage, $paginateUnit = 20)
+        public static function getFolderListByUserId($userId, $currentPage, $paginateUnit = 20, $sortType = 'created_at')
         {
                         /** @var \App\Services\Api\Folder\FolderService $instance */
-                        return $instance->getFolderListByUserId($userId, $currentPage, $paginateUnit);
+                        return $instance->getFolderListByUserId($userId, $currentPage, $paginateUnit, $sortType);
         }
                     /**
          * フォルダのレコードを追加します。
@@ -17896,6 +17895,19 @@
         {
                         /** @var \App\Services\Api\Folder\FolderService $instance */
                         return $instance->updateFolderRecord($folder, $name);
+        }
+                    /**
+         * 
+         *
+         * @param int $userId
+         * @param string $keyWord
+         * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection 
+         * @static 
+         */ 
+        public static function searchFolder($userId, $keyWord)
+        {
+                        /** @var \App\Services\Api\Folder\FolderService $instance */
+                        return $instance->searchFolder($userId, $keyWord);
         }
          
     }

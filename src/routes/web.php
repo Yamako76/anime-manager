@@ -58,6 +58,7 @@ Route::middleware('auth')->prefix('api')->group(function () {
      */
     \Route::prefix('folders')->group(function () {
         \Route::get('/', [App\Http\Controllers\Api\Folder\IndexController::class, 'index']);
+        \Route::get('/search', [App\Http\Controllers\Api\Folder\Search\IndexController::class, 'index']);
         \Route::get('/{folderId}', [App\Http\Controllers\Api\Folder\FolderController::class, 'index']);
         \Route::post('/', [App\Http\Controllers\Api\Folder\Create\IndexController::class, 'index']);
         \Route::put('/{folderId}', [App\Http\Controllers\Api\Folder\Update\IndexController::class, 'index']);

@@ -150,4 +150,19 @@ class FolderService
         return $folder;
     }
 
+    /**
+     * @param int $userId
+     * @param string $keyWord
+     * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
+     */
+    public function searchFolder(int $userId, string $keyWord): mixed
+    {
+        $folderList = Folder::query()->where('user_id', '=', $userId)
+            ->where('status', '=', Folder::STATUS_ACTIVE)
+            ->where('name', 'like', "%$keyWord%")
+            ->get();
+
+        return $folderList;
+    }
+
 }
