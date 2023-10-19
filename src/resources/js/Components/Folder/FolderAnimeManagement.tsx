@@ -69,7 +69,7 @@ const AnimeManagement = ({name, id}: FolderProps) => {
             setHasMore(false);
             setIsLoading(true);
             setItems([]);
-            // searchFolderAnimes();
+            searchFolderAnimes();
         };
 
         const handleDialogOpen = () => {
@@ -111,28 +111,28 @@ const AnimeManagement = ({name, id}: FolderProps) => {
             return res;
         }
 
-        // const searchFolderAnimes = async () => {
-        //     const abortCtrl = new AbortController()
-        //     const timeout = setTimeout(() => {
-        //         abortCtrl.abort()
-        //     }, 10000);
-        //     try {
-        //         const res = await fetch(`/api/anime-list/search?q=${value.trim()}`, {signal: abortCtrl.signal});
-        //         if (!res.ok) {
-        //             throw new Error(res.statusText);
-        //         }
-        //         const data = await res.json();
-        //         if (!isMounted.current) {
-        //             return;
-        //         }
-        //         setItems(data);
-        //         setIsLoading(false);
-        //     } catch (error) {
-        //         handleDialogOpen();
-        //     } finally {
-        //         clearTimeout(timeout);
-        //     }
-        // }
+        const searchFolderAnimes = async () => {
+            const abortCtrl = new AbortController()
+            const timeout = setTimeout(() => {
+                abortCtrl.abort()
+            }, 10000);
+            try {
+                const res = await fetch(`/api/folders/${id}/anime-list/search?q=${value.trim()}`, {signal: abortCtrl.signal});
+                if (!res.ok) {
+                    throw new Error(res.statusText);
+                }
+                const data = await res.json();
+                if (!isMounted.current) {
+                    return;
+                }
+                setItems(data);
+                setIsLoading(false);
+            } catch (error) {
+                handleDialogOpen();
+            } finally {
+                clearTimeout(timeout);
+            }
+        }
 
         useEffect(() => {
             const getAnimes = async () => {
