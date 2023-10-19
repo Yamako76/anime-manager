@@ -21,7 +21,8 @@ class IndexController extends Controller
         }
 
         try {
-            $folderList = \FolderService::getFolderListByUserId($userId, $currentPage, 20);
+            $sortType = !is_null($request->query('sort')) ? $request->query('sort') : 'created_at';
+            $folderList = \FolderService::getFolderListByUserId($userId, $currentPage, 20, $sortType);
         } catch (\Exception $e) {
             \Log::error(
                 "フォルダの一覧取得の際に、予期せぬエラーが発生しました。調査が必要です。",
