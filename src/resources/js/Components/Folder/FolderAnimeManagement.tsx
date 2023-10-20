@@ -143,7 +143,6 @@ const AnimeManagement = ({name, id}: FolderProps) => {
                         setHasMore(false);
                     }
                     setItems(data.data);
-                    console.log(data);
                     setIsLoading(false);
                 }
             }
