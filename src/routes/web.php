@@ -8,6 +8,11 @@ use Inertia\Inertia;
 \Route::get('/', [App\Http\Controllers\Top\IndexController::class, 'index']);
 
 /**
+ * ゲストログインのURLの設定
+ */
+\Route::get('/guest', [App\Http\Controllers\Auth\LoginController::class, 'guestLogin']);
+
+/**
  * 画面関連のURL設定
  */
 \Route::middleware('auth')->group(function () {
