@@ -1,8 +1,8 @@
 import React from "react";
 import Header from "@/Components/Header/Header";
 import Typography from "@mui/material/Typography";
-import { Box, Button } from "@mui/material";
-import { InertiaLink } from "@inertiajs/inertia-react";
+import {Box, Button} from "@mui/material";
+import {InertiaLink} from "@inertiajs/inertia-react";
 
 const Index = () => {
     return (
@@ -18,7 +18,7 @@ const Index = () => {
                 paddingBottom: "65px",
             }}
         >
-            <Header />
+            <Header/>
             <Box
                 sx={{
                     flexGrow: 1,
@@ -84,21 +84,23 @@ const Index = () => {
                             ログイン
                         </Button>
                     </Box>
-                    <Button
-                        sx={{
-                            width: "150px",
-                            borderRadius: "25px",
-                            backgroundColor: "#ffc107",
-                            color: "black",
-                            fontSize: "16px",
-                            boxShadow: "none",
-                            "&:hover": {
-                                backgroundColor: "#ffeb3b",
-                            },
-                        }}
-                    >
-                        ゲストログイン
-                    </Button>
+                    <Box as={InertiaLink} href="/guest">
+                        <Button
+                            sx={{
+                                width: "150px",
+                                borderRadius: "25px",
+                                backgroundColor: "#ffc107",
+                                color: "black",
+                                fontSize: "16px",
+                                boxShadow: "none",
+                                "&:hover": {
+                                    backgroundColor: "#ffeb3b",
+                                },
+                            }}
+                        >
+                            ゲストログイン
+                        </Button>
+                    </Box>
                 </Box>
             </Box>
         </Box>
