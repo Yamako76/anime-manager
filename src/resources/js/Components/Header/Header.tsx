@@ -5,6 +5,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import MenuIcon from '@mui/icons-material/Menu';
 import {createTheme, ThemeProvider, useMediaQuery} from "@mui/material";
 import {useState} from "react";
 import {InertiaLink} from "@inertiajs/inertia-react";
@@ -62,7 +63,7 @@ const Header = () => {
                                         },
                                     }}
                                 >
-                                    メニュー
+                                    <MenuIcon />
                                 </Button>
                                 <Menu
                                     anchorEl={menuAnchor}
