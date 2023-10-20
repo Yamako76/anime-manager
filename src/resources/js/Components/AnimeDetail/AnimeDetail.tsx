@@ -119,6 +119,10 @@ const AnimeDetail = ({name, memo, id}: AnimeProps) => {
         return res.data.items[0].id.videoId;
     };
 
+    const goBack = () => {
+        window.history.back();
+    };
+
     const ViewItem = () => {
         return (
             <Box
@@ -144,8 +148,6 @@ const AnimeDetail = ({name, memo, id}: AnimeProps) => {
                 >
                     <Button
                         size={"small"}
-                        // component={Link}
-                        // to={"/app/home/folders/" + folderId + "/items/"}
                         variant="text"
                         startIcon={<ArrowBackIcon/>}
                         sx={{
@@ -153,6 +155,7 @@ const AnimeDetail = ({name, memo, id}: AnimeProps) => {
                             "&:hover": {color: grey[900]},
                         }}
                         color="inherit"
+                        onClick={goBack}
                     >
                         戻る
                     </Button>
