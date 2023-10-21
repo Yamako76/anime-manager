@@ -10,7 +10,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
-class test extends Seeder
+class sample extends Seeder
 {
     /**
      * Seed the application's database.
@@ -19,12 +19,7 @@ class test extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
         $user = new User();
         $user->name = 'test';
         $user->email = 'test@example.com';
