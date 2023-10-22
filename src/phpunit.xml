@@ -14,6 +14,12 @@
         <testsuite name="Anime">
             <directory suffix="Test.php">./tests/app/Services/Api/Anime</directory>
         </testsuite>
+        <testsuite name="Folder">
+            <directory suffix="Test.php">./tests/app/Services/Api/Folder</directory>
+        </testsuite>
+        <testsuite name="FolderAnimeRelation">
+            <directory suffix="Test.php">./tests/app/Services/Api/FolderAnimeRelation</directory>
+        </testsuite>
     </testsuites>
     <coverage processUncoveredFiles="true">
         <include>
