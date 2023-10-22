@@ -113,8 +113,14 @@ class AnimeServiceTest extends TestCase
 
     public function test_failure_getAnimeListByUserId__invalid_arguments()
     {
-        $this->assertTrue(true);
+        $this->expectException(\InvalidArgumentException::class);
 
+        // 無効なソートタイプを使用して関数を呼び出す
+        $userId = 1;
+        $currentPage = 1;
+        $paginateUnit = 20;
+        $sortType = 'invalid_sort_type';
+        \AnimeService::getAnimeListByUserId($userId, $currentPage, $paginateUnit, $sortType);
     }
 
     public function test_success_createAnimeRecord()
