@@ -315,10 +315,32 @@ class FolderAnimeRelationServiceTest extends TestCase
         $this->refreshApplication();
     }
 
-    // 新しいアニメを作成する際にそのアニメが存在する場合のテスト
+    // フォルダに新しいアニメを追加する際にそのアニメが存在する場合のテスト
     public function test_success_createFolderAnimeRelation__status_active()
     {
-        $this->assertTrue(true);
+        $userId = 1;
+        $folderId = 1;
+        $animeId = 1;
+
+        $now = Carbon::now();
+        $folderAnimeRelation = new FolderAnimeRelation();
+        $folderAnimeRelation->user_id = $userId;
+        $folderAnimeRelation->folder_id = $folderId;
+        $folderAnimeRelation->anime_id = $animeId;
+        $folderAnimeRelation->status = FolderAnimeRelation::STATUS_ACTIVE;
+        $folderAnimeRelation->latest_changed_at = $now;
+        $folderAnimeRelation->created_at = $now;
+        $folderAnimeRelation->save();
+
+        $folderAnimeRelation = \FolderAnimeRelationService::createFolderAnimeRelation($userId, $folderId, $animeId);
+        $this->assertInstanceOf(FolderAnimeRelation::class, $folderAnimeRelation);
+        $this->assertEquals($userId, $folderAnimeRelation->user_id);
+        $this->assertEquals(1, $folderAnimeRelation->id);
+        $this->assertEquals($folderId, $folderAnimeRelation->folder_id);
+        $this->assertEquals($animeId, $folderAnimeRelation->anime_id);
+        $this->assertEquals(FolderAnimeRelation::STATUS_ACTIVE, $folderAnimeRelation->status);
+
+        $this->refreshApplication();
     }
 
     // 新しいアニメを作成する際にそのアニメが削除されていた場合のテスト
