@@ -206,10 +206,29 @@ class FolderAnimeRelationServiceTest extends TestCase
         $this->assertNull($result);
     }
 
-    // アニメを name, userId から取得するテスト
+    // userId と animeName からアニメを取得するテスト
     public function test_success_getAnimeByUserIdAndAnimeName()
     {
-        $this->assertTrue(true);
+        $userId = 1;
+        $name = "アニメ1";
+
+        $now = Carbon::now();
+        $anime = new Anime();
+        $anime->user_id = $userId;
+        $anime->name = $name;
+        $anime->memo = "test";
+        $anime->status = Anime::STATUS_ACTIVE;
+        $anime->latest_changed_at = $now;
+        $anime->created_at = $now;
+        $anime->updated_at = $now;
+        $anime->save();
+
+        $retrievedAnime = \FolderAnimeRelationService::getAnimeByUserIdAndAnimeName($userId, $name);
+        $this->assertInstanceOf(Anime::class, $retrievedAnime);
+        $this->assertEquals($userId, $retrievedAnime->user_id);
+        $this->assertEquals($name, $retrievedAnime->name);
+
+        $this->refreshApplication();
     }
 
     // アニメを name, userId から取得する際にアニメが存在しない場合のテスト
