@@ -399,16 +399,92 @@ class FolderAnimeRelationServiceTest extends TestCase
     }
 
 
-    // アニメを検索する際にそのキーワードのアニメが存在する場合のテスト
+    // フォルダ内でアニメを検索する際にそのキーワードのアニメが存在する場合のテスト
     public function test_success_searchFolderAnime()
     {
-        $this->assertTrue(true);
+        $userId = 1;
+        $folderId = 1;
+        $keyWord = "1";
+
+        $anime1 = new Anime();
+        $anime1->user_id = 1;
+        $anime1->name = "アニメ1";
+        $anime1->memo = "メモ1";
+        $anime1->status = Anime::STATUS_ACTIVE;
+        $anime1->latest_changed_at = now();
+        $anime1->created_at = now();
+        $anime1->updated_at = now();
+        $anime1->save();
+
+        $anime2 = new Anime();
+        $anime2->user_id = 1;
+        $anime2->name = "アニメ2";
+        $anime2->memo = "メモ2";
+        $anime2->status = Anime::STATUS_ACTIVE;
+        $anime2->latest_changed_at = now();
+        $anime2->created_at = now();
+        $anime2->updated_at = now();
+        $anime2->save();
+
+        $folderAnimeRelation1 = new FolderAnimeRelation();
+        $folderAnimeRelation1->user_id = $userId;
+        $folderAnimeRelation1->folder_id = $folderId;
+        $folderAnimeRelation1->anime_id = $anime1->id;
+        $folderAnimeRelation1->status = FolderAnimeRelation::STATUS_ACTIVE;
+        $folderAnimeRelation1->latest_changed_at = now();
+        $folderAnimeRelation1->created_at = now();
+        $folderAnimeRelation1->save();
+
+        $folderAnimeRelation2 = new FolderAnimeRelation();
+        $folderAnimeRelation2->user_id = $userId;
+        $folderAnimeRelation2->folder_id = $folderId;
+        $folderAnimeRelation2->anime_id = $anime2->id;
+        $folderAnimeRelation2->status = FolderAnimeRelation::STATUS_ACTIVE;
+        $folderAnimeRelation2->latest_changed_at = now();
+        $folderAnimeRelation2->created_at = now();
+        $folderAnimeRelation2->save();
+
+
+        $animeList = \FolderAnimeRelationService::searchFolderAnime($userId, $folderId, $keyWord);
+
+        $this->assertCount(1, $animeList);
+        $this->assertEquals($anime1->name, $animeList[0]->name);
+
+        $this->refreshApplication();
     }
 
-    // アニメを検索する際にそのキーワードのアニメが存在しない場合のテスト
+    // フォルダ内でアニメを検索する際にそのキーワードのアニメが存在しない場合のテスト
     public function test_success_searchFolderAnime_no_match()
     {
-        $this->assertTrue(true);
+        $userId = 1;
+        $folderId = 1;
+        $keyWord = "anime";
+
+        $anime = new Anime();
+        $anime->user_id = 1;
+        $anime->name = "アニメ1";
+        $anime->memo = "メモ1";
+        $anime->status = Anime::STATUS_ACTIVE;
+        $anime->latest_changed_at = now();
+        $anime->created_at = now();
+        $anime->updated_at = now();
+        $anime->save();
+
+        $folderAnimeRelation = new FolderAnimeRelation();
+        $folderAnimeRelation->user_id = $userId;
+        $folderAnimeRelation->folder_id = $folderId;
+        $folderAnimeRelation->anime_id = $anime->id;
+        $folderAnimeRelation->status = FolderAnimeRelation::STATUS_ACTIVE;
+        $folderAnimeRelation->latest_changed_at = now();
+        $folderAnimeRelation->created_at = now();
+        $folderAnimeRelation->save();
+
+        $animeList = \FolderAnimeRelationService::searchFolderAnime($userId, $folderId, $keyWord);
+
+        $this->assertInstanceOf(\Illuminate\Support\Collection::class, $animeList);
+        $this->assertCount(0, $animeList);
+
+        $this->refreshApplication();
     }
 }
 
