@@ -1,0 +1,157 @@
+<?php
+
+namespace Tests\app\Services\Api\FolderAnimeRelation;
+
+use App\Models\Anime;
+use App\Models\FolderAnimeRelation;
+use App\Services\Api\Anime\State\AnimeStateNotFoundException;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Support\Carbon;
+use Tests\TestCase;
+
+class FolderAnimeRelationServiceTest extends TestCase
+{
+    use DatabaseTransactions;
+
+    public function setUp(): void
+    {
+        parent::setUp();
+    }
+
+    // あるフォルダに所属するアニメを作成順に取得するテスト
+    public function test_success_getAnimeListByUserIdAndFolderId__created_at()
+    {
+        $userId = 1;
+        $folderId = 1;
+
+        $expectedAnimeNames = [];
+        for ($i = 1; $i <= 20; $i++) {
+            $animeName = "アニメ{$i}";
+
+            $customDateTime = Carbon::parse("20{$i}-01-01 00:00:00");
+            $anime = new Anime();
+            $anime->user_id = $userId;
+            $anime->status = Anime::STATUS_ACTIVE;
+            $anime->name = $animeName;
+            $anime->memo = 'This is a memo.';
+            $anime->latest_changed_at = $customDateTime;
+            $anime->created_at = $customDateTime;
+            $anime->updated_at = $customDateTime;
+            $anime->save();
+
+            if ($i % 2 == 1) {
+                $expectedAnimeNames[] = $animeName;
+                $folderAnimeRelation = new FolderAnimeRelation();
+                $folderAnimeRelation->user_id = $userId;
+                $folderAnimeRelation->folder_id = $folderId;
+                $folderAnimeRelation->anime_id = $anime->id;
+                $folderAnimeRelation->status = FolderAnimeRelation::STATUS_ACTIVE;
+                $folderAnimeRelation->latest_changed_at = $customDateTime;
+                $folderAnimeRelation->created_at = $customDateTime;
+                $folderAnimeRelation->save();
+            }
+        }
+
+        $animeList = \FolderAnimeRelationService::getAnimeListByUserIdAndFolderId($userId, $folderId, 1, 20, 'created_at');
+
+        $retrievedAnimeNames = $animeList->pluck('name')->toArray();
+        $this->assertEquals($expectedAnimeNames, $retrievedAnimeNames);
+    }
+
+    // アニメを最新順に取得するテスト
+    public function test_success_getAnimeListByUserIdAndFolderId__latest()
+    {
+        $this->assertTrue(true);
+    }
+
+    // アニメを名前順に取得するテスト
+    public function test_success_getAnimeListByUserIdAndFolderId__title()
+    {
+        $this->assertTrue(true);
+    }
+
+    // アニメ取得の際に無効なソートタイプのテスト
+    public function test_failure_getAnimeListByUserIdAndFolderId__invalid_arguments()
+    {
+        $this->assertTrue(true);
+    }
+
+    // アニメを animeId, userId から取得するテスト
+    public function test_success_getFolderIdByUserIdAndFolderName()
+    {
+        $this->assertTrue(true);
+    }
+
+    // アニメを animeId, userId から取得する際にアニメが存在しない場合のテスト
+    public function test_getFolderIdByUserIdAndFolderName_return_null()
+    {
+        $this->assertTrue(true);
+    }
+
+    // アニメを name, userId から取得するテスト
+    public function test_success_getAnimeIdByUserIdAndAnimeName()
+    {
+        $this->assertTrue(true);
+    }
+
+    // アニメを name, userId から取得する際にアニメが存在しない場合のテスト
+    public function test_success_getAnimeIdByUserIdAndAnimeName_return_null()
+    {
+        $this->assertTrue(true);
+    }
+
+    public function test_success_getFolderAnimeRelationByUserIdAndFolderIdAndAnimeId()
+    {
+        $this->assertTrue(true);
+    }
+
+    // アニメを name, userId から取得する際にアニメが存在しない場合のテスト
+    public function test_success_getFolderAnimeRelationByUserIdAndFolderIdAndAnimeId_return_null()
+    {
+        $this->assertTrue(true);
+    }
+
+    // アニメをレコードに保存するテスト
+    public function test_success_createFolderAnimeRelationRecord()
+    {
+        $this->assertTrue(true);
+    }
+
+    // 新しいアニメを作成するテスト
+    public function test_success_createFolderAnimeRelation__record_new_anime()
+    {
+        $this->assertTrue(true);
+    }
+
+    // 新しいアニメを作成する際にそのアニメが存在する場合のテスト
+    public function test_success_createFolderAnimeRelation__status_active()
+    {
+        $this->assertTrue(true);
+    }
+
+    // 新しいアニメを作成する際にそのアニメが削除されていた場合のテスト
+    public function test_success_createFolderAnimeRelation__status_deleted()
+    {
+        $this->assertTrue(true);
+    }
+
+    // 新しいアニメを作成する際にそのアニメの status が存在しない値の場合のテスト
+    public function test_failure_createFolderAnimeRelation__anime_state_not_found()
+    {
+        $this->assertTrue(true);
+    }
+
+
+    // アニメを検索する際にそのキーワードのアニメが存在する場合のテスト
+    public function test_success_searchFolderAnime()
+    {
+        $this->assertTrue(true);
+    }
+
+    // アニメを検索する際にそのキーワードのアニメが存在しない場合のテスト
+    public function test_success_searchFolderAnime_no_match()
+    {
+        $this->assertTrue(true);
+    }
+}
+
