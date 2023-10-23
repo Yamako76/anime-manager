@@ -23,18 +23,18 @@ class FolderServiceTest extends TestCase
         $expectedFolderNames = [];
 
         for ($i = 1; $i <= 20; $i++) {
-            $animeName = "フォルダ{$i}";
-            $expectedFolderNames[] = $animeName;
+            $folderName = "フォルダ{$i}";
+            $expectedFolderNames[] = $folderName;
 
-            $anime = new Folder();
+            $folder = new Folder();
             $customDateTime = Carbon::parse("20{$i}-01-01 00:00:00");
-            $anime->user_id = $userId;
-            $anime->status = Folder::STATUS_ACTIVE;
-            $anime->name = "フォルダ{$i}";
-            $anime->latest_changed_at = $customDateTime;
-            $anime->created_at = $customDateTime;
-            $anime->updated_at = $customDateTime;
-            $anime->save();
+            $folder->user_id = $userId;
+            $folder->status = Folder::STATUS_ACTIVE;
+            $folder->name = "フォルダ{$i}";
+            $folder->latest_changed_at = $customDateTime;
+            $folder->created_at = $customDateTime;
+            $folder->updated_at = $customDateTime;
+            $folder->save();
         }
 
         $currentPage = 1;
@@ -150,14 +150,14 @@ class FolderServiceTest extends TestCase
         $folderId = 1;
 
         $now = Carbon::now();
-        $anime = new Folder();
-        $anime->user_id = $userId;
-        $anime->name = "Folder";
-        $anime->status = Folder::STATUS_ACTIVE;
-        $anime->latest_changed_at = $now;
-        $anime->created_at = $now;
-        $anime->updated_at = $now;
-        $anime->save();
+        $folder = new Folder();
+        $folder->user_id = $userId;
+        $folder->name = "Folder";
+        $folder->status = Folder::STATUS_ACTIVE;
+        $folder->latest_changed_at = $now;
+        $folder->created_at = $now;
+        $folder->updated_at = $now;
+        $folder->save();
 
         $retrievedFolder = \FolderService::getFolderByIdAndUserId($folderId, $userId);
         $this->assertInstanceOf(Folder::class, $retrievedFolder);
@@ -214,7 +214,17 @@ class FolderServiceTest extends TestCase
     // 新しいフォルダを作成するテスト
     public function test_success_createFolder__record_new_folder()
     {
-        $this->assertTrue(true);
+        $userId = 1;
+        $name = "フォルダ1";
+
+        $folder = \FolderService::createFolder($userId, $name);
+
+        $this->assertInstanceOf(Folder::class, $folder);
+        $this->assertEquals($userId, $folder->user_id);
+        $this->assertEquals(1, $folder->id);
+        $this->assertEquals($name, $folder->name);
+
+        $this->refreshApplication();
     }
 
     // 新しいフォルダを作成する際にそのフォルダが存在する場合のテスト
