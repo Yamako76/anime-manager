@@ -230,7 +230,28 @@ class FolderServiceTest extends TestCase
     // 新しいフォルダを作成する際にそのフォルダが存在する場合のテスト
     public function test_success_createFolder__status_active()
     {
-        $this->assertTrue(true);
+        $userId = 1;
+        $name = "アニメ1";
+
+        $now = Carbon::now();
+        $folder = new Folder();
+        $folder->user_id = $userId;
+        $folder->name = $name;
+        $folder->status = Folder::STATUS_ACTIVE;
+        $folder->latest_changed_at = $now;
+        $folder->created_at = $now;
+        $folder->updated_at = $now;
+        $folder->save();
+
+        $folder = \FolderService::createFolder($userId, $name);
+
+        $this->assertInstanceOf(Folder::class, $folder);
+        $this->assertEquals($userId, $folder->user_id);
+        $this->assertEquals(1, $folder->id);
+        $this->assertEquals($name, $folder->name);
+        $this->assertEquals(Folder::STATUS_ACTIVE, $folder->status);
+
+        $this->refreshApplication();
     }
 
     // 新しいフォルダを作成する際にそのフォルダが削除されていた場合のテスト
