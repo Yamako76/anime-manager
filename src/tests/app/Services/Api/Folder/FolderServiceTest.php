@@ -146,7 +146,25 @@ class FolderServiceTest extends TestCase
     // フォルダを folderId, userId から取得するテスト
     public function test_success_getFolderByIdAndUserId()
     {
-        $this->assertTrue(true);
+        $userId = 1;
+        $folderId = 1;
+
+        $now = Carbon::now();
+        $anime = new Folder();
+        $anime->user_id = $userId;
+        $anime->name = "Folder";
+        $anime->status = Folder::STATUS_ACTIVE;
+        $anime->latest_changed_at = $now;
+        $anime->created_at = $now;
+        $anime->updated_at = $now;
+        $anime->save();
+
+        $retrievedFolder = \FolderService::getFolderByIdAndUserId($folderId, $userId);
+        $this->assertInstanceOf(Folder::class, $retrievedFolder);
+        $this->assertEquals($userId, $retrievedFolder->user_id);
+        $this->assertEquals($folderId, $retrievedFolder->id);
+
+        $this->refreshApplication();
     }
 
     // フォルダを folderId, userId から取得する際にフォルダが存在しない場合のテスト
