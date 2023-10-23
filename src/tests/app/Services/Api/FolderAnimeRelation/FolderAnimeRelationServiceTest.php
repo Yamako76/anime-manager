@@ -5,6 +5,7 @@ namespace Tests\app\Services\Api\FolderAnimeRelation;
 use App\Models\Anime;
 use App\Models\Folder;
 use App\Models\FolderAnimeRelation;
+use App\Services\Api\FolderAnimeRelation\State\FolderAnimeRelationStateNotFoundException;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Carbon;
 use Tests\TestCase;
@@ -373,10 +374,28 @@ class FolderAnimeRelationServiceTest extends TestCase
         $this->refreshApplication();
     }
 
-    // 新しいアニメを作成する際にそのアニメの status が存在しない値の場合のテスト
+    // フォルダに新しいアニメを作成する際にそのアニメの status が存在しない値の場合のテスト
     public function test_failure_createFolderAnimeRelation__anime_state_not_found()
     {
-        $this->assertTrue(true);
+        $userId = 1;
+        $folderId = 1;
+        $animeId = 1;
+
+        $now = Carbon::now();
+        $folderAnimeRelation = new FolderAnimeRelation();
+        $folderAnimeRelation->user_id = $userId;
+        $folderAnimeRelation->folder_id = $folderId;
+        $folderAnimeRelation->anime_id = $animeId;
+        $folderAnimeRelation->status = "anime";
+        $folderAnimeRelation->latest_changed_at = $now;
+        $folderAnimeRelation->created_at = $now;
+        $folderAnimeRelation->save();
+
+        $this->expectException(FolderAnimeRelationStateNotFoundException::class);
+
+        \FolderAnimeRelationService::createFolderAnimeRelation($userId, $folderId, $animeId);
+
+        $this->refreshApplication();
     }
 
 
