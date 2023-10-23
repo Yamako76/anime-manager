@@ -63,7 +63,7 @@ class FolderAnimeRelationService
      * @param bool $usePrimary
      * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|object|null
      */
-    public function getFolderIdByUserIdAndFolderName(int $userId, string $folderName, bool $usePrimary = false): mixed
+    public function getFolderByUserIdAndFolderName(int $userId, string $folderName, bool $usePrimary = false): mixed
     {
         $query = $usePrimary ? Folder::onWriteConnection() : Folder::query();
         $fodler = $query
@@ -81,7 +81,7 @@ class FolderAnimeRelationService
      * @param bool $usePrimary
      * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|object|null
      */
-    public function getAnimeIdByUserIdAndAnimeName(int $userId, string $animeName, bool $usePrimary = false): mixed
+    public function getAnimeByUserIdAndAnimeName(int $userId, string $animeName, bool $usePrimary = false): mixed
     {
         $query = $usePrimary ? Anime::onWriteConnection() : Anime::query();
         $anime = $query

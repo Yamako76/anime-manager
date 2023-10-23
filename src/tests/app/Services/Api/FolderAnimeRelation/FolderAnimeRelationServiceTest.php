@@ -3,6 +3,7 @@
 namespace Tests\app\Services\Api\FolderAnimeRelation;
 
 use App\Models\Anime;
+use App\Models\Folder;
 use App\Models\FolderAnimeRelation;
 use App\Services\Api\Anime\State\AnimeStateNotFoundException;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -171,26 +172,44 @@ class FolderAnimeRelationServiceTest extends TestCase
 
     }
 
-    // アニメを animeId, userId から取得するテスト
-    public function test_success_getFolderIdByUserIdAndFolderName()
+    // userIdとfolderNameからフォルダを取得するテスト
+    public function test_success_getFolderByUserIdAndFolderName()
     {
-        $this->assertTrue(true);
+        $userId = 1;
+        $name = "フォルダ1";
+
+        $now = Carbon::now();
+        $folder = new Folder();
+        $folder->user_id = $userId;
+        $folder->name = $name;
+        $folder->status = Folder::STATUS_ACTIVE;
+        $folder->latest_changed_at = $now;
+        $folder->created_at = $now;
+        $folder->updated_at = $now;
+        $folder->save();
+
+        $retrievedFolder = \FolderAnimeRelationService::getFolderByUserIdAndFolderName($userId, $name);
+        $this->assertInstanceOf(Folder::class, $retrievedFolder);
+        $this->assertEquals($userId, $retrievedFolder->user_id);
+        $this->assertEquals($name, $retrievedFolder->name);
+
+        $this->refreshApplication();
     }
 
     // アニメを animeId, userId から取得する際にアニメが存在しない場合のテスト
-    public function test_getFolderIdByUserIdAndFolderName_return_null()
+    public function test_getFolderByUserIdAndFolderName_return_null()
     {
         $this->assertTrue(true);
     }
 
     // アニメを name, userId から取得するテスト
-    public function test_success_getAnimeIdByUserIdAndAnimeName()
+    public function test_success_getAnimeByUserIdAndAnimeName()
     {
         $this->assertTrue(true);
     }
 
     // アニメを name, userId から取得する際にアニメが存在しない場合のテスト
-    public function test_success_getAnimeIdByUserIdAndAnimeName_return_null()
+    public function test_success_getAnimeByUserIdAndAnimeName_return_null()
     {
         $this->assertTrue(true);
     }

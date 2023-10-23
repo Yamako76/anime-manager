@@ -22,14 +22,14 @@ class IndexController extends Controller
         $userId = Auth::id();
 
         /** @var Folder $folder */
-        $folder = \FolderAnimeRelationService::getFolderIdByUserIdAndFolderName($userId, $request->folderName);
+        $folder = \FolderAnimeRelationService::getFolderByUserIdAndFolderName($userId, $request->folderName);
         if (is_null($folder)) {
             return response()->json([], 400);
         }
         $folderId = $folder->id;
 
         /** @var Anime $anime */
-        $anime = \FolderAnimeRelationService::getAnimeIdByUserIdAndAnimeName($userId, $request->animeName);
+        $anime = \FolderAnimeRelationService::getAnimeByUserIdAndAnimeName($userId, $request->animeName);
         if (is_null($anime)) {
             return response()->json([], 400);
         }
