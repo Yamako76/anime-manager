@@ -127,7 +127,20 @@ class FolderServiceTest extends TestCase
     // フォルダをレコードに保存するテスト
     public function test_success_createFolderRecord()
     {
-        $this->assertTrue(true);
+        $userId = 1;
+        $name = "Folder";
+
+        $folder = \FolderService::createFolderRecord($userId, $name);
+
+        $this->assertInstanceOf(Folder::class, $folder);
+        $this->assertEquals($userId, $folder->user_id);
+        $this->assertEquals($name, $folder->name);
+        $this->assertEquals(Folder::STATUS_ACTIVE, $folder->status);
+        $this->assertNotNull($folder->latest_changed_at);
+        $this->assertNotNull($folder->created_at);
+        $this->assertNotNull($folder->updated_at);
+
+        $this->refreshApplication();
     }
 
     // フォルダを folderId, userId から取得するテスト
