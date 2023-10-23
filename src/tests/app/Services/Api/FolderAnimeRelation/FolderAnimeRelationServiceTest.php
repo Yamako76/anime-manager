@@ -240,15 +240,40 @@ class FolderAnimeRelationServiceTest extends TestCase
         $this->assertNull($result);
     }
 
+    // // userId と folderId ,animeId からアニメを取得するテスト
     public function test_success_getFolderAnimeRelationByUserIdAndFolderIdAndAnimeId()
     {
-        $this->assertTrue(true);
+        $userId = 1;
+        $folderId = 1;
+        $animeId = 1;
+        $folderAnimeRelation = new FolderAnimeRelation();
+        $folderAnimeRelation->user_id = $userId;
+        $folderAnimeRelation->folder_id = $folderId;
+        $folderAnimeRelation->anime_id = $animeId;
+        $folderAnimeRelation->status = FolderAnimeRelation::STATUS_ACTIVE;
+        $folderAnimeRelation->latest_changed_at = now();
+        $folderAnimeRelation->created_at = now();
+        $folderAnimeRelation->save();
+
+        $retrievedRelation = \FolderAnimeRelationService::getFolderAnimeRelationByUserIdAndFolderIdAndAnimeId($userId, $folderId, $animeId);
+
+        $this->assertInstanceOf(FolderAnimeRelation::class, $retrievedRelation);
+        $this->assertEquals($userId, $retrievedRelation->user_id);
+        $this->assertEquals($folderId, $retrievedRelation->folder_id);
+        $this->assertEquals($animeId, $retrievedRelation->anime_id);
+
+        $this->refreshApplication();
     }
 
-    // アニメを name, userId から取得する際にアニメが存在しない場合のテスト
+    // userId と folderId ,animeId からアニメを取得する際にアニメが存在しない場合のテスト
     public function test_success_getFolderAnimeRelationByUserIdAndFolderIdAndAnimeId_return_null()
     {
-        $this->assertTrue(true);
+        $userId = 999;
+        $folderId = 999;
+        $animeId = 999;
+
+        $result = \FolderAnimeRelationService::getFolderAnimeRelationByUserIdAndFolderIdAndAnimeId($userId, $folderId, $animeId);
+        $this->assertNull($result);
     }
 
     // アニメをレコードに保存するテスト
