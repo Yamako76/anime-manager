@@ -170,7 +170,11 @@ class FolderServiceTest extends TestCase
     // フォルダを folderId, userId から取得する際にフォルダが存在しない場合のテスト
     public function test_getFolderByIdAndUserId_return_null()
     {
-        $this->assertTrue(true);
+        $folderId = 999;
+        $userId = 1;
+
+        $result = \FolderService::getFolderByIdAndUserId($folderId, $userId);
+        $this->assertNull($result);
     }
 
     // フォルダを name, userId から取得するテスト
