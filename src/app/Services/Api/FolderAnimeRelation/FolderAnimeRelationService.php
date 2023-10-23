@@ -42,7 +42,6 @@ class FolderAnimeRelationService
             case 'latest':
                 $query->latest('folder_anime_relations.id');
                 break;
-            // TODO title順のソート追加
             case 'title':
                 $query->orderBy('name');
                 break;
