@@ -300,7 +300,19 @@ class FolderAnimeRelationServiceTest extends TestCase
     // フォルダに新しいアニメを追加するテスト
     public function test_success_createFolderAnimeRelation__record_new_anime()
     {
-        $this->assertTrue(true);
+        $userId = 1;
+        $folderId = 1;
+        $animeId = 1;
+
+        $folderAnimeRelation = \FolderAnimeRelationService::createFolderAnimeRelation($userId, $folderId, $animeId);
+
+        $this->assertInstanceOf(FolderAnimeRelation::class, $folderAnimeRelation);
+        $this->assertEquals($userId, $folderAnimeRelation->user_id);
+        $this->assertEquals(1, $folderAnimeRelation->id);
+        $this->assertEquals($folderId, $folderAnimeRelation->folder_id);
+        $this->assertEquals($animeId, $folderAnimeRelation->anime_id);
+
+        $this->refreshApplication();
     }
 
     // 新しいアニメを作成する際にそのアニメが存在する場合のテスト
