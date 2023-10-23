@@ -337,7 +337,33 @@ class FolderServiceTest extends TestCase
     // フォルダを検索する際にそのキーワードのフォルダが存在する場合のテスト
     public function test_success_searchFolder()
     {
-        $this->assertTrue(true);
+        $userId = 1;
+        $keyWord = "1";
+
+        $folder1 = new Folder();
+        $folder1->user_id = 1;
+        $folder1->name = "フォルダ1";
+        $folder1->status = Folder::STATUS_ACTIVE;
+        $folder1->latest_changed_at = Carbon::now();
+        $folder1->created_at = Carbon::now();
+        $folder1->updated_at = Carbon::now();
+        $folder1->save();
+
+        $folder2 = new Folder();
+        $folder2->user_id = 1;
+        $folder2->name = "フォルダ2";
+        $folder2->status = Folder::STATUS_ACTIVE;
+        $folder2->latest_changed_at = Carbon::now();
+        $folder2->created_at = Carbon::now();
+        $folder2->updated_at = Carbon::now();
+        $folder2->save();
+
+        $folderList = \FolderService::searchFolder($userId, $keyWord);
+
+        $this->assertCount(1, $folderList);
+        $this->assertEquals($folder1->name, $folderList[0]->name);
+
+        $this->refreshApplication();
     }
 
     // フォルダを検索する際にそのキーワードのフォルダが存在しない場合のテスト
