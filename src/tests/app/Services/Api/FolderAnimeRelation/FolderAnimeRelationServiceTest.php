@@ -157,10 +157,18 @@ class FolderAnimeRelationServiceTest extends TestCase
         $this->refreshApplication();
     }
 
-    // アニメ取得の際に無効なソートタイプのテスト
+    // あるフォルダに所属するアニメ取得の際に無効なソートタイプのテスト
     public function test_failure_getAnimeListByUserIdAndFolderId__invalid_arguments()
     {
-        $this->assertTrue(true);
+        $this->expectException(\InvalidArgumentException::class);
+
+        $userId = 1;
+        $folderId = 1;
+        $currentPage = 1;
+        $paginateUnit = 20;
+        $sortType = 'invalid_sort_type';
+        \FolderAnimeRelationService::getAnimeListByUserIdAndFolderId($userId, $folderId, $currentPage, $paginateUnit, $sortType);
+
     }
 
     // アニメを animeId, userId から取得するテスト
