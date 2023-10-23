@@ -3,6 +3,7 @@
 namespace Tests\app\Services\Api\Folder;
 
 use App\Models\Folder;
+use App\Services\Api\Folder\State\FolderStateNotFoundException;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Carbon;
 use Tests\TestCase;
@@ -284,7 +285,24 @@ class FolderServiceTest extends TestCase
     // 新しいフォルダを作成する際にそのフォルダの status が存在しない値の場合のテスト
     public function test_failure_createFolder__folder_state_not_found()
     {
-        $this->assertTrue(true);
+        $userId = 1;
+        $name = "フォルダ1";
+
+        $now = Carbon::now();
+        $anime = new Folder();
+        $anime->user_id = $userId;
+        $anime->name = $name;
+        $anime->status = "folder";
+        $anime->latest_changed_at = $now;
+        $anime->created_at = $now;
+        $anime->updated_at = $now;
+        $anime->save();
+
+        $this->expectException(FolderStateNotFoundException::class);
+
+        \FolderService::createFolder($userId, $name);
+
+        $this->refreshApplication();
     }
 
     // フォルダを編集し新しい値が保存されていることのテスト
