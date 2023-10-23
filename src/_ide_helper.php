@@ -17986,6 +17986,20 @@
                         return $instance->getFolderAnimeRelationByUserIdAndFolderIdAndAnimeId($userId, $folderId, $animeId, $usePrimary);
         }
                     /**
+         * ユーザーIDとフォルダIDからフォルダを取得します。
+         *
+         * @param int $userId
+         * @param int $folderId
+         * @param bool $usePrimary
+         * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|object|null 
+         * @static 
+         */ 
+        public static function getFolderByUserIdAndFolderId($userId, $folderId, $usePrimary = false)
+        {
+                        /** @var \App\Services\Api\FolderAnimeRelation\FolderAnimeRelationService $instance */
+                        return $instance->getFolderByUserIdAndFolderId($userId, $folderId, $usePrimary);
+        }
+                    /**
          * フォルダアニメのレコードを追加します。
          *
          * @param int $userId
@@ -18027,10 +18041,10 @@
          * @return \Illuminate\Support\Collection 
          * @static 
          */ 
-        public static function searchFolderAnime($userId, $keyWord)
+        public static function searchFolderAnime($userId, $folderId, $keyWord)
         {
                         /** @var \App\Services\Api\FolderAnimeRelation\FolderAnimeRelationService $instance */
-                        return $instance->searchFolderAnime($userId, $keyWord);
+                        return $instance->searchFolderAnime($userId, $folderId, $keyWord);
         }
          
     }
