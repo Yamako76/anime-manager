@@ -172,7 +172,7 @@ class FolderAnimeRelationServiceTest extends TestCase
 
     }
 
-    // userIdとfolderNameからフォルダを取得するテスト
+    // userId と folderName からフォルダを取得するテスト
     public function test_success_getFolderByUserIdAndFolderName()
     {
         $userId = 1;
@@ -196,10 +196,14 @@ class FolderAnimeRelationServiceTest extends TestCase
         $this->refreshApplication();
     }
 
-    // アニメを animeId, userId から取得する際にアニメが存在しない場合のテスト
+    // userId と folderName からフォルダ際にフォルダが存在しない場合のテスト
     public function test_getFolderByUserIdAndFolderName_return_null()
     {
-        $this->assertTrue(true);
+        $name = "フォルダ999";
+        $userId = 1;
+
+        $result = \FolderAnimeRelationService::getFolderByUserIdAndFolderName($userId, $name);
+        $this->assertNull($result);
     }
 
     // アニメを name, userId から取得するテスト
