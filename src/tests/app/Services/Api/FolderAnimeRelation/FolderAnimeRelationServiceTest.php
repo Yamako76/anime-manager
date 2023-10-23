@@ -5,7 +5,6 @@ namespace Tests\app\Services\Api\FolderAnimeRelation;
 use App\Models\Anime;
 use App\Models\Folder;
 use App\Models\FolderAnimeRelation;
-use App\Services\Api\Anime\State\AnimeStateNotFoundException;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Carbon;
 use Tests\TestCase;
@@ -231,10 +230,14 @@ class FolderAnimeRelationServiceTest extends TestCase
         $this->refreshApplication();
     }
 
-    // アニメを name, userId から取得する際にアニメが存在しない場合のテスト
+    // userId と animeName からアニメを取得する際にアニメが存在しない場合のテスト
     public function test_success_getAnimeByUserIdAndAnimeName_return_null()
     {
-        $this->assertTrue(true);
+        $name = "アニメ999";
+        $userId = 1;
+
+        $result = \FolderAnimeRelationService::getAnimeByUserIdAndAnimeName($userId, $name);
+        $this->assertNull($result);
     }
 
     public function test_success_getFolderAnimeRelationByUserIdAndFolderIdAndAnimeId()
