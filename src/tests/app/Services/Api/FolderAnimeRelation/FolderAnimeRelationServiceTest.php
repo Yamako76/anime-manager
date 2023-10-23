@@ -57,8 +57,8 @@ class FolderAnimeRelationServiceTest extends TestCase
         $sortType = 'created_at';
         $animeList = \FolderAnimeRelationService::getAnimeListByUserIdAndFolderId($userId, $folderId, $currentPage, $paginateUnit, $sortType);
 
-        $retrievedAnimeNames = $animeList->pluck('name')->toArray();
-        $this->assertEquals($expectedAnimeNames, $retrievedAnimeNames);
+        $actualAnimeNames = $animeList->pluck('name')->toArray();
+        $this->assertEquals($expectedAnimeNames, $actualAnimeNames);
 
         $this->refreshApplication();
     }
@@ -106,16 +106,55 @@ class FolderAnimeRelationServiceTest extends TestCase
         $sortType = 'latest';
         $animeList = \FolderAnimeRelationService::getAnimeListByUserIdAndFolderId($userId, $folderId, $currentPage, $paginateUnit, $sortType);
 
-        $retrievedAnimeNames = $animeList->pluck('name')->toArray();
-        $this->assertEquals($expectedAnimeNames, $retrievedAnimeNames);
+        $actualAnimeNames = $animeList->pluck('name')->toArray();
+        $this->assertEquals($expectedAnimeNames, $actualAnimeNames);
 
         $this->refreshApplication();
     }
 
-    // アニメを名前順に取得するテスト
+    // あるフォルダに所属するアニメを名前順に取得するテスト
     public function test_success_getAnimeListByUserIdAndFolderId__title()
     {
-        $this->assertTrue(true);
+        $userId = 1;
+        $folderId = 1;
+
+        $expectedAnimeNames = [];
+        for ($i = 1; $i <= 20; $i++) {
+            $animeName = "アニメ{$i}";
+
+            $anime = new Anime();
+            $anime->user_id = $userId;
+            $anime->status = Anime::STATUS_ACTIVE;
+            $anime->name = $animeName;
+            $anime->memo = 'memo';
+            $anime->latest_changed_at = now();
+            $anime->created_at = now();
+            $anime->updated_at = now();
+            $anime->save();
+
+            if ($i % 2 == 1) {
+                $expectedAnimeNames[] = $animeName;
+                $folderAnimeRelation = new FolderAnimeRelation();
+                $folderAnimeRelation->user_id = $userId;
+                $folderAnimeRelation->folder_id = $folderId;
+                $folderAnimeRelation->anime_id = $anime->id;
+                $folderAnimeRelation->status = FolderAnimeRelation::STATUS_ACTIVE;
+                $folderAnimeRelation->latest_changed_at = now();
+                $folderAnimeRelation->created_at = now();
+                $folderAnimeRelation->save();
+            }
+        }
+
+        $currentPage = 1;
+        $paginateUnit = 20;
+        $sortType = 'title';
+        $animeList = \FolderAnimeRelationService::getAnimeListByUserIdAndFolderId($userId, $folderId, $currentPage, $paginateUnit, $sortType);
+
+        sort($expectedAnimeNames);
+        $actualAnimeNames = $animeList->pluck('name')->toArray();
+        $this->assertEquals($expectedAnimeNames, $actualAnimeNames);
+
+        $this->refreshApplication();
     }
 
     // アニメ取得の際に無効なソートタイプのテスト
