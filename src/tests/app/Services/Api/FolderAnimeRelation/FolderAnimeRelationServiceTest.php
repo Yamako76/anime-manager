@@ -276,13 +276,28 @@ class FolderAnimeRelationServiceTest extends TestCase
         $this->assertNull($result);
     }
 
-    // アニメをレコードに保存するテスト
+    // フォルダに属するアニメをレコードに保存するテスト
     public function test_success_createFolderAnimeRelationRecord()
     {
-        $this->assertTrue(true);
+        $userId = 1;
+        $folderId = 1;
+        $animeId = 1;
+
+        $folderAnimeRelation = \FolderAnimeRelationService::createFolderAnimeRelation($userId, $folderId, $animeId);
+
+        $this->assertInstanceOf(FolderAnimeRelation::class, $folderAnimeRelation);
+        $this->assertEquals($userId, $folderAnimeRelation->user_id);
+        $this->assertEquals($folderId, $folderAnimeRelation->folder_id);
+        $this->assertEquals($animeId, $folderAnimeRelation->anime_id);
+        $this->assertEquals(FolderAnimeRelation::STATUS_ACTIVE, $folderAnimeRelation->status);
+        $this->assertNotNull($folderAnimeRelation->latest_changed_at);
+        $this->assertNotNull($folderAnimeRelation->created_at);
+        $this->assertNotNull($folderAnimeRelation->updated_at);
+
+        $this->refreshApplication();
     }
 
-    // 新しいアニメを作成するテスト
+    // フォルダに新しいアニメを追加するテスト
     public function test_success_createFolderAnimeRelation__record_new_anime()
     {
         $this->assertTrue(true);
