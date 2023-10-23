@@ -32,7 +32,7 @@ class AnimeServiceTest extends TestCase
             $anime->user_id = $userId;
             $anime->status = Anime::STATUS_ACTIVE;
             $anime->name = "アニメ{$i}";
-            $anime->memo = 'This is a memo.';
+            $anime->memo = 'memo';
             $anime->latest_changed_at = $customDateTime;
             $anime->created_at = $customDateTime;
             $anime->updated_at = $customDateTime;
