@@ -289,14 +289,14 @@ class FolderServiceTest extends TestCase
         $name = "フォルダ1";
 
         $now = Carbon::now();
-        $anime = new Folder();
-        $anime->user_id = $userId;
-        $anime->name = $name;
-        $anime->status = "folder";
-        $anime->latest_changed_at = $now;
-        $anime->created_at = $now;
-        $anime->updated_at = $now;
-        $anime->save();
+        $folder = new Folder();
+        $folder->user_id = $userId;
+        $folder->name = $name;
+        $folder->status = "folder";
+        $folder->latest_changed_at = $now;
+        $folder->created_at = $now;
+        $folder->updated_at = $now;
+        $folder->save();
 
         $this->expectException(FolderStateNotFoundException::class);
 
@@ -308,7 +308,30 @@ class FolderServiceTest extends TestCase
     // フォルダを編集し新しい値が保存されていることのテスト
     public function test_success_updateFolderRecord()
     {
-        $this->assertTrue(true);
+        $now = Carbon::now();
+        $folder = new Folder();
+        $folder->user_id = 1;
+        $folder->name = "フォルダ";
+        $folder->status = Folder::STATUS_ACTIVE;
+        $folder->latest_changed_at = $now;
+        $folder->created_at = $now;
+        $folder->updated_at = $now;
+        $folder->save();
+
+        $newName = "Folder";
+
+        $updatedFolder = \FolderService::updateFolderRecord($folder, $newName);
+
+        $retrievedFolder = Folder::find($folder->id);
+
+        $this->assertInstanceOf(Folder::class, $updatedFolder);
+        $this->assertEquals($newName, $updatedFolder->name);
+        $this->assertEquals($folder->latest_changed_at->toDateTimeString(), $updatedFolder->latest_changed_at->toDateTimeString());
+
+        $this->assertEquals($newName, $retrievedFolder->name);
+        $this->assertEquals($folder->latest_changed_at->toDateTimeString(), $updatedFolder->latest_changed_at);
+
+        $this->refreshApplication();
     }
 
     // フォルダを検索する際にそのキーワードのフォルダが存在する場合のテスト
