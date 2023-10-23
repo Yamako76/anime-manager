@@ -156,7 +156,7 @@ class AnimeServiceTest extends TestCase
         $now = Carbon::now();
         $anime = new Anime();
         $anime->user_id = $userId;
-        $anime->name = "Test Anime";
+        $anime->name = "Anime";
         $anime->memo = "test";
         $anime->status = Anime::STATUS_ACTIVE;
         $anime->latest_changed_at = $now;
