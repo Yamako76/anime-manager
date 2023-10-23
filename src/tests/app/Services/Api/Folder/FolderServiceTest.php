@@ -369,7 +369,25 @@ class FolderServiceTest extends TestCase
     // フォルダを検索する際にそのキーワードのフォルダが存在しない場合のテスト
     public function test_success_searchFolder_no_match()
     {
-        $this->assertTrue(true);
+        $userId = 1;
+        $keyWord = "folder";
+
+        $anime = new Folder();
+        $anime->user_id = 1;
+        $anime->name = "フォルダ1";
+        $anime->status = Folder::STATUS_ACTIVE;
+        $anime->latest_changed_at = Carbon::now();
+        $anime->created_at = Carbon::now();
+        $anime->updated_at = Carbon::now();
+        $anime->save();
+
+
+        $folderList = \FolderService::searchFolder($userId, $keyWord);
+
+        $this->assertInstanceOf(\Illuminate\Database\Eloquent\Collection::class, $folderList);
+        $this->assertCount(0, $folderList);
+
+        $this->refreshApplication();
     }
 }
 
