@@ -5,9 +5,16 @@ import axios from "axios";
 import ApiCommunicationSuccess from "@/Components/common/ApiCommunicationSuccess";
 import ApiCommunicationFailed from "@/Components/common/ApiCommunicationFailed";
 
+type Anime = {
+    anime_id: number;
+    folder_anime_latest_changed_at: string;
+    folder_id: number;
+    name: string;
+};
+
 interface Props {
     handleReload: () => void;
-    anime: any;
+    anime: Anime;
     id: number;
 }
 

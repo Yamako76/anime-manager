@@ -7,10 +7,17 @@ import {getBoxWidth} from "@/Components/AllAnime/tool/tool";
 import {InertiaLink} from "@inertiajs/inertia-react";
 import DeleteFolderAnime from "@/Components/Folder/tool/DeleteFolderAnime";
 
+type Anime = {
+    anime_id: number;
+    folder_anime_latest_changed_at: string;
+    folder_id: number;
+    name: string;
+};
+
 interface Props {
     handleReload: () => void;
     id: number;
-    animes: any[];
+    animes: Anime[];
 }
 
 const AnimeList = ({handleReload, id, animes}: Props) => {
