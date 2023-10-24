@@ -8,17 +8,7 @@ import InfiniteScroll from "react-infinite-scroller";
 import NotExistFolders from "@/Components/AllFolder/NotExistFolders";
 import AllFolderTitle from "@/Components/AllFolder/AllFolderTitle";
 import AllFolder from "@/Components/AllFolder/AllFolder";
-
-type Folder = {
-    created_at: string;
-    deleted_at: string | null;
-    id: number;
-    latest_changed_at: string;
-    name: string;
-    status: "active" | "deleted";
-    updated_at: string;
-    user_id: number;
-};
+import {Folder} from "@/Components/Folder";
 
 const FolderManagement = () => {
         const BoxWidth: number = getBoxWidth();

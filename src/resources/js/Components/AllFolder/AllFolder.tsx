@@ -7,17 +7,8 @@ import {grey} from "@mui/material/colors";
 import DeleteFolder from "@/Components/AllFolder/tool/DeleteFolder";
 import Paper from "@mui/material/Paper";
 import EditFolder from "@/Components/AllFolder/tool/EditFolder";
+import {Folder} from "@/Components/Folder";
 
-type Folder = {
-    created_at: string;
-    deleted_at: string | null;
-    id: number;
-    latest_changed_at: string;
-    name: string;
-    status: "active" | "deleted";
-    updated_at: string;
-    user_id: number;
-};
 
 interface Props {
     handleReload: () => void;
