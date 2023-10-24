@@ -8,18 +8,7 @@ import {SortContext} from "@/Components/common/SortManagement";
 import ApiErrorDialog from "@/Components/common/ApiErrorDialog";
 import InfiniteScroll from "react-infinite-scroller";
 import NotExistAnimes from "@/Components/common/NotExistAnimes";
-
-type Anime = {
-    created_at: string;
-    deleted_at: string | null;
-    id: number;
-    latest_changed_at: string;
-    memo: string;
-    name: string;
-    status: "active" | "deleted";
-    updated_at: string;
-    user_id: number;
-};
+import {Anime} from "@/Components/anime";
 
 const AnimeManagement = () => {
         const BoxWidth: number = getBoxWidth();

@@ -4,18 +4,7 @@ import DeleteButton from "@/Components/Button/DeleteButton";
 import axios from "axios";
 import ApiCommunicationSuccess from "@/Components/common/ApiCommunicationSuccess";
 import ApiCommunicationFailed from "@/Components/common/ApiCommunicationFailed";
-
-type Anime = {
-    created_at: string;
-    deleted_at: string | null;
-    id: number;
-    latest_changed_at: string;
-    memo: string;
-    name: string;
-    status: "active" | "deleted";
-    updated_at: string;
-    user_id: number;
-};
+import {Anime} from "@/Components/anime";
 
 interface Props {
     handleReload: () => void;
