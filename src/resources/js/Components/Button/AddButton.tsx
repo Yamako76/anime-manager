@@ -1,41 +1,56 @@
 import React from "react";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import EditDialog from "./EditDialog";
 import IconButton from "@mui/material/IconButton";
 import AddIcon from "@mui/icons-material/Add";
 import Tooltip from "@mui/material/Tooltip";
 
+interface Props {
+    taskName: string;
+    id: string;
+    label: string;
+    open: boolean;
+    error: boolean;
+    errorText: string;
+    handleClickOpen: () => void;
+    handleChange: (e) => void;
+    handleClose: () => void;
+    handleSubmit: () => void;
+    handleRefresh: () => void;
+    value: string;
+    submitButtonName: string;
+}
+
 const AddButton = ({
-    task_name,
-    id,
-    label,
-    open,
-    error,
-    errorText,
-    handleClickOpen,
-    handleChange,
-    handleClose,
-    handleSubmit,
-    handleRefresh,
-    value,
-    submit_button_name,
-    sx,
-}) => {
+                       taskName,
+                       id,
+                       label,
+                       open,
+                       error,
+                       errorText,
+                       handleClickOpen,
+                       handleChange,
+                       handleClose,
+                       handleSubmit,
+                       handleRefresh,
+                       value,
+                       submitButtonName,
+                       sx,
+                   }: Props) => {
     return (
         <Box>
-            <Tooltip title={task_name}>
+            <Tooltip title={taskName}>
                 <IconButton
                     onClick={handleClickOpen}
                     disableFocusRipple={true}
                     sx={sx}
                 >
-                    <AddIcon />
+                    <AddIcon/>
                 </IconButton>
             </Tooltip>
 
             <EditDialog
-                task_name={task_name}
+                taskName={taskName}
                 id={id}
                 label={label}
                 open={open}
@@ -46,7 +61,7 @@ const AddButton = ({
                 handleSubmit={handleSubmit}
                 handleRefresh={handleRefresh}
                 value={value}
-                submit_button_name={submit_button_name}
+                submitButtonName={submitButtonName}
             />
         </Box>
     );

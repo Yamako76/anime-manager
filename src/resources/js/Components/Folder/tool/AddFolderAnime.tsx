@@ -111,8 +111,7 @@ const AddFolderAnime = ({handleReload, folderName, id}: Props) => {
         <>
             <Box>
                 <AddButton
-                    button_name="アニメの追加"
-                    task_name="フォルダにアニメの追加"
+                    taskName="フォルダにアニメの追加"
                     id="new_folder_name"
                     label="新しいアニメ名"
                     open={open}
@@ -124,7 +123,7 @@ const AddFolderAnime = ({handleReload, folderName, id}: Props) => {
                     handleSubmit={handleSubmit}
                     handleRefresh={handleRefresh}
                     value={value}
-                    submit_button_name="追加"
+                    submitButtonName="追加"
                 />
             </Box>
             {isSuccessSnackbar && <ApiCommunicationSuccess message={"アニメの追加が完了しました"}

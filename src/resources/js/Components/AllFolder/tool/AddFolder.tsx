@@ -106,8 +106,7 @@ const AddFolder = ({handleReload}) => {
         <>
             <Box>
                 <AddButton
-                    button_name="フォルダの追加"
-                    task_name="新しいフォルダの作成"
+                    taskName="新しいフォルダの作成"
                     id="new_folder_name"
                     label="新しいフォルダ名"
                     open={open}
@@ -119,7 +118,7 @@ const AddFolder = ({handleReload}) => {
                     handleSubmit={handleSubmit}
                     handleRefresh={handleRefresh}
                     value={value}
-                    submit_button_name="追加"
+                    submitButtonName="追加"
                 />
             </Box>
             {isSuccessSnackbar && <ApiCommunicationSuccess message={"フォルダの追加が完了しました"}

@@ -21,7 +21,7 @@ interface Props {
     handleSubmit: () => void;
     handleRefresh: () => void;
     value: string;
-    submit_button_name: string;
+    submitButtonName: string;
 }
 
 
@@ -37,7 +37,7 @@ const EditDialog = ({
                         handleSubmit,
                         handleRefresh,
                         value,
-                        submit_button_name,
+                        submitButtonName,
                     }: Props) => {
     return (
         <Box>
@@ -72,7 +72,7 @@ const EditDialog = ({
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>閉じる</Button>
-                    <Button onClick={handleSubmit}>{submit_button_name}</Button>
+                    <Button onClick={handleSubmit}>{submitButtonName}</Button>
                 </DialogActions>
             </Dialog>
         </Box>
