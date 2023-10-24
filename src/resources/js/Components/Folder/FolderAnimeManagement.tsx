@@ -8,13 +8,7 @@ import InfiniteScroll from "react-infinite-scroller";
 import NotExistAnimes from "@/Components/common/NotExistAnimes";
 import FolderTitle from "@/Components/Folder/FolderTitle";
 import AnimeList from "@/Components/Folder/AnimeList";
-
-type Anime = {
-    anime_id: number;
-    folder_anime_latest_changed_at: string;
-    folder_id: number;
-    name: string;
-};
+import {FolderAnime} from "@/Components/FolderAnime";
 
 interface FolderProps {
     name: string;
@@ -24,7 +18,7 @@ interface FolderProps {
 const AnimeManagement = ({name, id}: FolderProps) => {
         const BoxWidth: number = getBoxWidth();
         const [value, setValue] = useState<string>("");
-        const [animes, setAnimes] = useState<Anime[]>([]);
+        const [animes, setAnimes] = useState<FolderAnime[]>([]);
         const [reRender, setReRender] = useState<boolean>(true);
         const [isLoading, setIsLoading] = useState<boolean>(true);
         const [hasMore, setHasMore] = useState<boolean>(true);

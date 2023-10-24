@@ -6,18 +6,12 @@ import {grey} from "@mui/material/colors";
 import {getBoxWidth} from "@/Components/AllAnime/tool/tool";
 import {InertiaLink} from "@inertiajs/inertia-react";
 import DeleteFolderAnime from "@/Components/Folder/tool/DeleteFolderAnime";
-
-type Anime = {
-    anime_id: number;
-    folder_anime_latest_changed_at: string;
-    folder_id: number;
-    name: string;
-};
+import {FolderAnime} from "@/Components/FolderAnime";
 
 interface Props {
     handleReload: () => void;
     id: number;
-    animes: Anime[];
+    animes: FolderAnime[];
 }
 
 const AnimeList = ({handleReload, id, animes}: Props) => {

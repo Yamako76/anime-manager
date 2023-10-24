@@ -4,17 +4,12 @@ import DeleteButton from "@/Components/Button/DeleteButton";
 import axios from "axios";
 import ApiCommunicationSuccess from "@/Components/common/ApiCommunicationSuccess";
 import ApiCommunicationFailed from "@/Components/common/ApiCommunicationFailed";
+import {FolderAnime} from "@/Components/FolderAnime";
 
-type Anime = {
-    anime_id: number;
-    folder_anime_latest_changed_at: string;
-    folder_id: number;
-    name: string;
-};
 
 interface Props {
     handleReload: () => void;
-    anime: Anime;
+    anime: FolderAnime;
     id: number;
 }
 
