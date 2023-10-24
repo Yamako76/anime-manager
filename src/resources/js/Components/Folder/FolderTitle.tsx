@@ -2,7 +2,6 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Tooltip from "@mui/material/Tooltip";
 import Grid from "@mui/material/Grid";
-// import SortItem from '../tool/SortItem';
 import {getBoxWidth} from "@/Components/AllAnime/tool/tool";
 import AddFolderAnime from "@/Components/Folder/tool/AddFolderAnime";
 import SortAnime from "@/Components/Folder/tool/SortAnime";
