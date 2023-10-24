@@ -2,7 +2,6 @@
 
 namespace App\Services\Api\Folder;
 
-
 use App\Models\Folder;
 use App\Services\Api\Folder\State\FolderStateNotFoundException;
 use Carbon\Carbon;
@@ -12,10 +11,16 @@ class FolderService
     /**
      * 特定のユーザーに関連するフォルダ一覧を取得する。
      *
+     * 取得順は「sortType」によって変更する。
+     * - created_atの場合: フォルダの登録順
+     * - latestの場合: フォルダの最新順
+     * - titleの場合: フォルダのタイトル順
+     *
      * @param int $userId
      * @param int $currentPage
      * @param int $paginateUnit
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     * @throws \InvalidArgumentException
      */
     public function getFolderListByUserId(
         int    $userId,

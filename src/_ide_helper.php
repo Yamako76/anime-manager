@@ -17811,11 +17811,17 @@
         class FolderService {
                     /**
          * 特定のユーザーに関連するフォルダ一覧を取得する。
+         * 
+         * 取得順は「sortType」によって変更する。
+         * - created_atの場合: フォルダの登録順
+         * - latestの場合: フォルダの最新順
+         * - titleの場合: フォルダのタイトル順
          *
          * @param int $userId
          * @param int $currentPage
          * @param int $paginateUnit
          * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator 
+         * @throws \InvalidArgumentException
          * @static 
          */ 
         public static function getFolderListByUserId($userId, $currentPage, $paginateUnit = 20, $sortType = 'created_at')
@@ -17945,10 +17951,10 @@
          * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|object|null 
          * @static 
          */ 
-        public static function getFolderIdByUserIdAndFolderName($userId, $folderName, $usePrimary = false)
+        public static function getFolderByUserIdAndFolderName($userId, $folderName, $usePrimary = false)
         {
                         /** @var \App\Services\Api\FolderAnimeRelation\FolderAnimeRelationService $instance */
-                        return $instance->getFolderIdByUserIdAndFolderName($userId, $folderName, $usePrimary);
+                        return $instance->getFolderByUserIdAndFolderName($userId, $folderName, $usePrimary);
         }
                     /**
          * ユーザーIDとアニメの名前からアニメを取得します。
@@ -17959,10 +17965,10 @@
          * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|object|null 
          * @static 
          */ 
-        public static function getAnimeIdByUserIdAndAnimeName($userId, $animeName, $usePrimary = false)
+        public static function getAnimeByUserIdAndAnimeName($userId, $animeName, $usePrimary = false)
         {
                         /** @var \App\Services\Api\FolderAnimeRelation\FolderAnimeRelationService $instance */
-                        return $instance->getAnimeIdByUserIdAndAnimeName($userId, $animeName, $usePrimary);
+                        return $instance->getAnimeByUserIdAndAnimeName($userId, $animeName, $usePrimary);
         }
                     /**
          * ユーザーIDとフォルダIDとアニメIDからフォルダアニメを取得します。
@@ -17978,6 +17984,20 @@
         {
                         /** @var \App\Services\Api\FolderAnimeRelation\FolderAnimeRelationService $instance */
                         return $instance->getFolderAnimeRelationByUserIdAndFolderIdAndAnimeId($userId, $folderId, $animeId, $usePrimary);
+        }
+                    /**
+         * ユーザーIDとフォルダIDからフォルダを取得します。
+         *
+         * @param int $userId
+         * @param int $folderId
+         * @param bool $usePrimary
+         * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|object|null 
+         * @static 
+         */ 
+        public static function getFolderByUserIdAndFolderId($userId, $folderId, $usePrimary = false)
+        {
+                        /** @var \App\Services\Api\FolderAnimeRelation\FolderAnimeRelationService $instance */
+                        return $instance->getFolderByUserIdAndFolderId($userId, $folderId, $usePrimary);
         }
                     /**
          * フォルダアニメのレコードを追加します。
@@ -18014,14 +18034,17 @@
                         return $instance->createFolderAnimeRelation($userId, $folderID, $animeId);
         }
                     /**
-         * 
+         * フォルダ内のアニメを検索します。
          *
+         * @param int $userId
+         * @param string $keyWord
+         * @return \Illuminate\Support\Collection 
          * @static 
          */ 
-        public static function searchFolderAnime($userId, $keyWord)
+        public static function searchFolderAnime($userId, $folderId, $keyWord)
         {
                         /** @var \App\Services\Api\FolderAnimeRelation\FolderAnimeRelationService $instance */
-                        return $instance->searchFolderAnime($userId, $keyWord);
+                        return $instance->searchFolderAnime($userId, $folderId, $keyWord);
         }
          
     }

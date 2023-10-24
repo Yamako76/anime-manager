@@ -30,6 +30,9 @@ class Folder extends Model
     const STATUS_ACTIVE = "active";
     const STATUS_DELETED = "deleted";
 
+
+    protected $fillable = ['user_id', 'name', 'status', 'latest_changed_at',];
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */

@@ -42,7 +42,6 @@ class FolderAnimeRelationService
             case 'latest':
                 $query->latest('folder_anime_relations.id');
                 break;
-            // TODO title順のソート追加
             case 'title':
                 $query->orderBy('name');
                 break;
@@ -63,7 +62,7 @@ class FolderAnimeRelationService
      * @param bool $usePrimary
      * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|object|null
      */
-    public function getFolderIdByUserIdAndFolderName(int $userId, string $folderName, bool $usePrimary = false): mixed
+    public function getFolderByUserIdAndFolderName(int $userId, string $folderName, bool $usePrimary = false): mixed
     {
         $query = $usePrimary ? Folder::onWriteConnection() : Folder::query();
         $fodler = $query
@@ -81,7 +80,7 @@ class FolderAnimeRelationService
      * @param bool $usePrimary
      * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|object|null
      */
-    public function getAnimeIdByUserIdAndAnimeName(int $userId, string $animeName, bool $usePrimary = false): mixed
+    public function getAnimeByUserIdAndAnimeName(int $userId, string $animeName, bool $usePrimary = false): mixed
     {
         $query = $usePrimary ? Anime::onWriteConnection() : Anime::query();
         $anime = $query
@@ -107,6 +106,24 @@ class FolderAnimeRelationService
             ->where("user_id", "=", $userId)
             ->where("folder_id", "=", $folderId)
             ->where("anime_id", "=", $animeId)
+            ->first();
+        return $folderAnimeRelation;
+    }
+
+    /**
+     * ユーザーIDとフォルダIDからフォルダを取得します。
+     *
+     * @param int $userId
+     * @param int $folderId
+     * @param bool $usePrimary
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|object|null
+     */
+    public function getFolderByUserIdAndFolderId(int $userId, int $folderId,bool $usePrimary = false ): mixed
+    {
+        $query = $usePrimary ? FolderAnimeRelation::onWriteConnection() : FolderAnimeRelation::query();
+        $folderAnimeRelation = $query
+            ->where("user_id", "=", $userId)
+            ->where("folder_id", "=", $folderId)
             ->first();
         return $folderAnimeRelation;
     }
@@ -175,11 +192,12 @@ class FolderAnimeRelationService
      * @param string $keyWord
      * @return \Illuminate\Support\Collection
      */
-    public function searchFolderAnime(int $userId, string $keyWord): \Illuminate\Support\Collection
+    public function searchFolderAnime(int $userId,  int $folderId, string $keyWord): \Illuminate\Support\Collection
     {
         $animeList = DB::table('folder_anime_relations')
             ->join('animes', 'folder_anime_relations.anime_id', '=', 'animes.id')
             ->where('folder_anime_relations.user_id', '=', $userId)
+            ->where('folder_anime_relations.folder_id', '=', $folderId)
             ->where('folder_anime_relations.status', '=', FolderAnimeRelation::STATUS_ACTIVE)
             ->where('animes.status', '=', Anime::STATUS_ACTIVE)
             ->where('animes.name', 'like', "%$keyWord%")

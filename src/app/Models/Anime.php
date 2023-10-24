@@ -33,6 +33,8 @@ class Anime extends Model
     const STATUS_ACTIVE = "active";
     const STATUS_DELETED = "deleted";
 
+    protected $fillable = ['user_id', 'name', 'memo', 'status', 'latest_changed_at',];
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
