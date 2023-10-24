@@ -17,7 +17,7 @@ interface Props {
     handleSubmit: () => void;
     handleRefresh: () => void;
     value: string;
-    submit_button_name: string;
+    submitButtonName: string;
     aria_label: string;
     size: "small";
     sx: { [key: string]: any };
@@ -36,7 +36,7 @@ const EditButton = ({
                         handleSubmit,
                         handleRefresh,
                         value,
-                        submit_button_name,
+                        submitButtonName,
                         aria_label,
                         size,
                         sx,
@@ -64,7 +64,7 @@ const EditButton = ({
                 handleSubmit={handleSubmit}
                 handleRefresh={handleRefresh}
                 value={value}
-                submit_button_name={submit_button_name}
+                submitButtonName={submitButtonName}
             />
         </Box>
     );

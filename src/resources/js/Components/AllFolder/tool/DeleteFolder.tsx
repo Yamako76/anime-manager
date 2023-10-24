@@ -5,9 +5,20 @@ import axios from "axios";
 import ApiCommunicationSuccess from "@/Components/common/ApiCommunicationSuccess";
 import ApiCommunicationFailed from "@/Components/common/ApiCommunicationFailed";
 
+type Folder = {
+    created_at: string;
+    deleted_at: string | null;
+    id: number;
+    latest_changed_at: string;
+    name: string;
+    status: "active" | "deleted";
+    updated_at: string;
+    user_id: number;
+};
+
 interface Props {
     handleReload: () => void;
-    folder: any;
+    folder: Folder;
 }
 
 const DeleteFolder = ({handleReload, folder}: Props) => {

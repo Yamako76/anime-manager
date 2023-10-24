@@ -11,8 +11,20 @@ import ApiCommunicationFailed from "@/Components/common/ApiCommunicationFailed";
 // フォルダの編集ボタンを押すとフォルダを編集する画面が表示され
 // 閉じるまたは編集ボタンを押すとフォルダ編集のキャンセルまたはフォルダ編集が完了する
 // 入力は1字以上200字以下で制限する
+
+type Folder = {
+    created_at: string;
+    deleted_at: string | null;
+    id: number;
+    latest_changed_at: string;
+    name: string;
+    status: "active" | "deleted";
+    updated_at: string;
+    user_id: number;
+};
+
 interface Props {
-    folder: any;
+    folder: Folder;
     handleReload: () => void;
 }
 
@@ -46,7 +58,7 @@ const EditFolder = ({folder, handleReload}: Props) => {
 
     const handleClose = () => {
         setOpen(false);
-        setValue(folder);
+        setValue(folder.name);
         handleRefresh();
         handleErrorRefresh();
     };
@@ -123,7 +135,7 @@ const EditFolder = ({folder, handleReload}: Props) => {
                     handleSubmit={handleSubmit}
                     handleRefresh={handleRefresh}
                     value={value}
-                    submit_button_name="完了"
+                    submitButtonName="完了"
                     aria_label="edit_folder"
                     size="small"
                     sx={{"&:hover": {color: grey[900]}}}

@@ -9,10 +9,21 @@ import NotExistFolders from "@/Components/AllFolder/NotExistFolders";
 import AllFolderTitle from "@/Components/AllFolder/AllFolderTitle";
 import AllFolder from "@/Components/AllFolder/AllFolder";
 
+type Folder = {
+    created_at: string;
+    deleted_at: string | null;
+    id: number;
+    latest_changed_at: string;
+    name: string;
+    status: "active" | "deleted";
+    updated_at: string;
+    user_id: number;
+};
+
 const FolderManagement = () => {
         const BoxWidth: number = getBoxWidth();
         const [value, setValue] = useState<string>("");
-        const [folders, setFolders] = useState([]);
+        const [folders, setFolders] = useState<Folder[]>([]);
         const [reRender, setReRender] = useState<boolean>(true);
         const [isLoading, setIsLoading] = useState<boolean>(true);
         const [hasMore, setHasMore] = useState<boolean>(true);

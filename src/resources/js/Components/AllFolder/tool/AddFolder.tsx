@@ -10,7 +10,12 @@ import ApiCommunicationFailed from "@/Components/common/ApiCommunicationFailed";
 // フォルダの追加ボタンを押すと新しいフォルダ作成する画面が表示され
 // 閉じるまたは追加ボタンを押すと新しいフォルダ作成のキャンセルまたは新しいフォルダ作成が完了する
 // 入力は1字以上200字以下で制限する
-const AddFolder = ({handleReload}) => {
+
+interface Props {
+    handleReload: () => void;
+}
+
+const AddFolder = ({handleReload}: Props) => {
     const [open, setOpen] = useState<boolean>(false);
     const [error, setError] = useState<boolean>(false);
     const [value, setValue] = useState<string>("");

@@ -8,13 +8,24 @@ import DeleteFolder from "@/Components/AllFolder/tool/DeleteFolder";
 import Paper from "@mui/material/Paper";
 import EditFolder from "@/Components/AllFolder/tool/EditFolder";
 
+type Folder = {
+    created_at: string;
+    deleted_at: string | null;
+    id: number;
+    latest_changed_at: string;
+    name: string;
+    status: "active" | "deleted";
+    updated_at: string;
+    user_id: number;
+};
+
 interface Props {
     handleReload: () => void;
-    folders: any[];
+    folders: Folder[];
 }
 
 interface FolderProps {
-    folder: any;
+    folder: Folder;
 }
 
 const AllFolder = ({handleReload, folders}: Props) => {
