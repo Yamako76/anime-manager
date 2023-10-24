@@ -4,7 +4,7 @@ import DeleteButton from "@/Components/Button/DeleteButton";
 import axios from "axios";
 import ApiCommunicationSuccess from "@/Components/common/ApiCommunicationSuccess";
 import ApiCommunicationFailed from "@/Components/common/ApiCommunicationFailed";
-import {Anime} from "@/Components/anime";
+import {Anime} from "@/Components/Anime";
 
 interface Props {
     handleReload: () => void;

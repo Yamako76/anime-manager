@@ -6,7 +6,7 @@ import {grey} from "@mui/material/colors";
 import {getBoxWidth} from "@/Components/AllAnime/tool/tool";
 import DeleteAnime from "@/Components/AllAnime/tool/DeleteAnime";
 import {InertiaLink} from "@inertiajs/inertia-react";
-import {Anime} from "@/Components/anime";
+import {Anime} from "@/Components/Anime";
 
 interface Props {
     handleReload: () => void;
