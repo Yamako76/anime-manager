@@ -11,8 +11,14 @@ interface Props {
     isLoading: boolean;
 }
 
+interface MainProps {
+    titleWidth: number;
+    handleReload: () => void;
+    isLoading: boolean;
+}
+
 // コンテンツMain部分
-const Main = ({titleWidth, handleReload, isLoading}) => {
+const Main = ({titleWidth, handleReload, isLoading}: MainProps) => {
     const contentList = [
         {
             body: (

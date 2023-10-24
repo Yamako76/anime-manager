@@ -1,22 +1,26 @@
 import React from "react";
-import { Box, Grid } from "@mui/material";
+import {Box, Grid} from "@mui/material";
 import Tooltip from "@mui/material/Tooltip";
 import Paper from "@mui/material/Paper";
-import { grey } from "@mui/material/colors";
-import { getBoxWidth } from "@/Components/AllAnime/tool/tool";
+import {grey} from "@mui/material/colors";
+import {getBoxWidth} from "@/Components/AllAnime/tool/tool";
 import DeleteAnime from "@/Components/AllAnime/tool/DeleteAnime";
-import { InertiaLink } from "@inertiajs/inertia-react";
+import {InertiaLink} from "@inertiajs/inertia-react";
 
 interface Props {
     handleReload: () => void;
     items: any[];
 }
 
-const AllAnime = ({ handleReload, items }: Props) => {
-    const BoxWidth = getBoxWidth();
-    const titleWidth = BoxWidth - 50;
+interface Prop {
+    item: any;
+}
 
-    const PaperContent = ({ item }) => {
+const AllAnime = ({handleReload, items}: Props) => {
+    const BoxWidth: number = getBoxWidth();
+    const titleWidth: number = BoxWidth - 50;
+
+    const PaperContent = ({item}: Prop) => {
         const contentList = [
             {
                 body: (
@@ -32,7 +36,7 @@ const AllAnime = ({ handleReload, items }: Props) => {
                                 width: String(titleWidth - 10) + "px",
                                 color: grey[900],
                                 textDecoration: "none",
-                                "&:hover": { color: grey[900] },
+                                "&:hover": {color: grey[900]},
                             }}
                         >
                             {item.name}
@@ -101,7 +105,7 @@ const AllAnime = ({ handleReload, items }: Props) => {
                 <Grid container direction="column" spacing={1}>
                     {items.map((item, index) => (
                         <Grid key={index} container item>
-                            <PaperContent item={item} />
+                            <PaperContent item={item}/>
                         </Grid>
                     ))}
                 </Grid>
@@ -111,7 +115,7 @@ const AllAnime = ({ handleReload, items }: Props) => {
 
     return (
         <Box>
-            <ItemList />
+            <ItemList/>
         </Box>
     );
 };
