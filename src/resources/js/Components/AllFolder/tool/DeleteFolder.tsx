@@ -68,8 +68,8 @@ const DeleteFolder = ({handleReload, folder}: Props) => {
         <>
             <Box>
                 <DeleteButton
-                    task_name="フォルダの削除"
-                    content_text="本当にフォルダの削除を行いますか？"
+                    taskName="フォルダの削除"
+                    contentText="本当にフォルダの削除を行いますか？"
                     open={open}
                     handleClickOpen={handleClickOpen}
                     handleClose={handleClose}

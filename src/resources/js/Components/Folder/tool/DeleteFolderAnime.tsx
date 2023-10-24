@@ -68,8 +68,8 @@ const DeleteFolderAnime = ({handleReload, item}: Props) => {
         <>
             <Box>
                 <DeleteButton
-                    task_name="アニメの削除"
-                    content_text="本当にアニメの削除を行いますか？"
+                    taskName="アニメの削除"
+                    contentText="本当にアニメの削除を行いますか？"
                     open={open}
                     handleClickOpen={handleClickOpen}
                     handleClose={handleClose}
