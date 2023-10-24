@@ -4,16 +4,17 @@ import DeleteButton from "@/Components/Button/DeleteButton";
 import axios from "axios";
 import ApiCommunicationSuccess from "@/Components/common/ApiCommunicationSuccess";
 import ApiCommunicationFailed from "@/Components/common/ApiCommunicationFailed";
+import {Folder} from "@/Components/Folder";
 
 interface Props {
     handleReload: () => void;
-    folder: any;
+    folder: Folder;
 }
 
 const DeleteFolder = ({handleReload, folder}: Props) => {
-    const [open, setOpen] = useState(false);
-    const [isSuccessSnackbar, setIsSuccessSnackbar] = useState(false);
-    const [isFailedSnackbar, setIsFailedSnackbar] = useState(false);
+    const [open, setOpen] = useState<boolean>(false);
+    const [isSuccessSnackbar, setIsSuccessSnackbar] = useState<boolean>(false);
+    const [isFailedSnackbar, setIsFailedSnackbar] = useState<boolean>(false);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -68,8 +69,8 @@ const DeleteFolder = ({handleReload, folder}: Props) => {
         <>
             <Box>
                 <DeleteButton
-                    task_name="フォルダの削除"
-                    content_text="本当にフォルダの削除を行いますか？"
+                    taskName="フォルダの削除"
+                    contentText="本当にフォルダの削除を行いますか？"
                     open={open}
                     handleClickOpen={handleClickOpen}
                     handleClose={handleClose}

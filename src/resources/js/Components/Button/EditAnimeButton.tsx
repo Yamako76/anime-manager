@@ -3,29 +3,54 @@ import Box from "@mui/material/Box";
 import EditAnimeDialog from "@/Components/Button/EditAnimeDialog";
 import Button from "@mui/material/Button";
 
+
+interface Props {
+    taskName: string;
+    id: string;
+    label: string;
+    open: boolean;
+    error: boolean;
+    errorText: string;
+    handleClickOpen: () => void;
+    handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    handleClose: () => void;
+    handleSubmit: () => void;
+    handleRefresh: () => void;
+    nameValue: string;
+    submitButtonName: string;
+    ariaLabel: string;
+    size: "small";
+    memoId: string;
+    memoLabel: string;
+    memoValue: string;
+    memoHandleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    startIcon: React.ReactElement;
+    sx: Record<string, any>;
+}
+
 const EditAnimeButton = ({
-    taskName,
-    id,
-    label,
-    open,
-    error,
-    errorText,
-    handleClickOpen,
-    handleChange,
-    handleClose,
-    handleSubmit,
-    handleRefresh,
-    nameValue,
-    submitButtonName,
-    ariaLabel,
-    size,
-    sx,
-    memoId,
-    memoValue,
-    memoLabel,
-    memoHandleChange,
-    startIcon,
-}) => {
+                             taskName,
+                             id,
+                             label,
+                             open,
+                             error,
+                             errorText,
+                             handleClickOpen,
+                             handleChange,
+                             handleClose,
+                             handleSubmit,
+                             handleRefresh,
+                             nameValue,
+                             submitButtonName,
+                             ariaLabel,
+                             size,
+                             sx,
+                             memoId,
+                             memoValue,
+                             memoLabel,
+                             memoHandleChange,
+                             startIcon,
+                         }: Props) => {
     return (
         <Box>
             <Button

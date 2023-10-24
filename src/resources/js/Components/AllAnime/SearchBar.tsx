@@ -28,8 +28,8 @@ const SearchBar = ({
     handleSubmit,
     value,
 }: Props) => {
-    const BoxWidth = getBoxWidth();
-    const SearchBarWidth = getSearchBarWidth();
+    const BoxWidth:number = getBoxWidth();
+    const SearchBarWidth:number = getSearchBarWidth();
 
     const box_sx = {
         position: "fixed",
@@ -66,6 +66,7 @@ const SearchBar = ({
                     <ClearButton
                         title="検索のクリア"
                         handleRefresh={handleRefresh}
+                        fontSize={"small"}
                     />
                 )}
                 <Tooltip title="アニメの再読み込み" placement="bottom">

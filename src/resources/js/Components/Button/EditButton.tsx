@@ -1,27 +1,46 @@
 import React from "react";
 import Box from "@mui/material/Box";
-import { IconButton } from "@mui/material";
+import {IconButton} from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import EditDialog from "./EditDialog";
 
+interface Props {
+    taskName: string;
+    id: string;
+    label: string;
+    open: boolean;
+    error: boolean;
+    errorText: string;
+    handleClickOpen: () => void;
+    handleChange: (e) => void;
+    handleClose: () => void;
+    handleSubmit: () => void;
+    handleRefresh: () => void;
+    value: string;
+    submitButtonName: string;
+    aria_label: string;
+    size: "small";
+    sx: { [key: string]: any };
+}
+
 const EditButton = ({
-    task_name,
-    id,
-    label,
-    open,
-    error,
-    errorText,
-    handleClickOpen,
-    handleChange,
-    handleClose,
-    handleSubmit,
-    handleRefresh,
-    value,
-    submit_button_name,
-    aria_label,
-    size,
-    sx,
-}) => {
+                        taskName,
+                        id,
+                        label,
+                        open,
+                        error,
+                        errorText,
+                        handleClickOpen,
+                        handleChange,
+                        handleClose,
+                        handleSubmit,
+                        handleRefresh,
+                        value,
+                        submitButtonName,
+                        aria_label,
+                        size,
+                        sx,
+                    }: Props) => {
     return (
         <Box>
             <IconButton
@@ -31,10 +50,10 @@ const EditButton = ({
                 size={size}
                 sx={sx}
             >
-                <EditIcon />
+                <EditIcon/>
             </IconButton>
             <EditDialog
-                task_name={task_name}
+                taskName={taskName}
                 id={id}
                 label={label}
                 open={open}
@@ -45,7 +64,7 @@ const EditButton = ({
                 handleSubmit={handleSubmit}
                 handleRefresh={handleRefresh}
                 value={value}
-                submit_button_name={submit_button_name}
+                submitButtonName={submitButtonName}
             />
         </Box>
     );

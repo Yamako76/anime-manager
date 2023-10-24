@@ -6,9 +6,9 @@ import {getBodyHeight, getBoxWidth} from '@/Components/AllAnime/tool/tool';
 
 // 検索後に該当するアイテムが存在しない場合に表示する画面
 const NotExistAnimes = () => {
-    const bodyHeight = getBodyHeight();
-    const BoxWidth = getBoxWidth();
-    const textList = [
+    const bodyHeight: number = getBodyHeight();
+    const BoxWidth: number = getBoxWidth();
+    const textList: string[] = [
         "該当するアニメが存在しません",
         "(アニメの作成を行ってください)"
     ];

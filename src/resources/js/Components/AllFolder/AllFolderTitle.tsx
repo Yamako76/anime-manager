@@ -11,8 +11,14 @@ interface Props {
     isLoading: boolean;
 }
 
+interface MainProps {
+    titleWidth: number;
+    handleReload: () => void;
+    isLoading: boolean;
+}
 
-const Main = ({titleWidth, handleReload, isLoading}) => {
+
+const Main = ({titleWidth, handleReload, isLoading}: MainProps) => {
     const contentList = [
         {
             body: (
@@ -72,7 +78,7 @@ const Main = ({titleWidth, handleReload, isLoading}) => {
 };
 
 const AllFolderTitle = ({handleReload, isLoading}: Props) => {
-    const titleWidth = getBoxWidth() - 100;
+    const titleWidth: number = getBoxWidth() - 100;
 
     return (
         <Box>

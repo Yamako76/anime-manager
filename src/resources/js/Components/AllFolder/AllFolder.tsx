@@ -7,17 +7,23 @@ import {grey} from "@mui/material/colors";
 import DeleteFolder from "@/Components/AllFolder/tool/DeleteFolder";
 import Paper from "@mui/material/Paper";
 import EditFolder from "@/Components/AllFolder/tool/EditFolder";
+import {Folder} from "@/Components/Folder";
+
 
 interface Props {
     handleReload: () => void;
-    folders: any[];
+    folders: Folder[];
+}
+
+interface FolderProps {
+    folder: Folder;
 }
 
 const AllFolder = ({handleReload, folders}: Props) => {
-    const BoxWidth = getBoxWidth();
-    const titleWidth = BoxWidth - 90;
+    const BoxWidth: number = getBoxWidth();
+    const titleWidth: number = BoxWidth - 90;
 
-    const PaperContent = ({folder}) => {
+    const PaperContent = ({folder}: FolderProps) => {
         const contentList = [
             {
                 body: (

@@ -2,13 +2,13 @@ import React, {useContext, useEffect, useRef, useState} from "react";
 import {Box, Divider, Grid, Skeleton} from "@mui/material";
 import {getBoxWidth} from "@/Components/AllAnime/tool/tool";
 import SearchBar from "@/Components/AllAnime/SearchBar";
-// import { useNavigate } from "react-router-dom";
 import {SortContext} from "@/Components/common/SortManagement";
 import ApiErrorDialog from "@/Components/common/ApiErrorDialog";
 import InfiniteScroll from "react-infinite-scroller";
 import NotExistAnimes from "@/Components/common/NotExistAnimes";
 import FolderTitle from "@/Components/Folder/FolderTitle";
 import AnimeList from "@/Components/Folder/AnimeList";
+import {FolderAnime} from "@/Components/FolderAnime";
 
 interface FolderProps {
     name: string;
@@ -16,15 +16,14 @@ interface FolderProps {
 }
 
 const AnimeManagement = ({name, id}: FolderProps) => {
-        const BoxWidth = getBoxWidth();
+        const BoxWidth: number = getBoxWidth();
         const [value, setValue] = useState<string>("");
-        const [items, setItems] = useState([]);
-        const [reRender, setReRender] = useState(true);
-        const [isLoading, setIsLoading] = useState(true);
-        const [hasMore, setHasMore] = useState(true);
+        const [animes, setAnimes] = useState<FolderAnime[]>([]);
+        const [reRender, setReRender] = useState<boolean>(true);
+        const [isLoading, setIsLoading] = useState<boolean>(true);
+        const [hasMore, setHasMore] = useState<boolean>(true);
         const [isDialog, setIsDialog] = useState<boolean>(false);
         const [state, dispatch] = useContext(SortContext);
-        // const navigate = useNavigate();
         const isMounted = useRef(false);
         const page = useRef(1);
 
@@ -53,7 +52,7 @@ const AnimeManagement = ({name, id}: FolderProps) => {
             }
             handleRefresh();
             setIsLoading(true);
-            setItems([]);
+            setAnimes([]);
             page.current = 1;
             handleReRender();
             setHasMore(true);
@@ -68,7 +67,7 @@ const AnimeManagement = ({name, id}: FolderProps) => {
             }
             setHasMore(false);
             setIsLoading(true);
-            setItems([]);
+            setAnimes([]);
             searchFolderAnimes();
         };
 
@@ -125,7 +124,7 @@ const AnimeManagement = ({name, id}: FolderProps) => {
                 if (!isMounted.current) {
                     return;
                 }
-                setItems(data);
+                setAnimes(data);
                 setIsLoading(false);
             } catch (error) {
                 handleDialogOpen();
@@ -142,7 +141,7 @@ const AnimeManagement = ({name, id}: FolderProps) => {
                     if (data.last_page === page.current) {
                         setHasMore(false);
                     }
-                    setItems(data.data);
+                    setAnimes(data.data);
                     setIsLoading(false);
                 }
             }
@@ -169,7 +168,7 @@ const AnimeManagement = ({name, id}: FolderProps) => {
                 if (data.last_page === page.current) {
                     setHasMore(false);
                 }
-                setItems([...items, ...data.data]);
+                setAnimes([...animes, ...data.data]);
             }
         }
 
@@ -189,14 +188,14 @@ const AnimeManagement = ({name, id}: FolderProps) => {
                         hasMore={hasMore}
                         loader={loader}
                     >
-                        <AnimeList handleReload={handleReload} items={items} id={id}/>
+                        <AnimeList handleReload={handleReload} animes={animes} id={id}/>
                     </InfiniteScroll>
                 </Box>
             );
         }
 
         const isNotExist = (
-            (items.length) ? <ViewInfiniteScroll/> : <NotExistAnimes/>
+            (animes.length) ? <ViewInfiniteScroll/> : <NotExistAnimes/>
         );
 
         const Main = () => {

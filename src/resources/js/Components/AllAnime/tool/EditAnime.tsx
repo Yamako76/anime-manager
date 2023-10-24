@@ -15,13 +15,13 @@ interface AnimeProps {
 }
 
 const EditAnime = ({name, memo, id}: AnimeProps) => {
-    const [open, setOpen] = useState(false);
-    const [error, setError] = useState(false);
-    const [nameValue, setNameValue] = useState(name);
-    const [memoValue, setMemoValue] = useState(memo);
-    const [errorText, setErrorText] = useState("");
-    const [isSuccessSnackbar, setIsSuccessSnackbar] = useState(false);
-    const [isFailedSnackbar, setIsFailedSnackbar] = useState(false);
+    const [open, setOpen] = useState<boolean>(false);
+    const [error, setError] = useState<boolean>(false);
+    const [nameValue, setNameValue] = useState<string>(name);
+    const [memoValue, setMemoValue] = useState<string>(memo);
+    const [errorText, setErrorText] = useState<string>("");
+    const [isSuccessSnackbar, setIsSuccessSnackbar] = useState<boolean>(false);
+    const [isFailedSnackbar, setIsFailedSnackbar] = useState<boolean>(false);
     const errorMessage = "1字以上200字以下で記入してください。";
 
     const handleErrorRefresh = () => {

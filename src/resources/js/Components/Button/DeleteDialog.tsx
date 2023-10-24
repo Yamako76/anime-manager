@@ -7,27 +7,30 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
+interface Props {
+    taskName: string;
+    contentText: string;
+    open: boolean;
+    handleClose: () => void;
+    handleSubmit: () => void;
+}
+
 const DeleteDialog = ({
-    task_name,
-    content_text,
-    open,
-    handleClose,
-    handleSubmit,
-}) => {
+                          taskName,
+                          contentText,
+                          open,
+                          handleClose,
+                          handleSubmit,
+                      }: Props) => {
     return (
         <Box>
             <Dialog open={open} onClose={handleClose}>
-                <DialogTitle>{task_name}</DialogTitle>
+                <DialogTitle>{taskName}</DialogTitle>
                 <DialogContent>
-                    <DialogContentText>{content_text}</DialogContentText>
+                    <DialogContentText>{contentText}</DialogContentText>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>閉じる</Button>
-                    {/*{*/}
-                    {/*    (state.current_folderId === String(folder_key))*/}
-                    {/*        ? <Button component={Link} to="/app/home" onClick={handleSubmit}>削除</Button>*/}
-                    {/*        : <Button onClick={handleSubmit}>削除</Button>*/}
-                    {/*}*/}
                     <Button onClick={handleSubmit}>削除</Button>
                 </DialogActions>
             </Dialog>

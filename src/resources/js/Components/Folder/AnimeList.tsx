@@ -6,28 +6,29 @@ import {grey} from "@mui/material/colors";
 import {getBoxWidth} from "@/Components/AllAnime/tool/tool";
 import {InertiaLink} from "@inertiajs/inertia-react";
 import DeleteFolderAnime from "@/Components/Folder/tool/DeleteFolderAnime";
+import {FolderAnime} from "@/Components/FolderAnime";
 
 interface Props {
     handleReload: () => void;
-    items: any[];
     id: number;
+    animes: FolderAnime[];
 }
 
-const AnimeList = ({handleReload, items, id}: Props) => {
-    const BoxWidth = getBoxWidth();
-    const titleWidth = BoxWidth - 50;
+const AnimeList = ({handleReload, id, animes}: Props) => {
+    const BoxWidth: number = getBoxWidth();
+    const titleWidth: number = BoxWidth - 50;
 
-    const PaperContent = ({item}) => {
+    const PaperContent = ({anime}) => {
         const contentList = [
             {
                 body: (
-                    <Tooltip title={item.name + "の詳細"} placement="bottom-end">
+                    <Tooltip title={anime.name + "の詳細"} placement="bottom-end">
                         <Box
                             textOverflow="ellipsis"
                             overflow="hidden"
                             fontSize={20}
                             as={InertiaLink}
-                            href={`/anime-list/${item.anime_id}`}
+                            href={`/anime-list/${anime.anime_id}`}
                             sx={{
                                 margin: "0px 5px",
                                 width: String(titleWidth - 10) + "px",
@@ -36,7 +37,7 @@ const AnimeList = ({handleReload, items, id}: Props) => {
                                 "&:hover": {color: grey[900]},
                             }}
                         >
-                            {item.name}
+                            {anime.name}
                         </Box>
                     </Tooltip>
                 ),
@@ -48,7 +49,7 @@ const AnimeList = ({handleReload, items, id}: Props) => {
                 },
             },
             {
-                body: <DeleteFolderAnime handleReload={handleReload} item={item}/>,
+                body: <DeleteFolderAnime handleReload={handleReload} anime={anime} id={id}/>,
                 sx: {
                     width: "40px",
                     display: "flex",
@@ -99,9 +100,9 @@ const AnimeList = ({handleReload, items, id}: Props) => {
                 }}
             >
                 <Grid container direction="column" spacing={1}>
-                    {items.map((item, index) => (
+                    {animes.map((anime, index) => (
                         <Grid key={index} container item>
-                            <PaperContent item={item}/>
+                            <PaperContent anime={anime}/>
                         </Grid>
                     ))}
                 </Grid>

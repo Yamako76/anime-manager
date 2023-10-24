@@ -4,12 +4,19 @@ import Tooltip from "@mui/material/Tooltip";
 import IconButton from "@mui/material/IconButton";
 import ClearIcon from "@mui/icons-material/Clear";
 
-const ClearButton = ({ title, handleRefresh, fontSize }) => {
+interface Props {
+    title: string;
+    handleRefresh: () => void;
+    fontSize: "small";
+}
+
+
+const ClearButton = ({title, handleRefresh, fontSize}: Props) => {
     return (
         <Box>
             <Tooltip title={title} placeholder="bottom">
                 <IconButton onClick={handleRefresh}>
-                    <ClearIcon fontSize={fontSize} />
+                    <ClearIcon fontSize={fontSize}/>
                 </IconButton>
             </Tooltip>
         </Box>

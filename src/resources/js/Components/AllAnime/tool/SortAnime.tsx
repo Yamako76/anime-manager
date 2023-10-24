@@ -19,7 +19,11 @@ const options = [
     "タイトル順",
 ];
 
-const SortAnime = ({isLoading}) => {
+interface Props {
+    isLoading: boolean;
+}
+
+const SortAnime = ({isLoading}: Props) => {
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     const [state, dispatch] = useContext(SortContext);

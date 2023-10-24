@@ -6,23 +6,26 @@ import {grey} from "@mui/material/colors";
 import axios from "axios";
 import ApiCommunicationSuccess from "@/Components/common/ApiCommunicationSuccess";
 import ApiCommunicationFailed from "@/Components/common/ApiCommunicationFailed";
+import {Folder} from "@/Components/Folder";
 
 // フォルダ編集機能 //
 // フォルダの編集ボタンを押すとフォルダを編集する画面が表示され
 // 閉じるまたは編集ボタンを押すとフォルダ編集のキャンセルまたはフォルダ編集が完了する
 // 入力は1字以上200字以下で制限する
+
+
 interface Props {
-    folder: any;
+    folder: Folder;
     handleReload: () => void;
 }
 
 const EditFolder = ({folder, handleReload}: Props) => {
-    const [open, setOpen] = useState(false);
-    const [error, setError] = useState(false);
-    const [value, setValue] = useState(folder.name);
-    const [errorText, setErrorText] = useState("");
-    const [isSuccessSnackbar, setIsSuccessSnackbar] = useState(false);
-    const [isFailedSnackbar, setIsFailedSnackbar] = useState(false);
+    const [open, setOpen] = useState<boolean>(false);
+    const [error, setError] = useState<boolean>(false);
+    const [value, setValue] = useState<string>(folder.name);
+    const [errorText, setErrorText] = useState<string>("");
+    const [isSuccessSnackbar, setIsSuccessSnackbar] = useState<boolean>(false);
+    const [isFailedSnackbar, setIsFailedSnackbar] = useState<boolean>(false);
     const errorMessage = "1字以上200字以下で記入してください。";
 
     const handleErrorRefresh = () => {
@@ -46,7 +49,7 @@ const EditFolder = ({folder, handleReload}: Props) => {
 
     const handleClose = () => {
         setOpen(false);
-        setValue(folder);
+        setValue(folder.name);
         handleRefresh();
         handleErrorRefresh();
     };
@@ -111,7 +114,7 @@ const EditFolder = ({folder, handleReload}: Props) => {
         <>
             <Box>
                 <EditButton
-                    task_name="フォルダの編集"
+                    taskName="フォルダの編集"
                     id="edit folder"
                     label="新しいフォルダ名"
                     open={open}
@@ -123,7 +126,7 @@ const EditFolder = ({folder, handleReload}: Props) => {
                     handleSubmit={handleSubmit}
                     handleRefresh={handleRefresh}
                     value={value}
-                    submit_button_name="完了"
+                    submitButtonName="完了"
                     aria_label="edit_folder"
                     size="small"
                     sx={{"&:hover": {color: grey[900]}}}

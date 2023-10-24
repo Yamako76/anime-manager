@@ -4,22 +4,21 @@ import AllAnime from "@/Components/AllAnime/AllAnime";
 import {getBoxWidth} from "@/Components/AllAnime/tool/tool";
 import AnimeListTitle from "@/Components/AllAnime/AnimeListTitle";
 import SearchBar from "@/Components/AllAnime/SearchBar";
-// import { useNavigate } from "react-router-dom";
 import {SortContext} from "@/Components/common/SortManagement";
 import ApiErrorDialog from "@/Components/common/ApiErrorDialog";
 import InfiniteScroll from "react-infinite-scroller";
 import NotExistAnimes from "@/Components/common/NotExistAnimes";
+import {Anime} from "@/Components/Anime";
 
 const AnimeManagement = () => {
-        const BoxWidth = getBoxWidth();
+        const BoxWidth: number = getBoxWidth();
         const [value, setValue] = useState<string>("");
-        const [items, setItems] = useState([]);
-        const [reRender, setReRender] = useState(true);
-        const [isLoading, setIsLoading] = useState(true);
-        const [hasMore, setHasMore] = useState(true);
+        const [animes, setAnimes] = useState<Anime[]>([]);
+        const [reRender, setReRender] = useState<boolean>(true);
+        const [isLoading, setIsLoading] = useState<boolean>(true);
+        const [hasMore, setHasMore] = useState<boolean>(true);
         const [isDialog, setIsDialog] = useState<boolean>(false);
         const [state, dispatch] = useContext(SortContext);
-        // const navigate = useNavigate();
         const isMounted = useRef(false);
         const page = useRef(1);
 
@@ -48,7 +47,7 @@ const AnimeManagement = () => {
             }
             handleRefresh();
             setIsLoading(true);
-            setItems([]);
+            setAnimes([]);
             page.current = 1;
             handleReRender();
             setHasMore(true);
@@ -63,7 +62,7 @@ const AnimeManagement = () => {
             }
             setHasMore(false);
             setIsLoading(true);
-            setItems([]);
+            setAnimes([]);
             searchAnimes();
         };
 
@@ -106,28 +105,28 @@ const AnimeManagement = () => {
             return res;
         }
 
-    const searchAnimes = async () => {
-        const abortCtrl = new AbortController()
-        const timeout = setTimeout(() => {
-            abortCtrl.abort()
-        }, 10000);
-        try {
-            const res = await fetch(`/api/anime-list/search?q=${value.trim()}`, {signal: abortCtrl.signal});
-            if (!res.ok) {
-                throw new Error(res.statusText);
+        const searchAnimes = async () => {
+            const abortCtrl = new AbortController()
+            const timeout = setTimeout(() => {
+                abortCtrl.abort()
+            }, 10000);
+            try {
+                const res = await fetch(`/api/anime-list/search?q=${value.trim()}`, {signal: abortCtrl.signal});
+                if (!res.ok) {
+                    throw new Error(res.statusText);
+                }
+                const data = await res.json();
+                if (!isMounted.current) {
+                    return;
+                }
+                setAnimes(data);
+                setIsLoading(false);
+            } catch (error) {
+                handleDialogOpen();
+            } finally {
+                clearTimeout(timeout);
             }
-            const data = await res.json();
-            if (!isMounted.current) {
-                return;
-            }
-            setItems(data);
-            setIsLoading(false);
-        } catch (error) {
-            handleDialogOpen();
-        } finally {
-            clearTimeout(timeout);
         }
-    }
 
         useEffect(() => {
             const getAnimes = async () => {
@@ -137,7 +136,7 @@ const AnimeManagement = () => {
                     if (data.last_page === page.current) {
                         setHasMore(false);
                     }
-                    setItems(data.data);
+                    setAnimes(data.data);
                     setIsLoading(false);
                 }
             }
@@ -164,7 +163,7 @@ const AnimeManagement = () => {
                 if (data.last_page === page.current) {
                     setHasMore(false);
                 }
-                setItems([...items, ...data.data]);
+                setAnimes([...animes, ...data.data]);
             }
         }
 
@@ -184,14 +183,14 @@ const AnimeManagement = () => {
                         hasMore={hasMore}
                         loader={loader}
                     >
-                        <AllAnime handleReload={handleReload} items={items}/>
+                        <AllAnime handleReload={handleReload} animes={animes}/>
                     </InfiniteScroll>
                 </Box>
             );
         }
 
         const isNotExist = (
-            (items.length) ? <ViewInfiniteScroll/> : <NotExistAnimes/>
+            (animes.length) ? <ViewInfiniteScroll/> : <NotExistAnimes/>
         );
 
         const Main = () => {
