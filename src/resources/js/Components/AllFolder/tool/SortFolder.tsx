@@ -19,7 +19,11 @@ const options = [
     "タイトル順",
 ];
 
-const SortFolder = ({isLoading}) => {
+interface Props {
+    isLoading: boolean;
+}
+
+const SortFolder = ({isLoading}: Props) => {
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     const [state, dispatch] = useContext(SortContext);

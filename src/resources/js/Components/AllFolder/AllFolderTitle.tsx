@@ -78,7 +78,7 @@ const Main = ({titleWidth, handleReload, isLoading}: MainProps) => {
 };
 
 const AllFolderTitle = ({handleReload, isLoading}: Props) => {
-    const titleWidth = getBoxWidth() - 100;
+    const titleWidth: number = getBoxWidth() - 100;
 
     return (
         <Box>

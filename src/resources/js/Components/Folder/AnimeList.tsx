@@ -10,12 +10,11 @@ import DeleteFolderAnime from "@/Components/Folder/tool/DeleteFolderAnime";
 interface Props {
     handleReload: () => void;
     items: any[];
-    id: number;
 }
 
-const AnimeList = ({handleReload, items, id}: Props) => {
-    const BoxWidth = getBoxWidth();
-    const titleWidth = BoxWidth - 50;
+const AnimeList = ({handleReload, items}: Props) => {
+    const BoxWidth: number = getBoxWidth();
+    const titleWidth: number = BoxWidth - 50;
 
     const PaperContent = ({item}) => {
         const contentList = [

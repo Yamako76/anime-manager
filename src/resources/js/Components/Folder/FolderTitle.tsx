@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import Tooltip from "@mui/material/Tooltip";
 import Grid from "@mui/material/Grid";
 // import SortItem from '../tool/SortItem';
-import { getBoxWidth } from "@/Components/AllAnime/tool/tool";
+import {getBoxWidth} from "@/Components/AllAnime/tool/tool";
 import AddFolderAnime from "@/Components/Folder/tool/AddFolderAnime";
 import SortAnime from "@/Components/Folder/tool/SortAnime";
 
@@ -15,7 +15,17 @@ interface Props {
     isLoading: boolean;
 }
 
-const Main = ({ titleWidth, name, handleReload, isLoading, id }) => {
+interface MainProps {
+    titleWidth: number;
+    name: string;
+    handleReload: () => void;
+    isLoading: boolean;
+    id: number;
+
+}
+
+
+const Main = ({titleWidth, name, handleReload, isLoading, id}: MainProps) => {
     const contentList = [
         {
             body: (
@@ -63,7 +73,7 @@ const Main = ({ titleWidth, name, handleReload, isLoading, id }) => {
     return (
         <Grid
             container
-            sx={{ height: "60px", marginBottom: "5px", marginTop: "20px" }}
+            sx={{height: "60px", marginBottom: "5px", marginTop: "20px"}}
         >
             {contentList.map((content, index) => {
                 return (
@@ -76,8 +86,8 @@ const Main = ({ titleWidth, name, handleReload, isLoading, id }) => {
     );
 };
 
-const FolderTitle = ({ name, handleReload, isLoading, id }: Props) => {
-    const titleWidth = getBoxWidth() - 100;
+const FolderTitle = ({name, handleReload, isLoading, id}: Props) => {
+    const titleWidth: number = getBoxWidth() - 100;
 
     return (
         <Box>

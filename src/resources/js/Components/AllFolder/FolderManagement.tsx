@@ -10,7 +10,7 @@ import AllFolderTitle from "@/Components/AllFolder/AllFolderTitle";
 import AllFolder from "@/Components/AllFolder/AllFolder";
 
 const FolderManagement = () => {
-        const BoxWidth = getBoxWidth();
+        const BoxWidth: number = getBoxWidth();
         const [value, setValue] = useState<string>("");
         const [folders, setFolders] = useState([]);
         const [reRender, setReRender] = useState<boolean>(true);

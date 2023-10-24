@@ -13,12 +13,12 @@ interface Props {
 }
 
 const AddFolderAnime = ({handleReload, folderName, id}: Props) => {
-    const [open, setOpen] = useState(false);
-    const [error, setError] = useState(false);
-    const [value, setValue] = useState("");
-    const [errorText, setErrorText] = useState("");
-    const [isSuccessSnackbar, setIsSuccessSnackbar] = useState(false);
-    const [isFailedSnackbar, setIsFailedSnackbar] = useState(false);
+    const [open, setOpen] = useState<boolean>(false);
+    const [error, setError] = useState<boolean>(false);
+    const [value, setValue] = useState<string>("");
+    const [errorText, setErrorText] = useState<string>("");
+    const [isSuccessSnackbar, setIsSuccessSnackbar] = useState<boolean>(false);
+    const [isFailedSnackbar, setIsFailedSnackbar] = useState<boolean>(false);
     const errorMessage = "1字以上200字以下で記入してください。";
 
     const handleErrorRefresh = () => {
