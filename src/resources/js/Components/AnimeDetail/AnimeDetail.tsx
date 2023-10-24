@@ -9,7 +9,6 @@ import Typography from "@mui/material/Typography";
 import ViewYouTubeVideo from "@/Components/YouTubeApi/ViewYouTubeVideo";
 import ViewAnimeTitle from "@/Components/AnimeDetail/ViewAnimeTitle";
 import EditAnime from "@/Components/AllAnime/tool/EditAnime";
-// import {useNavigate} from "react-router-dom";
 import ApiCommunicationFailed from "@/Components/common/ApiCommunicationFailed";
 
 interface AnimeProps {
@@ -19,10 +18,8 @@ interface AnimeProps {
 }
 
 const AnimeDetail = ({name, memo, id}: AnimeProps) => {
-    const [videoId, setVideoId] = useState();
-    const [isLoading, setIsLoading] = useState(true);
-    const [isFailedSnackbar, setIsFailedSnackbar] = useState(false);
-    // const navigate = useNavigate();
+    const [videoId, setVideoId] = useState<string>("");
+    const [isFailedSnackbar, setIsFailedSnackbar] = useState<boolean>(false);
     const isMounted = useRef(false);
 
     const handleSnackbarClose = () => {
@@ -50,41 +47,6 @@ const AnimeDetail = ({name, memo, id}: AnimeProps) => {
             getAnime();
         }
     }, []);
-
-    // const loader = (
-    //     <Grid
-    //         container
-    //         direction="column"
-    //         sx={{
-    //             width: "100%",
-    //             height: "100vh",
-    //             justifyContent: "center",
-    //             alignItems: "center",
-    //             display: "flex",
-    //         }}
-    //     >
-    //         <Grid
-    //             sx={{
-    //                 width: "100%",
-    //                 justifyContent: "center",
-    //                 alignItems: "center",
-    //                 display: "flex",
-    //             }}
-    //         >
-    //             <CircularProgress color="inherit" />
-    //         </Grid>
-    //         <Grid
-    //             sx={{
-    //                 width: "100%",
-    //                 justifyContent: "center",
-    //                 alignItems: "center",
-    //                 display: "flex",
-    //             }}
-    //         >
-    //             <Typography color="inherit">ロード中</Typography>
-    //         </Grid>
-    //     </Grid>
-    // );
 
     const fetchYouTubeVideoId = async (keyWord) => {
         const abortCtrl = new AbortController();
@@ -203,9 +165,6 @@ const AnimeDetail = ({name, memo, id}: AnimeProps) => {
                         maxWidth: "1200px",
                     }}
                 >
-                    {/*{videoId == null || !isMounted.current ? null : (*/}
-                    {/*    <ViewYouTubeVideo videoId={videoId} />*/}
-                    {/*)}*/}
                     <ViewYouTubeVideo videoId={videoId}/>
                 </Box>
             </Box>
@@ -223,7 +182,6 @@ const AnimeDetail = ({name, memo, id}: AnimeProps) => {
                     display: "flex",
                 }}
             >
-                {/*{isLoading ? loader : <ViewItem />}*/}
                 <ViewItem/>
             </Box>
             {isFailedSnackbar && <ApiCommunicationFailed message={`動画の取得に失敗しました`}

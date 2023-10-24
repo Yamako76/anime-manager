@@ -2,7 +2,11 @@ import React from "react";
 import Iframe from "react-iframe";
 import Box from "@mui/material/Box";
 
-const ViewYouTubeVideo = ({ videoId }) => {
+interface Props {
+    videoId: string;
+}
+
+const ViewYouTubeVideo = ({videoId}: Props) => {
     return (
         <Box
             sx={{
