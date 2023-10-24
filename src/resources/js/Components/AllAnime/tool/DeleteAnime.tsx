@@ -5,12 +5,24 @@ import axios from "axios";
 import ApiCommunicationSuccess from "@/Components/common/ApiCommunicationSuccess";
 import ApiCommunicationFailed from "@/Components/common/ApiCommunicationFailed";
 
+type Anime = {
+    created_at: string;
+    deleted_at: string | null;
+    id: number;
+    latest_changed_at: string;
+    memo: string;
+    name: string;
+    status: "active" | "deleted";
+    updated_at: string;
+    user_id: number;
+};
+
 interface Props {
     handleReload: () => void;
-    item: any;
+    anime: Anime;
 }
 
-const DeleteAnime = ({handleReload, item}: Props) => {
+const DeleteAnime = ({handleReload, anime}: Props) => {
     const [open, setOpen] = useState<boolean>(false);
     const [isSuccessSnackbar, setIsSuccessSnackbar] = useState<boolean>(false);
     const [isFailedSnackbar, setIsFailedSnackbar] = useState<boolean>(false);
@@ -52,7 +64,7 @@ const DeleteAnime = ({handleReload, item}: Props) => {
             abortCtrl.abort()
         }, 10000);
         axios
-            .delete(`/api/anime-list/${item.id}`, {signal: abortCtrl.signal})
+            .delete(`/api/anime-list/${anime.id}`, {signal: abortCtrl.signal})
             .then(() => {
                 handleSnackbarSuccess();
             })
@@ -78,11 +90,11 @@ const DeleteAnime = ({handleReload, item}: Props) => {
                     size="small"
                 />
             </Box>
-            {isSuccessSnackbar && <ApiCommunicationSuccess message={`アニメ(${item.name})の削除が完了しました`}
+            {isSuccessSnackbar && <ApiCommunicationSuccess message={`アニメ(${anime.name})の削除が完了しました`}
                                                            handleSnackbarClose={handleSuccessSnackbarClose}
                                                            isSnackbar={isSuccessSnackbar}
             />}
-            {isFailedSnackbar && <ApiCommunicationFailed message={`アニメ(${item.name})の削除に失敗しました`}
+            {isFailedSnackbar && <ApiCommunicationFailed message={`アニメ(${anime.name})の削除に失敗しました`}
                                                          handleSnackbarClose={handleFailedSnackbarClose}
                                                          isSnackbar={isFailedSnackbar}
             />}

@@ -7,10 +7,11 @@ import ApiCommunicationFailed from "@/Components/common/ApiCommunicationFailed";
 
 interface Props {
     handleReload: () => void;
-    item: any;
+    anime: any;
+    id: number;
 }
 
-const DeleteFolderAnime = ({handleReload, item}: Props) => {
+const DeleteFolderAnime = ({handleReload, anime, id}: Props) => {
     const [open, setOpen] = useState<boolean>(false);
     const [isSuccessSnackbar, setIsSuccessSnackbar] = useState<boolean>(false);
     const [isFailedSnackbar, setIsFailedSnackbar] = useState<boolean>(false);
@@ -52,7 +53,7 @@ const DeleteFolderAnime = ({handleReload, item}: Props) => {
             abortCtrl.abort()
         }, 10000);
         axios
-            .delete(`/api/folders/${item.folder_id}/anime-list/${item.anime_id}`, {signal: abortCtrl.signal})
+            .delete(`/api/folders/${id}/anime-list/${anime.anime_id}`, {signal: abortCtrl.signal})
             .then(() => {
                 handleSnackbarSuccess();
             })
@@ -78,11 +79,11 @@ const DeleteFolderAnime = ({handleReload, item}: Props) => {
                     size="small"
                 />
             </Box>
-            {isSuccessSnackbar && <ApiCommunicationSuccess message={`アニメ(${item.name})の削除が完了しました`}
+            {isSuccessSnackbar && <ApiCommunicationSuccess message={`アニメ(${anime.name})の削除が完了しました`}
                                                            handleSnackbarClose={handleSuccessSnackbarClose}
                                                            isSnackbar={isSuccessSnackbar}
             />}
-            {isFailedSnackbar && <ApiCommunicationFailed message={`アニメ(${item.name})の削除に失敗しました`}
+            {isFailedSnackbar && <ApiCommunicationFailed message={`アニメ(${anime.name})の削除に失敗しました`}
                                                          handleSnackbarClose={handleFailedSnackbarClose}
                                                          isSnackbar={isFailedSnackbar}
             />}

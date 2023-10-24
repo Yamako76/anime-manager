@@ -17,7 +17,7 @@ interface FolderProps {
 const AnimeManagement = ({name, id}: FolderProps) => {
         const BoxWidth: number = getBoxWidth();
         const [value, setValue] = useState<string>("");
-        const [items, setItems] = useState([]);
+        const [animes, setAnimes] = useState([]);
         const [reRender, setReRender] = useState<boolean>(true);
         const [isLoading, setIsLoading] = useState<boolean>(true);
         const [hasMore, setHasMore] = useState<boolean>(true);
@@ -51,7 +51,7 @@ const AnimeManagement = ({name, id}: FolderProps) => {
             }
             handleRefresh();
             setIsLoading(true);
-            setItems([]);
+            setAnimes([]);
             page.current = 1;
             handleReRender();
             setHasMore(true);
@@ -66,7 +66,7 @@ const AnimeManagement = ({name, id}: FolderProps) => {
             }
             setHasMore(false);
             setIsLoading(true);
-            setItems([]);
+            setAnimes([]);
             searchFolderAnimes();
         };
 
@@ -123,7 +123,7 @@ const AnimeManagement = ({name, id}: FolderProps) => {
                 if (!isMounted.current) {
                     return;
                 }
-                setItems(data);
+                setAnimes(data);
                 setIsLoading(false);
             } catch (error) {
                 handleDialogOpen();
@@ -140,7 +140,7 @@ const AnimeManagement = ({name, id}: FolderProps) => {
                     if (data.last_page === page.current) {
                         setHasMore(false);
                     }
-                    setItems(data.data);
+                    setAnimes(data.data);
                     setIsLoading(false);
                 }
             }
@@ -167,7 +167,7 @@ const AnimeManagement = ({name, id}: FolderProps) => {
                 if (data.last_page === page.current) {
                     setHasMore(false);
                 }
-                setItems([...items, ...data.data]);
+                setAnimes([...animes, ...data.data]);
             }
         }
 
@@ -187,14 +187,14 @@ const AnimeManagement = ({name, id}: FolderProps) => {
                         hasMore={hasMore}
                         loader={loader}
                     >
-                        <AnimeList handleReload={handleReload} items={items}/>
+                        <AnimeList handleReload={handleReload} animes={animes} id={id}/>
                     </InfiniteScroll>
                 </Box>
             );
         }
 
         const isNotExist = (
-            (items.length) ? <ViewInfiniteScroll/> : <NotExistAnimes/>
+            (animes.length) ? <ViewInfiniteScroll/> : <NotExistAnimes/>
         );
 
         const Main = () => {

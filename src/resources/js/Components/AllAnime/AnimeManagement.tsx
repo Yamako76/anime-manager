@@ -9,10 +9,22 @@ import ApiErrorDialog from "@/Components/common/ApiErrorDialog";
 import InfiniteScroll from "react-infinite-scroller";
 import NotExistAnimes from "@/Components/common/NotExistAnimes";
 
+type Anime = {
+    created_at: string;
+    deleted_at: string | null;
+    id: number;
+    latest_changed_at: string;
+    memo: string;
+    name: string;
+    status: "active" | "deleted";
+    updated_at: string;
+    user_id: number;
+};
+
 const AnimeManagement = () => {
         const BoxWidth: number = getBoxWidth();
         const [value, setValue] = useState<string>("");
-        const [items, setItems] = useState([]);
+        const [animes, setAnimes] = useState<Anime[]>([]);
         const [reRender, setReRender] = useState<boolean>(true);
         const [isLoading, setIsLoading] = useState<boolean>(true);
         const [hasMore, setHasMore] = useState<boolean>(true);
@@ -46,7 +58,7 @@ const AnimeManagement = () => {
             }
             handleRefresh();
             setIsLoading(true);
-            setItems([]);
+            setAnimes([]);
             page.current = 1;
             handleReRender();
             setHasMore(true);
@@ -61,7 +73,7 @@ const AnimeManagement = () => {
             }
             setHasMore(false);
             setIsLoading(true);
-            setItems([]);
+            setAnimes([]);
             searchAnimes();
         };
 
@@ -118,7 +130,7 @@ const AnimeManagement = () => {
                 if (!isMounted.current) {
                     return;
                 }
-                setItems(data);
+                setAnimes(data);
                 setIsLoading(false);
             } catch (error) {
                 handleDialogOpen();
@@ -135,7 +147,7 @@ const AnimeManagement = () => {
                     if (data.last_page === page.current) {
                         setHasMore(false);
                     }
-                    setItems(data.data);
+                    setAnimes(data.data);
                     setIsLoading(false);
                 }
             }
@@ -162,7 +174,7 @@ const AnimeManagement = () => {
                 if (data.last_page === page.current) {
                     setHasMore(false);
                 }
-                setItems([...items, ...data.data]);
+                setAnimes([...animes, ...data.data]);
             }
         }
 
@@ -182,14 +194,14 @@ const AnimeManagement = () => {
                         hasMore={hasMore}
                         loader={loader}
                     >
-                        <AllAnime handleReload={handleReload} items={items}/>
+                        <AllAnime handleReload={handleReload} animes={animes}/>
                     </InfiniteScroll>
                 </Box>
             );
         }
 
         const isNotExist = (
-            (items.length) ? <ViewInfiniteScroll/> : <NotExistAnimes/>
+            (animes.length) ? <ViewInfiniteScroll/> : <NotExistAnimes/>
         );
 
         const Main = () => {

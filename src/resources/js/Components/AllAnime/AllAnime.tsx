@@ -7,30 +7,42 @@ import {getBoxWidth} from "@/Components/AllAnime/tool/tool";
 import DeleteAnime from "@/Components/AllAnime/tool/DeleteAnime";
 import {InertiaLink} from "@inertiajs/inertia-react";
 
+type Anime = {
+    created_at: string;
+    deleted_at: string | null;
+    id: number;
+    latest_changed_at: string;
+    memo: string;
+    name: string;
+    status: "active" | "deleted";
+    updated_at: string;
+    user_id: number;
+};
+
 interface Props {
     handleReload: () => void;
-    items: any[];
+    animes: Anime[];
 }
 
 interface AnimeProps {
-    item: any;
+    anime: Anime;
 }
 
-const AllAnime = ({handleReload, items}: Props) => {
+const AllAnime = ({handleReload, animes}: Props) => {
     const BoxWidth: number = getBoxWidth();
     const titleWidth: number = BoxWidth - 50;
 
-    const PaperContent = ({item}: AnimeProps) => {
+    const PaperContent = ({anime}: AnimeProps) => {
         const contentList = [
             {
                 body: (
-                    <Tooltip title={item.name + "の詳細"} placement="bottom-end">
+                    <Tooltip title={anime.name + "の詳細"} placement="bottom-end">
                         <Box
                             textOverflow="ellipsis"
                             overflow="hidden"
                             fontSize={20}
                             as={InertiaLink}
-                            href={`/anime-list/${item.id}`}
+                            href={`/anime-list/${anime.id}`}
                             sx={{
                                 margin: "0px 5px",
                                 width: String(titleWidth - 10) + "px",
@@ -39,7 +51,7 @@ const AllAnime = ({handleReload, items}: Props) => {
                                 "&:hover": {color: grey[900]},
                             }}
                         >
-                            {item.name}
+                            {anime.name}
                         </Box>
                     </Tooltip>
                 ),
@@ -51,7 +63,7 @@ const AllAnime = ({handleReload, items}: Props) => {
                 },
             },
             {
-                body: <DeleteAnime handleReload={handleReload} item={item}/>,
+                body: <DeleteAnime handleReload={handleReload} anime={anime}/>,
                 sx: {
                     width: "40px",
                     display: "flex",
@@ -103,9 +115,9 @@ const AllAnime = ({handleReload, items}: Props) => {
                 }}
             >
                 <Grid container direction="column" spacing={1}>
-                    {items.map((item, index) => (
+                    {animes.map((anime, index) => (
                         <Grid key={index} container item>
-                            <PaperContent item={item}/>
+                            <PaperContent anime={anime}/>
                         </Grid>
                     ))}
                 </Grid>
