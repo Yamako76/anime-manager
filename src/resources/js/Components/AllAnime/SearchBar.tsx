@@ -66,6 +66,7 @@ const SearchBar = ({
                     <ClearButton
                         title="検索のクリア"
                         handleRefresh={handleRefresh}
+                        fontSize={"small"}
                     />
                 )}
                 <Tooltip title="アニメの再読み込み" placement="bottom">

@@ -12,7 +12,7 @@ interface Props {
     handleClose: () => void;
     handleSubmit: () => void;
     aria_label: string;
-    size: "small" | "medium" | "large"; // サイズの選択肢に合わせて調整してください
+    size: "small";
 }
 
 const DeleteButton = ({
