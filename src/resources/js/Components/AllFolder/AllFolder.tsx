@@ -13,11 +13,15 @@ interface Props {
     folders: any[];
 }
 
-const AllFolder = ({handleReload, folders}: Props) => {
-    const BoxWidth = getBoxWidth();
-    const titleWidth = BoxWidth - 90;
+interface FolderProps {
+    folder: any;
+}
 
-    const PaperContent = ({folder}) => {
+const AllFolder = ({handleReload, folders}: Props) => {
+    const BoxWidth: number = getBoxWidth();
+    const titleWidth: number = BoxWidth - 90;
+
+    const PaperContent = ({folder}: FolderProps) => {
         const contentList = [
             {
                 body: (

@@ -2,7 +2,6 @@ import React, {useContext, useEffect, useRef, useState} from "react";
 import {Box, Divider, Grid, Skeleton} from "@mui/material";
 import {getBoxWidth} from "@/Components/AllAnime/tool/tool";
 import SearchBar from "@/Components/AllFolder/SearchBar";
-// import { useNavigate } from "react-router-dom";
 import {SortContext} from "@/Components/common/SortManagement";
 import ApiErrorDialog from "@/Components/common/ApiErrorDialog";
 import InfiniteScroll from "react-infinite-scroller";
@@ -14,12 +13,11 @@ const FolderManagement = () => {
         const BoxWidth = getBoxWidth();
         const [value, setValue] = useState<string>("");
         const [folders, setFolders] = useState([]);
-        const [reRender, setReRender] = useState(true);
-        const [isLoading, setIsLoading] = useState(true);
-        const [hasMore, setHasMore] = useState(true);
+        const [reRender, setReRender] = useState<boolean>(true);
+        const [isLoading, setIsLoading] = useState<boolean>(true);
+        const [hasMore, setHasMore] = useState<boolean>(true);
         const [isDialog, setIsDialog] = useState<boolean>(false);
         const [state, dispatch] = useContext(SortContext);
-        // const navigate = useNavigate();
         const isMounted = useRef(false);
         const page = useRef(1);
 

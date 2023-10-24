@@ -12,7 +12,7 @@ interface Props {
     items: any[];
 }
 
-interface Prop {
+interface AnimeProps {
     item: any;
 }
 
@@ -20,7 +20,7 @@ const AllAnime = ({handleReload, items}: Props) => {
     const BoxWidth: number = getBoxWidth();
     const titleWidth: number = BoxWidth - 50;
 
-    const PaperContent = ({item}: Prop) => {
+    const PaperContent = ({item}: AnimeProps) => {
         const contentList = [
             {
                 body: (

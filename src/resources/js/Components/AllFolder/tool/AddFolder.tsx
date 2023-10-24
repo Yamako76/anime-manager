@@ -11,12 +11,12 @@ import ApiCommunicationFailed from "@/Components/common/ApiCommunicationFailed";
 // 閉じるまたは追加ボタンを押すと新しいフォルダ作成のキャンセルまたは新しいフォルダ作成が完了する
 // 入力は1字以上200字以下で制限する
 const AddFolder = ({handleReload}) => {
-    const [open, setOpen] = useState(false);
-    const [error, setError] = useState(false);
-    const [value, setValue] = useState("");
-    const [errorText, setErrorText] = useState("");
-    const [isSuccessSnackbar, setIsSuccessSnackbar] = useState(false);
-    const [isFailedSnackbar, setIsFailedSnackbar] = useState(false);
+    const [open, setOpen] = useState<boolean>(false);
+    const [error, setError] = useState<boolean>(false);
+    const [value, setValue] = useState<string>("");
+    const [errorText, setErrorText] = useState<string>("");
+    const [isSuccessSnackbar, setIsSuccessSnackbar] = useState<boolean>(false);
+    const [isFailedSnackbar, setIsFailedSnackbar] = useState<boolean>(false);
     const errorMessage = "1字以上200字以下で記入してください。";
 
     const handleErrorRefresh = () => {

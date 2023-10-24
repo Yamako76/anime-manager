@@ -11,9 +11,9 @@ interface Props {
 }
 
 const DeleteFolder = ({handleReload, folder}: Props) => {
-    const [open, setOpen] = useState(false);
-    const [isSuccessSnackbar, setIsSuccessSnackbar] = useState(false);
-    const [isFailedSnackbar, setIsFailedSnackbar] = useState(false);
+    const [open, setOpen] = useState<boolean>(false);
+    const [isSuccessSnackbar, setIsSuccessSnackbar] = useState<boolean>(false);
+    const [isFailedSnackbar, setIsFailedSnackbar] = useState<boolean>(false);
 
     const handleClickOpen = () => {
         setOpen(true);
