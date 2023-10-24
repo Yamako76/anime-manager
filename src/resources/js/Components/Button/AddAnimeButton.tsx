@@ -5,48 +5,27 @@ import Tooltip from "@mui/material/Tooltip";
 import AddIcon from "@mui/icons-material/Add";
 import EditAnimeDialog from "./EditAnimeDialog";
 
-interface Props {
-    taskName: string;
-    id: string;
-    label: string;
-    open: boolean;
-    error: boolean;
-    errorText: string;
-    handleClickOpen: () => void;
-    handleChange: (e) => void;
-    handleClose: () => void;
-    handleSubmit: () => void;
-    handleRefresh: () => void;
-    nameValue: string;
-    submitButtonName: string;
-    memoId: string;
-    memoLabel: string;
-    memoValue: string;
-    memoHandleChange: (e) => void;
-    memoHandleRefresh: () => void;
-}
-
 const AddAnimeButton = ({
-                            taskName,
-                            id,
-                            label,
-                            open,
-                            error,
-                            errorText,
-                            handleClickOpen,
-                            handleChange,
-                            handleClose,
-                            handleSubmit,
-                            handleRefresh,
-                            nameValue,
-                            submitButtonName,
-                            sx,
-                            memoId,
-                            memoLabel,
-                            memoValue,
-                            memoHandleChange,
-                            memoHandleRefresh,
-                        }: Props) => {
+    taskName,
+    id,
+    label,
+    open,
+    error,
+    errorText,
+    handleClickOpen,
+    handleChange,
+    handleClose,
+    handleSubmit,
+    handleRefresh,
+    nameValue,
+    submitButtonName,
+    sx,
+    memoId,
+    memoLabel,
+    memoValue,
+    memoHandleChange,
+    memoHandleRefresh,
+}) => {
     return (
         <Box>
             <Tooltip title={taskName}>
@@ -55,7 +34,7 @@ const AddAnimeButton = ({
                     disableFocusRipple={true}
                     sx={sx}
                 >
-                    <AddIcon/>
+                    <AddIcon />
                 </IconButton>
             </Tooltip>
 

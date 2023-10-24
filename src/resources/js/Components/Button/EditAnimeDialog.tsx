@@ -8,43 +8,24 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import ClearButton from "./ClearButton";
 
-interface Props {
-    taskName: string;
-    id: string;
-    label: string;
-    open: boolean;
-    error: boolean;
-    errorText: string;
-    handleChange: (e) => void;
-    handleClose: () => void;
-    handleSubmit: () => void;
-    handleRefresh: () => void;
-    nameValue: string;
-    submitButtonName: string;
-    memoId: string;
-    memoLabel: string;
-    memoValue: string;
-    memoHandleChange: (e) => void;
-}
-
 const EditAnimeDialog = ({
-                             taskName,
-                             id,
-                             label,
-                             open,
-                             error,
-                             errorText,
-                             handleChange,
-                             handleClose,
-                             handleSubmit,
-                             handleRefresh,
-                             nameValue,
-                             submitButtonName,
-                             memoId,
-                             memoLabel,
-                             memoValue,
-                             memoHandleChange,
-                         }: Props) => {
+    taskName,
+    id,
+    label,
+    open,
+    error,
+    errorText,
+    handleChange,
+    handleClose,
+    handleSubmit,
+    handleRefresh,
+    nameValue,
+    submitButtonName,
+    memoId,
+    memoLabel,
+    memoValue,
+    memoHandleChange,
+}) => {
     return (
         <Box>
             <Dialog open={open} onClose={handleClose}>
