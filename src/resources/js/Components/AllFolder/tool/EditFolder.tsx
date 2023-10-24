@@ -111,7 +111,7 @@ const EditFolder = ({folder, handleReload}: Props) => {
         <>
             <Box>
                 <EditButton
-                    task_name="フォルダの編集"
+                    taskName="フォルダの編集"
                     id="edit folder"
                     label="新しいフォルダ名"
                     open={open}

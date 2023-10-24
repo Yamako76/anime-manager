@@ -7,22 +7,38 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import ClearButton from "./ClearButton";
-import { pressEnter } from "@/Components/common/tool";
+import {pressEnter} from "@/Components/common/tool";
+
+interface Props {
+    taskName: string;
+    id: string;
+    label: string;
+    open: boolean;
+    error: boolean;
+    errorText: string;
+    handleChange: (e) => void;
+    handleClose: () => void;
+    handleSubmit: () => void;
+    handleRefresh: () => void;
+    value: string;
+    submit_button_name: string;
+}
+
 
 const EditDialog = ({
-    taskName,
-    id,
-    label,
-    open,
-    error,
-    errorText,
-    handleChange,
-    handleClose,
-    handleSubmit,
-    handleRefresh,
-    value,
-    submit_button_name,
-}) => {
+                        taskName,
+                        id,
+                        label,
+                        open,
+                        error,
+                        errorText,
+                        handleChange,
+                        handleClose,
+                        handleSubmit,
+                        handleRefresh,
+                        value,
+                        submit_button_name,
+                    }: Props) => {
     return (
         <Box>
             <Dialog open={open} onClose={handleClose}>
