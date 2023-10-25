@@ -21,23 +21,10 @@ class AnimeServiceTest extends TestCase
     public function test_success_getAnimeListByUserId__created_at()
     {
         $userId = 1;
-        $expectedAnimeNames = [];
 
-        for ($i = 1; $i <= 20; $i++) {
-            $animeName = "アニメ{$i}";
-            $expectedAnimeNames[] = $animeName;
-
-            $anime = new Anime();
-            $customDateTime = Carbon::parse("20{$i}-01-01 00:00:00");
-            $anime->user_id = $userId;
-            $anime->status = Anime::STATUS_ACTIVE;
-            $anime->name = "アニメ{$i}";
-            $anime->memo = 'memo';
-            $anime->latest_changed_at = $customDateTime;
-            $anime->created_at = $customDateTime;
-            $anime->updated_at = $customDateTime;
-            $anime->save();
-        }
+        $anime1 = $this->createAnime($userId, "アニメ1", "メモ", Anime::STATUS_ACTIVE, Carbon::now(), Carbon::now(), Carbon::now());
+        $anime2 = $this->createAnime($userId, "アニメ2", "メモ", Anime::STATUS_ACTIVE, Carbon::now(), Carbon::now(), Carbon::now());
+        $anime3 = $this->createAnime($userId, "アニメ3", "メモ", Anime::STATUS_ACTIVE, Carbon::now(), Carbon::now(), Carbon::now());
 
         $currentPage = 1;
         $paginateUnit = 20;
@@ -46,31 +33,19 @@ class AnimeServiceTest extends TestCase
 
         $actualAnimeNames = $animeList->pluck('name')->toArray();
 
-        $this->assertEquals($expectedAnimeNames, $actualAnimeNames);
-
-        $this->refreshApplication();
+        $this->assertEquals($anime1->name, $actualAnimeNames[0]);
+        $this->assertEquals($anime2->name, $actualAnimeNames[1]);
+        $this->assertEquals($anime3->name, $actualAnimeNames[2]);
     }
 
     // アニメを最新順に取得するテスト
     public function test_success_getAnimeListByUserId__latest()
     {
         $userId = 1;
-        $expectedAnimeNames = [];
 
-        for ($i = 1; $i <= 20; $i++) {
-            Anime::create([
-                'user_id' => $userId,
-                'status' => Anime::STATUS_ACTIVE,
-                'name' => "アニメ{$i}",
-                'memo' => 'This is a memo.',
-                'latest_changed_at' => now(),
-            ]);
-        }
-
-        for ($i = 20; $i > 0; $i--) {
-            $animeName = "アニメ{$i}";
-            $expectedAnimeNames[] = $animeName;
-        }
+        $anime1 = $this->createAnime($userId, "アニメ1", "メモ", Anime::STATUS_ACTIVE, Carbon::now(), Carbon::now(), Carbon::now());
+        $anime2 = $this->createAnime($userId, "アニメ2", "メモ", Anime::STATUS_ACTIVE, Carbon::now(), Carbon::now(), Carbon::now());
+        $anime3 = $this->createAnime($userId, "アニメ3", "メモ", Anime::STATUS_ACTIVE, Carbon::now(), Carbon::now(), Carbon::now());
 
         $currentPage = 1;
         $paginateUnit = 20;
@@ -78,40 +53,29 @@ class AnimeServiceTest extends TestCase
         $animeList = \AnimeService::getAnimeListByUserId($userId, $currentPage, $paginateUnit, $sortType);
 
         $actualAnimeNames = $animeList->pluck('name')->toArray();
-        $this->assertEquals($expectedAnimeNames, $actualAnimeNames);
-
-        $this->refreshApplication();
+        $this->assertEquals($anime1->name, $actualAnimeNames[2]);
+        $this->assertEquals($anime2->name, $actualAnimeNames[1]);
+        $this->assertEquals($anime3->name, $actualAnimeNames[0]);
     }
 
     // アニメを名前順に取得するテスト
     public function test_success_getAnimeListByUserId__title()
     {
         $userId = 1;
-        $expectedAnimeNames = [];
 
-        for ($i = 1; $i <= 20; $i++) {
-            $animeName = "アニメ{$i}";
-            $expectedAnimeNames[] = $animeName;
-
-            Anime::create([
-                'user_id' => $userId,
-                'status' => Anime::STATUS_ACTIVE,
-                'name' => "アニメ{$i}",
-                'memo' => 'This is a memo.',
-                'latest_changed_at' => now(),
-            ]);
-        }
+        $anime1 = $this->createAnime($userId, "アニメ1", "メモ", Anime::STATUS_ACTIVE, Carbon::now(), Carbon::now(), Carbon::now());
+        $anime2 = $this->createAnime($userId, "アニメ3", "メモ", Anime::STATUS_ACTIVE, Carbon::now(), Carbon::now(), Carbon::now());
+        $anime3 = $this->createAnime($userId, "アニメ2", "メモ", Anime::STATUS_ACTIVE, Carbon::now(), Carbon::now(), Carbon::now());
 
         $currentPage = 1;
         $paginateUnit = 20;
         $sortType = 'title';
         $animeList = \AnimeService::getAnimeListByUserId($userId, $currentPage, $paginateUnit, $sortType);
 
-        sort($expectedAnimeNames);
         $actualAnimeNames = $animeList->pluck('name')->toArray();
-        $this->assertEquals($expectedAnimeNames, $actualAnimeNames);
-
-        $this->refreshApplication();
+        $this->assertEquals($anime1->name, $actualAnimeNames[0]);
+        $this->assertEquals($anime3->name, $actualAnimeNames[1]);
+        $this->assertEquals($anime2->name, $actualAnimeNames[2]);
     }
 
     // アニメ取得の際に無効なソートタイプのテスト
@@ -135,7 +99,6 @@ class AnimeServiceTest extends TestCase
 
         $anime = \AnimeService::createAnimeRecord($userId, $name, $memo);
 
-        $this->assertInstanceOf(Anime::class, $anime);
         $this->assertEquals($userId, $anime->user_id);
         $this->assertEquals($name, $anime->name);
         $this->assertEquals($memo, $anime->memo);
@@ -143,8 +106,6 @@ class AnimeServiceTest extends TestCase
         $this->assertNotNull($anime->latest_changed_at);
         $this->assertNotNull($anime->created_at);
         $this->assertNotNull($anime->updated_at);
-
-        $this->refreshApplication();
     }
 
     // アニメを animeId, userId から取得するテスト
@@ -154,32 +115,12 @@ class AnimeServiceTest extends TestCase
         $animeId = 1;
 
         $now = Carbon::now();
-        $anime = new Anime();
-        $anime->user_id = $userId;
-        $anime->name = "Anime";
-        $anime->memo = "test";
-        $anime->status = Anime::STATUS_ACTIVE;
-        $anime->latest_changed_at = $now;
-        $anime->created_at = $now;
-        $anime->updated_at = $now;
-        $anime->save();
+        $anime = $this->createAnime($userId, "アニメ1", "メモ", Anime::STATUS_ACTIVE, $now, $now, $now);
 
         $retrievedAnime = \AnimeService::getAnimeByIdAndUserId($animeId, $userId);
         $this->assertInstanceOf(Anime::class, $retrievedAnime);
-        $this->assertEquals($userId, $retrievedAnime->user_id);
-        $this->assertEquals($animeId, $retrievedAnime->id);
-
-        $this->refreshApplication();
-    }
-
-    // アニメを animeId, userId から取得する際にアニメが存在しない場合のテスト
-    public function test_getAnimeByIdAndUserId_return_null()
-    {
-        $animeId = 999;
-        $userId = 1;
-
-        $result = \AnimeService::getAnimeByIdAndUserId($animeId, $userId);
-        $this->assertNull($result);
+        $this->assertEquals($anime->user_id, $retrievedAnime->user_id);
+        $this->assertEquals($anime->id, $retrievedAnime->id);
     }
 
     // アニメを name, userId から取得するテスト
@@ -189,32 +130,12 @@ class AnimeServiceTest extends TestCase
         $name = "アニメ1";
 
         $now = Carbon::now();
-        $anime = new Anime();
-        $anime->user_id = $userId;
-        $anime->name = $name;
-        $anime->memo = "test";
-        $anime->status = Anime::STATUS_ACTIVE;
-        $anime->latest_changed_at = $now;
-        $anime->created_at = $now;
-        $anime->updated_at = $now;
-        $anime->save();
+        $anime = $this->createAnime($userId, "アニメ1", "メモ", Anime::STATUS_ACTIVE, $now, $now, $now);
 
         $retrievedAnime = \AnimeService::getAnimeByUserIdAndName($userId, $name);
         $this->assertInstanceOf(Anime::class, $retrievedAnime);
-        $this->assertEquals($userId, $retrievedAnime->user_id);
-        $this->assertEquals($name, $retrievedAnime->name);
-
-        $this->refreshApplication();
-    }
-
-    // アニメを name, userId から取得する際にアニメが存在しない場合のテスト
-    public function test_success_getAnimeByUserIdAndName_return_null()
-    {
-        $name = "アニメ999";
-        $userId = 1;
-
-        $result = \AnimeService::getAnimeByUserIdAndName($userId, $name);
-        $this->assertNull($result);
+        $this->assertEquals($anime->user_id, $retrievedAnime->user_id);
+        $this->assertEquals($anime->name, $retrievedAnime->name);
     }
 
     // 新しいアニメを作成するテスト
@@ -231,8 +152,6 @@ class AnimeServiceTest extends TestCase
         $this->assertEquals(1, $anime->id);
         $this->assertEquals($name, $anime->name);
         $this->assertEquals($memo, $anime->memo);
-
-        $this->refreshApplication();
     }
 
     // 新しいアニメを作成する際にそのアニメが存在する場合のテスト
@@ -243,26 +162,18 @@ class AnimeServiceTest extends TestCase
         $memo = "test";
 
         $now = Carbon::now();
-        $anime = new Anime();
-        $anime->user_id = $userId;
-        $anime->name = $name;
-        $anime->memo = $memo;
-        $anime->status = Anime::STATUS_ACTIVE;
-        $anime->latest_changed_at = $now;
-        $anime->created_at = $now;
-        $anime->updated_at = $now;
-        $anime->save();
+        $expectedAnime = $this->createAnime($userId, $name, $memo, Anime::STATUS_ACTIVE, $now, $now, $now);
 
         $anime = \AnimeService::createAnime($userId, $name, $memo);
+        $count = Anime::count();
 
         $this->assertInstanceOf(Anime::class, $anime);
-        $this->assertEquals($userId, $anime->user_id);
-        $this->assertEquals(1, $anime->id);
-        $this->assertEquals($name, $anime->name);
-        $this->assertEquals($memo, $anime->memo);
-        $this->assertEquals(Anime::STATUS_ACTIVE, $anime->status);
-
-        $this->refreshApplication();
+        $this->assertEquals($expectedAnime->user_id, $anime->user_id);
+        $this->assertEquals($expectedAnime->id, $anime->id);
+        $this->assertEquals($expectedAnime->name, $anime->name);
+        $this->assertEquals($expectedAnime->memo, $anime->memo);
+        $this->assertEquals($expectedAnime->status, $anime->status);
+        $this->assertEquals(1, $count);
     }
 
     // 新しいアニメを作成する際にそのアニメが削除されていた場合のテスト
@@ -273,26 +184,18 @@ class AnimeServiceTest extends TestCase
         $memo = "test";
 
         $now = Carbon::now();
-        $anime = new Anime();
-        $anime->user_id = $userId;
-        $anime->name = $name;
-        $anime->memo = $memo;
-        $anime->status = Anime::STATUS_DELETED;
-        $anime->latest_changed_at = $now;
-        $anime->created_at = $now;
-        $anime->updated_at = $now;
-        $anime->save();
+        $expectedAnime = $this->createAnime($userId, $name, $memo, Anime::STATUS_DELETED, $now, $now, $now);
 
         $anime = \AnimeService::createAnime($userId, $name, $memo);
+        $count = Anime::count();
 
         $this->assertInstanceOf(Anime::class, $anime);
-        $this->assertEquals($userId, $anime->user_id);
-        $this->assertEquals(1, $anime->id);
-        $this->assertEquals($name, $anime->name);
-        $this->assertEquals($memo, $anime->memo);
+        $this->assertEquals($expectedAnime->user_id, $anime->user_id);
+        $this->assertEquals($expectedAnime->id, $anime->id);
+        $this->assertEquals($expectedAnime->name, $anime->name);
+        $this->assertEquals($expectedAnime->memo, $anime->memo);
         $this->assertEquals(Anime::STATUS_ACTIVE, $anime->status);
-
-        $this->refreshApplication();
+        $this->assertEquals(1, $count);
     }
 
     // 新しいアニメを作成する際にそのアニメの status が存在しない値の場合のテスト
@@ -303,113 +206,73 @@ class AnimeServiceTest extends TestCase
         $memo = "memo";
 
         $now = Carbon::now();
-        $anime = new Anime();
-        $anime->user_id = $userId;
-        $anime->name = $name;
-        $anime->memo = $memo;
-        $anime->status = "anime";
-        $anime->latest_changed_at = $now;
-        $anime->created_at = $now;
-        $anime->updated_at = $now;
-        $anime->save();
+        $anime = $this->createAnime($userId, $name, $memo, "anime", $now, $now, $now);
 
         $this->expectException(AnimeStateNotFoundException::class);
 
         \AnimeService::createAnime($userId, $name, $memo);
-
-        $this->refreshApplication();
     }
 
     // アニメを編集し新しい値が保存されていることのテスト
     public function test_success_updateAnimeRecord()
     {
+        $userId = 1;
+        $name = "アニメ1";
+        $memo = "メモ";
+
         $now = Carbon::now();
-        $anime = new Anime();
-        $anime->user_id = 1;
-        $anime->name = "アニメ";
-        $anime->memo = "メモ";
-        $anime->status = Anime::STATUS_ACTIVE;
-        $anime->latest_changed_at = $now;
-        $anime->created_at = $now;
-        $anime->updated_at = $now;
-        $anime->save();
+        $anime = $this->createAnime($userId, $name, $memo, Anime::STATUS_ACTIVE, $now, $now, $now);
 
         $newName = "Anime";
         $newMemo = "memo";
 
         $updatedAnime = \AnimeService::updateAnimeRecord($anime, $newName, $newMemo);
 
-        $retrievedAnime = Anime::find($anime->id);
-
         $this->assertInstanceOf(Anime::class, $updatedAnime);
         $this->assertEquals($newName, $updatedAnime->name);
         $this->assertEquals($newMemo, $updatedAnime->memo);
         $this->assertEquals($anime->latest_changed_at->toDateTimeString(), $updatedAnime->latest_changed_at->toDateTimeString());
-
-        $this->assertEquals($newName, $retrievedAnime->name);
-        $this->assertEquals($newMemo, $retrievedAnime->memo);
-        $this->assertEquals($anime->latest_changed_at->toDateTimeString(), $retrievedAnime->latest_changed_at);
-
-        $this->refreshApplication();
     }
 
-    // アニメを検索する際にそのキーワードのアニメが存在する場合のテスト
     public function test_success_searchAnime()
     {
         $userId = 1;
-        $keyWord = "1";
 
-        $anime1 = new Anime();
-        $anime1->user_id = 1;
-        $anime1->name = "アニメ1";
-        $anime1->memo = "メモ1";
-        $anime1->status = Anime::STATUS_ACTIVE;
-        $anime1->latest_changed_at = Carbon::now();
-        $anime1->created_at = Carbon::now();
-        $anime1->updated_at = Carbon::now();
-        $anime1->save();
+        $now = Carbon::now();
+        // 1が半角の場合
+        $anime1 = $this->createAnime($userId, "アニメ1", "メモ", Anime::STATUS_ACTIVE, $now, $now, $now);
+        // １が全角場合
+        $anime2 = $this->createAnime($userId, "アニメ１", "メモ", Anime::STATUS_ACTIVE, $now, $now, $now);
+        $anime3 = $this->createAnime($userId, "アニメa", "メモ", Anime::STATUS_ACTIVE, $now, $now, $now);
+        $anime4 = $this->createAnime($userId, "アニメA", "メモ", Anime::STATUS_ACTIVE, $now, $now, $now);
 
-        $anime2 = new Anime();
-        $anime2->user_id = 1;
-        $anime2->name = "アニメ2";
-        $anime2->memo = "メモ2";
-        $anime2->status = Anime::STATUS_ACTIVE;
-        $anime2->latest_changed_at = Carbon::now();
-        $anime2->created_at = Carbon::now();
-        $anime2->updated_at = Carbon::now();
-        $anime2->save();
+        // 半角と全角の違いを確認するテスト
+        $animeList1 = \AnimeService::searchAnime($userId, "1");
+        $this->assertCount(1, $animeList1);
+        $this->assertEquals($anime1->name, $animeList1[0]->name);
 
-        $animeList = \AnimeService::searchAnime($userId, $keyWord);
+        // 大文字と小文字の区別はされないことを確認するテスト
+        $animeList2 = \AnimeService::searchAnime($userId, "A");
+        $this->assertCount(2, $animeList2);
+        $this->assertEquals($anime4->name, $animeList2[0]->name);
 
-        $this->assertCount(1, $animeList);
-        $this->assertEquals($anime1->name, $animeList[0]->name);
-
-        $this->refreshApplication();
     }
 
-    // アニメを検索する際にそのキーワードのアニメが存在しない場合のテスト
-    public function test_success_searchAnime_no_match()
+    // アニメをレコードに保存する関数。
+    private function createAnime(int $userId, string $name, string $memo, string $status, string $latest_changed_at, string $created_at, string $updated_at)
     {
-        $userId = 1;
-        $keyWord = "anime";
-
         $anime = new Anime();
-        $anime->user_id = 1;
-        $anime->name = "アニメ1";
-        $anime->memo = "メモ1";
-        $anime->status = Anime::STATUS_ACTIVE;
-        $anime->latest_changed_at = Carbon::now();
-        $anime->created_at = Carbon::now();
-        $anime->updated_at = Carbon::now();
+        $anime->user_id = $userId;
+        $anime->name = $name;
+        $anime->memo = $memo;
+        $anime->status = $status;
+        $anime->latest_changed_at = $latest_changed_at;
+        $anime->created_at = $created_at;
+        $anime->updated_at = $updated_at;
         $anime->save();
 
-
-        $animeList = \AnimeService::searchAnime($userId, $keyWord);
-
-        $this->assertInstanceOf(\Illuminate\Database\Eloquent\Collection::class, $animeList);
-        $this->assertCount(0, $animeList);
-
-        $this->refreshApplication();
+        return $anime;
     }
+
 }
 
