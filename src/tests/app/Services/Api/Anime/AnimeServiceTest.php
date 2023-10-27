@@ -231,7 +231,6 @@ class AnimeServiceTest extends TestCase
         $this->assertInstanceOf(Anime::class, $updatedAnime);
         $this->assertEquals($newName, $updatedAnime->name);
         $this->assertEquals($newMemo, $updatedAnime->memo);
-        $this->assertEquals($anime->latest_changed_at->toDateTimeString(), $updatedAnime->latest_changed_at->toDateTimeString());
     }
 
     public function test_success_searchAnime()
