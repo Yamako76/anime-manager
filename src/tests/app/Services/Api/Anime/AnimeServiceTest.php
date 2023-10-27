@@ -254,7 +254,6 @@ class AnimeServiceTest extends TestCase
         $animeList2 = \AnimeService::searchAnime($userId, "A");
         $this->assertCount(2, $animeList2);
         $this->assertEquals($anime4->name, $animeList2[0]->name);
-
     }
 
     // アニメをレコードに保存する関数。
