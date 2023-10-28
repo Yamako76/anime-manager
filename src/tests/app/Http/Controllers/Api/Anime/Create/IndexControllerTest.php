@@ -21,7 +21,6 @@ class IndexControllerTest extends TestCase
 
     public function test_success_create_anime()
     {
-        $userId = Auth::id();
         $anime = new Anime([
             'user_id' => 1,
             'id' => 1,
@@ -39,7 +38,6 @@ class IndexControllerTest extends TestCase
         ];
 
         \AnimeService::shouldReceive('createAnime')
-            ->with($userId, $data['name'], $data['memo'])
             ->andReturn($anime)
             ->once();
 

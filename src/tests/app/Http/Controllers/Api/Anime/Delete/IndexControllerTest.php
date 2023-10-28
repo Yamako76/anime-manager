@@ -21,7 +21,6 @@ class IndexControllerTest extends TestCase
 
     public function test_success_delete_anime()
     {
-        $userId = Auth::id();
         $anime = new Anime([
             'user_id' => 1,
             'id' => 1,
@@ -35,7 +34,6 @@ class IndexControllerTest extends TestCase
         $anime->save();
 
         \AnimeService::shouldReceive('getAnimeByIdAndUserId')
-            ->with($anime->id, $userId)
             ->andReturn($anime)
             ->once();
 

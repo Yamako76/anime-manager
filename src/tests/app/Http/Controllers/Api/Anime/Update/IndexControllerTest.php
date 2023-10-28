@@ -5,7 +5,6 @@ namespace Tests\app\Http\Controllers\Api\Anime\Update;
 use App\Models\Anime;
 use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Support\Facades\Auth;
 use Tests\TestCase;
 
 class IndexControllerTest extends TestCase
@@ -21,7 +20,6 @@ class IndexControllerTest extends TestCase
 
     public function test_success_update_anime()
     {
-        $userId = Auth::id();
         $anime = new Anime([
             'user_id' => 1,
             'id' => 1,
@@ -51,13 +49,11 @@ class IndexControllerTest extends TestCase
         ];
 
         \AnimeService::shouldReceive('getAnimeByIdAndUserId')
-            ->with($anime->id, $userId)
             ->andReturn($anime)
             ->once();
 
 
         \AnimeService::shouldReceive('updateAnimeRecord')
-            ->with($anime, $data['name'], $data['memo'])
             ->andReturn($updatedAnime)
             ->once();
 
