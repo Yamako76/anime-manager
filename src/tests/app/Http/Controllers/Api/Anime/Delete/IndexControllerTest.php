@@ -5,7 +5,6 @@ namespace Tests\app\Http\Controllers\Api\Anime\Delete;
 use App\Models\Anime;
 use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Support\Facades\Auth;
 use Tests\TestCase;
 
 class IndexControllerTest extends TestCase
@@ -21,6 +20,7 @@ class IndexControllerTest extends TestCase
 
     public function test_success_delete_anime()
     {
+        $animeId = 1;
         $anime = new Anime([
             'user_id' => 1,
             'id' => 1,
@@ -31,13 +31,12 @@ class IndexControllerTest extends TestCase
             'created_at' => '2023-9-20 12:30:00',
             'updated_at' => '2023-9-25 14:45:00',
         ]);
-        $anime->save();
 
         \AnimeService::shouldReceive('getAnimeByIdAndUserId')
             ->andReturn($anime)
             ->once();
 
-        $response = $this->json('DELETE', "/api/anime-list/{$anime->id}");
+        $response = $this->json('DELETE', "/api/anime-list/{$animeId}");
         $response->assertStatus(200);
     }
 
