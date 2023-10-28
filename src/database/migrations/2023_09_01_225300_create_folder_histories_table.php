@@ -17,7 +17,7 @@ return new class extends Migration
             $table->increments('id');
             $table->bigInteger('user_id');
             $table->bigInteger('folder_id');
-            $table->string('name', 500);
+            $table->string('name', 200);
             $table->string('status', 15);
             $table->timestamp('deleted_at')->nullable();
             $table->timestamp('created_at');
