@@ -20,6 +20,7 @@ class IndexControllerTest extends TestCase
 
     public function test_success_update_anime()
     {
+        $animeId = 1;
         $anime = new Anime([
             'user_id' => 1,
             'id' => 1,
@@ -30,7 +31,6 @@ class IndexControllerTest extends TestCase
             'created_at' => '2023-9-20 12:30:00',
             'updated_at' => '2023-9-25 14:45:00',
         ]);
-        $anime->save();
 
         $updatedAnime = new Anime([
             'user_id' => 1,
@@ -43,11 +43,6 @@ class IndexControllerTest extends TestCase
             'updated_at' => '2023-9-25 14:45:00',
         ]);
 
-        $data = [
-            'name' => 'anime',
-            'memo' => 'memo',
-        ];
-
         \AnimeService::shouldReceive('getAnimeByIdAndUserId')
             ->andReturn($anime)
             ->once();
@@ -57,7 +52,7 @@ class IndexControllerTest extends TestCase
             ->andReturn($updatedAnime)
             ->once();
 
-        $response = $this->json('PUT', "/api/anime-list/{$anime->id}", $data);
+        $response = $this->json('PUT', "/api/anime-list/{$animeId}", ['name' => 'anime', 'memo' => 'memo']);
         $response->assertStatus(200);
     }
 
@@ -70,30 +65,18 @@ class IndexControllerTest extends TestCase
         $response = $this->json('PUT', "/api/anime-list/1", ['name' => 'anime', 'memo' => 'memo']);
         $response->assertStatus(404);
 
-        $anime = new Anime([
-            'user_id' => 1,
-            'id' => 1,
-            'name' => 'アニメ',
-            'memo' => 'メモ',
-            'status' => 'active',
-            'latest_changed_at' => '2023-9-28 08:00:00',
-            'created_at' => '2023-9-20 12:30:00',
-            'updated_at' => '2023-9-25 14:45:00',
-        ]);
-        $anime->save();
-
         // nameがない場合
-        $response = $this->json('PUT', "/api/anime-list/{$anime->id}", []);
+        $response = $this->json('PUT', "/api/anime-list/1", []);
         $response->assertStatus(422);
 
         // name = ""の場合
-        $response = $this->json('PUT', "/api/anime-list/{$anime->id}", ['name' => "", 'memo' => 'memo']);
+        $response = $this->json('PUT', "/api/anime-list/1", ['name' => "", 'memo' => 'memo']);
         $response->assertStatus(422);
 
         // name = ""の場合
         $str = 'abcdefghijklmnopqrstuvwxyz0123456789';
         $name = substr(str_shuffle(str_repeat($str, 10)), 0, 201);
-        $response = $this->json('PUT', "/api/anime-list/{$anime->id}", ['name' => $name, 'memo' => 'memo']);
+        $response = $this->json('PUT', "/api/anime-list/1", ['name' => $name, 'memo' => 'memo']);
         $response->assertStatus(422);
     }
 }
