@@ -32,7 +32,7 @@ class IndexController extends Controller
         }
 
         // そもそも存在しないページへのアクセスが行われた場合、リソースが存在しないため404を返却。
-        if ($currentPage < $folderList->total() &&
+        if ($currentPage > $folderList->lastPage() ||
             $currentPage < 1) {
             return \response()->json([], 404);
         }
