@@ -45,10 +45,8 @@ class IndexControllerTest extends TestCase
 
     public function test_error_delete_anime()
     {
-        $userId = Auth::id();
         // アニメが存在しない場合404を返す。
         \AnimeService::shouldReceive('getAnimeByIdAndUserId')
-            ->with(1, $userId)
             ->andReturn(null)
             ->once();
         $response = $this->json('DELETE', "/api/anime-list/1");
