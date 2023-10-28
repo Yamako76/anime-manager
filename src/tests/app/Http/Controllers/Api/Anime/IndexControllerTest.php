@@ -47,7 +47,7 @@ class IndexControllerTest extends TestCase
             new LengthAwarePaginator($animeList, count($animeList), 20, 1)
         )->once();
 
-        $response = $this->get('/api/anime-list?page=1&sort=created_at');
+        $response = $this->json('GET','/api/anime-list?page=1&sort=created_at');
         $response->assertStatus(200);
         $this->assertStringContainsString(json_encode($animeList), $response->content());
     }
@@ -56,7 +56,7 @@ class IndexControllerTest extends TestCase
     {
 
         // 現在のページデータが渡されなかった場合、ぺジネーション機能を使用できないため、400を返すテスト。
-        $response = $this->get('/api/anime-list?sort=created_at');
+        $response = $this->json('GET','/api/anime-list?sort=created_at');
         $response->assertStatus(400);
 
         $animeList = [
@@ -86,13 +86,13 @@ class IndexControllerTest extends TestCase
         \AnimeService::shouldReceive("getAnimeListByUserId")->andReturn(
             new LengthAwarePaginator($animeList, count($animeList), 20,     1)
         )->once();
-        $response = $this->get('/api/anime-list?page=2&sort=created_at');
+        $response = $this->json('GET','/api/anime-list?page=2&sort=created_at');
         $response->assertStatus(404);
 
         \AnimeService::shouldReceive("getAnimeListByUserId")->andReturn(
             new LengthAwarePaginator($animeList, count($animeList), 20,     1)
         )->once();
-        $response = $this->get('/api/anime-list?page=0&sort=created_at');
+        $response = $this->json('GET','/api/anime-list?page=0&sort=created_at');
         $response->assertStatus(404);
     }
 }
