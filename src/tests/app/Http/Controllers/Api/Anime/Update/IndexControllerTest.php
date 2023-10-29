@@ -20,7 +20,6 @@ class IndexControllerTest extends TestCase
 
     public function test_success_update_anime()
     {
-        $animeId = 1;
         $anime = new Anime([
             'user_id' => 1,
             'id' => 1,
@@ -52,7 +51,7 @@ class IndexControllerTest extends TestCase
             ->andReturn($updatedAnime)
             ->once();
 
-        $response = $this->json('PUT', "/api/anime-list/{$animeId}", ['name' => 'anime', 'memo' => 'memo']);
+        $response = $this->json('PUT', "/api/anime-list/{$anime->id}", ['name' => 'anime', 'memo' => 'memo']);
         $response->assertStatus(200);
     }
 

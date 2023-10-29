@@ -20,7 +20,6 @@ class IndexControllerTest extends TestCase
 
     public function test_success_update_folder()
     {
-        $folderId = 1;
         $folder = new Folder([
             'user_id' => 1,
             'id' => 1,
@@ -50,7 +49,7 @@ class IndexControllerTest extends TestCase
             ->andReturn($updatedFolder)
             ->once();
 
-        $response = $this->json('PUT', "/api/folders/{$folderId}", ['name' => 'folder']);
+        $response = $this->json('PUT', "/api/folders/{$folder->id}", ['name' => 'folder']);
         $response->assertStatus(200);
     }
 

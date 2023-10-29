@@ -20,7 +20,6 @@ class IndexControllerTest extends TestCase
 
     public function test_success_delete_anime()
     {
-        $animeId = 1;
         $anime = new Anime([
             'user_id' => 1,
             'id' => 1,
@@ -36,7 +35,7 @@ class IndexControllerTest extends TestCase
             ->andReturn($anime)
             ->once();
 
-        $response = $this->json('DELETE', "/api/anime-list/{$animeId}");
+        $response = $this->json('DELETE', "/api/anime-list/{$anime->id}");
         $response->assertStatus(200);
     }
 

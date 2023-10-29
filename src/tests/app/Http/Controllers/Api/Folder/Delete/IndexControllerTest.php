@@ -20,7 +20,6 @@ class IndexControllerTest extends TestCase
 
     public function test_success_delete_folder()
     {
-        $folderId = 1;
         $folder = new Folder([
             'user_id' => 1,
             'id' => 1,
@@ -35,7 +34,7 @@ class IndexControllerTest extends TestCase
             ->andReturn($folder)
             ->once();
 
-        $response = $this->json('DELETE', "/api/folders/{$folderId}");
+        $response = $this->json('DELETE', "/api/folders/{$folder->id}");
         $response->assertStatus(200);
     }
 
