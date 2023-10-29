@@ -12,6 +12,10 @@ class AnimeController extends Controller
 
     public function index($animeId): Response
     {
+        // $animeId が整数でない場合
+        if (!is_numeric($animeId) || (int)$animeId != $animeId) {
+            return Inertia::render('Error/NotFound');
+        }
 
         $userId = \Auth::id();
         /** @var Anime $anime */
