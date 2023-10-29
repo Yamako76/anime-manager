@@ -18,7 +18,7 @@ class IndexControllerTest extends TestCase
         $this->actingAs($user);
     }
 
-    public function test_success_create_anime()
+    public function test_success_create_folder()
     {
         $folder = new Folder([
             'user_id' => 1,
@@ -38,7 +38,7 @@ class IndexControllerTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function test_error_create_anime()
+    public function test_error_create_folder()
     {
         // nameがない場合
         $response = $this->json('POST', '/api/folders', []);
