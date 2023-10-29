@@ -55,6 +55,10 @@ class IndexControllerTest extends TestCase
 
     public function test_error_update_folder()
     {
+        $folderId = "d";
+        $response = $this->json('PUT', "/api/folders/{$folderId}", ['name' => 'folder']);
+        $response->assertStatus(400);
+
         // フォルダが存在しない場合
         \FolderService::shouldReceive('getFolderByIdAndUserId')
             ->andReturn(null)

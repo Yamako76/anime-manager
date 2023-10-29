@@ -40,6 +40,10 @@ class IndexControllerTest extends TestCase
 
     public function test_error_delete_folder()
     {
+        $folderId = "d";
+        $response = $this->json('DELETE', "/api/folders/{$folderId}");
+        $response->assertStatus(400);
+
         // フォルダが存在しない場合404を返す。
         \FolderService::shouldReceive('getFolderByIdAndUserId')
             ->andReturn(null)
