@@ -14,8 +14,12 @@ class IndexController extends Controller
      */
     public function index($animeId): \Illuminate\Http\JsonResponse
     {
-
         $userId = \Auth::id();
+
+        // $animeId が整数でない場合
+        if (!is_numeric($animeId) || (int)$animeId != $animeId) {
+            return \response()->json([], 400);
+        }
 
         // 削除するアニメを取得します。
         /** @var Anime $anime */
