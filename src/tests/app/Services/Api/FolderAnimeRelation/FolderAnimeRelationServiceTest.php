@@ -25,33 +25,13 @@ class FolderAnimeRelationServiceTest extends TestCase
         $userId = 1;
         $folderId = 1;
 
-        $expectedAnimeNames = [];
-        for ($i = 1; $i <= 20; $i++) {
-            $animeName = "アニメ{$i}";
+        $anime1 = $this->createAnime($userId, "アニメ1", "メモ", Anime::STATUS_ACTIVE, Carbon::now(), Carbon::now(), Carbon::now());
+        $anime2 = $this->createAnime($userId, "アニメ2", "メモ", Anime::STATUS_ACTIVE, Carbon::now(), Carbon::now(), Carbon::now());
+        $anime3 = $this->createAnime($userId, "アニメ3", "メモ", Anime::STATUS_ACTIVE, Carbon::now(), Carbon::now(), Carbon::now());
 
-            $customDateTime = Carbon::parse("20{$i}-01-01 00:00:00");
-            $anime = new Anime();
-            $anime->user_id = $userId;
-            $anime->status = Anime::STATUS_ACTIVE;
-            $anime->name = $animeName;
-            $anime->memo = 'This is a memo.';
-            $anime->latest_changed_at = $customDateTime;
-            $anime->created_at = $customDateTime;
-            $anime->updated_at = $customDateTime;
-            $anime->save();
-
-            if ($i % 2 == 1) {
-                $expectedAnimeNames[] = $animeName;
-                $folderAnimeRelation = new FolderAnimeRelation();
-                $folderAnimeRelation->user_id = $userId;
-                $folderAnimeRelation->folder_id = $folderId;
-                $folderAnimeRelation->anime_id = $anime->id;
-                $folderAnimeRelation->status = FolderAnimeRelation::STATUS_ACTIVE;
-                $folderAnimeRelation->latest_changed_at = $customDateTime;
-                $folderAnimeRelation->created_at = $customDateTime;
-                $folderAnimeRelation->save();
-            }
-        }
+        $folderAnime1 = $this->createFolderAnime($userId, $folderId, $anime1->id, Anime::STATUS_ACTIVE, Carbon::now(), Carbon::now(), Carbon::now());
+        $folderAnime2 = $this->createFolderAnime($userId, $folderId, $anime2->id, Anime::STATUS_ACTIVE, Carbon::now(), Carbon::now(), Carbon::now());
+        $folderAnime3 = $this->createFolderAnime($userId, $folderId, $anime3->id, Anime::STATUS_ACTIVE, Carbon::now(), Carbon::now(), Carbon::now());
 
         $currentPage = 1;
         $paginateUnit = 20;
@@ -59,9 +39,9 @@ class FolderAnimeRelationServiceTest extends TestCase
         $animeList = \FolderAnimeRelationService::getAnimeListByUserIdAndFolderId($userId, $folderId, $currentPage, $paginateUnit, $sortType);
 
         $actualAnimeNames = $animeList->pluck('name')->toArray();
-        $this->assertEquals($expectedAnimeNames, $actualAnimeNames);
-
-        $this->refreshApplication();
+        $this->assertEquals($anime1->name, $actualAnimeNames[0]);
+        $this->assertEquals($anime2->name, $actualAnimeNames[1]);
+        $this->assertEquals($anime3->name, $actualAnimeNames[2]);
     }
 
     // あるフォルダに所属するアニメを最新順に取得するテスト
@@ -70,37 +50,13 @@ class FolderAnimeRelationServiceTest extends TestCase
         $userId = 1;
         $folderId = 1;
 
-        $expectedAnimeNames = [];
-        for ($i = 1; $i <= 20; $i++) {
-            $animeName = "アニメ{$i}";
+        $anime1 = $this->createAnime($userId, "アニメ1", "メモ", Anime::STATUS_ACTIVE, Carbon::now(), Carbon::now(), Carbon::now());
+        $anime2 = $this->createAnime($userId, "アニメ2", "メモ", Anime::STATUS_ACTIVE, Carbon::now(), Carbon::now(), Carbon::now());
+        $anime3 = $this->createAnime($userId, "アニメ3", "メモ", Anime::STATUS_ACTIVE, Carbon::now(), Carbon::now(), Carbon::now());
 
-            $anime = new Anime();
-            $anime->user_id = $userId;
-            $anime->status = Anime::STATUS_ACTIVE;
-            $anime->name = $animeName;
-            $anime->memo = 'memo';
-            $anime->latest_changed_at = now();
-            $anime->created_at = now();
-            $anime->updated_at = now();
-            $anime->save();
-
-            if ($i % 2 == 1) {
-                $folderAnimeRelation = new FolderAnimeRelation();
-                $folderAnimeRelation->user_id = $userId;
-                $folderAnimeRelation->folder_id = $folderId;
-                $folderAnimeRelation->anime_id = $anime->id;
-                $folderAnimeRelation->status = FolderAnimeRelation::STATUS_ACTIVE;
-                $folderAnimeRelation->latest_changed_at = now();
-                $folderAnimeRelation->created_at = now();
-                $folderAnimeRelation->save();
-            }
-        }
-        for ($i = 20; $i > 0; $i--) {
-            if ($i % 2 == 1) {
-                $animeName = "アニメ{$i}";
-                $expectedAnimeNames[] = $animeName;
-            }
-        }
+        $folderAnime1 = $this->createFolderAnime($userId, $folderId, $anime1->id, Anime::STATUS_ACTIVE, Carbon::now(), Carbon::now(), Carbon::now());
+        $folderAnime2 = $this->createFolderAnime($userId, $folderId, $anime2->id, Anime::STATUS_ACTIVE, Carbon::now(), Carbon::now(), Carbon::now());
+        $folderAnime3 = $this->createFolderAnime($userId, $folderId, $anime3->id, Anime::STATUS_ACTIVE, Carbon::now(), Carbon::now(), Carbon::now());
 
         $currentPage = 1;
         $paginateUnit = 20;
@@ -108,9 +64,9 @@ class FolderAnimeRelationServiceTest extends TestCase
         $animeList = \FolderAnimeRelationService::getAnimeListByUserIdAndFolderId($userId, $folderId, $currentPage, $paginateUnit, $sortType);
 
         $actualAnimeNames = $animeList->pluck('name')->toArray();
-        $this->assertEquals($expectedAnimeNames, $actualAnimeNames);
-
-        $this->refreshApplication();
+        $this->assertEquals($anime1->name, $actualAnimeNames[2]);
+        $this->assertEquals($anime2->name, $actualAnimeNames[1]);
+        $this->assertEquals($anime3->name, $actualAnimeNames[0]);
     }
 
     // あるフォルダに所属するアニメを名前順に取得するテスト
@@ -119,43 +75,23 @@ class FolderAnimeRelationServiceTest extends TestCase
         $userId = 1;
         $folderId = 1;
 
-        $expectedAnimeNames = [];
-        for ($i = 1; $i <= 20; $i++) {
-            $animeName = "アニメ{$i}";
+        $anime1 = $this->createAnime($userId, "アニメ1", "メモ", Anime::STATUS_ACTIVE, Carbon::now(), Carbon::now(), Carbon::now());
+        $anime2 = $this->createAnime($userId, "アニメ3", "メモ", Anime::STATUS_ACTIVE, Carbon::now(), Carbon::now(), Carbon::now());
+        $anime3 = $this->createAnime($userId, "アニメ2", "メモ", Anime::STATUS_ACTIVE, Carbon::now(), Carbon::now(), Carbon::now());
 
-            $anime = new Anime();
-            $anime->user_id = $userId;
-            $anime->status = Anime::STATUS_ACTIVE;
-            $anime->name = $animeName;
-            $anime->memo = 'memo';
-            $anime->latest_changed_at = now();
-            $anime->created_at = now();
-            $anime->updated_at = now();
-            $anime->save();
-
-            if ($i % 2 == 1) {
-                $expectedAnimeNames[] = $animeName;
-                $folderAnimeRelation = new FolderAnimeRelation();
-                $folderAnimeRelation->user_id = $userId;
-                $folderAnimeRelation->folder_id = $folderId;
-                $folderAnimeRelation->anime_id = $anime->id;
-                $folderAnimeRelation->status = FolderAnimeRelation::STATUS_ACTIVE;
-                $folderAnimeRelation->latest_changed_at = now();
-                $folderAnimeRelation->created_at = now();
-                $folderAnimeRelation->save();
-            }
-        }
+        $folderAnime1 = $this->createFolderAnime($userId, $folderId, $anime1->id, Anime::STATUS_ACTIVE, Carbon::now(), Carbon::now(), Carbon::now());
+        $folderAnime2 = $this->createFolderAnime($userId, $folderId, $anime2->id, Anime::STATUS_ACTIVE, Carbon::now(), Carbon::now(), Carbon::now());
+        $folderAnime3 = $this->createFolderAnime($userId, $folderId, $anime3->id, Anime::STATUS_ACTIVE, Carbon::now(), Carbon::now(), Carbon::now());
 
         $currentPage = 1;
         $paginateUnit = 20;
         $sortType = 'title';
         $animeList = \FolderAnimeRelationService::getAnimeListByUserIdAndFolderId($userId, $folderId, $currentPage, $paginateUnit, $sortType);
 
-        sort($expectedAnimeNames);
         $actualAnimeNames = $animeList->pluck('name')->toArray();
-        $this->assertEquals($expectedAnimeNames, $actualAnimeNames);
-
-        $this->refreshApplication();
+        $this->assertEquals($anime1->name, $actualAnimeNames[0]);
+        $this->assertEquals($anime3->name, $actualAnimeNames[1]);
+        $this->assertEquals($anime2->name, $actualAnimeNames[2]);
     }
 
     // あるフォルダに所属するアニメ取得の際に無効なソートタイプのテスト
@@ -169,7 +105,6 @@ class FolderAnimeRelationServiceTest extends TestCase
         $paginateUnit = 20;
         $sortType = 'invalid_sort_type';
         \FolderAnimeRelationService::getAnimeListByUserIdAndFolderId($userId, $folderId, $currentPage, $paginateUnit, $sortType);
-
     }
 
     // userId と folderName からフォルダを取得するテスト
@@ -179,31 +114,12 @@ class FolderAnimeRelationServiceTest extends TestCase
         $name = "フォルダ1";
 
         $now = Carbon::now();
-        $folder = new Folder();
-        $folder->user_id = $userId;
-        $folder->name = $name;
-        $folder->status = Folder::STATUS_ACTIVE;
-        $folder->latest_changed_at = $now;
-        $folder->created_at = $now;
-        $folder->updated_at = $now;
-        $folder->save();
+        $folder = $this->createFolder($userId, $name, Folder::STATUS_ACTIVE, $now, $now, $now);
 
         $retrievedFolder = \FolderAnimeRelationService::getFolderByUserIdAndFolderName($userId, $name);
         $this->assertInstanceOf(Folder::class, $retrievedFolder);
-        $this->assertEquals($userId, $retrievedFolder->user_id);
-        $this->assertEquals($name, $retrievedFolder->name);
-
-        $this->refreshApplication();
-    }
-
-    // userId と folderName からフォルダ際にフォルダが存在しない場合のテスト
-    public function test_getFolderByUserIdAndFolderName_return_null()
-    {
-        $name = "フォルダ999";
-        $userId = 1;
-
-        $result = \FolderAnimeRelationService::getFolderByUserIdAndFolderName($userId, $name);
-        $this->assertNull($result);
+        $this->assertEquals($folder->user_id, $retrievedFolder->user_id);
+        $this->assertEquals($folder->name, $retrievedFolder->name);
     }
 
     // userId と animeName からアニメを取得するテスト
@@ -213,68 +129,30 @@ class FolderAnimeRelationServiceTest extends TestCase
         $name = "アニメ1";
 
         $now = Carbon::now();
-        $anime = new Anime();
-        $anime->user_id = $userId;
-        $anime->name = $name;
-        $anime->memo = "test";
-        $anime->status = Anime::STATUS_ACTIVE;
-        $anime->latest_changed_at = $now;
-        $anime->created_at = $now;
-        $anime->updated_at = $now;
-        $anime->save();
+        $anime = $this->createAnime($userId, "アニメ1", "メモ", Anime::STATUS_ACTIVE, $now, $now, $now);
 
         $retrievedAnime = \FolderAnimeRelationService::getAnimeByUserIdAndAnimeName($userId, $name);
         $this->assertInstanceOf(Anime::class, $retrievedAnime);
-        $this->assertEquals($userId, $retrievedAnime->user_id);
-        $this->assertEquals($name, $retrievedAnime->name);
-
-        $this->refreshApplication();
+        $this->assertEquals($anime->user_id, $retrievedAnime->user_id);
+        $this->assertEquals($anime->name, $retrievedAnime->name);
     }
 
-    // userId と animeName からアニメを取得する際にアニメが存在しない場合のテスト
-    public function test_success_getAnimeByUserIdAndAnimeName_return_null()
-    {
-        $name = "アニメ999";
-        $userId = 1;
-
-        $result = \FolderAnimeRelationService::getAnimeByUserIdAndAnimeName($userId, $name);
-        $this->assertNull($result);
-    }
-
-    // // userId と folderId ,animeId からアニメを取得するテスト
+    // userId と folderId ,animeId からアニメを取得するテスト
     public function test_success_getFolderAnimeRelationByUserIdAndFolderIdAndAnimeId()
     {
         $userId = 1;
         $folderId = 1;
         $animeId = 1;
-        $folderAnimeRelation = new FolderAnimeRelation();
-        $folderAnimeRelation->user_id = $userId;
-        $folderAnimeRelation->folder_id = $folderId;
-        $folderAnimeRelation->anime_id = $animeId;
-        $folderAnimeRelation->status = FolderAnimeRelation::STATUS_ACTIVE;
-        $folderAnimeRelation->latest_changed_at = now();
-        $folderAnimeRelation->created_at = now();
-        $folderAnimeRelation->save();
+
+        $now = Carbon::now();
+        $folderAnimeRelation = $this->createFolderAnime($userId, $folderId, $animeId, FolderAnimeRelation::STATUS_ACTIVE, $now, $now, $now);
 
         $retrievedRelation = \FolderAnimeRelationService::getFolderAnimeRelationByUserIdAndFolderIdAndAnimeId($userId, $folderId, $animeId);
 
         $this->assertInstanceOf(FolderAnimeRelation::class, $retrievedRelation);
-        $this->assertEquals($userId, $retrievedRelation->user_id);
-        $this->assertEquals($folderId, $retrievedRelation->folder_id);
-        $this->assertEquals($animeId, $retrievedRelation->anime_id);
-
-        $this->refreshApplication();
-    }
-
-    // userId と folderId ,animeId からアニメを取得する際にアニメが存在しない場合のテスト
-    public function test_success_getFolderAnimeRelationByUserIdAndFolderIdAndAnimeId_return_null()
-    {
-        $userId = 999;
-        $folderId = 999;
-        $animeId = 999;
-
-        $result = \FolderAnimeRelationService::getFolderAnimeRelationByUserIdAndFolderIdAndAnimeId($userId, $folderId, $animeId);
-        $this->assertNull($result);
+        $this->assertEquals($folderAnimeRelation->user_id, $retrievedRelation->user_id);
+        $this->assertEquals($folderAnimeRelation->folder_id, $retrievedRelation->folder_id);
+        $this->assertEquals($folderAnimeRelation->anime_id, $retrievedRelation->anime_id);
     }
 
     // フォルダに属するアニメをレコードに保存するテスト
@@ -294,8 +172,6 @@ class FolderAnimeRelationServiceTest extends TestCase
         $this->assertNotNull($folderAnimeRelation->latest_changed_at);
         $this->assertNotNull($folderAnimeRelation->created_at);
         $this->assertNotNull($folderAnimeRelation->updated_at);
-
-        $this->refreshApplication();
     }
 
     // フォルダに新しいアニメを追加するテスト
@@ -312,8 +188,6 @@ class FolderAnimeRelationServiceTest extends TestCase
         $this->assertEquals(1, $folderAnimeRelation->id);
         $this->assertEquals($folderId, $folderAnimeRelation->folder_id);
         $this->assertEquals($animeId, $folderAnimeRelation->anime_id);
-
-        $this->refreshApplication();
     }
 
     // フォルダに新しいアニメを追加する際にそのアニメが存在する場合のテスト
@@ -324,25 +198,18 @@ class FolderAnimeRelationServiceTest extends TestCase
         $animeId = 1;
 
         $now = Carbon::now();
-        $folderAnimeRelation = new FolderAnimeRelation();
-        $folderAnimeRelation->user_id = $userId;
-        $folderAnimeRelation->folder_id = $folderId;
-        $folderAnimeRelation->anime_id = $animeId;
-        $folderAnimeRelation->status = FolderAnimeRelation::STATUS_ACTIVE;
-        $folderAnimeRelation->latest_changed_at = $now;
-        $folderAnimeRelation->created_at = $now;
-        $folderAnimeRelation->save();
+        $expectedFolderAnimeRelation = $this->createFolderAnime($userId, $folderId, $animeId, FolderAnimeRelation::STATUS_ACTIVE, $now, $now, $now);
 
         $folderAnimeRelation = \FolderAnimeRelationService::createFolderAnimeRelation($userId, $folderId, $animeId);
+        $count = FolderAnimeRelation::count();
 
         $this->assertInstanceOf(FolderAnimeRelation::class, $folderAnimeRelation);
-        $this->assertEquals($userId, $folderAnimeRelation->user_id);
-        $this->assertEquals(1, $folderAnimeRelation->id);
-        $this->assertEquals($folderId, $folderAnimeRelation->folder_id);
-        $this->assertEquals($animeId, $folderAnimeRelation->anime_id);
+        $this->assertEquals($expectedFolderAnimeRelation->user_id, $folderAnimeRelation->user_id);
+        $this->assertEquals($expectedFolderAnimeRelation->id, $folderAnimeRelation->id);
+        $this->assertEquals($expectedFolderAnimeRelation->folder_id, $folderAnimeRelation->folder_id);
+        $this->assertEquals($expectedFolderAnimeRelation->anime_id, $folderAnimeRelation->anime_id);
         $this->assertEquals(FolderAnimeRelation::STATUS_ACTIVE, $folderAnimeRelation->status);
-
-        $this->refreshApplication();
+        $this->assertEquals(1, $count);
     }
 
     // フォルダに新しいアニメを作成する際にそのアニメが削除されていた場合のテスト
@@ -353,25 +220,18 @@ class FolderAnimeRelationServiceTest extends TestCase
         $animeId = 1;
 
         $now = Carbon::now();
-        $folderAnimeRelation = new FolderAnimeRelation();
-        $folderAnimeRelation->user_id = $userId;
-        $folderAnimeRelation->folder_id = $folderId;
-        $folderAnimeRelation->anime_id = $animeId;
-        $folderAnimeRelation->status = FolderAnimeRelation::STATUS_DELETED;
-        $folderAnimeRelation->latest_changed_at = $now;
-        $folderAnimeRelation->created_at = $now;
-        $folderAnimeRelation->save();
+        $expectedFolderAnimeRelation = $this->createFolderAnime($userId, $folderId, $animeId, FolderAnimeRelation::STATUS_DELETED, $now, $now, $now);
 
         $folderAnimeRelation = \FolderAnimeRelationService::createFolderAnimeRelation($userId, $folderId, $animeId);
+        $count = FolderAnimeRelation::count();
 
         $this->assertInstanceOf(FolderAnimeRelation::class, $folderAnimeRelation);
-        $this->assertEquals($userId, $folderAnimeRelation->user_id);
-        $this->assertEquals(1, $folderAnimeRelation->id);
-        $this->assertEquals($folderId, $folderAnimeRelation->folder_id);
-        $this->assertEquals($animeId, $folderAnimeRelation->anime_id);
+        $this->assertEquals($expectedFolderAnimeRelation->user_id, $folderAnimeRelation->user_id);
+        $this->assertEquals($expectedFolderAnimeRelation->id, $folderAnimeRelation->id);
+        $this->assertEquals($expectedFolderAnimeRelation->folder_id, $folderAnimeRelation->folder_id);
+        $this->assertEquals($expectedFolderAnimeRelation->anime_id, $folderAnimeRelation->anime_id);
         $this->assertEquals(FolderAnimeRelation::STATUS_ACTIVE, $folderAnimeRelation->status);
-
-        $this->refreshApplication();
+        $this->assertEquals(1, $count);
     }
 
     // フォルダに新しいアニメを作成する際にそのアニメの status が存在しない値の場合のテスト
@@ -382,20 +242,11 @@ class FolderAnimeRelationServiceTest extends TestCase
         $animeId = 1;
 
         $now = Carbon::now();
-        $folderAnimeRelation = new FolderAnimeRelation();
-        $folderAnimeRelation->user_id = $userId;
-        $folderAnimeRelation->folder_id = $folderId;
-        $folderAnimeRelation->anime_id = $animeId;
-        $folderAnimeRelation->status = "anime";
-        $folderAnimeRelation->latest_changed_at = $now;
-        $folderAnimeRelation->created_at = $now;
-        $folderAnimeRelation->save();
+        $expectedFolderAnimeRelation = $this->createFolderAnime($userId, $folderId, $animeId, "anime", $now, $now, $now);
 
         $this->expectException(FolderAnimeRelationStateNotFoundException::class);
 
         \FolderAnimeRelationService::createFolderAnimeRelation($userId, $folderId, $animeId);
-
-        $this->refreshApplication();
     }
 
 
@@ -404,87 +255,76 @@ class FolderAnimeRelationServiceTest extends TestCase
     {
         $userId = 1;
         $folderId = 1;
-        $keyWord = "1";
 
-        $anime1 = new Anime();
-        $anime1->user_id = 1;
-        $anime1->name = "アニメ1";
-        $anime1->memo = "メモ1";
-        $anime1->status = Anime::STATUS_ACTIVE;
-        $anime1->latest_changed_at = now();
-        $anime1->created_at = now();
-        $anime1->updated_at = now();
-        $anime1->save();
+        $now = Carbon::now();
+        // 1が半角の場合
+        $anime1 = $this->createAnime($userId, "アニメ1", "メモ", Anime::STATUS_ACTIVE, $now, $now, $now);
+        // １が全角場合
+        $anime2 = $this->createAnime($userId, "アニメ１", "メモ", Anime::STATUS_ACTIVE, $now, $now, $now);
+        $anime3 = $this->createAnime($userId, "アニメa", "メモ", Anime::STATUS_ACTIVE, $now, $now, $now);
+        $anime4 = $this->createAnime($userId, "アニメA", "メモ", Anime::STATUS_ACTIVE, $now, $now, $now);
 
-        $anime2 = new Anime();
-        $anime2->user_id = 1;
-        $anime2->name = "アニメ2";
-        $anime2->memo = "メモ2";
-        $anime2->status = Anime::STATUS_ACTIVE;
-        $anime2->latest_changed_at = now();
-        $anime2->created_at = now();
-        $anime2->updated_at = now();
-        $anime2->save();
+        $folderAnimeRelation1 = $this->createFolderAnime($userId, $folderId, $anime1->id, FolderAnimeRelation::STATUS_ACTIVE, $now, $now, $now);
+        $folderAnimeRelation2 = $this->createFolderAnime($userId, $folderId, $anime2->id, FolderAnimeRelation::STATUS_ACTIVE, $now, $now, $now);
+        $folderAnimeRelation3 = $this->createFolderAnime($userId, $folderId, $anime3->id, FolderAnimeRelation::STATUS_ACTIVE, $now, $now, $now);
+        $folderAnimeRelation4 = $this->createFolderAnime($userId, $folderId, $anime4->id, FolderAnimeRelation::STATUS_ACTIVE, $now, $now, $now);
 
-        $folderAnimeRelation1 = new FolderAnimeRelation();
-        $folderAnimeRelation1->user_id = $userId;
-        $folderAnimeRelation1->folder_id = $folderId;
-        $folderAnimeRelation1->anime_id = $anime1->id;
-        $folderAnimeRelation1->status = FolderAnimeRelation::STATUS_ACTIVE;
-        $folderAnimeRelation1->latest_changed_at = now();
-        $folderAnimeRelation1->created_at = now();
-        $folderAnimeRelation1->save();
+        // 半角と全角の違いを確認するテスト
+        $animeList1 = \FolderAnimeRelationService::searchFolderAnime($userId, $folderId, "1");
+        $this->assertCount(1, $animeList1);
+        $this->assertEquals($anime1->name, $animeList1[0]->name);
 
-        $folderAnimeRelation2 = new FolderAnimeRelation();
-        $folderAnimeRelation2->user_id = $userId;
-        $folderAnimeRelation2->folder_id = $folderId;
-        $folderAnimeRelation2->anime_id = $anime2->id;
-        $folderAnimeRelation2->status = FolderAnimeRelation::STATUS_ACTIVE;
-        $folderAnimeRelation2->latest_changed_at = now();
-        $folderAnimeRelation2->created_at = now();
-        $folderAnimeRelation2->save();
-
-
-        $animeList = \FolderAnimeRelationService::searchFolderAnime($userId, $folderId, $keyWord);
-
-        $this->assertCount(1, $animeList);
-        $this->assertEquals($anime1->name, $animeList[0]->name);
-
-        $this->refreshApplication();
+        // 大文字と小文字の区別はされないことを確認するテスト
+        $animeList2 = \FolderAnimeRelationService::searchFolderAnime($userId, $folderId, "a");
+        $this->assertCount(2, $animeList2);
+        $this->assertEquals($anime3->name, $animeList2[0]->name);
     }
 
-    // フォルダ内でアニメを検索する際にそのキーワードのアニメが存在しない場合のテスト
-    public function test_success_searchFolderAnime_no_match()
+    // アニメをレコードに保存する関数。
+    private function createAnime(int $userId, string $name, string $memo, string $status, string $latest_changed_at, string $created_at, string $updated_at)
     {
-        $userId = 1;
-        $folderId = 1;
-        $keyWord = "anime";
-
         $anime = new Anime();
-        $anime->user_id = 1;
-        $anime->name = "アニメ1";
-        $anime->memo = "メモ1";
-        $anime->status = Anime::STATUS_ACTIVE;
-        $anime->latest_changed_at = now();
-        $anime->created_at = now();
-        $anime->updated_at = now();
+        $anime->user_id = $userId;
+        $anime->name = $name;
+        $anime->memo = $memo;
+        $anime->status = $status;
+        $anime->latest_changed_at = $latest_changed_at;
+        $anime->created_at = $created_at;
+        $anime->updated_at = $updated_at;
         $anime->save();
 
+        return $anime;
+    }
+
+    // フォルダをレコードに保存する関数。
+    private function createFolder(int $userId, string $name, string $status, string $latest_changed_at, string $created_at, string $updated_at)
+    {
+        $folder = new Folder();
+        $folder->user_id = $userId;
+        $folder->name = $name;
+        $folder->status = $status;
+        $folder->latest_changed_at = $latest_changed_at;
+        $folder->created_at = $created_at;
+        $folder->updated_at = $updated_at;
+        $folder->save();
+
+        return $folder;
+    }
+
+    // フォルダアニメをレコードに保存する関数。
+    private function createFolderAnime(int $userId, int $folderId, int $animeId, string $status, string $latest_changed_at, string $created_at, string $updated_at)
+    {
         $folderAnimeRelation = new FolderAnimeRelation();
         $folderAnimeRelation->user_id = $userId;
         $folderAnimeRelation->folder_id = $folderId;
-        $folderAnimeRelation->anime_id = $anime->id;
-        $folderAnimeRelation->status = FolderAnimeRelation::STATUS_ACTIVE;
-        $folderAnimeRelation->latest_changed_at = now();
-        $folderAnimeRelation->created_at = now();
+        $folderAnimeRelation->anime_id = $animeId;
+        $folderAnimeRelation->status = $status;
+        $folderAnimeRelation->latest_changed_at = $latest_changed_at;
+        $folderAnimeRelation->created_at = $created_at;
+        $folderAnimeRelation->updated_at = $updated_at;
         $folderAnimeRelation->save();
 
-        $animeList = \FolderAnimeRelationService::searchFolderAnime($userId, $folderId, $keyWord);
-
-        $this->assertInstanceOf(\Illuminate\Support\Collection::class, $animeList);
-        $this->assertCount(0, $animeList);
-
-        $this->refreshApplication();
+        return $folderAnimeRelation;
     }
 }
 

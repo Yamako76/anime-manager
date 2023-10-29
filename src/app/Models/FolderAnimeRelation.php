@@ -32,6 +32,9 @@ class FolderAnimeRelation extends Model
     const STATUS_ACTIVE = "active";
     const STATUS_DELETED = "deleted";
 
+    protected $fillable = ['user_id', 'id', 'folder_id', 'anime_id', 'status', 'latest_changed_at', 'created_at', 'updated_at'];
+
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */

@@ -11,14 +11,11 @@
         <testsuite name="Feature">
             <directory suffix="Test.php">./tests/Feature</directory>
         </testsuite>
-        <testsuite name="Anime">
-            <directory suffix="Test.php">./tests/app/Services/Api/Anime</directory>
+        <testsuite name="Services">
+            <directory suffix="Test.php">./tests/app/Services</directory>
         </testsuite>
-        <testsuite name="Folder">
-            <directory suffix="Test.php">./tests/app/Services/Api/Folder</directory>
-        </testsuite>
-        <testsuite name="FolderAnimeRelation">
-            <directory suffix="Test.php">./tests/app/Services/Api/FolderAnimeRelation</directory>
+        <testsuite name="Controllers">
+            <directory suffix="Test.php">./tests/app/Http/Controllers</directory>
         </testsuite>
     </testsuites>
     <coverage processUncoveredFiles="true">

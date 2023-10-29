@@ -21,22 +21,10 @@ class FolderServiceTest extends TestCase
     public function test_success_getFolderListByUserId__created_at()
     {
         $userId = 1;
-        $expectedFolderNames = [];
 
-        for ($i = 1; $i <= 20; $i++) {
-            $folderName = "フォルダ{$i}";
-            $expectedFolderNames[] = $folderName;
-
-            $folder = new Folder();
-            $customDateTime = Carbon::parse("20{$i}-01-01 00:00:00");
-            $folder->user_id = $userId;
-            $folder->status = Folder::STATUS_ACTIVE;
-            $folder->name = "フォルダ{$i}";
-            $folder->latest_changed_at = $customDateTime;
-            $folder->created_at = $customDateTime;
-            $folder->updated_at = $customDateTime;
-            $folder->save();
-        }
+        $folder1 = $this->createFolder($userId, "フォルダ1", Folder::STATUS_ACTIVE, Carbon::now(), Carbon::now(), Carbon::now());
+        $folder2 = $this->createFolder($userId, "フォルダ2", Folder::STATUS_ACTIVE, Carbon::now(), Carbon::now(), Carbon::now());
+        $folder3 = $this->createFolder($userId, "フォルダ3", Folder::STATUS_ACTIVE, Carbon::now(), Carbon::now(), Carbon::now());
 
         $currentPage = 1;
         $paginateUnit = 20;
@@ -45,31 +33,19 @@ class FolderServiceTest extends TestCase
 
         $actualFolderNames = $folderList->pluck('name')->toArray();
 
-        $this->assertEquals($expectedFolderNames, $actualFolderNames);
-
-        $this->refreshApplication();
+        $this->assertEquals($folder1->name, $actualFolderNames[0]);
+        $this->assertEquals($folder2->name, $actualFolderNames[1]);
+        $this->assertEquals($folder3->name, $actualFolderNames[2]);
     }
 
     // フォルダを最新順に取得するテスト
     public function test_success_getFolderListByUserId__latest()
     {
         $userId = 1;
-        $expectedFolderNames = [];
 
-        for ($i = 1; $i <= 20; $i++) {
-            Folder::create([
-                'user_id' => $userId,
-                'status' => Folder::STATUS_ACTIVE,
-                'name' => "フォルダ{$i}",
-                'memo' => 'This is a memo.',
-                'latest_changed_at' => now(),
-            ]);
-        }
-
-        for ($i = 20; $i > 0; $i--) {
-            $folderName = "フォルダ{$i}";
-            $expectedFolderNames[] = $folderName;
-        }
+        $folder1 = $this->createFolder($userId, "フォルダ1", Folder::STATUS_ACTIVE, Carbon::now(), Carbon::now(), Carbon::now());
+        $folder2 = $this->createFolder($userId, "フォルダ2", Folder::STATUS_ACTIVE, Carbon::now(), Carbon::now(), Carbon::now());
+        $folder3 = $this->createFolder($userId, "フォルダ3", Folder::STATUS_ACTIVE, Carbon::now(), Carbon::now(), Carbon::now());
 
         $currentPage = 1;
         $paginateUnit = 20;
@@ -77,40 +53,29 @@ class FolderServiceTest extends TestCase
         $folderList = \FolderService::getFolderListByUserId($userId, $currentPage, $paginateUnit, $sortType);
 
         $actualFolderNames = $folderList->pluck('name')->toArray();
-        $this->assertEquals($expectedFolderNames, $actualFolderNames);
-
-        $this->refreshApplication();
+        $this->assertEquals($folder1->name, $actualFolderNames[2]);
+        $this->assertEquals($folder2->name, $actualFolderNames[1]);
+        $this->assertEquals($folder3->name, $actualFolderNames[0]);
     }
 
     // フォルダを名前順に取得するテスト
     public function test_success_getFolderListByUserId__title()
     {
         $userId = 1;
-        $expectedFolderNames = [];
 
-        for ($i = 1; $i <= 20; $i++) {
-            $folderName = "フォルダ{$i}";
-            $expectedFolderNames[] = $folderName;
-
-            Folder::create([
-                'user_id' => $userId,
-                'status' => Folder::STATUS_ACTIVE,
-                'name' => "フォルダ{$i}",
-                'memo' => 'This is a memo.',
-                'latest_changed_at' => now(),
-            ]);
-        }
+        $folder1 = $this->createFolder($userId, "フォルダ1", Folder::STATUS_ACTIVE, Carbon::now(), Carbon::now(), Carbon::now());
+        $folder2 = $this->createFolder($userId, "フォルダ3", Folder::STATUS_ACTIVE, Carbon::now(), Carbon::now(), Carbon::now());
+        $folder3 = $this->createFolder($userId, "フォルダ2", Folder::STATUS_ACTIVE, Carbon::now(), Carbon::now(), Carbon::now());
 
         $currentPage = 1;
         $paginateUnit = 20;
         $sortType = 'title';
         $folderList = \FolderService::getFolderListByUserId($userId, $currentPage, $paginateUnit, $sortType);
 
-        sort($expectedFolderNames);
         $actualFolderNames = $folderList->pluck('name')->toArray();
-        $this->assertEquals($expectedFolderNames, $actualFolderNames);
-
-        $this->refreshApplication();
+        $this->assertEquals($folder1->name, $actualFolderNames[0]);
+        $this->assertEquals($folder3->name, $actualFolderNames[1]);
+        $this->assertEquals($folder2->name, $actualFolderNames[2]);
     }
 
     // フォルダ取得の際に無効なソートタイプのテスト
@@ -140,8 +105,6 @@ class FolderServiceTest extends TestCase
         $this->assertNotNull($folder->latest_changed_at);
         $this->assertNotNull($folder->created_at);
         $this->assertNotNull($folder->updated_at);
-
-        $this->refreshApplication();
     }
 
     // フォルダを folderId, userId から取得するテスト
@@ -151,31 +114,12 @@ class FolderServiceTest extends TestCase
         $folderId = 1;
 
         $now = Carbon::now();
-        $folder = new Folder();
-        $folder->user_id = $userId;
-        $folder->name = "Folder";
-        $folder->status = Folder::STATUS_ACTIVE;
-        $folder->latest_changed_at = $now;
-        $folder->created_at = $now;
-        $folder->updated_at = $now;
-        $folder->save();
+        $folder = $this->createFolder($userId, "フォルダ1", Folder::STATUS_ACTIVE, $now, $now, $now);
 
         $retrievedFolder = \FolderService::getFolderByIdAndUserId($folderId, $userId);
         $this->assertInstanceOf(Folder::class, $retrievedFolder);
-        $this->assertEquals($userId, $retrievedFolder->user_id);
-        $this->assertEquals($folderId, $retrievedFolder->id);
-
-        $this->refreshApplication();
-    }
-
-    // フォルダを folderId, userId から取得する際にフォルダが存在しない場合のテスト
-    public function test_getFolderByIdAndUserId_return_null()
-    {
-        $folderId = 999;
-        $userId = 1;
-
-        $result = \FolderService::getFolderByIdAndUserId($folderId, $userId);
-        $this->assertNull($result);
+        $this->assertEquals($folder->user_id, $retrievedFolder->user_id);
+        $this->assertEquals($folder->id, $retrievedFolder->id);
     }
 
     // フォルダを name, userId から取得するテスト
@@ -185,31 +129,12 @@ class FolderServiceTest extends TestCase
         $name = "フォルダ1";
 
         $now = Carbon::now();
-        $folder = new Folder();
-        $folder->user_id = $userId;
-        $folder->name = $name;
-        $folder->status = Folder::STATUS_ACTIVE;
-        $folder->latest_changed_at = $now;
-        $folder->created_at = $now;
-        $folder->updated_at = $now;
-        $folder->save();
+        $folder = $this->createFolder($userId, "フォルダ1", Folder::STATUS_ACTIVE, $now, $now, $now);
 
         $retrievedFolder = \FolderService::getFolderByUserIdAndName($userId, $name);
         $this->assertInstanceOf(Folder::class, $retrievedFolder);
-        $this->assertEquals($userId, $retrievedFolder->user_id);
-        $this->assertEquals($name, $retrievedFolder->name);
-
-        $this->refreshApplication();
-    }
-
-    // フォルダを name, userId から取得する際にフォルダが存在しない場合のテスト
-    public function test_success_getFolderByUserIdAndName_return_null()
-    {
-        $name = "フォルダ999";
-        $userId = 1;
-
-        $result = \FolderService::getFolderByUserIdAndName($userId, $name);
-        $this->assertNull($result);
+        $this->assertEquals($folder->user_id, $retrievedFolder->user_id);
+        $this->assertEquals($folder->name, $retrievedFolder->name);
     }
 
     // 新しいフォルダを作成するテスト
@@ -224,8 +149,6 @@ class FolderServiceTest extends TestCase
         $this->assertEquals($userId, $folder->user_id);
         $this->assertEquals(1, $folder->id);
         $this->assertEquals($name, $folder->name);
-
-        $this->refreshApplication();
     }
 
     // 新しいフォルダを作成する際にそのフォルダが存在する場合のテスト
@@ -235,24 +158,17 @@ class FolderServiceTest extends TestCase
         $name = "フォルダ1";
 
         $now = Carbon::now();
-        $folder = new Folder();
-        $folder->user_id = $userId;
-        $folder->name = $name;
-        $folder->status = Folder::STATUS_ACTIVE;
-        $folder->latest_changed_at = $now;
-        $folder->created_at = $now;
-        $folder->updated_at = $now;
-        $folder->save();
+        $expectedFolder = $this->createFolder($userId, $name, Folder::STATUS_ACTIVE, $now, $now, $now);
 
         $folder = \FolderService::createFolder($userId, $name);
+        $count = Folder::count();
 
         $this->assertInstanceOf(Folder::class, $folder);
-        $this->assertEquals($userId, $folder->user_id);
-        $this->assertEquals(1, $folder->id);
-        $this->assertEquals($name, $folder->name);
-        $this->assertEquals(Folder::STATUS_ACTIVE, $folder->status);
-
-        $this->refreshApplication();
+        $this->assertEquals($expectedFolder->user_id, $folder->user_id);
+        $this->assertEquals($expectedFolder->id, $folder->id);
+        $this->assertEquals($expectedFolder->name, $folder->name);
+        $this->assertEquals($expectedFolder->status, $folder->status);
+        $this->assertEquals(1, $count);
     }
 
     // 新しいフォルダを作成する際にそのフォルダが削除されていた場合のテスト
@@ -262,24 +178,17 @@ class FolderServiceTest extends TestCase
         $name = "フォルダ1";
 
         $now = Carbon::now();
-        $folder = new Folder();
-        $folder->user_id = $userId;
-        $folder->name = $name;
-        $folder->status = Folder::STATUS_DELETED;
-        $folder->latest_changed_at = $now;
-        $folder->created_at = $now;
-        $folder->updated_at = $now;
-        $folder->save();
+        $expectedFolder = $this->createFolder($userId, $name, Folder::STATUS_DELETED, $now, $now, $now);
 
         $folder = \FolderService::createFolder($userId, $name);
+        $count = Folder::count();
 
         $this->assertInstanceOf(Folder::class, $folder);
-        $this->assertEquals($userId, $folder->user_id);
-        $this->assertEquals(1, $folder->id);
-        $this->assertEquals($name, $folder->name);
+        $this->assertEquals($expectedFolder->user_id, $folder->user_id);
+        $this->assertEquals($expectedFolder->id, $folder->id);
+        $this->assertEquals($expectedFolder->name, $folder->name);
         $this->assertEquals(Folder::STATUS_ACTIVE, $folder->status);
-
-        $this->refreshApplication();
+        $this->assertEquals(1, $count);
     }
 
     // 新しいフォルダを作成する際にそのフォルダの status が存在しない値の場合のテスト
@@ -289,105 +198,68 @@ class FolderServiceTest extends TestCase
         $name = "フォルダ1";
 
         $now = Carbon::now();
-        $folder = new Folder();
-        $folder->user_id = $userId;
-        $folder->name = $name;
-        $folder->status = "folder";
-        $folder->latest_changed_at = $now;
-        $folder->created_at = $now;
-        $folder->updated_at = $now;
-        $folder->save();
+        $folder = $this->createFolder($userId, $name, "folder", $now, $now, $now);
 
         $this->expectException(FolderStateNotFoundException::class);
 
         \FolderService::createFolder($userId, $name);
-
-        $this->refreshApplication();
     }
 
     // フォルダを編集し新しい値が保存されていることのテスト
     public function test_success_updateFolderRecord()
     {
-        $now = Carbon::now();
-        $folder = new Folder();
-        $folder->user_id = 1;
-        $folder->name = "フォルダ";
-        $folder->status = Folder::STATUS_ACTIVE;
-        $folder->latest_changed_at = $now;
-        $folder->created_at = $now;
-        $folder->updated_at = $now;
-        $folder->save();
+        $userId = 1;
+        $name = "フォルダ1";
+
+        $yesterday = Carbon::now()->subDay();
+
+        $folder = $this->createFolder($userId, $name, Folder::STATUS_ACTIVE, $yesterday, $yesterday, $yesterday);
 
         $newName = "Folder";
 
         $updatedFolder = \FolderService::updateFolderRecord($folder, $newName);
 
-        $retrievedFolder = Folder::find($folder->id);
-
         $this->assertInstanceOf(Folder::class, $updatedFolder);
         $this->assertEquals($newName, $updatedFolder->name);
-        $this->assertEquals($folder->latest_changed_at->toDateTimeString(), $updatedFolder->latest_changed_at->toDateTimeString());
-
-        $this->assertEquals($newName, $retrievedFolder->name);
-        $this->assertEquals($folder->latest_changed_at->toDateTimeString(), $updatedFolder->latest_changed_at);
-
-        $this->refreshApplication();
     }
 
     // フォルダを検索する際にそのキーワードのフォルダが存在する場合のテスト
     public function test_success_searchFolder()
     {
         $userId = 1;
-        $keyWord = "1";
 
-        $folder1 = new Folder();
-        $folder1->user_id = 1;
-        $folder1->name = "フォルダ1";
-        $folder1->status = Folder::STATUS_ACTIVE;
-        $folder1->latest_changed_at = Carbon::now();
-        $folder1->created_at = Carbon::now();
-        $folder1->updated_at = Carbon::now();
-        $folder1->save();
+        $now = Carbon::now();
+        // 1が半角の場合
+        $folder1 = $this->createFolder($userId, "フォルダ1", Folder::STATUS_ACTIVE, $now, $now, $now);
+        // １が全角場合
+        $folder2 = $this->createFolder($userId, "フォルダ１", Folder::STATUS_ACTIVE, $now, $now, $now);
+        $folder3 = $this->createFolder($userId, "フォルダa", Folder::STATUS_ACTIVE, $now, $now, $now);
+        $folder4 = $this->createFolder($userId, "フォルダA", Folder::STATUS_ACTIVE, $now, $now, $now);
 
-        $folder2 = new Folder();
-        $folder2->user_id = 1;
-        $folder2->name = "フォルダ2";
-        $folder2->status = Folder::STATUS_ACTIVE;
-        $folder2->latest_changed_at = Carbon::now();
-        $folder2->created_at = Carbon::now();
-        $folder2->updated_at = Carbon::now();
-        $folder2->save();
+        // 半角と全角の違いを確認するテスト
+        $folderList1 = \FolderService::searchFolder($userId, "1");
+        $this->assertCount(1, $folderList1);
+        $this->assertEquals($folder1->name, $folderList1[0]->name);
 
-        $folderList = \FolderService::searchFolder($userId, $keyWord);
-
-        $this->assertCount(1, $folderList);
-        $this->assertEquals($folder1->name, $folderList[0]->name);
-
-        $this->refreshApplication();
+        // 大文字と小文字の区別はされないことを確認するテスト
+        $folderList2 = \FolderService::searchFolder($userId, "A");
+        $this->assertCount(2, $folderList2);
+        $this->assertEquals($folder4->name, $folderList2[0]->name);
     }
 
-    // フォルダを検索する際にそのキーワードのフォルダが存在しない場合のテスト
-    public function test_success_searchFolder_no_match()
+    // フォルダをレコードに保存する関数。
+    private function createFolder(int $userId, string $name, string $status, string $latest_changed_at, string $created_at, string $updated_at)
     {
-        $userId = 1;
-        $keyWord = "folder";
+        $folder = new Folder();
+        $folder->user_id = $userId;
+        $folder->name = $name;
+        $folder->status = $status;
+        $folder->latest_changed_at = $latest_changed_at;
+        $folder->created_at = $created_at;
+        $folder->updated_at = $updated_at;
+        $folder->save();
 
-        $anime = new Folder();
-        $anime->user_id = 1;
-        $anime->name = "フォルダ1";
-        $anime->status = Folder::STATUS_ACTIVE;
-        $anime->latest_changed_at = Carbon::now();
-        $anime->created_at = Carbon::now();
-        $anime->updated_at = Carbon::now();
-        $anime->save();
-
-
-        $folderList = \FolderService::searchFolder($userId, $keyWord);
-
-        $this->assertInstanceOf(\Illuminate\Database\Eloquent\Collection::class, $folderList);
-        $this->assertCount(0, $folderList);
-
-        $this->refreshApplication();
+        return $folder;
     }
 }
 

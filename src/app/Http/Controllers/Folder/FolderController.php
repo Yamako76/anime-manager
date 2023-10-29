@@ -12,6 +12,11 @@ class FolderController extends Controller
 
     public function index($folderId): Response
     {
+        // $folderId が整数でない場合
+        if (!is_numeric($folderId) || (int)$folderId != $folderId) {
+            return Inertia::render('Error/NotFound');
+        }
+
         $userId = \Auth::id();
 
         /** @var Folder $folder */

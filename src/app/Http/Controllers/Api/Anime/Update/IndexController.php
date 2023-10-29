@@ -17,6 +17,11 @@ class IndexController extends Controller
 
         $userId = \Auth::id();
 
+        // $animeId が整数でない場合
+        if (!is_numeric($animeId) || (int)$animeId != $animeId) {
+            return \response()->json([], 400);
+        }
+
         // 編集するアニメを取得します。
         /** @var Anime $anime */
         $anime = \AnimeService::getAnimeByIdAndUserId($animeId, $userId);
