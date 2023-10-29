@@ -18,6 +18,11 @@ class IndexController extends Controller
 
         $userId = \Auth::id();
 
+        // $folderId が整数でない場合
+        if (!is_numeric($folderId) || (int)$folderId != $folderId) {
+            return \response()->json([], 400);
+        }
+
         // 編集するフォルダを取得します。
         /** @var Folder $folder */
         $folder = \FolderService::getFolderByIdAndUserId($folderId, $userId);
