@@ -40,6 +40,7 @@ class IndexControllerTest extends TestCase
 
     public function test_error_delete_folder()
     {
+        // $folderIdが整数以外の場合400を返す。
         $folderId = "d";
         $response = $this->json('DELETE', "/api/folders/{$folderId}");
         $response->assertStatus(400);

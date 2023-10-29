@@ -57,7 +57,7 @@ class IndexControllerTest extends TestCase
 
     public function test_error_update_anime()
     {
-        // $animeIdが整数以外の場合400を返す。
+        // $animeIdが整数以外の場合
         $animeId = "d";
         $response = $this->json('PUT', "/api/anime-list/{$animeId}", ['name' => 'anime', 'memo' => 'memo']);
         $response->assertStatus(400);

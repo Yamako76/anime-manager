@@ -55,6 +55,7 @@ class IndexControllerTest extends TestCase
 
     public function test_error_update_folder()
     {
+        // $folderIdが整数以外の場合
         $folderId = "d";
         $response = $this->json('PUT', "/api/folders/{$folderId}", ['name' => 'folder']);
         $response->assertStatus(400);
