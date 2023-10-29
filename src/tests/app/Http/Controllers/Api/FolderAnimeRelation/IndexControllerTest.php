@@ -23,14 +23,14 @@ class IndexControllerTest extends TestCase
         $folderId = 1;
         $animeList = [
             [
-                'name' => 'フォルダ1',
+                'name' => 'アニメ1',
                 'anime_id' => 1,
                 'folder_id' => 1,
                 'folder_anime_latest_changed_at' => '2023-9-25 14:45:00',
             ],
             [
-                'name' => 'フォルダ1',
-                'anime_id' => 1,
+                'name' => 'アニメ2',
+                'anime_id' => 2,
                 'folder_id' => 1,
                 'folder_anime_latest_changed_at' => '2023-10-26 09:30:00',
             ],
@@ -54,14 +54,14 @@ class IndexControllerTest extends TestCase
 
         $animeList = [
             [
-                'name' => 'フォルダ1',
+                'name' => 'アニメ1',
                 'anime_id' => 1,
                 'folder_id' => 1,
                 'folder_anime_latest_changed_at' => '2023-9-25 14:45:00',
             ],
             [
-                'name' => 'フォルダ1',
-                'anime_id' => 1,
+                'name' => 'アニメ2',
+                'anime_id' => 2,
                 'folder_id' => 1,
                 'folder_anime_latest_changed_at' => '2023-10-26 09:30:00',
             ],

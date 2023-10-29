@@ -18,7 +18,7 @@ class IndexControllerTest extends TestCase
         $this->actingAs($user);
     }
 
-    public function test_success_delete_folder()
+    public function test_success_delete_folder_anime()
     {
         $folderAnime = new FolderAnimeRelation([
             'user_id' => 1,
@@ -39,7 +39,7 @@ class IndexControllerTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function test_error_delete_folder()
+    public function test_error_delete_folder_anime()
     {
         // フォルダ内にアニメが存在しない場合404を返す。
         \FolderAnimeRelationService::shouldReceive('getFolderAnimeRelationByUserIdAndFolderIdAndAnimeId')
