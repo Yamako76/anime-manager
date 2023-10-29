@@ -46,8 +46,8 @@ class IndexControllerTest extends TestCase
         $folderAnime = new FolderAnimeRelation([
             'user_id' => 1,
             'id' => 1,
-            '$folder_id' => 1,
-            '$anime_id' => 1,
+            'folder_id' => 1,
+            'anime_id' => 1,
             'status' => 'active',
             'latest_changed_at' => '2023-9-28 08:00:00',
             'created_at' => '2023-9-20 12:30:00',
