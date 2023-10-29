@@ -41,6 +41,11 @@ class IndexControllerTest extends TestCase
 
     public function test_error_delete_anime()
     {
+        // $animeIdが整数以外の場合400を返す。
+        $animeId = "d";
+        $response = $this->json('DELETE', "/api/anime-list/{$animeId}");
+        $response->assertStatus(400);
+
         // アニメが存在しない場合404を返す。
         \AnimeService::shouldReceive('getAnimeByIdAndUserId')
             ->andReturn(null)
