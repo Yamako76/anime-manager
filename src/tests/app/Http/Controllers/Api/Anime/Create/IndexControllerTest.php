@@ -5,7 +5,6 @@ namespace Tests\app\Http\Controllers\Api\Anime\Create;
 use App\Models\Anime;
 use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Support\Facades\Auth;
 use Tests\TestCase;
 
 class IndexControllerTest extends TestCase
