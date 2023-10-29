@@ -41,6 +41,16 @@ class IndexControllerTest extends TestCase
 
     public function test_error_delete_folder_anime()
     {
+        // $folderIdが整数以外の場合400を返す。
+        $folderId = "a";
+        $response = $this->json('DELETE', "/api/folders/{$folderId}/anime-list/1");
+        $response->assertStatus(400);
+
+        // $animeIdが整数以外の場合400を返す。
+        $animeId = "a";
+        $response = $this->json('DELETE', "/api/folders/1/anime-list/{$animeId}");
+        $response->assertStatus(400);
+
         // フォルダ内にアニメが存在しない場合404を返す。
         \FolderAnimeRelationService::shouldReceive('getFolderAnimeRelationByUserIdAndFolderIdAndAnimeId')
             ->andReturn(null)
