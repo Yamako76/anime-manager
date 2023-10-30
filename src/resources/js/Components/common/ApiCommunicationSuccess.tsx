@@ -10,6 +10,8 @@ interface Props {
     isSnackbar: boolean;
 }
 
+// API通信時における成功の通知
+// 例: フォルダの追加に成功した場合 => フォルダの追加に成功しました とSnackBarで通知をする
 const ApiCommunicationSuccess = ({message, handleSnackbarClose, isSnackbar}: Props) => {
 
     const SlideTransition = (props) => {

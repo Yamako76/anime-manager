@@ -23,6 +23,9 @@ interface Props {
     sx: { [key: string]: any };
 }
 
+// Objectの編集を行う画面を表するためのボタン
+// ボタンを押すと編集画面を表示し
+// 再度, ボタンを押すと閉じる
 const EditButton = ({
                         taskName,
                         id,

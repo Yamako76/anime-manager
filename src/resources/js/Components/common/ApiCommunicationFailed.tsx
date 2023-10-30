@@ -10,6 +10,8 @@ interface Props {
     isSnackbar: boolean;
 }
 
+// API通信時における失敗の通知
+// 例: フォルダの読み込みに失敗した場合 => フォルダの読み込みに失敗しました とSnackBarで通知をする
 const ApiCommunicationFailed = ({message, handleSnackbarClose, isSnackbar}: Props) => {
 
     const SlideTransition = (props) => {

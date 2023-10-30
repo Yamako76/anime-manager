@@ -26,6 +26,9 @@ interface Props {
     memoHandleRefresh: () => void;
 }
 
+// アニメを追加するためのDialogを表示するボタン
+// アニメの追加ボタンを押すと新しいアニメ作成する画面が表示され
+// 閉じるまたは追加ボタンを押すと新しいアニメ作成のキャンセルまたは新しいアニメ作成が完了する
 const AddAnimeButton = ({
                             taskName,
                             id,

@@ -10,7 +10,8 @@ interface Props {
     fontSize: "small";
 }
 
-
+// 入力のクリアボタン
+// ボタンを押すと入力内容がクリアされる
 const ClearButton = ({title, handleRefresh, fontSize}: Props) => {
     return (
         <Box>
