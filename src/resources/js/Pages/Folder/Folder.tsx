@@ -5,6 +5,9 @@ import AnimeHeader from "../../Components/Header/AnimeHeader";
 import SortManagement from "@/Components/common/SortManagement"
 import FolderAnimeManagement from "@/Components/Folder/FolderAnimeManagement";
 
+//　/folders/folderIdの画面へ出力する要素
+// folderIdによって選択されたアニメ詳細画面を表示
+
 interface FolderProps {
     name: string;
     id: number;

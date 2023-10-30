@@ -14,11 +14,19 @@ interface Props {
     animes: FolderAnime[];
 }
 
+interface FolderAnimeProps {
+    anime: FolderAnime;
+}
+
+// アニメの一覧表示
 const AnimeList = ({handleReload, id, animes}: Props) => {
     const BoxWidth: number = getBoxWidth();
     const titleWidth: number = BoxWidth - 50;
 
-    const PaperContent = ({anime}) => {
+    // 各アニメを表示するための枠組み
+    // - アニメのタイトルの表示
+    // - アニメの削除ボタン の作成
+    const PaperContent = ({anime}: FolderAnimeProps) => {
         const contentList = [
             {
                 body: (
@@ -89,6 +97,7 @@ const AnimeList = ({handleReload, id, animes}: Props) => {
         );
     };
 
+    // アニメ一覧
     const ItemList = () => {
         return (
             <Box

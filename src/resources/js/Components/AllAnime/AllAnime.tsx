@@ -17,10 +17,14 @@ interface AnimeProps {
     anime: Anime;
 }
 
+// アニメの一覧表示
 const AllAnime = ({handleReload, animes}: Props) => {
     const BoxWidth: number = getBoxWidth();
     const titleWidth: number = BoxWidth - 50;
 
+    // 各アニメを表示するための枠組み
+    // - アニメのタイトルの表示
+    // - アニメの削除ボタン の作成
     const PaperContent = ({anime}: AnimeProps) => {
         const contentList = [
             {
@@ -92,7 +96,7 @@ const AllAnime = ({handleReload, animes}: Props) => {
         );
     };
 
-    // アイテム一覧
+    // アニメ一覧
     const ItemList = () => {
         return (
             <Box

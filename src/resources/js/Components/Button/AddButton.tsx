@@ -21,6 +21,10 @@ interface Props {
     submitButtonName: string;
 }
 
+// Objectを追加するためのDialogを表示するボタン
+// Objectの追加ボタンを押すと新しいObject作成する画面が表示され
+// 閉じるまたは追加ボタンを押すと新しいObject作成のキャンセルまたは新しいObject作成が完了する
+// @button_name: ボタンに表示する文字
 const AddButton = ({
                        taskName,
                        id,

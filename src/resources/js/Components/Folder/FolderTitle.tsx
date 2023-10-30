@@ -23,7 +23,7 @@ interface MainProps {
 
 }
 
-
+// コンテンツMain部分
 const Main = ({titleWidth, name, handleReload, isLoading, id}: MainProps) => {
     const contentList = [
         {

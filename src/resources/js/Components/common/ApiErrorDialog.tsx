@@ -12,6 +12,7 @@ interface Props {
     message: string;
 }
 
+// API通信時に失敗したときにDialogを表示
 const ApiErrorDialog = ({isDialog, handleDialogClose, message}: Props) => {
     return (
         <div>

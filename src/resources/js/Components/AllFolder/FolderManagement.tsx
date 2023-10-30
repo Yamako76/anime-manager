@@ -10,6 +10,10 @@ import AllFolderTitle from "@/Components/AllFolder/AllFolderTitle";
 import AllFolder from "@/Components/AllFolder/AllFolder";
 import {Folder} from "@/Components/Folder";
 
+// フォルダ一覧の管理画面
+// - 新しいフォルダの追加
+// - 既存フォルダの削除
+// - フォルダの検索 を実装
 const FolderManagement = () => {
         const BoxWidth: number = getBoxWidth();
         const [value, setValue] = useState<string>("");
@@ -83,14 +87,17 @@ const FolderManagement = () => {
             try {
                 switch (state.sortIndex) {
                     case 1:
+                        // 最新順にフォルダを取得
                         res = await fetch(`/api/folders?page=${page}&sort=latest`, {signal: abortCtrl.signal});
                         break;
 
                     case 2:
+                        // タイトル順にフォルダを取得
                         res = await fetch(`/api/folders?page=${page}&sort=title`, {signal: abortCtrl.signal});
                         break
 
                     default:
+                        // 作成順にフォルダを取得
                         res = await fetch(`/api/folders?page=${page}&sort=created_at`, {signal: abortCtrl.signal});
                         break
                 }
@@ -128,6 +135,8 @@ const FolderManagement = () => {
             }
         }
 
+        // Mountされた時点でフォルダ読み込みを開始し
+        // reRenderがtrueになるたびに再読み込み
         useEffect(() => {
             const getFolders = async () => {
                 const res = await fetchFolders(1);
@@ -147,7 +156,7 @@ const FolderManagement = () => {
             }
         }, [reRender])
 
-        // アイテムの並び替えが発生した場合に再読み込み
+        // フォルダの並び替えが発生した場合に再読み込み
         useEffect(() => {
             if (!isLoading) {
                 handleReload();
@@ -189,10 +198,13 @@ const FolderManagement = () => {
             );
         }
 
+        // フォルダが存在するときとそうでないときに表示する分岐
         const isNotExist = (
             (folders.length) ? <ViewInfiniteScroll/> : <NotExistFolders/>
         );
 
+        // コンテンツのMain部分
+        // フォルダ一覧を表示
         const Main = () => {
             return (
                 <Grid container direction="column" sx={{marginTop: "100px"}}>
@@ -222,6 +234,7 @@ const FolderManagement = () => {
                     }}
                 >
                     <Main/>
+                    {/* フォルダ検索 */}
                     <SearchBar
                         handleChange={handleChange}
                         handleRefresh={handleRefresh}

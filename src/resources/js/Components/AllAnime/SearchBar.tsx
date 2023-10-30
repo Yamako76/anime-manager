@@ -21,6 +21,7 @@ interface Props {
     value: string;
 }
 
+// アニメ検索バー
 const SearchBar = ({
     handleChange,
     handleRefresh,

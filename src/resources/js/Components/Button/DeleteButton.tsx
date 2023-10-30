@@ -15,6 +15,9 @@ interface Props {
     size: "small";
 }
 
+// Objectの削除を行う画面を表するためのボタン
+// ボタンを押すと削除画面を表示し
+// 再度, ボタンを押すと閉じる
 const DeleteButton = ({
                           taskName,
                           contentText,

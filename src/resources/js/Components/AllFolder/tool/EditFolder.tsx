@@ -8,7 +8,7 @@ import ApiCommunicationSuccess from "@/Components/common/ApiCommunicationSuccess
 import ApiCommunicationFailed from "@/Components/common/ApiCommunicationFailed";
 import {Folder} from "@/Components/Folder";
 
-// フォルダ編集機能 //
+// フォルダ編集機能
 // フォルダの編集ボタンを押すとフォルダを編集する画面が表示され
 // 閉じるまたは編集ボタンを押すとフォルダ編集のキャンセルまたはフォルダ編集が完了する
 // 入力は1字以上200字以下で制限する

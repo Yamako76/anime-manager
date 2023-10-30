@@ -7,7 +7,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import {SortContext} from '../../common/SortManagement';
 
-// アイテムの並べ替えをするMenu
+// アニメの並べ替えをするMenu
 // 0:  作成順
 // 1:  最新順
 // 2:  タイトル順

@@ -11,6 +11,9 @@ interface Props {
     folder: Folder;
 }
 
+// フォルダ削除機能
+// フォルダの削除ボタンを押すと削除画面が表示され
+// 閉じるまたは削除ボタンを押すと削除のキャンセルまたは削除が完了する
 const DeleteFolder = ({handleReload, folder}: Props) => {
     const [open, setOpen] = useState<boolean>(false);
     const [isSuccessSnackbar, setIsSuccessSnackbar] = useState<boolean>(false);
