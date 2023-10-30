@@ -5,6 +5,8 @@ import AnimeHeader from "../../Components/Header/AnimeHeader";
 import SortManagement from "@/Components/common/SortManagement"
 import AnimeManagement from "@/Components/AllAnime/AnimeManagement";
 
+// /anime-listの画面へ出力する要素
+//  アニメ一覧画面を表示
 const Index = () => {
 
 

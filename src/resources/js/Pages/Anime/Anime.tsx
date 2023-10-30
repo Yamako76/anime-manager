@@ -4,6 +4,9 @@ import {Box} from "@mui/material";
 import AnimeHeader from "../../Components/Header/AnimeHeader";
 import AnimeDetail from "@/Components/AnimeDetail/AnimeDetail";
 
+//　/anime-list/animeIdの画面へ出力する要素
+// animeIdによって選択されたアニメ詳細画面を表示
+
 interface AnimeProps {
     name: string;
     memo: string;
