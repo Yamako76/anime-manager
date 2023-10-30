@@ -10,6 +10,10 @@ import InfiniteScroll from "react-infinite-scroller";
 import NotExistAnimes from "@/Components/common/NotExistAnimes";
 import {Anime} from "@/Components/Anime";
 
+// アニメ一覧の管理画面
+// - 新しいアニメの追加
+// - 既存アニメの削除
+// - アニメの検索 を実装
 const AnimeManagement = () => {
         const BoxWidth: number = getBoxWidth();
         const [value, setValue] = useState<string>("");
@@ -83,14 +87,17 @@ const AnimeManagement = () => {
             try {
                 switch (state.sortIndex) {
                     case 1:
+                        // 最新順にアニメを取得
                         res = await fetch(`/api/anime-list?page=${page}&sort=latest`, {signal: abortCtrl.signal});
                         break;
 
                     case 2:
+                        // タイトル順にアニメを取得
                         res = await fetch(`/api/anime-list?page=${page}&sort=title`, {signal: abortCtrl.signal});
                         break
 
                     default:
+                        // 作成順にアニメを取得
                         res = await fetch(`/api/anime-list?page=${page}&sort=created_at`, {signal: abortCtrl.signal});
                         break
                 }
@@ -128,6 +135,8 @@ const AnimeManagement = () => {
             }
         }
 
+        // Mountされた時点でアニメ読み込みを開始し
+        // reRenderがtrueになるたびに再読み込み
         useEffect(() => {
             const getAnimes = async () => {
                 const res = await fetchAnimes(1);
@@ -147,14 +156,14 @@ const AnimeManagement = () => {
             }
         }, [reRender])
 
-        // アイテムの並び替えが発生した場合に再読み込み
+        // アニメの並び替えが発生した場合に再読み込み
         useEffect(() => {
             if (!isLoading) {
                 handleReload();
             }
         }, [state.sortIndex])
 
-        // 無限スクロールで呼ばれるアイテムの読み込みを行う関数
+        // 無限スクロールで呼ばれるアニメの読み込みを行う関数
         const loadMore = async () => {
             page.current++;
             const res = await fetchAnimes(page.current);
@@ -189,10 +198,13 @@ const AnimeManagement = () => {
             );
         }
 
+        // アニメが存在するときとそうでないときに表示する分岐
         const isNotExist = (
             (animes.length) ? <ViewInfiniteScroll/> : <NotExistAnimes/>
         );
 
+    // コンテンツのMain部分
+    // アニメ一覧を表示
         const Main = () => {
             return (
                 <Grid container direction="column" sx={{marginTop: "100px"}}>
@@ -203,7 +215,7 @@ const AnimeManagement = () => {
                         />
                     </Grid>
                     <Divider/>
-                    {/* アイテム一覧 */}
+                    {/* アニメ一覧 */}
                     <Grid container item>
                         {(isLoading) ? (loader) : (isNotExist)}
                     </Grid>
@@ -222,6 +234,7 @@ const AnimeManagement = () => {
                     }}
                 >
                     <Main/>
+                    {/* アニメ検索 */}
                     <SearchBar
                         handleChange={handleChange}
                         handleRefresh={handleRefresh}

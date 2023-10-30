@@ -14,6 +14,10 @@ interface AnimeProps {
     id: number;
 }
 
+// アニメ編集機能
+// アニメの編集ボタンを押すとアニメを編集する画面が表示され
+// 閉じるまたは編集ボタンを押すとアニメ編集のキャンセルまたはアニメ編集が完了する
+// 入力は1字以上200字以下で制限する
 const EditAnime = ({name, memo, id}: AnimeProps) => {
     const [open, setOpen] = useState<boolean>(false);
     const [error, setError] = useState<boolean>(false);

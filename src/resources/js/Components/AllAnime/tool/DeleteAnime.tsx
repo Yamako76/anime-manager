@@ -11,6 +11,9 @@ interface Props {
     anime: Anime;
 }
 
+// アニメ削除機能
+// アニメの削除ボタンを押すと削除画面が表示され
+// 閉じるまたは削除ボタンを押すと削除のキャンセルまたは削除が完了する
 const DeleteAnime = ({handleReload, anime}: Props) => {
     const [open, setOpen] = useState<boolean>(false);
     const [isSuccessSnackbar, setIsSuccessSnackbar] = useState<boolean>(false);
