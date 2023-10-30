@@ -49,7 +49,7 @@ const ViewMemo = ({ memo }: Props) => {
                         }}
                     />
                     <Typography sx={{ fontSize: 18, fontWeight: "bold" }}>
-                        {memo}
+                        memo
                     </Typography>
                 </Grid>
                 <Grid
@@ -74,7 +74,7 @@ const ViewMemo = ({ memo }: Props) => {
                             padding: "5px",
                         }}
                     >
-                        <Typography>memo</Typography>
+                        <Typography>{memo}</Typography>
                     </Paper>
                 </Grid>
             </Grid>
