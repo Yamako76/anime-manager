@@ -87,6 +87,9 @@ export default function Register() {
                                     isFocused={true}
                                     onChange={handleOnChange}
                                     required
+                                    style={{
+                                        height: '35px'
+                                    }}
                                 />
 
                                 <InputError
@@ -111,6 +114,9 @@ export default function Register() {
                                     autoComplete="username"
                                     onChange={handleOnChange}
                                     required
+                                    style={{
+                                        height: '35px'
+                                    }}
                                 />
 
                                 <InputError
@@ -135,6 +141,9 @@ export default function Register() {
                                     autoComplete="new-password"
                                     onChange={handleOnChange}
                                     required
+                                    style={{
+                                        height: '35px'
+                                    }}
                                 />
 
                                 <InputError
@@ -159,6 +168,9 @@ export default function Register() {
                                     autoComplete="new-password"
                                     onChange={handleOnChange}
                                     required
+                                    style={{
+                                        height: '35px'
+                                    }}
                                 />
 
                                 <InputError
@@ -174,6 +186,12 @@ export default function Register() {
                                     style={{
                                         backgroundColor: "#0066FF",
                                         color: "white",
+                                    }}
+                                    onMouseEnter={(e) => {
+                                        e.target.style.backgroundColor = "#0044CC";
+                                    }}
+                                    onMouseLeave={(e) => {
+                                        e.target.style.backgroundColor = "#0066FF";
                                     }}
                                 >
                                     送信

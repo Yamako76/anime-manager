@@ -92,6 +92,10 @@ export default function Login({ status }: any) {
                                     autoComplete="username"
                                     isFocused={true}
                                     onChange={handleOnChange}
+                                    required
+                                    style={{
+                                        height: '35px'
+                                    }}
                                 />
 
                                 <InputError
@@ -115,6 +119,10 @@ export default function Login({ status }: any) {
                                     className="mt-1 block w-full"
                                     autoComplete="current-password"
                                     onChange={handleOnChange}
+                                    required
+                                    style={{
+                                        height: '35px'
+                                    }}
                                 />
 
                                 <InputError
@@ -130,6 +138,12 @@ export default function Login({ status }: any) {
                                     style={{
                                         backgroundColor: "#0066FF",
                                         color: "white",
+                                    }}
+                                    onMouseEnter={(e) => {
+                                        e.target.style.backgroundColor = "#0044CC";
+                                    }}
+                                    onMouseLeave={(e) => {
+                                        e.target.style.backgroundColor = "#0066FF";
                                     }}
                                 >
                                     送信
