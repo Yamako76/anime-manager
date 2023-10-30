@@ -17,6 +17,9 @@ interface AnimeProps {
     id: number;
 }
 
+// アニメ詳細画面
+// -特定のアニメの編集
+// -YouTubeAPIの実装
 const AnimeDetail = ({name, memo, id}: AnimeProps) => {
     const [videoId, setVideoId] = useState<string>("");
     const [isFailedSnackbar, setIsFailedSnackbar] = useState<boolean>(false);
@@ -38,6 +41,7 @@ const AnimeDetail = ({name, memo, id}: AnimeProps) => {
         };
     }, []);
 
+    // MountされたYouTubeの読み込みを開始
     useEffect(() => {
         const getAnime = async () => {
             const youTubeVideoId = await fetchYouTubeVideoId(name);
