@@ -94,7 +94,7 @@ export default function Login({ status }: any) {
                                     onChange={handleOnChange}
                                     required
                                     style={{
-                                        height: '35px'
+                                        height: "35px",
                                     }}
                                 />
 
@@ -121,7 +121,7 @@ export default function Login({ status }: any) {
                                     onChange={handleOnChange}
                                     required
                                     style={{
-                                        height: '35px'
+                                        height: "35px",
                                     }}
                                 />
 
@@ -141,10 +141,12 @@ export default function Login({ status }: any) {
                                         cursor: "pointer",
                                     }}
                                     onMouseEnter={(e) => {
-                                        e.target.style.backgroundColor = "#0044CC";
+                                        e.target.style.backgroundColor =
+                                            "#0044CC";
                                     }}
                                     onMouseLeave={(e) => {
-                                        e.target.style.backgroundColor = "#0066FF";
+                                        e.target.style.backgroundColor =
+                                            "#0066FF";
                                     }}
                                 >
                                     送信
