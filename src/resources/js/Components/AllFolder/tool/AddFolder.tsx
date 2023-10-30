@@ -1,7 +1,7 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import AddButton from "@/Components/Button/AddButton";
-import {value_validation} from "@/Components/common/tool";
+import { value_validation } from "@/Components/common/tool";
 import axios from "axios";
 import ApiCommunicationSuccess from "@/Components/common/ApiCommunicationSuccess";
 import ApiCommunicationFailed from "@/Components/common/ApiCommunicationFailed";
@@ -15,7 +15,7 @@ interface Props {
     handleReload: () => void;
 }
 
-const AddFolder = ({handleReload}: Props) => {
+const AddFolder = ({ handleReload }: Props) => {
     const [open, setOpen] = useState<boolean>(false);
     const [error, setError] = useState<boolean>(false);
     const [value, setValue] = useState<string>("");
@@ -79,11 +79,11 @@ const AddFolder = ({handleReload}: Props) => {
 
     const handleSnackbarSuccess = () => {
         setIsSuccessSnackbar(true);
-    }
+    };
 
     const handleSnackbarFailed = () => {
         setIsFailedSnackbar(true);
-    }
+    };
 
     const createFolder = () => {
         const abortCtrl = new AbortController();
@@ -93,8 +93,8 @@ const AddFolder = ({handleReload}: Props) => {
         axios
             .post(
                 "/api/folders",
-                {name: value.trim()},
-                {signal: abortCtrl.signal}
+                { name: value.trim() },
+                { signal: abortCtrl.signal }
             )
             .then(() => {
                 handleSnackbarSuccess();
@@ -126,14 +126,20 @@ const AddFolder = ({handleReload}: Props) => {
                     submitButtonName="追加"
                 />
             </Box>
-            {isSuccessSnackbar && <ApiCommunicationSuccess message={"フォルダの追加が完了しました"}
-                                                           handleSnackbarClose={handleSuccessSnackbarClose}
-                                                           isSnackbar={isSuccessSnackbar}
-            />}
-            {isFailedSnackbar && <ApiCommunicationFailed message={"フォルダの追加に失敗しました"}
-                                                         handleSnackbarClose={handleFailedSnackbarClose}
-                                                         isSnackbar={isFailedSnackbar}
-            />}
+            {isSuccessSnackbar && (
+                <ApiCommunicationSuccess
+                    message={"フォルダの追加が完了しました"}
+                    handleSnackbarClose={handleSuccessSnackbarClose}
+                    isSnackbar={isSuccessSnackbar}
+                />
+            )}
+            {isFailedSnackbar && (
+                <ApiCommunicationFailed
+                    message={"フォルダの追加に失敗しました"}
+                    handleSnackbarClose={handleFailedSnackbarClose}
+                    isSnackbar={isFailedSnackbar}
+                />
+            )}
         </>
     );
 };

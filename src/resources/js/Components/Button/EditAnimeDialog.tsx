@@ -27,24 +27,27 @@ interface Props {
     memoHandleChange: (e) => void;
 }
 
+// アニメの追加・編集をする画面
+// アニメの追加・編集ボタンを押すと新しいアニメを作成する画面が表示される
+// 閉じるまたは追加・編集ボタンを押すと新しいアニメ作成のキャンセルまたは新しいアニメ作成が完了する
 const EditAnimeDialog = ({
-                             taskName,
-                             id,
-                             label,
-                             open,
-                             error,
-                             errorText,
-                             handleChange,
-                             handleClose,
-                             handleSubmit,
-                             handleRefresh,
-                             nameValue,
-                             submitButtonName,
-                             memoId,
-                             memoLabel,
-                             memoValue,
-                             memoHandleChange,
-                         }: Props) => {
+    taskName,
+    id,
+    label,
+    open,
+    error,
+    errorText,
+    handleChange,
+    handleClose,
+    handleSubmit,
+    handleRefresh,
+    nameValue,
+    submitButtonName,
+    memoId,
+    memoLabel,
+    memoValue,
+    memoHandleChange,
+}: Props) => {
     return (
         <Box>
             <Dialog open={open} onClose={handleClose}>

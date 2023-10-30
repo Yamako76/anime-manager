@@ -7,7 +7,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import ClearButton from "./ClearButton";
-import {pressEnter} from "@/Components/common/tool";
+import { pressEnter } from "@/Components/common/tool";
 
 interface Props {
     taskName: string;
@@ -24,21 +24,25 @@ interface Props {
     submitButtonName: string;
 }
 
-
+// Objectの追加・編集する画面
+// Objectの追加・編集ボタンを押すと新しいObject作成する画面が表示され
+// 閉じるまたは追加・編集ボタンを押すと新しいObject作成のキャンセルまたは新しいObject作成が完了する
+// @taskName: 実行するtask  (例: 新しいフォルダの作成)
+// @submitButtonName: objectの追加・編集の完了するボタンの名前  (例: 追加)
 const EditDialog = ({
-                        taskName,
-                        id,
-                        label,
-                        open,
-                        error,
-                        errorText,
-                        handleChange,
-                        handleClose,
-                        handleSubmit,
-                        handleRefresh,
-                        value,
-                        submitButtonName,
-                    }: Props) => {
+    taskName,
+    id,
+    label,
+    open,
+    error,
+    errorText,
+    handleChange,
+    handleClose,
+    handleSubmit,
+    handleRefresh,
+    value,
+    submitButtonName,
+}: Props) => {
     return (
         <Box>
             <Dialog open={open} onClose={handleClose}>

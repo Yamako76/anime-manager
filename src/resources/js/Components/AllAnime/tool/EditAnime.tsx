@@ -1,9 +1,9 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import EditAnimeButton from "@/Components/Button/EditAnimeButton";
-import {value_validation} from "../../common/tool";
+import { value_validation } from "../../common/tool";
 import EditIcon from "@mui/icons-material/Edit";
-import {grey} from "@mui/material/colors";
+import { grey } from "@mui/material/colors";
 import axios from "axios";
 import ApiCommunicationSuccess from "@/Components/common/ApiCommunicationSuccess";
 import ApiCommunicationFailed from "@/Components/common/ApiCommunicationFailed";
@@ -14,7 +14,11 @@ interface AnimeProps {
     id: number;
 }
 
-const EditAnime = ({name, memo, id}: AnimeProps) => {
+// アニメ編集機能
+// アニメの編集ボタンを押すとアニメを編集する画面が表示され
+// 閉じるまたは編集ボタンを押すとアニメ編集のキャンセルまたはアニメ編集が完了する
+// 入力は1字以上200字以下で制限する
+const EditAnime = ({ name, memo, id }: AnimeProps) => {
     const [open, setOpen] = useState<boolean>(false);
     const [error, setError] = useState<boolean>(false);
     const [nameValue, setNameValue] = useState<string>(name);
@@ -84,22 +88,26 @@ const EditAnime = ({name, memo, id}: AnimeProps) => {
 
     const handleSnackbarSuccess = () => {
         setIsSuccessSnackbar(true);
-    }
+    };
 
     const handleSnackbarFailed = () => {
         setIsFailedSnackbar(true);
-    }
+    };
 
     const updateAnime = () => {
-        const abortCtrl = new AbortController()
+        const abortCtrl = new AbortController();
         const timeout = setTimeout(() => {
-            abortCtrl.abort()
+            abortCtrl.abort();
         }, 10000);
         axios
-            .put(`/api/anime-list/${id}`, {
-                name: nameValue.trim(),
-                memo: memoValue
-            }, {signal: abortCtrl.signal})
+            .put(
+                `/api/anime-list/${id}`,
+                {
+                    name: nameValue.trim(),
+                    memo: memoValue,
+                },
+                { signal: abortCtrl.signal }
+            )
             .then(() => {
                 handleSnackbarSuccess();
             })
@@ -108,8 +116,8 @@ const EditAnime = ({name, memo, id}: AnimeProps) => {
             })
             .finally(() => {
                 clearTimeout(timeout);
-            })
-    }
+            });
+    };
 
     return (
         <>
@@ -134,18 +142,24 @@ const EditAnime = ({name, memo, id}: AnimeProps) => {
                     memoLabel="メモ"
                     memoValue={memoValue}
                     memoHandleChange={memoHandleChange}
-                    startIcon={<EditIcon/>}
-                    sx={{"&:hover": {color: grey[900]}}}
+                    startIcon={<EditIcon />}
+                    sx={{ "&:hover": { color: grey[900] } }}
                 />
             </Box>
-            {isSuccessSnackbar && <ApiCommunicationSuccess message={`アニメ(${name})の更新が完了しました`}
-                                                           handleSnackbarClose={handleSuccessSnackbarClose}
-                                                           isSnackbar={isSuccessSnackbar}
-            />}
-            {isFailedSnackbar && <ApiCommunicationFailed message={`アニメ(${name})の更新が失敗しました`}
-                                                         handleSnackbarClose={handleFailedSnackbarClose}
-                                                         isSnackbar={isFailedSnackbar}
-            />}
+            {isSuccessSnackbar && (
+                <ApiCommunicationSuccess
+                    message={`アニメ(${name})の更新が完了しました`}
+                    handleSnackbarClose={handleSuccessSnackbarClose}
+                    isSnackbar={isSuccessSnackbar}
+                />
+            )}
+            {isFailedSnackbar && (
+                <ApiCommunicationFailed
+                    message={`アニメ(${name})の更新が失敗しました`}
+                    handleSnackbarClose={handleFailedSnackbarClose}
+                    isSnackbar={isFailedSnackbar}
+                />
+            )}
         </>
     );
 };

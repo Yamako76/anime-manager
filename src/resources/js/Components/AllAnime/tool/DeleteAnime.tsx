@@ -1,17 +1,20 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import DeleteButton from "@/Components/Button/DeleteButton";
 import axios from "axios";
 import ApiCommunicationSuccess from "@/Components/common/ApiCommunicationSuccess";
 import ApiCommunicationFailed from "@/Components/common/ApiCommunicationFailed";
-import {Anime} from "@/Components/Anime";
+import { Anime } from "@/Components/Anime";
 
 interface Props {
     handleReload: () => void;
     anime: Anime;
 }
 
-const DeleteAnime = ({handleReload, anime}: Props) => {
+// アニメ削除機能
+// アニメの削除ボタンを押すと削除画面が表示され
+// 閉じるまたは削除ボタンを押すと削除のキャンセルまたは削除が完了する
+const DeleteAnime = ({ handleReload, anime }: Props) => {
     const [open, setOpen] = useState<boolean>(false);
     const [isSuccessSnackbar, setIsSuccessSnackbar] = useState<boolean>(false);
     const [isFailedSnackbar, setIsFailedSnackbar] = useState<boolean>(false);
@@ -41,19 +44,19 @@ const DeleteAnime = ({handleReload, anime}: Props) => {
 
     const handleSnackbarSuccess = () => {
         setIsSuccessSnackbar(true);
-    }
+    };
 
     const handleSnackbarFailed = () => {
         setIsFailedSnackbar(true);
-    }
+    };
 
     const deleteAnime = () => {
-        const abortCtrl = new AbortController()
+        const abortCtrl = new AbortController();
         const timeout = setTimeout(() => {
-            abortCtrl.abort()
+            abortCtrl.abort();
         }, 10000);
         axios
-            .delete(`/api/anime-list/${anime.id}`, {signal: abortCtrl.signal})
+            .delete(`/api/anime-list/${anime.id}`, { signal: abortCtrl.signal })
             .then(() => {
                 handleSnackbarSuccess();
             })
@@ -62,8 +65,8 @@ const DeleteAnime = ({handleReload, anime}: Props) => {
             })
             .finally(() => {
                 clearTimeout(timeout);
-            })
-    }
+            });
+    };
 
     return (
         <>
@@ -79,14 +82,20 @@ const DeleteAnime = ({handleReload, anime}: Props) => {
                     size="small"
                 />
             </Box>
-            {isSuccessSnackbar && <ApiCommunicationSuccess message={`アニメ(${anime.name})の削除が完了しました`}
-                                                           handleSnackbarClose={handleSuccessSnackbarClose}
-                                                           isSnackbar={isSuccessSnackbar}
-            />}
-            {isFailedSnackbar && <ApiCommunicationFailed message={`アニメ(${anime.name})の削除に失敗しました`}
-                                                         handleSnackbarClose={handleFailedSnackbarClose}
-                                                         isSnackbar={isFailedSnackbar}
-            />}
+            {isSuccessSnackbar && (
+                <ApiCommunicationSuccess
+                    message={`アニメ(${anime.name})の削除が完了しました`}
+                    handleSnackbarClose={handleSuccessSnackbarClose}
+                    isSnackbar={isSuccessSnackbar}
+                />
+            )}
+            {isFailedSnackbar && (
+                <ApiCommunicationFailed
+                    message={`アニメ(${anime.name})の削除に失敗しました`}
+                    handleSnackbarClose={handleFailedSnackbarClose}
+                    isSnackbar={isFailedSnackbar}
+                />
+            )}
         </>
     );
 };

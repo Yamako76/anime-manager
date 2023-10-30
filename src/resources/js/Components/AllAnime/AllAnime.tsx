@@ -1,12 +1,12 @@
 import React from "react";
-import {Box, Grid} from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import Tooltip from "@mui/material/Tooltip";
 import Paper from "@mui/material/Paper";
-import {grey} from "@mui/material/colors";
-import {getBoxWidth} from "@/Components/AllAnime/tool/tool";
+import { grey } from "@mui/material/colors";
+import { getBoxWidth } from "@/Components/AllAnime/tool/tool";
 import DeleteAnime from "@/Components/AllAnime/tool/DeleteAnime";
-import {InertiaLink} from "@inertiajs/inertia-react";
-import {Anime} from "@/Components/Anime";
+import { InertiaLink } from "@inertiajs/inertia-react";
+import { Anime } from "@/Components/Anime";
 
 interface Props {
     handleReload: () => void;
@@ -17,15 +17,22 @@ interface AnimeProps {
     anime: Anime;
 }
 
-const AllAnime = ({handleReload, animes}: Props) => {
+// アニメの一覧表示
+const AllAnime = ({ handleReload, animes }: Props) => {
     const BoxWidth: number = getBoxWidth();
     const titleWidth: number = BoxWidth - 50;
 
-    const PaperContent = ({anime}: AnimeProps) => {
+    // 各アニメを表示するための枠組み
+    // - アニメのタイトルの表示
+    // - アニメの削除ボタン の作成
+    const PaperContent = ({ anime }: AnimeProps) => {
         const contentList = [
             {
                 body: (
-                    <Tooltip title={anime.name + "の詳細"} placement="bottom-end">
+                    <Tooltip
+                        title={anime.name + "の詳細"}
+                        placement="bottom-end"
+                    >
                         <Box
                             textOverflow="ellipsis"
                             overflow="hidden"
@@ -37,7 +44,7 @@ const AllAnime = ({handleReload, animes}: Props) => {
                                 width: String(titleWidth - 10) + "px",
                                 color: grey[900],
                                 textDecoration: "none",
-                                "&:hover": {color: grey[900]},
+                                "&:hover": { color: grey[900] },
                             }}
                         >
                             {anime.name}
@@ -52,7 +59,7 @@ const AllAnime = ({handleReload, animes}: Props) => {
                 },
             },
             {
-                body: <DeleteAnime handleReload={handleReload} anime={anime}/>,
+                body: <DeleteAnime handleReload={handleReload} anime={anime} />,
                 sx: {
                     width: "40px",
                     display: "flex",
@@ -92,7 +99,7 @@ const AllAnime = ({handleReload, animes}: Props) => {
         );
     };
 
-    // アイテム一覧
+    // アニメ一覧
     const ItemList = () => {
         return (
             <Box
@@ -106,7 +113,7 @@ const AllAnime = ({handleReload, animes}: Props) => {
                 <Grid container direction="column" spacing={1}>
                     {animes.map((anime, index) => (
                         <Grid key={index} container item>
-                            <PaperContent anime={anime}/>
+                            <PaperContent anime={anime} />
                         </Grid>
                     ))}
                 </Grid>
@@ -116,7 +123,7 @@ const AllAnime = ({handleReload, animes}: Props) => {
 
     return (
         <Box>
-            <ItemList/>
+            <ItemList />
         </Box>
     );
 };

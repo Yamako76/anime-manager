@@ -6,7 +6,7 @@ interface Props {
     videoId: string;
 }
 
-const ViewYouTubeVideo = ({videoId}: Props) => {
+const ViewYouTubeVideo = ({ videoId }: Props) => {
     return (
         <Box
             sx={{

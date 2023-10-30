@@ -1,11 +1,10 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import DeleteButton from "@/Components/Button/DeleteButton";
 import axios from "axios";
 import ApiCommunicationSuccess from "@/Components/common/ApiCommunicationSuccess";
 import ApiCommunicationFailed from "@/Components/common/ApiCommunicationFailed";
-import {FolderAnime} from "@/Components/FolderAnime";
-
+import { FolderAnime } from "@/Components/FolderAnime";
 
 interface Props {
     handleReload: () => void;
@@ -13,7 +12,10 @@ interface Props {
     id: number;
 }
 
-const DeleteFolderAnime = ({handleReload, anime, id}: Props) => {
+// フォルダ内のアニメ削除機能
+// アニメの削除ボタンを押すと削除画面が表示され
+// 閉じるまたは削除ボタンを押すと削除のキャンセルまたは削除が完了する
+const DeleteFolderAnime = ({ handleReload, anime, id }: Props) => {
     const [open, setOpen] = useState<boolean>(false);
     const [isSuccessSnackbar, setIsSuccessSnackbar] = useState<boolean>(false);
     const [isFailedSnackbar, setIsFailedSnackbar] = useState<boolean>(false);
@@ -43,19 +45,21 @@ const DeleteFolderAnime = ({handleReload, anime, id}: Props) => {
 
     const handleSnackbarSuccess = () => {
         setIsSuccessSnackbar(true);
-    }
+    };
 
     const handleSnackbarFailed = () => {
         setIsFailedSnackbar(true);
-    }
+    };
 
     const deleteAnime = () => {
-        const abortCtrl = new AbortController()
+        const abortCtrl = new AbortController();
         const timeout = setTimeout(() => {
-            abortCtrl.abort()
+            abortCtrl.abort();
         }, 10000);
         axios
-            .delete(`/api/folders/${id}/anime-list/${anime.anime_id}`, {signal: abortCtrl.signal})
+            .delete(`/api/folders/${id}/anime-list/${anime.anime_id}`, {
+                signal: abortCtrl.signal,
+            })
             .then(() => {
                 handleSnackbarSuccess();
             })
@@ -64,8 +68,8 @@ const DeleteFolderAnime = ({handleReload, anime, id}: Props) => {
             })
             .finally(() => {
                 clearTimeout(timeout);
-            })
-    }
+            });
+    };
 
     return (
         <>
@@ -81,14 +85,20 @@ const DeleteFolderAnime = ({handleReload, anime, id}: Props) => {
                     size="small"
                 />
             </Box>
-            {isSuccessSnackbar && <ApiCommunicationSuccess message={`アニメ(${anime.name})の削除が完了しました`}
-                                                           handleSnackbarClose={handleSuccessSnackbarClose}
-                                                           isSnackbar={isSuccessSnackbar}
-            />}
-            {isFailedSnackbar && <ApiCommunicationFailed message={`アニメ(${anime.name})の削除に失敗しました`}
-                                                         handleSnackbarClose={handleFailedSnackbarClose}
-                                                         isSnackbar={isFailedSnackbar}
-            />}
+            {isSuccessSnackbar && (
+                <ApiCommunicationSuccess
+                    message={`アニメ(${anime.name})の削除が完了しました`}
+                    handleSnackbarClose={handleSuccessSnackbarClose}
+                    isSnackbar={isSuccessSnackbar}
+                />
+            )}
+            {isFailedSnackbar && (
+                <ApiCommunicationFailed
+                    message={`アニメ(${anime.name})の削除に失敗しました`}
+                    handleSnackbarClose={handleFailedSnackbarClose}
+                    isSnackbar={isFailedSnackbar}
+                />
+            )}
         </>
     );
 };

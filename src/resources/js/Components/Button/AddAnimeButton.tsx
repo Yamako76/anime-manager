@@ -26,27 +26,30 @@ interface Props {
     memoHandleRefresh: () => void;
 }
 
+// アニメを追加するためのDialogを表示するボタン
+// アニメの追加ボタンを押すと新しいアニメ作成する画面が表示され
+// 閉じるまたは追加ボタンを押すと新しいアニメ作成のキャンセルまたは新しいアニメ作成が完了する
 const AddAnimeButton = ({
-                            taskName,
-                            id,
-                            label,
-                            open,
-                            error,
-                            errorText,
-                            handleClickOpen,
-                            handleChange,
-                            handleClose,
-                            handleSubmit,
-                            handleRefresh,
-                            nameValue,
-                            submitButtonName,
-                            sx,
-                            memoId,
-                            memoLabel,
-                            memoValue,
-                            memoHandleChange,
-                            memoHandleRefresh,
-                        }: Props) => {
+    taskName,
+    id,
+    label,
+    open,
+    error,
+    errorText,
+    handleClickOpen,
+    handleChange,
+    handleClose,
+    handleSubmit,
+    handleRefresh,
+    nameValue,
+    submitButtonName,
+    sx,
+    memoId,
+    memoLabel,
+    memoValue,
+    memoHandleChange,
+    memoHandleRefresh,
+}: Props) => {
     return (
         <Box>
             <Tooltip title={taskName}>
@@ -55,7 +58,7 @@ const AddAnimeButton = ({
                     disableFocusRipple={true}
                     sx={sx}
                 >
-                    <AddIcon/>
+                    <AddIcon />
                 </IconButton>
             </Tooltip>
 

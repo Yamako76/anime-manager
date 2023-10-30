@@ -1,22 +1,19 @@
 import React, { useEffect } from "react";
-import Checkbox from "@/Components/Checkbox";
-import GuestLayout from "@/Layouts/GuestLayout";
 import InputError from "@/Components/InputError";
 import InputLabel from "@/Components/InputLabel";
 import PrimaryButton from "@/Components/PrimaryButton";
 import TextInput from "@/Components/TextInput";
-import { Head, Link, useForm } from "@inertiajs/react";
+import { Head, useForm } from "@inertiajs/react";
 import Header from "@/Components/Header/Header";
 import { Box, CardHeader } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import { getBoxWidth } from "@/Components/AllAnime/tool/tool";
 
-export default function Login({ status, canResetPassword }: any) {
+export default function Login({ status }: any) {
     const { data, setData, post, processing, errors, reset } = useForm({
         email: "",
         password: "",
-        // remember: "",
     });
 
     const BoxWidth = getBoxWidth();
@@ -45,7 +42,6 @@ export default function Login({ status, canResetPassword }: any) {
     return (
         <>
             <Header />
-            {/*<GuestLayout>*/}
             <Head title="Log in" />
 
             {status && (
@@ -127,29 +123,7 @@ export default function Login({ status, canResetPassword }: any) {
                                 />
                             </div>
 
-                            {/*<div className="block mt-4">*/}
-                            {/*    <label className="flex items-center">*/}
-                            {/*        <Checkbox*/}
-                            {/*            name="remember"*/}
-                            {/*            value={data.remember}*/}
-                            {/*            onChange={handleOnChange}*/}
-                            {/*        />*/}
-                            {/*        <span className="ml-2 text-sm text-gray-600">*/}
-                            {/*    Remember me*/}
-                            {/*</span>*/}
-                            {/*    </label>*/}
-                            {/*</div>*/}
-
                             <div className="flex items-center justify-end mt-4">
-                                {/*{canResetPassword && (*/}
-                                {/*    <Link*/}
-                                {/*        href={route("password.request")}*/}
-                                {/*        className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"*/}
-                                {/*    >*/}
-                                {/*        Forgot your password?*/}
-                                {/*    </Link>*/}
-                                {/*)}*/}
-
                                 <PrimaryButton
                                     className="ml-4"
                                     disabled={processing}
@@ -165,7 +139,6 @@ export default function Login({ status, canResetPassword }: any) {
                     </CardContent>
                 </Card>
             </Box>
-            {/*</GuestLayout>*/}
         </>
     );
 }

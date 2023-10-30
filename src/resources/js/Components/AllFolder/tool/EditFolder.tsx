@@ -1,25 +1,24 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import EditButton from "@/Components/Button/EditButton";
-import {value_validation} from "@/Components/common/tool";
-import {grey} from "@mui/material/colors";
+import { value_validation } from "@/Components/common/tool";
+import { grey } from "@mui/material/colors";
 import axios from "axios";
 import ApiCommunicationSuccess from "@/Components/common/ApiCommunicationSuccess";
 import ApiCommunicationFailed from "@/Components/common/ApiCommunicationFailed";
-import {Folder} from "@/Components/Folder";
+import { Folder } from "@/Components/Folder";
 
-// フォルダ編集機能 //
+// フォルダ編集機能
 // フォルダの編集ボタンを押すとフォルダを編集する画面が表示され
 // 閉じるまたは編集ボタンを押すとフォルダ編集のキャンセルまたはフォルダ編集が完了する
 // 入力は1字以上200字以下で制限する
-
 
 interface Props {
     folder: Folder;
     handleReload: () => void;
 }
 
-const EditFolder = ({folder, handleReload}: Props) => {
+const EditFolder = ({ folder, handleReload }: Props) => {
     const [open, setOpen] = useState<boolean>(false);
     const [error, setError] = useState<boolean>(false);
     const [value, setValue] = useState<string>(folder.name);
@@ -84,21 +83,25 @@ const EditFolder = ({folder, handleReload}: Props) => {
 
     const handleSnackbarSuccess = () => {
         setIsSuccessSnackbar(true);
-    }
+    };
 
     const handleSnackbarFailed = () => {
         setIsFailedSnackbar(true);
-    }
+    };
 
     const updateFolder = () => {
-        const abortCtrl = new AbortController()
+        const abortCtrl = new AbortController();
         const timeout = setTimeout(() => {
-            abortCtrl.abort()
+            abortCtrl.abort();
         }, 10000);
         axios
-            .put(`/api/folders/${folder.id}`, {
-                name: value.trim(),
-            }, {signal: abortCtrl.signal})
+            .put(
+                `/api/folders/${folder.id}`,
+                {
+                    name: value.trim(),
+                },
+                { signal: abortCtrl.signal }
+            )
             .then(() => {
                 handleSnackbarSuccess();
             })
@@ -107,8 +110,8 @@ const EditFolder = ({folder, handleReload}: Props) => {
             })
             .finally(() => {
                 clearTimeout(timeout);
-            })
-    }
+            });
+    };
 
     return (
         <>
@@ -129,17 +132,23 @@ const EditFolder = ({folder, handleReload}: Props) => {
                     submitButtonName="完了"
                     aria_label="edit_folder"
                     size="small"
-                    sx={{"&:hover": {color: grey[900]}}}
+                    sx={{ "&:hover": { color: grey[900] } }}
                 />
             </Box>
-            {isSuccessSnackbar && <ApiCommunicationSuccess message={`フォルダ(${folder.name})の更新が完了しました`}
-                                                           handleSnackbarClose={handleSuccessSnackbarClose}
-                                                           isSnackbar={isSuccessSnackbar}
-            />}
-            {isFailedSnackbar && <ApiCommunicationFailed message={`フォルダ(${folder.name})の更新が失敗しました`}
-                                                         handleSnackbarClose={handleFailedSnackbarClose}
-                                                         isSnackbar={isFailedSnackbar}
-            />}
+            {isSuccessSnackbar && (
+                <ApiCommunicationSuccess
+                    message={`フォルダ(${folder.name})の更新が完了しました`}
+                    handleSnackbarClose={handleSuccessSnackbarClose}
+                    isSnackbar={isSuccessSnackbar}
+                />
+            )}
+            {isFailedSnackbar && (
+                <ApiCommunicationFailed
+                    message={`フォルダ(${folder.name})の更新が失敗しました`}
+                    handleSnackbarClose={handleFailedSnackbarClose}
+                    isSnackbar={isFailedSnackbar}
+                />
+            )}
         </>
     );
 };

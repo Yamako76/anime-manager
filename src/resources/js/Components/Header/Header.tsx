@@ -5,10 +5,10 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import MenuIcon from '@mui/icons-material/Menu';
-import {createTheme, ThemeProvider, useMediaQuery} from "@mui/material";
-import {useState} from "react";
-import {InertiaLink} from "@inertiajs/inertia-react";
+import MenuIcon from "@mui/icons-material/Menu";
+import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
+import { useState } from "react";
+import { InertiaLink } from "@inertiajs/inertia-react";
 
 const Header = () => {
     const theme = createTheme();
@@ -26,7 +26,7 @@ const Header = () => {
 
     return (
         <ThemeProvider theme={theme}>
-            <Box sx={{flexGrow: 1}}>
+            <Box sx={{ flexGrow: 1 }}>
                 <AppBar
                     position="static"
                     sx={{
@@ -46,7 +46,7 @@ const Header = () => {
                         <Typography
                             variant="h6"
                             component="div"
-                            sx={{color: "black", lineHeight: "64px"}}
+                            sx={{ color: "black", lineHeight: "64px" }}
                             as={InertiaLink}
                             href="/"
                         >

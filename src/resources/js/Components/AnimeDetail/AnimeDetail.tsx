@@ -1,10 +1,10 @@
-import React, {useEffect, useRef, useState} from "react";
-import {Box} from "@mui/material";
+import React, { useEffect, useRef, useState } from "react";
+import { Box } from "@mui/material";
 import Button from "@mui/material/Button";
 import axios from "axios";
 import Divider from "@mui/material/Divider";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import {grey} from "@mui/material/colors";
+import { grey } from "@mui/material/colors";
 import Typography from "@mui/material/Typography";
 import ViewYouTubeVideo from "@/Components/YouTubeApi/ViewYouTubeVideo";
 import ViewAnimeTitle from "@/Components/AnimeDetail/ViewAnimeTitle";
@@ -17,7 +17,10 @@ interface AnimeProps {
     id: number;
 }
 
-const AnimeDetail = ({name, memo, id}: AnimeProps) => {
+// アニメ詳細画面
+// -特定のアニメの編集
+// -YouTubeAPIの実装
+const AnimeDetail = ({ name, memo, id }: AnimeProps) => {
     const [videoId, setVideoId] = useState<string>("");
     const [isFailedSnackbar, setIsFailedSnackbar] = useState<boolean>(false);
     const isMounted = useRef(false);
@@ -29,7 +32,7 @@ const AnimeDetail = ({name, memo, id}: AnimeProps) => {
 
     const handleSnackbarFailed = () => {
         setIsFailedSnackbar(true);
-    }
+    };
 
     useEffect(() => {
         isMounted.current = true;
@@ -38,6 +41,7 @@ const AnimeDetail = ({name, memo, id}: AnimeProps) => {
         };
     }, []);
 
+    // MountされたYouTubeの読み込みを開始
     useEffect(() => {
         const getAnime = async () => {
             const youTubeVideoId = await fetchYouTubeVideoId(name);
@@ -111,17 +115,17 @@ const AnimeDetail = ({name, memo, id}: AnimeProps) => {
                     <Button
                         size={"small"}
                         variant="text"
-                        startIcon={<ArrowBackIcon/>}
+                        startIcon={<ArrowBackIcon />}
                         sx={{
                             marginRight: "10px",
-                            "&:hover": {color: grey[900]},
+                            "&:hover": { color: grey[900] },
                         }}
                         color="inherit"
                         onClick={goBack}
                     >
                         戻る
                     </Button>
-                    <EditAnime name={name} memo={memo} id={id}/>
+                    <EditAnime name={name} memo={memo} id={id} />
                 </Box>
                 <Divider
                     sx={{
@@ -130,7 +134,7 @@ const AnimeDetail = ({name, memo, id}: AnimeProps) => {
                         marginBottom: "5px",
                     }}
                 />
-                <ViewAnimeTitle name={name} memo={memo}/>
+                <ViewAnimeTitle name={name} memo={memo} />
                 <Box
                     sx={{
                         width: "100%",
@@ -150,7 +154,7 @@ const AnimeDetail = ({name, memo, id}: AnimeProps) => {
                             marginRight: "5px",
                         }}
                     />
-                    <Typography sx={{fontSize: 18, fontWeight: "bold"}}>
+                    <Typography sx={{ fontSize: 18, fontWeight: "bold" }}>
                         関連のビデオ
                     </Typography>
                 </Box>
@@ -165,7 +169,7 @@ const AnimeDetail = ({name, memo, id}: AnimeProps) => {
                         maxWidth: "1200px",
                     }}
                 >
-                    <ViewYouTubeVideo videoId={videoId}/>
+                    <ViewYouTubeVideo videoId={videoId} />
                 </Box>
             </Box>
         );
@@ -182,11 +186,15 @@ const AnimeDetail = ({name, memo, id}: AnimeProps) => {
                     display: "flex",
                 }}
             >
-                <ViewItem/>
+                <ViewItem />
             </Box>
-            {isFailedSnackbar && <ApiCommunicationFailed message={`動画の取得に失敗しました`}
-                                                         handleSnackbarClose={handleSnackbarClose}
-                                                         isSnackbar={isFailedSnackbar}/>}
+            {isFailedSnackbar && (
+                <ApiCommunicationFailed
+                    message={`動画の取得に失敗しました`}
+                    handleSnackbarClose={handleSnackbarClose}
+                    isSnackbar={isFailedSnackbar}
+                />
+            )}
         </>
     );
 };

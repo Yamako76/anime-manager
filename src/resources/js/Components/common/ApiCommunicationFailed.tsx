@@ -1,4 +1,4 @@
-import React, {Fragment} from "react";
+import React, { Fragment } from "react";
 import Slide from "@mui/material/Slide";
 import Snackbar from "@mui/material/Snackbar";
 import IconButton from "@mui/material/IconButton";
@@ -10,10 +10,15 @@ interface Props {
     isSnackbar: boolean;
 }
 
-const ApiCommunicationFailed = ({message, handleSnackbarClose, isSnackbar}: Props) => {
-
+// API通信時における失敗の通知
+// 例: フォルダの読み込みに失敗した場合 => フォルダの読み込みに失敗しました とSnackBarで通知をする
+const ApiCommunicationFailed = ({
+    message,
+    handleSnackbarClose,
+    isSnackbar,
+}: Props) => {
     const SlideTransition = (props) => {
-        return <Slide {...props} direction="up"/>;
+        return <Slide {...props} direction="up" />;
     };
 
     const action = (
@@ -24,7 +29,7 @@ const ApiCommunicationFailed = ({message, handleSnackbarClose, isSnackbar}: Prop
                 color="inherit"
                 onClick={handleSnackbarClose}
             >
-                <CloseIcon fontSize="small"/>
+                <CloseIcon fontSize="small" />
             </IconButton>
         </Fragment>
     );
@@ -33,7 +38,7 @@ const ApiCommunicationFailed = ({message, handleSnackbarClose, isSnackbar}: Prop
         <>
             <Snackbar
                 open={isSnackbar}
-                anchorOrigin={{vertical: "bottom", horizontal: "center"}}
+                anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
                 onClose={handleSnackbarClose}
                 TransitionComponent={SlideTransition}
                 message={message}
@@ -41,8 +46,7 @@ const ApiCommunicationFailed = ({message, handleSnackbarClose, isSnackbar}: Prop
                 action={action}
             />
         </>
-    )
-
-}
+    );
+};
 
 export default ApiCommunicationFailed;

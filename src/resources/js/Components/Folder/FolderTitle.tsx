@@ -2,7 +2,7 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Tooltip from "@mui/material/Tooltip";
 import Grid from "@mui/material/Grid";
-import {getBoxWidth} from "@/Components/AllAnime/tool/tool";
+import { getBoxWidth } from "@/Components/AllAnime/tool/tool";
 import AddFolderAnime from "@/Components/Folder/tool/AddFolderAnime";
 import SortAnime from "@/Components/Folder/tool/SortAnime";
 
@@ -20,11 +20,10 @@ interface MainProps {
     handleReload: () => void;
     isLoading: boolean;
     id: number;
-
 }
 
-
-const Main = ({titleWidth, name, handleReload, isLoading, id}: MainProps) => {
+// コンテンツMain部分
+const Main = ({ titleWidth, name, handleReload, isLoading, id }: MainProps) => {
     const contentList = [
         {
             body: (
@@ -54,7 +53,11 @@ const Main = ({titleWidth, name, handleReload, isLoading, id}: MainProps) => {
         },
         {
             body: (
-                <AddFolderAnime handleReload={handleReload} folderName={name} id={id}/>
+                <AddFolderAnime
+                    handleReload={handleReload}
+                    folderName={name}
+                    id={id}
+                />
             ),
             sx: {
                 width: "50px",
@@ -64,15 +67,20 @@ const Main = ({titleWidth, name, handleReload, isLoading, id}: MainProps) => {
             },
         },
         {
-            "body": <SortAnime isLoading={isLoading}/>,
-            "sx": {width: "50px", display: "flex", justifyContent: "center", alignItems: "flex-end"},
-        }
+            body: <SortAnime isLoading={isLoading} />,
+            sx: {
+                width: "50px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "flex-end",
+            },
+        },
     ];
 
     return (
         <Grid
             container
-            sx={{height: "60px", marginBottom: "5px", marginTop: "20px"}}
+            sx={{ height: "60px", marginBottom: "5px", marginTop: "20px" }}
         >
             {contentList.map((content, index) => {
                 return (
@@ -85,7 +93,7 @@ const Main = ({titleWidth, name, handleReload, isLoading, id}: MainProps) => {
     );
 };
 
-const FolderTitle = ({name, handleReload, isLoading, id}: Props) => {
+const FolderTitle = ({ name, handleReload, isLoading, id }: Props) => {
     const titleWidth: number = getBoxWidth() - 100;
 
     return (

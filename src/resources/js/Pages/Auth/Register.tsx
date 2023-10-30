@@ -1,11 +1,9 @@
-import { useEffect } from "react";
-import GuestLayout from "@/Layouts/GuestLayout";
+import React, { useEffect } from "react";
 import InputError from "@/Components/InputError";
 import InputLabel from "@/Components/InputLabel";
 import PrimaryButton from "@/Components/PrimaryButton";
 import TextInput from "@/Components/TextInput";
-import { Head, Link, useForm } from "@inertiajs/react";
-import React from "react";
+import { Head, useForm } from "@inertiajs/react";
 import Header from "@/Components/Header/Header";
 import { getBoxWidth } from "@/Components/AllAnime/tool/tool";
 import { Box, CardHeader } from "@mui/material";
@@ -170,13 +168,6 @@ export default function Register() {
                             </div>
 
                             <div className="flex items-center justify-end mt-4">
-                                {/*<Link*/}
-                                {/*    href={route("login")}*/}
-                                {/*    className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"*/}
-                                {/*>*/}
-                                {/*    Already registered?*/}
-                                {/*</Link>*/}
-
                                 <PrimaryButton
                                     className="ml-4"
                                     disabled={processing}

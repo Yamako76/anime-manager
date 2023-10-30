@@ -1,7 +1,7 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import AddAnimeButton from "@/Components/Button/AddAnimeButton";
-import {value_validation} from "../../common/tool";
+import { value_validation } from "../../common/tool";
 import axios from "axios";
 import ApiCommunicationSuccess from "@/Components/common/ApiCommunicationSuccess";
 import ApiCommunicationFailed from "@/Components/common/ApiCommunicationFailed";
@@ -10,7 +10,11 @@ interface Props {
     handleReload: () => void;
 }
 
-const AddAnime = ({handleReload}: Props) => {
+// アニメ追加機能
+// アニメの追加ボタンを押すと新しいアニメを作成する画面が表示され
+// 閉じるまたは追加ボタンを押すと新しいアニメ作成のキャンセルまたは新しいアニメ作成が完了する
+// 入力は1字以上200字以下で制限する
+const AddAnime = ({ handleReload }: Props) => {
     const [open, setOpen] = useState<boolean>(false);
     const [error, setError] = useState<boolean>(false);
     const [nameValue, setNameValue] = useState<string>("");
@@ -84,11 +88,11 @@ const AddAnime = ({handleReload}: Props) => {
 
     const handleSnackbarSuccess = () => {
         setIsSuccessSnackbar(true);
-    }
+    };
 
     const handleSnackbarFailed = () => {
         setIsFailedSnackbar(true);
-    }
+    };
 
     const createAnime = () => {
         const abortCtrl = new AbortController();
@@ -102,7 +106,7 @@ const AddAnime = ({handleReload}: Props) => {
                     name: nameValue.trim(),
                     memo: memoValue,
                 },
-                {signal: abortCtrl.signal}
+                { signal: abortCtrl.signal }
             )
             .then(() => {
                 handleSnackbarSuccess();
@@ -139,14 +143,20 @@ const AddAnime = ({handleReload}: Props) => {
                     memoHandleRefresh={memoHandleRefresh}
                 />
             </Box>
-            {isSuccessSnackbar && <ApiCommunicationSuccess message={"アニメの追加が完了しました"}
-                                                           handleSnackbarClose={handleSuccessSnackbarClose}
-                                                           isSnackbar={isSuccessSnackbar}
-            />}
-            {isFailedSnackbar && <ApiCommunicationFailed message={"アニメの追加に失敗しました"}
-                                                         handleSnackbarClose={handleFailedSnackbarClose}
-                                                         isSnackbar={isFailedSnackbar}
-            />}
+            {isSuccessSnackbar && (
+                <ApiCommunicationSuccess
+                    message={"アニメの追加が完了しました"}
+                    handleSnackbarClose={handleSuccessSnackbarClose}
+                    isSnackbar={isSuccessSnackbar}
+                />
+            )}
+            {isFailedSnackbar && (
+                <ApiCommunicationFailed
+                    message={"アニメの追加に失敗しました"}
+                    handleSnackbarClose={handleFailedSnackbarClose}
+                    isSnackbar={isFailedSnackbar}
+                />
+            )}
         </>
     );
 };

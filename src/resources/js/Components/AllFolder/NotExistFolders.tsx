@@ -2,7 +2,7 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import {getBodyHeight, getBoxWidth} from "@/Components/AllAnime/tool/tool";
+import { getBodyHeight, getBoxWidth } from "@/Components/AllAnime/tool/tool";
 
 // 検索後に該当するフォルダが存在しない場合に表示する画面
 const NotExistFolders = () => {
@@ -29,7 +29,7 @@ const NotExistFolders = () => {
 
     return (
         <Box sx={box_sx}>
-            <Grid container direction="column" sx={{width: BoxWidth}}>
+            <Grid container direction="column" sx={{ width: BoxWidth }}>
                 {textList.map((text, index) => {
                     return (
                         <Grid key={index} container item sx={grid_sx}>
