@@ -29,8 +29,8 @@ const SearchBar = ({
     handleSubmit,
     value,
 }: Props) => {
-    const BoxWidth:number = getBoxWidth();
-    const SearchBarWidth:number = getSearchBarWidth();
+    const BoxWidth: number = getBoxWidth();
+    const SearchBarWidth: number = getSearchBarWidth();
 
     const box_sx = {
         position: "fixed",

@@ -1,8 +1,8 @@
-import React from 'react';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
-import {getBodyHeight, getBoxWidth} from '@/Components/AllAnime/tool/tool';
+import React from "react";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+import { getBodyHeight, getBoxWidth } from "@/Components/AllAnime/tool/tool";
 
 // 検索後に該当するアニメが存在しない場合に表示する画面
 const NotExistAnimes = () => {
@@ -10,7 +10,7 @@ const NotExistAnimes = () => {
     const BoxWidth: number = getBoxWidth();
     const textList: string[] = [
         "該当するアニメが存在しません",
-        "(アニメの作成を行ってください)"
+        "(アニメの作成を行ってください)",
     ];
 
     const box_sx = {
@@ -29,30 +29,17 @@ const NotExistAnimes = () => {
 
     return (
         <Box sx={box_sx}>
-            <Grid
-                container
-                direction="column"
-                sx={{width: BoxWidth}}
-            >
-                {
-                    textList.map((text, index) => {
-                        return (
-                            <Grid
-                                key={index}
-                                container
-                                item
-                                sx={grid_sx}
-                            >
-                                <Typography fontWeight="bold">
-                                    {text}
-                                </Typography>
-                            </Grid>
-                        );
-                    })
-                }
+            <Grid container direction="column" sx={{ width: BoxWidth }}>
+                {textList.map((text, index) => {
+                    return (
+                        <Grid key={index} container item sx={grid_sx}>
+                            <Typography fontWeight="bold">{text}</Typography>
+                        </Grid>
+                    );
+                })}
             </Grid>
         </Box>
     );
-}
+};
 
 export default NotExistAnimes;

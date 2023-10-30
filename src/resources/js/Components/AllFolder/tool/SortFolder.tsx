@@ -1,11 +1,11 @@
-import React, {useContext, useState} from 'react';
-import Box from '@mui/material/Box';
-import IconButton from '@mui/material/IconButton';
-import SortIcon from '@mui/icons-material/Sort';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
-import Menu from '@mui/material/Menu';
-import {SortContext} from '../../common/SortManagement';
+import React, { useContext, useState } from "react";
+import Box from "@mui/material/Box";
+import IconButton from "@mui/material/IconButton";
+import SortIcon from "@mui/icons-material/Sort";
+import Tooltip from "@mui/material/Tooltip";
+import MenuItem from "@mui/material/MenuItem";
+import Menu from "@mui/material/Menu";
+import { SortContext } from "../../common/SortManagement";
 
 // アイテムの並べ替えをするMenu
 // 0:  作成順
@@ -13,17 +13,13 @@ import {SortContext} from '../../common/SortManagement';
 // 2:  タイトル順
 // でSortする
 
-const options = [
-    "作成順",
-    "最新順",
-    "タイトル順",
-];
+const options = ["作成順", "最新順", "タイトル順"];
 
 interface Props {
     isLoading: boolean;
 }
 
-const SortFolder = ({isLoading}: Props) => {
+const SortFolder = ({ isLoading }: Props) => {
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     const [state, dispatch] = useContext(SortContext);
@@ -41,8 +37,8 @@ const SortFolder = ({isLoading}: Props) => {
         if (isLoading) {
             return;
         }
-        dispatch({type: "setSortIndex", payload: index});
-    }
+        dispatch({ type: "setSortIndex", payload: index });
+    };
 
     return (
         <Box>
@@ -54,7 +50,7 @@ const SortFolder = ({isLoading}: Props) => {
                     aria-expanded={open ? "true" : undefined}
                     onClick={handleClick}
                 >
-                    <SortIcon/>
+                    <SortIcon />
                 </IconButton>
             </Tooltip>
 
@@ -67,24 +63,22 @@ const SortFolder = ({isLoading}: Props) => {
                     "aria-labelledby": "sort-button",
                 }}
             >
-                {
-                    options.map((option, index) => {
-                        return (
-                            <MenuItem
-                                key={index}
-                                selected={index === state.sortIndex}
-                                onClick={() => {
-                                    handleSortIndex(index);
-                                }}
-                            >
-                                {option}
-                            </MenuItem>
-                        );
-                    })
-                }
+                {options.map((option, index) => {
+                    return (
+                        <MenuItem
+                            key={index}
+                            selected={index === state.sortIndex}
+                            onClick={() => {
+                                handleSortIndex(index);
+                            }}
+                        >
+                            {option}
+                        </MenuItem>
+                    );
+                })}
             </Menu>
         </Box>
     );
-}
+};
 
 export default SortFolder;

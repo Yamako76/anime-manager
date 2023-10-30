@@ -1,8 +1,8 @@
 import React from "react";
 import Header from "@/Components/Header/Header";
 import Typography from "@mui/material/Typography";
-import {Box, Button} from "@mui/material";
-import {InertiaLink} from "@inertiajs/inertia-react";
+import { Box, Button } from "@mui/material";
+import { InertiaLink } from "@inertiajs/inertia-react";
 
 const Index = () => {
     return (
@@ -18,7 +18,7 @@ const Index = () => {
                 paddingBottom: "65px",
             }}
         >
-            <Header/>
+            <Header />
             <Box
                 sx={{
                     flexGrow: 1,

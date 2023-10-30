@@ -1,14 +1,13 @@
 import React from "react";
-import {Box, Grid} from "@mui/material";
-import {getBoxWidth} from "@/Components/AllAnime/tool/tool";
+import { Box, Grid } from "@mui/material";
+import { getBoxWidth } from "@/Components/AllAnime/tool/tool";
 import Tooltip from "@mui/material/Tooltip";
-import {InertiaLink} from "@inertiajs/inertia-react";
-import {grey} from "@mui/material/colors";
+import { InertiaLink } from "@inertiajs/inertia-react";
+import { grey } from "@mui/material/colors";
 import DeleteFolder from "@/Components/AllFolder/tool/DeleteFolder";
 import Paper from "@mui/material/Paper";
 import EditFolder from "@/Components/AllFolder/tool/EditFolder";
-import {Folder} from "@/Components/Folder";
-
+import { Folder } from "@/Components/Folder";
 
 interface Props {
     handleReload: () => void;
@@ -20,7 +19,7 @@ interface FolderProps {
 }
 
 // フォルダの一覧表示
-const AllFolder = ({handleReload, folders}: Props) => {
+const AllFolder = ({ handleReload, folders }: Props) => {
     const BoxWidth: number = getBoxWidth();
     const titleWidth: number = BoxWidth - 90;
 
@@ -28,11 +27,14 @@ const AllFolder = ({handleReload, folders}: Props) => {
     // - フォルダのタイトルの表示
     // - フォルダの編集ボタン の作成
     // - フォルダの削除ボタン の作成
-    const PaperContent = ({folder}: FolderProps) => {
+    const PaperContent = ({ folder }: FolderProps) => {
         const contentList = [
             {
                 body: (
-                    <Tooltip title={folder.name + "の詳細"} placement="bottom-end">
+                    <Tooltip
+                        title={folder.name + "の詳細"}
+                        placement="bottom-end"
+                    >
                         <Box
                             textOverflow="ellipsis"
                             overflow="hidden"
@@ -44,7 +46,7 @@ const AllFolder = ({handleReload, folders}: Props) => {
                                 width: String(titleWidth - 10) + "px",
                                 color: grey[900],
                                 textDecoration: "none",
-                                "&:hover": {color: grey[900]},
+                                "&:hover": { color: grey[900] },
                             }}
                         >
                             {folder.name}
@@ -59,7 +61,9 @@ const AllFolder = ({handleReload, folders}: Props) => {
                 },
             },
             {
-                body: <EditFolder folder={folder} handleReload={handleReload}/>,
+                body: (
+                    <EditFolder folder={folder} handleReload={handleReload} />
+                ),
                 sx: {
                     width: "40px",
                     display: "flex",
@@ -68,7 +72,9 @@ const AllFolder = ({handleReload, folders}: Props) => {
                 },
             },
             {
-                body: <DeleteFolder handleReload={handleReload} folder={folder}/>,
+                body: (
+                    <DeleteFolder handleReload={handleReload} folder={folder} />
+                ),
                 sx: {
                     width: "40px",
                     display: "flex",
@@ -122,9 +128,7 @@ const AllFolder = ({handleReload, folders}: Props) => {
                 <Grid container direction="column" spacing={1}>
                     {folders.map((folder, index) => (
                         <Grid key={index} container item>
-                            <PaperContent
-                                folder={folder}
-                            />
+                            <PaperContent folder={folder} />
                         </Grid>
                     ))}
                 </Grid>
@@ -134,7 +138,7 @@ const AllFolder = ({handleReload, folders}: Props) => {
 
     return (
         <Box>
-            <FolderList handleReload={handleReload}/>
+            <FolderList handleReload={handleReload} />
         </Box>
     );
 };

@@ -7,7 +7,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import ClearButton from "./ClearButton";
-import {pressEnter} from "@/Components/common/tool";
+import { pressEnter } from "@/Components/common/tool";
 
 interface Props {
     taskName: string;
@@ -30,19 +30,19 @@ interface Props {
 // @task_name: 実行するtask  (例: 新しいフォルダの作成)
 // @submit_button_name: objectの追加・編集の完了するボタンの名前  (例: 追加)
 const EditDialog = ({
-                        taskName,
-                        id,
-                        label,
-                        open,
-                        error,
-                        errorText,
-                        handleChange,
-                        handleClose,
-                        handleSubmit,
-                        handleRefresh,
-                        value,
-                        submitButtonName,
-                    }: Props) => {
+    taskName,
+    id,
+    label,
+    open,
+    error,
+    errorText,
+    handleChange,
+    handleClose,
+    handleSubmit,
+    handleRefresh,
+    value,
+    submitButtonName,
+}: Props) => {
     return (
         <Box>
             <Dialog open={open} onClose={handleClose}>

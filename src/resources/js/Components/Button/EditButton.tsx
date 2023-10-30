@@ -1,6 +1,6 @@
 import React from "react";
 import Box from "@mui/material/Box";
-import {IconButton} from "@mui/material";
+import { IconButton } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import EditDialog from "./EditDialog";
 
@@ -27,23 +27,23 @@ interface Props {
 // ボタンを押すと編集画面を表示し
 // 再度, ボタンを押すと閉じる
 const EditButton = ({
-                        taskName,
-                        id,
-                        label,
-                        open,
-                        error,
-                        errorText,
-                        handleClickOpen,
-                        handleChange,
-                        handleClose,
-                        handleSubmit,
-                        handleRefresh,
-                        value,
-                        submitButtonName,
-                        aria_label,
-                        size,
-                        sx,
-                    }: Props) => {
+    taskName,
+    id,
+    label,
+    open,
+    error,
+    errorText,
+    handleClickOpen,
+    handleChange,
+    handleClose,
+    handleSubmit,
+    handleRefresh,
+    value,
+    submitButtonName,
+    aria_label,
+    size,
+    sx,
+}: Props) => {
     return (
         <Box>
             <IconButton
@@ -53,7 +53,7 @@ const EditButton = ({
                 size={size}
                 sx={sx}
             >
-                <EditIcon/>
+                <EditIcon />
             </IconButton>
             <EditDialog
                 taskName={taskName}

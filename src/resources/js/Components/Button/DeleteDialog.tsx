@@ -20,12 +20,12 @@ interface Props {
 // 削除を押せば選択objectを削除
 // @content_text: Dialogに表示する説明文
 const DeleteDialog = ({
-                          taskName,
-                          contentText,
-                          open,
-                          handleClose,
-                          handleSubmit,
-                      }: Props) => {
+    taskName,
+    contentText,
+    open,
+    handleClose,
+    handleSubmit,
+}: Props) => {
     return (
         <Box>
             <Dialog open={open} onClose={handleClose}>

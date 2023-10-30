@@ -1,17 +1,17 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import InputError from "@/Components/InputError";
 import InputLabel from "@/Components/InputLabel";
 import PrimaryButton from "@/Components/PrimaryButton";
 import TextInput from "@/Components/TextInput";
-import {Head, useForm} from "@inertiajs/react";
+import { Head, useForm } from "@inertiajs/react";
 import Header from "@/Components/Header/Header";
-import {Box, CardHeader} from "@mui/material";
+import { Box, CardHeader } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import {getBoxWidth} from "@/Components/AllAnime/tool/tool";
+import { getBoxWidth } from "@/Components/AllAnime/tool/tool";
 
-export default function Login({status }: any) {
-    const {data, setData, post, processing, errors, reset} = useForm({
+export default function Login({ status }: any) {
+    const { data, setData, post, processing, errors, reset } = useForm({
         email: "",
         password: "",
     });
@@ -41,8 +41,8 @@ export default function Login({status }: any) {
 
     return (
         <>
-            <Header/>
-            <Head title="Log in"/>
+            <Header />
+            <Head title="Log in" />
 
             {status && (
                 <div className="mb-4 font-medium text-sm text-green-600">
@@ -72,7 +72,7 @@ export default function Login({status }: any) {
                 >
                     <CardHeader
                         title="ログイン"
-                        titleTypographyProps={{variant: "h6"}}
+                        titleTypographyProps={{ variant: "h6" }}
                     />
                     <CardContent>
                         <form onSubmit={submit}>
@@ -124,7 +124,6 @@ export default function Login({status }: any) {
                             </div>
 
                             <div className="flex items-center justify-end mt-4">
-
                                 <PrimaryButton
                                     className="ml-4"
                                     disabled={processing}
