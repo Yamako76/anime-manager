@@ -26,21 +26,21 @@ interface Props {
 // 閉じるまたは追加ボタンを押すと新しいObject作成のキャンセルまたは新しいObject作成が完了する
 // @button_name: ボタンに表示する文字
 const AddButton = ({
-                       taskName,
-                       id,
-                       label,
-                       open,
-                       error,
-                       errorText,
-                       handleClickOpen,
-                       handleChange,
-                       handleClose,
-                       handleSubmit,
-                       handleRefresh,
-                       value,
-                       submitButtonName,
-                       sx,
-                   }: Props) => {
+    taskName,
+    id,
+    label,
+    open,
+    error,
+    errorText,
+    handleClickOpen,
+    handleChange,
+    handleClose,
+    handleSubmit,
+    handleRefresh,
+    value,
+    submitButtonName,
+    sx,
+}: Props) => {
     return (
         <Box>
             <Tooltip title={taskName}>
@@ -49,7 +49,7 @@ const AddButton = ({
                     disableFocusRipple={true}
                     sx={sx}
                 >
-                    <AddIcon/>
+                    <AddIcon />
                 </IconButton>
             </Tooltip>
 

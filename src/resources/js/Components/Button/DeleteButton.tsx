@@ -1,6 +1,6 @@
 import React from "react";
 import Box from "@mui/material/Box";
-import {IconButton} from "@mui/material";
+import { IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import DeleteDialog from "./DeleteDialog";
 
@@ -18,16 +18,19 @@ interface Props {
 // Objectの削除を行う画面を表するためのボタン
 // ボタンを押すと削除画面を表示し
 // 再度, ボタンを押すと閉じる
-const DeleteButton = ({
-                          taskName,
-                          contentText,
-                          open,
-                          handleClickOpen,
-                          handleClose,
-                          handleSubmit,
-                          aria_label,
-                          size,
-                      }: Props, sx) => {
+const DeleteButton = (
+    {
+        taskName,
+        contentText,
+        open,
+        handleClickOpen,
+        handleClose,
+        handleSubmit,
+        aria_label,
+        size,
+    }: Props,
+    sx
+) => {
     return (
         <Box>
             <IconButton
@@ -37,7 +40,7 @@ const DeleteButton = ({
                 size={size}
                 sx={sx}
             >
-                <DeleteIcon/>
+                <DeleteIcon />
             </IconButton>
             <DeleteDialog
                 taskName={taskName}

@@ -3,7 +3,6 @@ import Box from "@mui/material/Box";
 import EditAnimeDialog from "@/Components/Button/EditAnimeDialog";
 import Button from "@mui/material/Button";
 
-
 interface Props {
     taskName: string;
     id: string;
@@ -32,28 +31,28 @@ interface Props {
 // ボタンを押すと編集画面を表示し
 // 再度, ボタンを押すと閉じる
 const EditAnimeButton = ({
-                             taskName,
-                             id,
-                             label,
-                             open,
-                             error,
-                             errorText,
-                             handleClickOpen,
-                             handleChange,
-                             handleClose,
-                             handleSubmit,
-                             handleRefresh,
-                             nameValue,
-                             submitButtonName,
-                             ariaLabel,
-                             size,
-                             sx,
-                             memoId,
-                             memoValue,
-                             memoLabel,
-                             memoHandleChange,
-                             startIcon,
-                         }: Props) => {
+    taskName,
+    id,
+    label,
+    open,
+    error,
+    errorText,
+    handleClickOpen,
+    handleChange,
+    handleClose,
+    handleSubmit,
+    handleRefresh,
+    nameValue,
+    submitButtonName,
+    ariaLabel,
+    size,
+    sx,
+    memoId,
+    memoValue,
+    memoLabel,
+    memoHandleChange,
+    startIcon,
+}: Props) => {
     return (
         <Box>
             <Button

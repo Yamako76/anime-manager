@@ -2,9 +2,9 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Tooltip from "@mui/material/Tooltip";
 import Grid from "@mui/material/Grid";
-import {getBoxWidth} from "@/Components/AllAnime/tool/tool";
+import { getBoxWidth } from "@/Components/AllAnime/tool/tool";
 import AddAnime from "@/Components/AllAnime/tool/AddAnime";
-import SortAnime from "@/Components/AllAnime/tool/SortAnime"
+import SortAnime from "@/Components/AllAnime/tool/SortAnime";
 
 interface Props {
     handleReload: () => void;
@@ -18,7 +18,7 @@ interface MainProps {
 }
 
 // コンテンツMain部分
-const Main = ({titleWidth, handleReload, isLoading}: MainProps) => {
+const Main = ({ titleWidth, handleReload, isLoading }: MainProps) => {
     const contentList = [
         {
             body: (
@@ -47,7 +47,7 @@ const Main = ({titleWidth, handleReload, isLoading}: MainProps) => {
             },
         },
         {
-            body: <AddAnime handleReload={handleReload}/>,
+            body: <AddAnime handleReload={handleReload} />,
             sx: {
                 width: "50px",
                 display: "flex",
@@ -56,15 +56,20 @@ const Main = ({titleWidth, handleReload, isLoading}: MainProps) => {
             },
         },
         {
-            "body": <SortAnime isLoading={isLoading}/>,
-            "sx": {width: "50px", display: "flex", justifyContent: "center", alignItems: "flex-end"},
-        }
+            body: <SortAnime isLoading={isLoading} />,
+            sx: {
+                width: "50px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "flex-end",
+            },
+        },
     ];
 
     return (
         <Grid
             container
-            sx={{height: "60px", marginBottom: "5px", marginTop: "20px"}}
+            sx={{ height: "60px", marginBottom: "5px", marginTop: "20px" }}
         >
             {contentList.map((content, index) => {
                 return (
@@ -77,12 +82,16 @@ const Main = ({titleWidth, handleReload, isLoading}: MainProps) => {
     );
 };
 
-const AnimeListTitle = ({handleReload, isLoading}: Props) => {
+const AnimeListTitle = ({ handleReload, isLoading }: Props) => {
     const titleWidth: number = getBoxWidth() - 100;
 
     return (
         <Box>
-            <Main titleWidth={titleWidth} handleReload={handleReload} isLoading={isLoading}/>
+            <Main
+                titleWidth={titleWidth}
+                handleReload={handleReload}
+                isLoading={isLoading}
+            />
         </Box>
     );
 };
