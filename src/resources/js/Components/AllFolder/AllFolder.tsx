@@ -26,6 +26,7 @@ const AllFolder = ({handleReload, folders}: Props) => {
 
     // 各フォルダを表示するための枠組み
     // - フォルダのタイトルの表示
+    // - フォルダの編集ボタン の作成
     // - フォルダの削除ボタン の作成
     const PaperContent = ({folder}: FolderProps) => {
         const contentList = [

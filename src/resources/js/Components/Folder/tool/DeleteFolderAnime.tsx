@@ -13,6 +13,9 @@ interface Props {
     id: number;
 }
 
+// フォルダ内のアニメ削除機能
+// アニメの削除ボタンを押すと削除画面が表示され
+// 閉じるまたは削除ボタンを押すと削除のキャンセルまたは削除が完了する
 const DeleteFolderAnime = ({handleReload, anime, id}: Props) => {
     const [open, setOpen] = useState<boolean>(false);
     const [isSuccessSnackbar, setIsSuccessSnackbar] = useState<boolean>(false);

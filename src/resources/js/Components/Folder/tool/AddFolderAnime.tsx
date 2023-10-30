@@ -12,6 +12,10 @@ interface Props {
     handleReload: () => void;
 }
 
+// フォルダ内のアニメ追加機能
+// アニメの追加ボタンを押すと新しいアニメを作成する画面が表示され
+// 閉じるまたは追加ボタンを押すと新しいアニメ作成のキャンセルまたは新しいアニメ作成が完了する
+// 入力は1字以上200字以下で制限する
 const AddFolderAnime = ({handleReload, folderName, id}: Props) => {
     const [open, setOpen] = useState<boolean>(false);
     const [error, setError] = useState<boolean>(false);
