@@ -203,8 +203,8 @@ const AnimeManagement = () => {
             (animes.length) ? <ViewInfiniteScroll/> : <NotExistAnimes/>
         );
 
-    // コンテンツのMain部分
-    // アニメ一覧を表示
+        // コンテンツのMain部分
+        // アニメ一覧を表示
         const Main = () => {
             return (
                 <Grid container direction="column" sx={{marginTop: "100px"}}>

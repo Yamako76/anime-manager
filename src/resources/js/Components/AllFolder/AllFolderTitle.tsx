@@ -17,7 +17,7 @@ interface MainProps {
     isLoading: boolean;
 }
 
-
+// コンテンツMain部分
 const Main = ({titleWidth, handleReload, isLoading}: MainProps) => {
     const contentList = [
         {

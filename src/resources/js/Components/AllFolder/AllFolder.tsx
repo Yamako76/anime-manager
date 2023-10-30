@@ -19,10 +19,14 @@ interface FolderProps {
     folder: Folder;
 }
 
+// フォルダの一覧表示
 const AllFolder = ({handleReload, folders}: Props) => {
     const BoxWidth: number = getBoxWidth();
     const titleWidth: number = BoxWidth - 90;
 
+    // 各フォルダを表示するための枠組み
+    // - フォルダのタイトルの表示
+    // - フォルダの削除ボタン の作成
     const PaperContent = ({folder}: FolderProps) => {
         const contentList = [
             {
