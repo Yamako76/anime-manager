@@ -60,6 +60,7 @@ const Header = () => {
                                         color: "#616161",
                                         "&:hover": {
                                             color: "#212121",
+                                            backgroundColor: "#ffc107",
                                         },
                                     }}
                                 >
@@ -81,6 +82,7 @@ const Header = () => {
                                             color: "#616161",
                                             "&:hover": {
                                                 color: "#212121",
+                                                backgroundColor: "#ffc107",
                                             },
                                         }}
                                         as={InertiaLink}
@@ -93,6 +95,7 @@ const Header = () => {
                                             color: "#616161",
                                             "&:hover": {
                                                 color: "#212121",
+                                                backgroundColor: "#ffc107",
                                             },
                                         }}
                                         as={InertiaLink}
@@ -105,6 +108,7 @@ const Header = () => {
                                             color: "#616161",
                                             "&:hover": {
                                                 color: "#212121",
+                                                backgroundColor: "#ffc107",
                                             },
                                         }}
                                         as={InertiaLink}
@@ -121,6 +125,7 @@ const Header = () => {
                                         color: "#616161",
                                         "&:hover": {
                                             color: "#212121",
+                                            backgroundColor: "#ffc107",
                                         },
                                         marginRight: 1,
                                     }}
@@ -134,6 +139,7 @@ const Header = () => {
                                         color: "#616161",
                                         "&:hover": {
                                             color: "#212121",
+                                            backgroundColor: "#ffc107",
                                         },
                                         marginRight: 1,
                                     }}
@@ -147,6 +153,7 @@ const Header = () => {
                                         color: "#616161",
                                         "&:hover": {
                                             color: "#212121",
+                                            backgroundColor: "#ffc107",
                                         },
                                     }}
                                     as={InertiaLink}
