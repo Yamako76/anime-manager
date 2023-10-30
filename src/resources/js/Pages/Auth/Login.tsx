@@ -138,6 +138,7 @@ export default function Login({ status }: any) {
                                     style={{
                                         backgroundColor: "#0066FF",
                                         color: "white",
+                                        cursor: "pointer",
                                     }}
                                     onMouseEnter={(e) => {
                                         e.target.style.backgroundColor = "#0044CC";
