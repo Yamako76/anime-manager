@@ -48,7 +48,11 @@ const Index = () => {
                         marginTop: "50px",
                     }}
                 >
-                    <Box as={InertiaLink} href="/register">
+                    <Box
+                        as={InertiaLink}
+                        href="/register"
+                        sx={{ marginBottom: "20px" }}
+                    >
                         <Button
                             sx={{
                                 width: "150px",
@@ -57,7 +61,6 @@ const Index = () => {
                                 color: "#FFFFFF",
                                 fontSize: "16px",
                                 boxShadow: "none",
-                                marginBottom: "20px",
                                 "&:hover": {
                                     backgroundColor: "#b71c1c",
                                 },
@@ -66,7 +69,11 @@ const Index = () => {
                             新規登録
                         </Button>
                     </Box>
-                    <Box as={InertiaLink} href="/login">
+                    <Box
+                        as={InertiaLink}
+                        href="/login"
+                        sx={{ marginBottom: "20px" }}
+                    >
                         <Button
                             sx={{
                                 width: "150px",
@@ -75,7 +82,6 @@ const Index = () => {
                                 color: "#FFFFFF",
                                 fontSize: "16px",
                                 boxShadow: "none",
-                                marginBottom: "20px",
                                 "&:hover": {
                                     backgroundColor: "#263238",
                                 },
