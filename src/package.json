@@ -3,7 +3,8 @@
     "scripts": {
         "dev": "vite",
         "build": "vite build && vite build --ssr",
-        "lint": "npx prettier --write './resources/js/**/*.tsx' './resources/js/**/*.jsx' && eslint --fix --ext ./resources/js/**/*.tsx"
+        "lint": "npx prettier --write './resources/js/**/*.tsx' './resources/js/**/*.jsx' && eslint --fix --ext ./resources/js/**/*.tsx",
+        "prod": "vite build && vite build --ssr --mode production"
     },
     "devDependencies": {
         "@headlessui/react": "^1.4.2",
