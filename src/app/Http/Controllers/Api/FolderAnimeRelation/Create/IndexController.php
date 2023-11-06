@@ -33,6 +33,11 @@ class IndexController extends Controller
         if (is_null($anime)) {
             return response()->json([], 400);
         }
+
+        if($anime->status == Anime::STATUS_DELETED){
+            return response()->json([], 400);
+        }
+
         $animeId = $anime->id;
 
         // フォルダにアニメを追加します。

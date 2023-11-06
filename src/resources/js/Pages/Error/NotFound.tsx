@@ -10,7 +10,7 @@ const NotFound = () => {
                 flex: 1,
                 justifyContent: "center",
                 alignItems: "center",
-                height: "100vh",
+                height: `calc(100vh - 65px)`,
                 margin: "0px",
                 minWidth: "350px",
                 paddingBottom: "65px",

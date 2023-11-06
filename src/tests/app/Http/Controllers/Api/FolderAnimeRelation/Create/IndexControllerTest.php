@@ -99,6 +99,26 @@ class IndexControllerTest extends TestCase
         $response = $this->json('POST', "/api/folders/{$folder->id}/anime-list", ['folderName' => 'フォルダ', 'animeName' => 'アニメ']);
         $response->assertStatus(400);
 
+        $anime = new Anime([
+            'user_id' => 1,
+            'id' => 1,
+            'name' => 'アニメ',
+            'memo' => 'メモ',
+            'status' => 'deleted',
+            'latest_changed_at' => '2023-9-28 08:00:00',
+            'created_at' => '2023-9-20 12:30:00',
+            'updated_at' => '2023-9-25 14:45:00',
+        ]);
+        \FolderAnimeRelationService::shouldReceive('getFolderByUserIdAndFolderName')
+            ->andReturn($folder)
+            ->once();
+        // アニメが削除されていた場合
+        \FolderAnimeRelationService::shouldReceive('getAnimeByUserIdAndAnimeName')
+            ->andReturn($anime)
+            ->once();
+        $response = $this->json('POST', "/api/folders/{$folder->id}/anime-list", ['folderName' => 'フォルダ', 'animeName' => 'アニメ']);
+        $response->assertStatus(400);
+
         // nameがない場合
         $response = $this->json('POST', '/api/folders', []);
         $response->assertStatus(422);

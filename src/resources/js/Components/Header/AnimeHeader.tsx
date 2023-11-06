@@ -59,6 +59,7 @@ const AnimeHeader = () => {
                                         color: "#616161",
                                         "&:hover": {
                                             color: "#212121",
+                                            backgroundColor: "#ffc107",
                                         },
                                     }}
                                 >
@@ -80,6 +81,7 @@ const AnimeHeader = () => {
                                             color: "#616161",
                                             "&:hover": {
                                                 color: "#212121",
+                                                backgroundColor: "#ffc107",
                                             },
                                         }}
                                         as={InertiaLink}
@@ -92,6 +94,7 @@ const AnimeHeader = () => {
                                             color: "#616161",
                                             "&:hover": {
                                                 color: "#212121",
+                                                backgroundColor: "#ffc107",
                                             },
                                         }}
                                         as={InertiaLink}
@@ -104,6 +107,7 @@ const AnimeHeader = () => {
                                             color: "#616161",
                                             "&:hover": {
                                                 color: "#212121",
+                                                backgroundColor: "#ffc107",
                                             },
                                         }}
                                         onClick={() => Inertia.post("/logout")}
@@ -119,6 +123,7 @@ const AnimeHeader = () => {
                                         color: "#616161",
                                         "&:hover": {
                                             color: "#212121",
+                                            backgroundColor: "#ffc107",
                                         },
                                         marginRight: 1,
                                     }}
@@ -132,6 +137,7 @@ const AnimeHeader = () => {
                                         color: "#616161",
                                         "&:hover": {
                                             color: "#212121",
+                                            backgroundColor: "#ffc107",
                                         },
                                         marginRight: 1,
                                     }}
@@ -145,6 +151,7 @@ const AnimeHeader = () => {
                                         color: "#616161",
                                         "&:hover": {
                                             color: "#212121",
+                                            backgroundColor: "#ffc107",
                                         },
                                     }}
                                     onClick={() => Inertia.post("/logout")}

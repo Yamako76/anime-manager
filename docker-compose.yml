@@ -7,47 +7,23 @@ services:
       dockerfile: ./docker/laravel/Dockerfile
     volumes:
       - ./src/:/app
-      - ./log/php:/var/log/php/
+      - ./log/php:/var/log/php
+    environment:
+      - DB_CONNECTION=${DB_CONNECTION:-mysql}
+      - DB_HOST=${DB_HOST:-db}
+      - DB_PORT=${DB_PORT:-3306}
+      - DB_DATABASE=${DB_DATABASE:-laravel}
+      - DB_USERNAME=${DB_USERNAME:-phper}
+      - DB_PASSWORD=${DB_PASSWORD:-secret}
 
   nginx:
     build:
       context: .
       dockerfile: ./docker/nginx/Dockerfile
     ports:
-      - "8080:80"
+      - ${WEB_PORT1:-80}:80
+      - ${WEB_PORT2:-443}:80
     depends_on:
       - app
     volumes:
       - ./src/:/app
-
-  db:
-    build:
-      context: .
-      dockerfile: ./docker/db/Dockerfile
-    ports:
-      - "3306:3306"
-    environment:
-      MYSQL_DATABASE: database
-      MYSQL_USER: user
-      MYSQL_PASSWORD: password
-      MYSQL_ROOT_PASSWORD: password
-      TZ: 'Asia/Tokyo'
-    volumes:
-      - mysql-volume:/var/lib/mysql
-
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    environment:
-      - PMA_ARBITRARY=1
-      - PMA_HOST=db
-      - PMA_USER=root
-      - PMA_PASSWORD=password
-    links:
-      - db
-    ports:
-      - "4040:80"
-    volumes:
-      - ./phpmyadmin/sessions:/sessions
-
-volumes:
-  mysql-volume:
