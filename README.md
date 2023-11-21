@@ -1,4 +1,4 @@
-# AniMane
+# AnimeManager
 
 アプリへのリンク: <https://animane-prot.net>
 
