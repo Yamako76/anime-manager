@@ -1,7 +1,5 @@
 # AnimeManager
 
-アプリへのリンク: <https://animane-prot.net>
-
 ## 概要
 
 アニメを構造的に管理できるアプリ。  
